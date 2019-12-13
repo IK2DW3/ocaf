@@ -1,4 +1,4 @@
-body {
+div.main {
     background-image: url(../img/backgrounds/imgfondo.png);
     background-size: cover;
     background-repeat: repeat-x;
@@ -6,10 +6,11 @@ body {
 
 div.index {
     align-items: center;
+    background-color: rgba(0,0,0,0.5);
     display: flex;
     height: 100vh;
     justify-content: center;
-    width: auto;
+    width: 100%;
 }
 div.index div.box {
     align-items: center;
@@ -18,17 +19,37 @@ div.index div.box {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
     flex-flow: column;
-    height: 50vh;
+    min-height: 400px;
     justify-content: center;
+    outline: 1px dashed #000;
+    outline-offset: -10px;
     overflow: hidden;
     padding: 2em;
-    width: 50%;
+    width: 40%;    
 }
 div.box h1 {
-    margin-bottom: 15%;
+    margin-bottom: 10%;
 }
-div.box button {
+div.box form {
+    margin: 1.5% 0;
+    width: 50%;
+}
+div.box form button {
+    width: 100%;
+}
+div.box a {
     font-size: 1rem;
     margin: 1.5% 0;
     width: 50%;
+}
+div.box a.btn-primary,
+div.box button.btn-primary {
+    background-color: #C35662 !important;
+    border: none !important;
+    border-radius: 5px;
+    color: azure;
+}
+div.box a.btn-primary:hover,
+div.box button.btn-primary:hover {
+    background-color: #a54c56 !important;
 }

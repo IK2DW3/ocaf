@@ -10,8 +10,8 @@
                 <img src="../resources/img/imglogo.png" alt="SVG con fallback de png" title="OCA-F">
             </picture>
             <h1>OCA-F</h1>
-            <a class="btn btn-primary btn-lg" href="{{url('login')}}">Entrar / Registrarse</a>
-            <a class="btn btn-primary btn-lg" href="{{url('mode')}}">Jugar</a>
+            <h2>$mode[0]</h2>
+            <a class="btn btn-outline-info" href="{{url('index')}}" role="button">&#x2190; Volver</a>
         </div>
     </div>
 
