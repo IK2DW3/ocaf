@@ -15,7 +15,7 @@ class OcafController extends Controller
         return view('mode');
     }
 
-    public function getGamemode(Request $request) {
+    public function getGamemode($id) {
         $mode = $request->input('mode');
         return view('gamemode', array('gamemodes' => $mode));
     }
