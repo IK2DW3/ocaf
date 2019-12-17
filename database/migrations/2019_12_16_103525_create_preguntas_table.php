@@ -13,14 +13,15 @@ class CreatePreguntasTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('preguntas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('carta_id', 100);
+            $table->increments('id');
             $table->string('pregunta', 100);
             $table->string('respuesta_1', 100);
             $table->string('respuesta_2', 30);
             $table->string('respuesta_3', 30);
-            $table->foreign('carta_id')->references('id')->on('cartas');
+            $table->unsignedInteger('cartaid');
+            $table->foreign('cartaid')->references('id')->on('cartas');
             $table->timestamps();
         });
     }

@@ -15,14 +15,16 @@ class CreateCartasTable extends Migration
     public function up()
     {
         Schema::create('cartas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('nombre', 20);
             $table->string('apellido', 30);
-            $table->timestamp('fecha_nacimiento');
+            $table->date('fecha_nacimiento');
+            $table->date('fecha_muerte')->nullable();
             $table->string('ambito');
             $table->string('lore', 10000);
+            $table->string('zona_geografica');
             $table->string('img_ruta', 500);
-            $table->timestamp('fecha_muerte')->nullable();
+            $table->string('enlace_referencia', 500);
             $table->timestamps();
         });
     }
