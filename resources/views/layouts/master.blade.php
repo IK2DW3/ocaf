@@ -14,6 +14,7 @@
     <title>OCA-F</title>
   </head>
   <body>
+    @include('sweetalert::alert')
 
     <div class="main">
       @yield('content')
