@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
 		$user = new User;
 		$user->name = 'Administrador';
         $user->email = 'adminsupport@rdjsl.com';
-        $user->email = 'superadmin';
+        $user->tipo = 'superadmin';
 		$user->password = bcrypt('adminrootg1');
 		$user->save();
 
