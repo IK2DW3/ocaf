@@ -105,16 +105,6 @@ class DatabaseSeeder extends Seeder
         )
     );
 
-    private $arrayPreguntas = array(
-		array(
-			'pregunta' => '¿algo?', 
-			'respuesta_1' => 'algo', 
-			'respuesta_2' => 'algo', 
-            'respuesta_3' => 'algo',
-            'cartaid' => '1'
-		)
-    );
-
     // Funcion de inicio del seeder
     public function run()
     {
@@ -123,7 +113,6 @@ class DatabaseSeeder extends Seeder
         self::seedAmbitos();
         self::seedContinentes();
         self::seedCartas();
-        //self::seedPreguntas();
 		
         $this->command->info('Datos insertados correctamente!');
 
@@ -183,23 +172,5 @@ class DatabaseSeeder extends Seeder
 
     }
     
-    public function seedPreguntas()
-    {
-        // En primer lugar borramos el contenido de la tabla
-        DB::table('preguntas')->delete();
-
-        // Rellenamos la tabla con el nuevo contenido
-        foreach( $this->arrayPreguntas as $pregunta ) {
-            $p = new Pregunta;
-            $p->pregunta = $pregunta['pregunta'];
-            $p->respuesta_1 = $pregunta['respuesta_1'];
-            $p->respuesta_2 = $pregunta['respuesta_2'];
-            $p->respuesta_3 = $pregunta['respuesta_3'];
-            $p->cartaid = $pregunta['cartaid'];
-            $p->save();
-        }
-
-	}
-	
 	
 }
