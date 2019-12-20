@@ -17,7 +17,7 @@ class CreateCartasTable extends Migration
         Schema::enableForeignKeyConstraints();
         Schema::create('cartas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre', 20);
+            $table->string('nombre', 50);
             $table->string('apellido', 50);
             $table->string('fecha_nacimiento',10);
             $table->string('fecha_muerte',10)->nullable();

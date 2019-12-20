@@ -1,24 +1,30 @@
 <?php
 
 Auth::routes();
-Route::GET('/logout', 'Auth/LoginController@logout');
+
+Route::get('/', 'OcafController@getIndex');
+Route::get('index', 'OcafController@getIndex');
+
+Route::GET('logout', 'Auth/LoginController@logout');
 
 Route::get('mode', 'OcafController@getMode');
+Route::get('historys', 'OcafController@getHistorys');
+Route::get('history/{id}', 'OcafController@getHistory');
 Route::get('gamemode/{id}', 'OcafController@getGamemode');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('/', function(){
+    Route::GET('paneladmin', function(){
         if (Auth::check()) {
-            return Redirect::action('OcafController@getMode');
+            return Redirect::action('OcafController@getIndex');
         } else {
             return Redirect::action('OcafController@getIndex');
         }
     });
 
-    Route::get('index', function(){
+    Route::get('paneladmin', function(){
         if (Auth::check()) {
-            return Redirect::action('OcafController@getMode');
+            return Redirect::action('OcafController@getIndex');
         } else {
             return Redirect::action('OcafController@getIndex');
         }

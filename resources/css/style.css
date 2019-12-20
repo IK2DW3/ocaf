@@ -87,3 +87,12 @@ div.col-volver {
 div.col-logo {
     color: #f5f5f5;
 }
+
+/* Historys */
+div.cartas {
+    padding: 1%;
+}
+
+div.card {
+    margin: 1% 0;
+}
