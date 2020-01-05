@@ -16,91 +16,96 @@ class DatabaseSeeder extends Seeder
 
     private $arrayContinentes = array(
 		array(
-			'esp' => 'Norte América', 
-			'eng' => 'North America', 
+			'esp' => 'Norte América',
+			'eng' => 'North America',
 			'eus' => 'Ipar America'
         ),
         array(
-			'esp' => 'Sud América', 
-			'eng' => 'South America', 
+			'esp' => 'Sud América',
+			'eng' => 'South America',
 			'eus' => 'Hego America'
         ),
         array(
-			'esp' => 'Europa', 
-			'eng' => 'Europe', 
+			'esp' => 'Europa',
+			'eng' => 'Europe',
 			'eus' => 'Europa'
         ),
         array(
-			'esp' => 'África', 
-			'eng' => 'Africa', 
+			'esp' => 'África',
+			'eng' => 'Africa',
 			'eus' => 'Africa'
         ),
         array(
-			'esp' => 'Ásia', 
-			'eng' => 'Asia', 
+			'esp' => 'Ásia',
+			'eng' => 'Asia',
 			'eus' => 'Asia'
         ),
         array(
-			'esp' => 'Oceanía', 
-			'eng' => 'Oceania', 
+			'esp' => 'Oceanía',
+			'eng' => 'Oceania',
 			'eus' => 'Oceania'
         ),
         array(
-			'esp' => 'Antartida', 
-			'eng' => 'Antartida', 
+			'esp' => 'Antartida',
+			'eng' => 'Antartida',
 			'eus' => 'Antarctica'
         ),
         array(
-			'esp' => 'Doble nacionalidad', 
-			'eng' => 'Double nationality', 
+			'esp' => 'Doble nacionalidad',
+			'eng' => 'Double nationality',
 			'eus' => 'Nazionalitate bikoitza'
+        ),
+        array(
+			'esp' => 'N/A',
+			'eng' => 'NONE',
+			'eus' => 'N/A'
 		)
     );
 
     private $arrayAmbitos = array(
 		array(
-			'esp' => 'Historia', 
-			'eng' => 'History', 
+			'esp' => 'Historia',
+			'eng' => 'History',
 			'eus' => 'Historia'
         ),
         array(
-			'esp' => 'Derecho', 
-			'eng' => 'Laws', 
+			'esp' => 'Derecho',
+			'eng' => 'Laws',
 			'eus' => 'Zuzenbidea'
         ),
         array(
-			'esp' => 'Antropología', 
-			'eng' => 'Anthropology', 
+			'esp' => 'Antropología',
+			'eng' => 'Anthropology',
 			'eus' => 'Antropologia'
         ),
         array(
-			'esp' => 'Geografía', 
-			'eng' => 'Geography', 
+			'esp' => 'Geografía',
+			'eng' => 'Geography',
 			'eus' => 'Geografia'
         ),
         array(
-			'esp' => 'Filosofía', 
-			'eng' => 'Philosophy', 
+			'esp' => 'Filosofía',
+			'eng' => 'Philosophy',
 			'eus' => 'Filosofia'
         ),
         array(
-			'esp' => 'Psicología', 
-			'eng' => 'Psychology', 
+			'esp' => 'Psicología',
+			'eng' => 'Psychology',
 			'eus' => 'Psicologia'
         ),
         array(
-			'esp' => 'Economía', 
-			'eng' => 'Economy', 
+			'esp' => 'Economía',
+			'eng' => 'Economy',
 			'eus' => 'Economia'
         ),
         array(
-			'esp' => 'Sociología', 
-			'eng' => 'Sociology', 
+			'esp' => 'Sociología',
+			'eng' => 'Sociology',
 			'eus' => 'Sociologia'
         ),
         array(
-			'esp' => 'Pedagogía', 
-			'eng' => 'Pedagogy', 
+			'esp' => 'Pedagogía',
+			'eng' => 'Pedagogy',
 			'eus' => 'Pedagogia'
         )
     );
@@ -113,7 +118,7 @@ class DatabaseSeeder extends Seeder
         self::seedAmbitos();
         self::seedContinentes();
         self::seedCartas();
-		
+
         $this->command->info('Datos insertados correctamente!');
 
     }
@@ -141,9 +146,9 @@ class DatabaseSeeder extends Seeder
         // Rellenamos la tabla con el nuevo contenido
         foreach( $this->arrayAmbitos as $ambito ) {
             $p = new Ambito;
-            $p->nombreEsp = $ambito['esp'];
-            $p->nombreEng = $ambito['eng'];
-            $p->nombreEus = $ambito['eus'];
+            $p->ambitoEsp = $ambito['esp'];
+            $p->ambitoEng = $ambito['eng'];
+            $p->ambitoEus = $ambito['eus'];
             $p->save();
         }
 
@@ -157,9 +162,9 @@ class DatabaseSeeder extends Seeder
         // Rellenamos la tabla con el nuevo contenido
         foreach( $this->arrayContinentes as $continente ) {
             $p = new Continente;
-            $p->nombreEsp = $continente['esp'];
-            $p->nombreEng = $continente['eng'];
-            $p->nombreEus = $continente['eus'];
+            $p->continenteEsp = $continente['esp'];
+            $p->continenteEng = $continente['eng'];
+            $p->continenteEus = $continente['eus'];
             $p->save();
         }
 
@@ -171,6 +176,6 @@ class DatabaseSeeder extends Seeder
         DB::table('cartas')->delete();
 
     }
-    
-	
+
+
 }

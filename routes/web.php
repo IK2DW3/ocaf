@@ -1,7 +1,5 @@
 <?php
 
-Auth::routes();
-
 Route::get('/', 'OcafController@getIndex');
 Route::get('index', 'OcafController@getIndex');
 
@@ -10,8 +8,9 @@ Route::GET('logout', 'Auth/LoginController@logout');
 Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
-Route::get('gamemode/{id}', 'OcafController@getGamemode');
+Route::post('gamemode', 'OcafController@getGamemode');
 
+Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     Route::GET('paneladmin', function(){
@@ -29,5 +28,5 @@ Route::group(['middleware' => 'auth'], function () {
             return Redirect::action('OcafController@getIndex');
         }
     });
-    
+
 });

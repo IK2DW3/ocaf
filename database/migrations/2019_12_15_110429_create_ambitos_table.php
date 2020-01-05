@@ -15,9 +15,9 @@ class CreateAmbitosTable extends Migration
     {
         Schema::create('ambitos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombreEsp', 20);
-            $table->string('nombreEng', 20);
-            $table->string('nombreEus', 20);
+            $table->string('ambitoEsp', 20);
+            $table->string('ambitoEng', 20);
+            $table->string('ambitoEus', 20);
             $table->timestamps();
         });
     }

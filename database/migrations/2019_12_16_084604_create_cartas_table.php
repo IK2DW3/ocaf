@@ -11,7 +11,7 @@ class CreateCartasTable extends Migration
      *
      * @return void
      */
-    
+
     public function up()
     {
         Schema::enableForeignKeyConstraints();
@@ -19,14 +19,17 @@ class CreateCartasTable extends Migration
             $table->increments('id');
             $table->string('nombre', 50);
             $table->string('apellido', 50);
-            $table->string('fecha_nacimiento',10);
-            $table->string('fecha_muerte',10)->nullable();
+            $table->string('fechaNacimiento',10);
+            $table->string('fechaMuerte',10)->nullable();
             $table->unsignedInteger('codAmbito');
-            $table->string('lore', 10000);
-            $table->string('zona_geografica');
+            $table->string('loreEsp', 5000)->nullable();
+            $table->string('loreEng', 5000)->nullable();
+            $table->string('loreEus', 5000)->nullable();
+            $table->string('zonaGeografica')->nullable();
             $table->unsignedInteger('codContinente');
-            $table->string('img_ruta', 500)->nullable();
-            $table->string('enlace_referencia', 500);
+            $table->string('imgRuta', 64)->nullable();
+            $table->string('imgDefault', 512)->nullable();
+            $table->string('enlaceReferencia', 500)->nullable();
             $table->unsignedInteger('codUsuario')->nullable();
             $table->boolean('habilitado')->default(false);
             $table->timestamps();
