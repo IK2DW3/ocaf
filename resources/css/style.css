@@ -130,3 +130,37 @@ div.colcard-img {
     display: inherit;
     justify-content: center;
 }
+
+
+/* Gamemode */
+
+form.gamemode {
+    width: 70% !important;
+}
+
+form.gamemode h3 {
+    padding: .5em 0;
+    text-align: center;
+}
+
+form.gamemode div.select-tablero {
+    border-radius: 2px;
+}
+
+form.gamemode div.input-tableroNuevo,
+form.gamemode div.input-tableroDefault {
+    background-size: cover;
+    background-repeat: repeat-x;
+    border-color: none;
+    border-radius: 2px !important;
+    height: 75px;
+    width: 75px;
+}
+
+form.gamemode div.input-tableroNuevo {
+    background-image: url(../img/tablero/default.png);
+}
+
+form.gamemode div.input-tableroDefault {
+    background-image: url(../img/tablero/default.png);
+}
