@@ -12,6 +12,7 @@
             <h1>OCA-F</h1>
             <a class="btn btn-primary btn-lg" href="{{url('login')}}">Entrar / Registrarse</a>
             <a class="btn btn-primary btn-lg" href="{{url('mode')}}">Jugar</a>
+            <a class="btn btn-primary btn-lg" href="{{url('historias')}}">Historia</a>
         </div>
     </div>
 
