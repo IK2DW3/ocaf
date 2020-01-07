@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css.css">
+    <title>Document</title>
+</head>
+
+
+</script>
+
+
+<body>
+
+    <header>
+        Tablero
+    </header>
+
+    <div id ="tablero">
+            <div class="casilla" id= "casillaInicio"> 1</div>
+
+        
+            <div class="casilla" id= "casilla2">2</div>
+            <div class="casilla" id= "casilla3">3</div>
+            <div class="casilla" id= "casilla4">4</div>
+            <div class="casilla" id= "casilla5">5</div>
+            <div class="casilla" id= "casilla6">6</div>
+            <div class="casilla" id= "casilla7">7</div>
+            <div class="casilla" id= "casilla8">8</div>
+            <div class="casilla" id= "casilla9">9</div>
+            <div class="casilla" id= "casilla10">10</div>
+            <div class="casilla" id= "casilla11">11</div>
+            <div class="casilla" id= "casilla12">12</div>
+            <div class="casilla" id= "casilla13">13</div>
+            <div class="casilla" id= "casilla14">14</div>
+            <div class="casilla" id= "casilla15">15</div>
+            <div class="casilla" id= "casilla16">16</div>
+            <div class="casilla" id= "casilla17">17</div>
+            <div class="casilla" id= "casilla18">18</div>
+            <div class="casilla" id= "casilla19">19</div>
+            <div class="casilla" id= "casilla20">20</div>
+            <div class="casilla" id= "casilla21">21</div>
+            <div class="casilla" id= "casilla22">22</div>
+            <div class="casilla" id= "casilla23">23</div>
+            <div class="casilla" id= "casilla24">24</div>
+            <div class="casilla" id= "casilla25">25</div>
+            <div class="casilla" id= "casilla26">26</div>
+            <div class="casilla" id= "casilla27">27</div>
+            <div class="casilla" id= "casilla28">28</div>
+            <div class="casilla" id= "casilla29">29</div>
+            <div class="casilla" id= "casilla30">30</div>
+            <div class="casilla" id= "casilla31">31</div>
+            <div class="casilla" id= "casilla32">32</div>
+            <div class="casilla" id= "casilla33">33</div>
+            <div class="casilla" id= "casilla34">34</div>
+            <div class="casilla" id= "casilla35">35</div>
+            <div class="casilla" id= "casilla36">36</div>
+            <div class="casilla" id= "casilla37">37</div>
+            <div class="casilla" id= "casilla38">38</div>
+            <div class="casilla" id= "casilla39">39</div>
+            <div class="casilla" id= "casilla40">40</div>
+            <div class="casilla" id= "casilla41">41</div>
+            <div class="casilla" id= "casilla42">42</div>
+            <div class="casilla" id= "casilla43">43</div>
+            <div class="casilla" id= "casilla44">44</div>
+            <div class="casilla" id= "casilla45">45</div>
+            <div class="casilla" id= "casilla46">46</div>
+            <div class="casilla" id= "casilla47">47</div>
+            <div class="casilla" id= "casilla48">48</div>
+            <div class="casilla" id= "casilla49">49</div>
+            <div class="casilla" id= "casilla50">50</div>
+            <div class="casilla" id= "casilla51">51</div>
+            <div class="casilla" id= "casilla52">52</div>
+            <div class="casilla" id= "casilla53">53</div>
+            <div class="casilla" id= "casilla54">54</div>
+            <div class="casilla" id= "casilla55">55</div>
+            <div class="casilla" id= "casilla56">56</div>
+            <div class="casilla" id= "casilla57">57</div>
+            <div class="casilla" id= "casilla58">58</div>
+            <div class="casilla" id= "casilla59">59</div>
+            <div class="casilla" id= "casilla60">60</div>
+            <div class="casilla" id= "casilla61">61</div>
+            <div class="casilla" id= "casilla62">62</div>
+            
+            
+            <div class="casilla" id= "casillaFinal">63</div>
+    </div>
+
+    <div class ="contjugador" id ="jugador1"><img class ="jugador" src="user1.png" alt="usuario1"><h2>Jugador1</h2></div>
+    <div class ="contjugador" id ="jugador2"><img class ="jugador" src="user1.png" alt="usuario1"><h2>Jugador1</h2></div>
+    <div class ="contjugador" id ="jugador3"><img class ="jugador" src="user1.png" alt="usuario1"><h2>Jugador1</h2></div>
+    <div class ="contjugador" id ="jugador4"><img class ="jugador" src="user1.png" alt="usuario1"><h2>Jugador1</h2></div>
+    
+    <div id="dado">
+        <button id ="botontirar">Tirar</button>
+    </div>
+
+    <div class="ficha" id =ficha1></div>
+
+</body>
+
+<script>
+    document.getElementById("botontirar").onclick=mover;
+    document.body.style.zoom = "20%" 
+
+function mover() {
+num1 =  Math.floor(Math.random() * 63) + 1
+var ficha = document.getElementById("ficha1")
+document.getElementById("casilla"+num1).appendChild(ficha)
+
+var X = document.getElementById("ficha1").offsetTop
+var Y = document.getElementById("ficha1").offsetLeft
+
+console.log(X)
+console.log(Y)
+
+window.scroll({
+  top: X,
+  left:Y,
+  behavior: 'smooth'
+});
+    
+}
+
+
+</script>
+</html>
