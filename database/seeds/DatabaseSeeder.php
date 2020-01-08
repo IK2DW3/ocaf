@@ -173,7 +173,7 @@ class DatabaseSeeder extends Seeder
     public function seedCartas()
     {
         // En primer lugar borramos el contenido de la tabla
-        DB::table('cartas')->delete();
+        // DB::table('cartas')->delete();
 
     }
 

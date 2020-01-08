@@ -1,3 +1,3 @@
-<div class="jumbotron text-center" style="margin-bottom:0">
+<div class="footer jumbotron text-center">
     <p>Footer</p>
 </div>

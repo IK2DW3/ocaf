@@ -26,7 +26,12 @@ class OcafController extends Controller
     }
 
     public function getPanel() {
-        return view('paneladmin');
+        $persona = DB::table('cartas')
+                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
+                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
+                    ->select('cartas.*', 'ambitos.*', 'continentes.*')
+                    ->get();
+        return view('paneladmin', array('arrayPersonas'=> $persona));
     }
 
     public function getGamemode(Request $request) {
