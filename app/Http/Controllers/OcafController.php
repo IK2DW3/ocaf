@@ -13,12 +13,20 @@ Use Alert;
 class OcafController extends Controller
 {
     //
+    public function getHome() {
+        return  redirect()->action('LoginController@login');
+    }
+
     public function getIndex() {
         return view('index');
     }
 
     public function getMode() {
         return view('mode');
+    }
+
+    public function getPanel() {
+        return view('paneladmin');
     }
 
     public function getGamemode(Request $request) {

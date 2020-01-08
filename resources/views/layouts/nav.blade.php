@@ -36,12 +36,19 @@
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opciones
+                        {{Auth::user()->name}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('paneladmin') }}">Gestión</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url('/logout') }}">Cerrar sesión</a>
+                        @if (Auth::user()->tipo == "superadmin")
+                            <a class="dropdown-item" href="{{ url('paneladmin') }}">Gestión</a>
+                            <div class="dropdown-divider"></div>
+                        @endif
+                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
+                            {{ csrf_field() }}
+                            <button type="submit" class="dropdown-item" style="display:inline;cursor:pointer">
+                                Cerrar sesión
+                            </button>
+                        </form>
                     </div>
                 </li>
             </ul>

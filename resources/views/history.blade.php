@@ -6,14 +6,14 @@
     <div class="tarjeta">
         <div class="row">
             @foreach( $arrayCarta as $key => $carta )
-            <div class="col-sm-4 colcard colcard-img">
+            <div class="col-sm-6 colcard colcard-img">
                 @if ($carta->imgRuta == '' || $carta->imgRuta == null)
                     <img src="../../resources/img/imglogo.svg" class="card-img-top" alt="No encontrado" title="No encontrado" style="height:200px">
                 @else
                     <img src="../../resources/img/cartas/{{$carta->imgRuta}}" class="card-img-top" alt="{{$carta->nombre}}" title="{{$carta->nombre}}" style="height:250px; width:220px;">
                 @endif
             </div>
-            <div class="col-sm-8 colcard colcard-info">
+            <div class="col-sm-6 colcard colcard-info">
 
                 {{-- TODO: Datos de la película --}}
                 <h1><?php echo $carta->nombre . ' ' . $carta->apellido ?></h1>
@@ -28,10 +28,9 @@
                     ?>
                 </p>
                 <p><strong>Ambito:</strong> <?php echo $carta->ambitoEsp ?></p>
-                <br>
+            </div>
+            <div class="col-sm-12 colcard colcard-resumen">
                 <p><strong>Resumen: </strong><?php echo $carta->loreEsp ?></p>
-                <br>
-
             </div>
             @endforeach
         </div>

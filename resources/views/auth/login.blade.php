@@ -15,12 +15,12 @@
             </div>
 
             <div class="col-sm-6 col-login">
-                <form class="login" action="{{ url('login') }}" method="POST">
+                <form class="login" action="{{ url('/login') }}" method="POST">
                     <h2>Inicio sesión</h2>
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="username">Usuario</label>
-                        <input type="text" name="username" id="username" class="form-control" autocomplete="off">
+                        <label for="username">Correo electrónico</label>
+                        <input type="text" name="email" id="email" class="form-control" autocomplete="off">
                     </div>
 
                     <div class="form-group">

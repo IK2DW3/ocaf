@@ -6,6 +6,11 @@ div.main {
     background-repeat: repeat-x;
 }
 
+/* NAVEGADOR */
+div.dropdown-menu {
+    left: -50px !important;
+    right: 0 !important;
+}
 
 /* INDEX */
 
@@ -114,7 +119,7 @@ div.card {
 }
 
 div.card h2 {
-    font-size: 1rem;
+    font-size: 1em;
 }
 
 div.card img {
@@ -139,6 +144,11 @@ div.colcard-img {
     align-items: center;
     display: inherit;
     justify-content: center;
+}
+div.colcard-resumen {
+    margin: 5% 0 1em;
+    padding: 0 5%;
+    text-align: justify;
 }
 
 
