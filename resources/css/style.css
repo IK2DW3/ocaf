@@ -108,7 +108,17 @@ div.cartas {
 }
 
 div.card {
-    margin: 1% 0;
+    height: 400px;
+    margin: 1% 0 5%;
+    max-height: 400px;
+}
+
+div.card h2 {
+    font-size: 1rem;
+}
+
+div.card img {
+    height: 180px;
 }
 
 

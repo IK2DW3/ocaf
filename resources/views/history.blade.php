@@ -17,8 +17,8 @@
 
                 {{-- TODO: Datos de la película --}}
                 <h1><?php echo $carta->nombre . ' ' . $carta->apellido ?></h1>
-                <h2>Fecha Nacimiento: <?php echo $carta->fechaNacimiento ?></h2>
-                <h2>Fecha de muerte:
+                <p><strong>Fecha Nacimiento:</strong> <?php echo $carta->fechaNacimiento ?></p>
+                <p><strong>Fecha de muerte:</strong>
                     <?php
                         if ($carta->fechaMuerte != '') {
                             echo $carta->fechaMuerte;
@@ -26,8 +26,8 @@
                             echo 'N/A';
                         }
                     ?>
-                </h2>
-                <h3>Ambito: <?php echo $carta->ambitoEsp ?></h3>
+                </p>
+                <p><strong>Ambito:</strong> <?php echo $carta->ambitoEsp ?></p>
                 <br>
                 <p><strong>Resumen: </strong><?php echo $carta->loreEsp ?></p>
                 <br>
