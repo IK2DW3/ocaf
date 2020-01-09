@@ -33,15 +33,6 @@ class OcafController extends Controller
         $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
         $registroPersona->save();
         return view('index', array('arrayRegistro'=> $registroPersona));
-        }
-
-    public function getPanel() {
-        $persona = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.*', 'continentes.*')
-                    ->get();
-        return view('paneladmin', array('arrayPersonas'=> $persona));
     }
 
     public function getGamemode(Request $request) {
@@ -65,6 +56,28 @@ class OcafController extends Controller
                     ->where('cartas.id', '=', $id)
                     ->get();
         return view('history', array('arrayCarta' => $Carta));
+    }
+
+    public function getPanel() {
+        return view('administracion.panel');
+    }
+
+    public function getPerfil() {
+        return view('administracion.perfil');
+    }
+
+    public function getPanelcartas() {
+        $cartas = DB::table('cartas')
+                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
+                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
+                    ->select('cartas.*', 'ambitos.*', 'continentes.*')
+                    ->get();
+        return view('administracion.panelcartas', array('arrayCartas'=> $cartas));
+    }
+
+    public function getPanelusuarios() {
+        $usuarios = DB::table('users')->get();
+        return view('administracion.panelusuarios', array('arrayUsuarios'=> $usuarios));
     }
 
 }

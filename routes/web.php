@@ -15,7 +15,7 @@ Route::post('register', 'OcafController@postRegister');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('paneladmin', function(){
+    Route::GET('panel', function(){
         if (Auth::check()) {
             return Redirect::action('OcafController@getPanel');
         } else {
@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('/paneladmin', function(){
+    Route::get('/panel', function(){
         if (Auth::check()) {
             return Redirect::action('OcafController@getPanel');
         } else {
@@ -31,8 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('paneladmin', 'OcafController@getPanel');
-    Route::post('paneladmin', 'OcafController@getPanel');
+    Route::get('panel', 'OcafController@getPanel');
+    Route::get('perfil', 'OcafController@getPerfil');
+    Route::get('panelcartas', 'OcafController@getPanelcartas');
+    Route::get('panelusuarios', 'OcafController@getPanelusuarios');
 
 });
 

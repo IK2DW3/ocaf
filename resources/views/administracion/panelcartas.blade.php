@@ -5,17 +5,17 @@
     <div class="contenedor-panel">
         <div class="panel rounded">
             <h1 class="text-center">Panel del conocimiento</h1>
-            <div class="row">
+            <div class="row contenido">
                 <div class="col-sm-2">
                     <h2>Gestionar</h2>
                     <div class="btn-group-vertical panel-aside-navegador">
-                        <button type="button" class="btn btn-secondary">&#x1F4D6; Historias</button>
-                        <button type="button" class="btn btn-secondary">&#x1F465; Usuarios</button>
+                        <a href="{{url('panelcartas')}}" type="button" class="btn btn-secondary">&#x1F4D6; Historias</a>
+                        <a href="{{url('panelusuarios')}}" type="button" class="btn btn-secondary">&#x1F465; Usuarios</a>
                     </div>
                 </div>
                 <div class="col-sm-10">
                     <div class="col-sm-12">
-                        <h2>Tabla de conocimiento</h2>
+                        <h2>Tabla del conocimiento</h2>
                         <div class="table-responsive table-mujeres">
                             <table class="table table-striped rounded">
                                 <thead class="thead-dark">
@@ -24,23 +24,21 @@
                                         <th>Apellido</th>
                                         <th>F.Nacimiento</th>
                                         <th>F.Muerte</th>
-                                        <th>Lore</th>
                                         <th>Ambito</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach( $arrayPersonas as $id => $persona )
+                                    @foreach( $arrayCartas as $id => $carta )
                                     <tr>
-                                        <td>{{Str::limit($persona->nombre,15)}}</td>
-                                        <td>{{Str::limit($persona->apellido,15)}}</td>
-                                        <td>{{$persona->fechaNacimiento}}</td>
-                                        <td>{{$persona->fechaMuerte}}</td>
-                                        <td>{{Str::limit($persona->loreEsp, 10)}}</td>
-                                        <td>{{$persona->ambitoEsp}}</td>
-                                        <td style="width: 10%;">
+                                        <td>{{Str::limit($carta->nombre,15)}}</td>
+                                        <td>{{Str::limit($carta->apellido,15)}}</td>
+                                        <td>{{$carta->fechaNacimiento}}</td>
+                                        <td>{{$carta->fechaMuerte}}</td>
+                                        <td>{{$carta->ambitoEsp}}</td>
+                                        <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-secondary" title="Ver">&#x1F5F3;</button>
+                                                <button type="button" class="btn btn-secondary" title="Ver">&#x1F440;</button>
                                                 <button type="button" class="btn btn-secondary" title="Editar">&#x270E;</button>
                                                 <button type="button" class="btn btn-secondary" title="Eliminar">&#x2716;</button>
                                             </div>

@@ -10,7 +10,7 @@ div.main {
 /* NAVEGADOR */
 
 div.dropdown-menu {
-    left: -50px !important;
+    left: -100px !important;
     right: 0 !important;
 }
 
@@ -189,9 +189,42 @@ form.gamemode div.input-tableroDefault {
     background-image: url(../img/tablero/default.png);
 }
 
+/* Perfil - Panel */
+div.contenedor-perfil div.perfil {
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 2.5% 25%;
+    min-height: 85vh;
+    outline: 1px dashed #000;
+    outline-offset: -10px;
+    overflow: hidden;
+    padding: 2em;
+}
+
+div.contenedor-perfil div.perfil div.perfil-opciones {
+    align-items: center;
+    display: flex;
+    height: 60vh;
+    justify-content: center !important;
+}
+
+div.contenedor-perfil div.perfil a.perfil-boton {
+    align-items: center;
+    border: 1px solid rgba(27,31,35,.2);
+    display: inherit;
+    height: 175px;
+    justify-content: center;
+    margin: 1%;
+    width: 175px;
+}
+
+div.contenedor-perfil div.perfil a.perfil-boton img {
+    height: 90%;
+    width: 100%;
+}
 
 /* Panel de conocimiento */
-
+div.contenedor-perfil,
 div.contenedor-panel {
     background-color: rgba(0, 0, 0, 0.952);
     min-height: 100vh;
@@ -199,10 +232,18 @@ div.contenedor-panel {
 }
 
 div.contenedor-panel div.panel {
-    background-color: #f0f0f0;
+    background-color: #eafff6;
     min-height: 80vh;
     margin: 2% 10%;
     padding: 1%;
+}
+
+div.contenedor-panel div.panel h1 {
+    padding: 1% 0;
+}
+
+div.contenedor-panel  div.panel div.contenido {
+    padding-top: 2%;
 }
 
 div.contenedor-panel div.panel div.table-mujeres {
@@ -219,6 +260,10 @@ div.contenedor-panel div.panel div.panel-aside-navegador {
 
 div.contenedor-panel div.panel div.datosFormulario {
     padding: 2% 0;
+}
+
+div.contenedor-panel div.panel div.datosFormulario textarea {
+    height: 150px;
 }
 
 div.contenedor-panel div.panel div.img-muestra {

@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
     <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos diferente... -->
     @if (\Request::is('history/*'))
@@ -24,7 +25,7 @@
   <body>
     @include('sweetalert::alert')
 
-    @if (\Request::is('historys') || \Request::is('paneladmin') || \Request::is('history/*'))
+    @if (\Request::is('historys') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas') || \Request::is('history/*'))
         @include('layouts.nav')
     @endif
 

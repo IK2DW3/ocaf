@@ -26,7 +26,7 @@
                 </button>
             </form>
             @if (Auth::check() && Auth::user()->tipo == "superadmin")
-            <a class="btn btn-primary btn-lg" href="{{url('paneladmin')}}" role="button">&#x269E; &#x1F5F3; &#x269F;</a>
+            <a class="btn btn-primary btn-lg" href="{{url('panel')}}" role="button">&#x269E; &#x1F5F3; &#x269F;</a>
             @endif
             <a class="btn btn-outline-info" href="{{url('index')}}" role="button">&#x2190; Volver</a>
         </div>
