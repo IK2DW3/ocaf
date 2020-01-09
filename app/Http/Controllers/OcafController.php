@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
 Use Alert;
@@ -59,7 +61,11 @@ class OcafController extends Controller
     }
 
     public function getPanel() {
-        return view('administracion.panel');
+        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
+            return view('index');
+        } else {
+            return view('administracion.panel');
+        }
     }
 
     public function getPerfil() {
@@ -67,17 +73,25 @@ class OcafController extends Controller
     }
 
     public function getPanelcartas() {
-        $cartas = DB::table('cartas')
+        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
+            return view('index');
+        } else {
+            $cartas = DB::table('cartas')
                     ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
                     ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
                     ->select('cartas.*', 'ambitos.*', 'continentes.*')
                     ->get();
-        return view('administracion.panelcartas', array('arrayCartas'=> $cartas));
+            return view('administracion.panelcartas', array('arrayCartas'=> $cartas));
+        }
     }
 
     public function getPanelusuarios() {
-        $usuarios = DB::table('users')->get();
-        return view('administracion.panelusuarios', array('arrayUsuarios'=> $usuarios));
+        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
+            return view('index');
+        } else {
+            $usuarios = DB::table('users')->get();
+            return view('administracion.panelusuarios', array('arrayUsuarios'=> $usuarios));
+        }
     }
 
 }
