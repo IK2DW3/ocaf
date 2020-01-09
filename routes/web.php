@@ -10,6 +10,7 @@ Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
 Route::post('gamemode', 'OcafController@getGamemode');
+Route::post('register', 'OcafController@postRegister');
 
 
 Route::group(['middleware' => 'auth'], function () {

@@ -51,40 +51,108 @@
                             </table>
                         </div>
                         <div class="col-sm-12">
-                            <div>
+                            <div class="datosFormulario">
                                 <h3>Datos</h3>
                                 <form>
                                     {{ csrf_field() }}
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
-                                            <label for="inputEmail4">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
+                                            <label for="cartaNombres">Nombre/s</label>
+                                            <input type="text" class="form-control" id="cartaNombres">
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="inputPassword4">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword4">
+                                            <label for="cartaApellidos">Apellido/s</label>
+                                            <input type="text" class="form-control" id="cartaApellidos">
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="inputEmail4">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
+                                            <label for="cartaFnacimiento">Fecha Nacimiento</label>
+                                            <input type="text" class="form-control" id="cartaFnacimiento">
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="inputPassword4">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword4">
+                                            <label for="cartaFmuerte">Fecha Muerte</label>
+                                            <input type="text" class="form-control" id="cartaFmuerte">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-8">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                                            </div>
+                                        <div class="form-group col-md-12">
+                                            <input type="text" class="form-control" id="cartaEnlacereferencia" placeholder="Enlace referencia...">
                                         </div>
                                         <div class="form-group col-md-4">
-
+                                            <div class="img-muestra">
+                                                <img src="../resources/img/imglogo.svg" class="rounded" alt="Cinque Terre" title="Imagen previa">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                                        <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <input type="text" class="form-control" id="cartaImagenalternativa" placeholder="Enlace imagen alternativa...">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <input type="text" class="form-control" id="cartaZonageografica" placeholder="Zona geográfica">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <select class="custom-select">
+                                                        <option selected>Seleccionar ambito</option>
+                                                        <option value="1">Normal</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <select class="custom-select">
+                                                        <option selected>Seleccionar continente</option>
+                                                        <option value="1">Normal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <textarea class="form-control" id="cartaLore" placeholder="Añade aquí la historia..."></textarea>
+                                        </div>
+                                    </div>
+                                    <h4>Pregunta</h4>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <input type="text" class="form-control" id="cartaPregunta" placeholder="Crea una pregunta...">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <input type="radio" name="respuesta" id="cartaRespuestauno" aria-label="Radio button for following text input">
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Respuesta uno" aria-label="Text input with radio button">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <input type="radio" name="respuesta" id="cartaRespuestados" aria-label="Radio button for following text input">
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Respuesta dos" aria-label="Text input with radio button">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <input type="radio" name="respuesta" id="cartaRespuestatres" aria-label="Radio button for following text input">
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Respuesta tres" aria-label="Text input with radio button">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Añadir</button>
                                 </form>
                             </div>
                         </div>

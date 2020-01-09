@@ -8,6 +8,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Carta;
+use App\User;
 Use Alert;
 
 class OcafController extends Controller
@@ -24,6 +25,15 @@ class OcafController extends Controller
     public function getMode() {
         return view('mode');
     }
+
+    public function postRegister(Request $request) {
+        $registroPersona = new User;
+        $registroPersona->name = $request->input('newusername');
+        $registroPersona->email = $request->input('email');
+        $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
+        $registroPersona->save();
+        return view('index', array('arrayRegistro'=> $registroPersona));
+        }
 
     public function getPanel() {
         $persona = DB::table('cartas')
