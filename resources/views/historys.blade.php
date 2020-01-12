@@ -6,7 +6,7 @@
         <div class="cartas">
             <div class="row">
                 @foreach( $arrayCartas as $key => $carta )
-                <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="col-sm-12 col-md-4 col-lg-2">
                     <div class="card text-center">
                         <div class="card-header"><h2>{{$carta->nombre}} {{$carta->apellido}}</h2></div>
                         @if ($carta->imgRuta == '' || $carta->imgRuta == null)

@@ -17,83 +17,121 @@ div.dropdown-menu {
 
 /* INDEX */
 
-div.index,
 div.contenedor {
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     min-height: 100vh;
-    justify-content: center;
     overflow: hidden;
     width: 100%;
 }
 
-div.index div.box {
+div.contenedor div.contenido {
+    min-height: 100vh;
+}
+
+div.contenedor div.box-index,
+div.contenedor div.box-mode,
+div.contenedor div.box-gamemode {
     align-items: center;
-    display: inherit;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
-    flex-flow: column;
+    display: flex;
     min-height: 400px;
     justify-content: center;
     outline: 1px dashed #000;
     outline-offset: -10px;
     overflow: hidden;
     padding: 2em;
-    width: 40%;
 }
 
-div.box h1 {
-    margin-bottom: 10%;
-}
-
-div.box form {
-    margin: 1.5% 0;
-    width: 50%;
-}
-
-div.box form button {
-    width: 100%;
-}
-
-div.box a {
-    font-size: 1rem;
-    margin: 1.5% 0;
-    width: 50%;
-}
-
-div.box a.btn-primary,
-div.box button.btn-primary {
+div.box-index a.btn-primary,
+div.box-index button.btn-primary,
+div.box-mode a.btn-primary,
+div.box-mode button.btn-primary,
+div.box-gamemode a.btn-primary,
+div.box-gamemode button.btn-primary {
     background-color: #C35662 !important;
     border: none !important;
     border-radius: 5px;
     color: azure;
+    width: 250px;
 }
 
-div.box a.btn-primary:hover,
-div.box button.btn-primary:hover {
+div.box-index a.btn-primary:hover,
+div.box-index button.btn-primary:hover,
+div.box-mode a.btn-primary:hover,
+div.box-mode button.btn-primary:hover,
+div.box-gamemode a.btn-primary:hover,
+div.box-gamemode button.btn-primary:hover {
     background-color: #a54c56 !important;
+}
+
+div.contenedor div.box-index div.box-index-contenido {
+    height: auto;
+}
+
+div.fab {
+    align-items: flex-end;
+    bottom: 5%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    position: fixed;
+    right: 3%;
+    width: 300px;
+}
+
+div.fab div.fab-action-btn {
+    flex-grow: 2;
+    flex-basis: 100%;
+}
+
+div.fab div.fab-action-btn button.btn-fab {
+    height: 60px;
+    width: 60px;
+}
+
+div.fab div.fab-action-btn button.btn-fab .icon {
+    font-size: 2em;
+}
+
+div.fab div.fab-action-menu {
+    align-items: center;
+    bottom: 10%;
+    display: inherit;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: space-between;
+    padding: 0 11.5px 5px 0;
+    right: 3.5%;
+}
+
+div.fab div.fab-action-menu div.fab-item {
+    align-items: center;
+    display: inherit;
+    justify-content: center;
+    margin: 1% 0;
+}
+
+div.fab div.fab-action-menu div.fab-item span {
+    margin-right: .5em;
+    padding: .3em;
 }
 
 
 /* LOGIN/REGISTER */
 
-form.login,
-form.registro {
-    align-items: center;
-    display: inherit;
+div.login,
+div.registro {
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
-    flex-flow: column;
-    min-height: 400px;
     justify-content: center;
     outline: 1px dashed #000;
     outline-offset: -10px;
-    overflow: hidden;
     padding: 2em;
-    width: 100%;
 }
 
 div.col-logo,
@@ -158,10 +196,6 @@ div.colcard-resumen {
 
 /* Gamemode */
 
-form.gamemode {
-    width: 70% !important;
-}
-
 form.gamemode h3 {
     padding: .5em 0;
     text-align: center;
@@ -189,7 +223,9 @@ form.gamemode div.input-tableroDefault {
     background-image: url(../img/tablero/default.png);
 }
 
+
 /* Perfil - Panel */
+
 div.contenedor-perfil div.perfil {
     background-color: #fff;
     border-radius: 15px;
@@ -210,7 +246,7 @@ div.contenedor-perfil div.perfil div.perfil-opciones {
 
 div.contenedor-perfil div.perfil a.perfil-boton {
     align-items: center;
-    border: 1px solid rgba(27,31,35,.2);
+    border: 1px solid rgba(27, 31, 35, .2);
     display: inherit;
     height: 175px;
     justify-content: center;
@@ -223,7 +259,9 @@ div.contenedor-perfil div.perfil a.perfil-boton img {
     width: 100%;
 }
 
+
 /* Panel de conocimiento */
+
 div.contenedor-perfil,
 div.contenedor-panel {
     background-color: rgba(0, 0, 0, 0.952);
@@ -242,7 +280,7 @@ div.contenedor-panel div.panel h1 {
     padding: 1% 0;
 }
 
-div.contenedor-panel  div.panel div.contenido {
+div.contenedor-panel div.panel div.contenido {
     padding-top: 2%;
 }
 

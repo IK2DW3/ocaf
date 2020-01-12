@@ -61,10 +61,11 @@ class OcafController extends Controller
     }
 
     public function getPanel() {
-        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
-            return view('index');
-        } else {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panel');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
         }
     }
 
@@ -73,24 +74,28 @@ class OcafController extends Controller
     }
 
     public function getPanelcartas() {
-        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
-            return view('index');
-        } else {
-            $cartas = DB::table('cartas')
+        $cartas = DB::table('cartas')
                     ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
                     ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
                     ->select('cartas.*', 'ambitos.*', 'continentes.*')
                     ->get();
+
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panelcartas', array('arrayCartas'=> $cartas));
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
         }
     }
 
     public function getPanelusuarios() {
-        if (Auth::user()->tipo != 'superadmin' || Auth::user()->tipo != 'admin') {
-            return view('index');
-        } else {
-            $usuarios = DB::table('users')->get();
+        $usuarios = DB::table('users')->get();
+
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panelusuarios', array('arrayUsuarios'=> $usuarios));
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
         }
     }
 
