@@ -49,14 +49,12 @@ body{background-color:#F29199}
     height: 150px; 
     font-size: 300%;
 }
+.ficha{ 
+    background-color: aqua; 
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;}
 
-#ficha1{
- background-color: aqua; 
- height: 100px;
- width: 100px;
- border-radius: 50%;
- position: absolute;
-}
 .jugador{
     width: 350px;
     height: 350px;

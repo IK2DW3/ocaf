@@ -1,5 +1,5 @@
 body{background-color:#F29199}
-#divCarga{background-image: url(imagen1.png); width: 1000px; height: 1000px;}
+
 #jugador1{ 
     opacity: 0.5;
     width: 460px;  
@@ -10,6 +10,8 @@ body{background-color:#F29199}
     left: 0px;
     top:0px;
     font-size: 200%;
+    border-bottom-right-radius: 25%;
+    border-bottom-left-radius: 25%;
 }
 #jugador2{
     opacity: 0.5;
@@ -21,6 +23,8 @@ body{background-color:#F29199}
     left: 0px;
     bottom:0px;
     font-size: 200%;
+    border-top-right-radius: 25%;
+    border-top-left-radius: 25%;
 }
 #jugador3{
     opacity: 0.5;
@@ -32,6 +36,8 @@ body{background-color:#F29199}
     right:0px;
     bottom:0px;
     font-size: 200%;
+    border-top-right-radius: 25%;
+    border-top-left-radius: 25%;
 }
 #jugador4{
     opacity: 0.5;
@@ -42,7 +48,10 @@ body{background-color:#F29199}
     position: fixed; 
     right:0px;
     top:0px;
-    font-size: 200%;}
+    font-size: 200%;
+    border-bottom-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+}
 
 #nombre{font-size: 200%; margin: 0px; color: white;}
 
@@ -67,12 +76,12 @@ body{background-color:#F29199}
     font-size: 300%;
 }
 
-#ficha1{
+.ficha{
  background-color: white; 
  height: 100px;
  width: 100px;
  border-radius: 50%;
- position: absolute;
+ 
 }
 
 .jugador{
@@ -83,7 +92,7 @@ body{background-color:#F29199}
 
 
 
-.dado{
+#dado1{
     width: 350px;
     height: 350px;
 }
@@ -111,6 +120,7 @@ body{background-color:#F29199}
     background-color: white; 
     font-size: 350%; 
     padding:0px;
+    
 }
 
 .Nº {
@@ -235,3 +245,26 @@ body{background-color:#F29199}
                               grid-area: c63; 
                               background-repeat: no-repeat; 
                               background-position: center;}
+
+.area{
+    background-color: aqua;
+    width: 400px;
+    height: 300px;
+    display: grid; 
+
+
+}
+        #area5{background-color: blueviolet;}
+        #area14{background-color: blueviolet;}
+        #area23{background-color: blueviolet;}
+        #area32{background-color: blueviolet;}
+        #area41{background-color: blueviolet;}
+        #area50{background-color: blueviolet;}
+        #area59{background-color: blueviolet;}
+        #area9{background-color: blueviolet;}
+        #area18{background-color: blueviolet;}
+        #area27{background-color: blueviolet;}
+        #area36{background-color: blueviolet;}
+        #area45{background-color: blueviolet;}
+        #area54{background-color: blueviolet;}
+    

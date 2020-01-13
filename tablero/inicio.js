@@ -1,7 +1,10 @@
 
 alert("Bienvenid@\n Porfavor toma un momento para leer las normas y mas informacion sobre el juego dandole click al boton mas informacion\n gracias")
-document.body.style.zoom = "22%"
 
+
+
+
+document.body.style.zoom = "22%"
 preguntas= document.getElementsByClassName("pregunta")
 for (i = 0; i < preguntas.length; i++) {
     const element = preguntas[i].onclick=preguntar;}
@@ -30,6 +33,11 @@ function Imprimir() {
     document.getElementById("tablero").style.marginLeft="0px"
     document.getElementById("tablero").style.marginTop="0px"
     document.getElementById("ficha1").style.display="none"
+    document.getElementById("ficha2").style.display="none"
+    document.getElementById("ficha3").style.display="none"
+    document.getElementById("ficha4").style.display="none"
+
+    
 
     window.print()
     alert("volviendo al juego")
@@ -60,3 +68,5 @@ function fade() {
     document.getElementById("jugador4").style.opacity = "0.5";
    
 }
+
+
