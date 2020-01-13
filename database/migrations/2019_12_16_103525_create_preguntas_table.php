@@ -20,8 +20,8 @@ class CreatePreguntasTable extends Migration
             $table->string('respuesta_1', 100);
             $table->string('respuesta_2', 30);
             $table->string('respuesta_3', 30);
-            $table->unsignedInteger('cartaid');
-            $table->foreign('cartaid')->references('id')->on('cartas');
+            $table->unsignedInteger('cartaID');
+            $table->foreign('cartaID')->references('id')->on('cartas');
             $table->timestamps();
         });
     }
