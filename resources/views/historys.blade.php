@@ -2,10 +2,11 @@
 
 @section('content')
 
+
     <div class="contenedor">
         <div class="cartas">
             <div class="row">
-                @foreach( $arrayCartas as $key => $carta )
+                @foreach($arrayCartas as $carta)
                 <div class="col-sm-12 col-md-4 col-lg-2">
                     <div class="card text-center">
                         <div class="card-header"><h2>{{$carta->nombre}} {{$carta->apellido}}</h2></div>
@@ -18,7 +19,7 @@
                             <a href="{{ url('history/' . $carta->id ) }}" class="btn btn-primary">Ver</a>
                         </div>
                         <div class="card-footer text-muted">
-                            {{$carta->ambitoEsp}}
+                            {{$carta->ambito->ambitoEsp}}
                         </div>
                     </div>
                 </div>
@@ -26,5 +27,6 @@
             </div>
         </div>
     </div>
+
 
 @stop

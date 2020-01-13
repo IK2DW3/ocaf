@@ -38,9 +38,9 @@
                                         <td>{{$carta->ambitoEsp}}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-secondary" title="Ver">&#x1F440;</button>
+                                                <a href="{{url('history/' . $carta->id)}}" type="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
                                                 <button type="button" class="btn btn-secondary" title="Editar">&#x270E;</button>
-                                                <button type="button" class="btn btn-secondary" title="Eliminar">&#x2716;</button>
+                                                <button href="" type="button" class="btn btn-secondary" title="Eliminar">&#x2716;</button>
                                             </div>
                                         </td>
                                     </tr>

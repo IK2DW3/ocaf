@@ -15,7 +15,7 @@ Use Alert;
 
 class OcafController extends Controller
 {
-    //
+    // Inicio de las funciones
     public function getHome() {
         return  redirect()->action('LoginController@login');
     }
@@ -42,21 +42,13 @@ class OcafController extends Controller
         return view('gamemode', array('gamemode' => $mode));
     }
 
-    public function getHistorys() {
-        $Cartas = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp')
-                    ->get();
+    public function getHistorys() {        
+        $Cartas = Carta::all();
         return view('historys', array('arrayCartas'=> $Cartas));
     }
 
     public function getHistory($id) {
-        $Carta = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp', 'continentes.continenteEng')
-                    ->where('cartas.id', '=', $id)
-                    ->get();
+        $Carta = Carta::findOrFail($id);
         return view('history', array('arrayCarta' => $Carta));
     }
 
@@ -74,14 +66,10 @@ class OcafController extends Controller
     }
 
     public function getPanelcartas() {
-        $cartas = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.*', 'continentes.*')
-                    ->get();
+        $Cartas = Carta::all();
 
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelcartas', array('arrayCartas'=> $cartas));
+            return view('administracion.panelcartas', array('arrayCartas'=> $Cartas));
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
@@ -89,10 +77,10 @@ class OcafController extends Controller
     }
 
     public function getPanelusuarios() {
-        $usuarios = DB::table('users')->get();
+        $Usuarios = User::all();
 
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelusuarios', array('arrayUsuarios'=> $usuarios));
+            return view('administracion.panelusuarios', array('arrayUsuarios'=> $Usuarios));
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
