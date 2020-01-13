@@ -57,6 +57,7 @@ class OcafController extends Controller
                     ->distinct()
                     ->get();
         return view('historys',array('arrayCartas'=> $Cartas),/*array('arrayContinentes' => $Continentes),*/ array('arrayAC' => $AC));
+        return view('historys',array('arrayCartas'=> $Cartas),/*array('arrayContinentes' => $Continentes),*/ array('arrayAC' => $AC));
     }
 
     public function getHistory($id) {

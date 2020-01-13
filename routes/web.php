@@ -7,7 +7,6 @@ Route::get('index', 'OcafController@getIndex');
 Route::GET('logout', 'Auth/LoginController@logout');
 
 Route::get('mode', 'OcafController@getMode');
-//Route::get('historyFiltros', 'OcafController@getHistoryFiltro');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
 Route::post('gamemode', 'OcafController@getGamemode');
