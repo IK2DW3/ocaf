@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Carta extends Model
 {
     // Parametros iniciales
-    protected $link1 = 'ambitos';
     protected $table = 'cartas';
-    protected $link2 = 'continentes';
+    public $timestamps = false;
 
     protected $fillable = ['nombre', 'apellido', 'fechaNacimiento', 'fechaMuerte', 'ambito_id', 'loreEsp', 'loreEng', 'loreEus', 'zonaGeografica', 'continente_id', 'imgRuta', 'imgDefault', 'enlaceReferencia', 'habilitado'];
 

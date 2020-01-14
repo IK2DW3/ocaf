@@ -21,7 +21,8 @@ class OcafController extends Controller
     }
 
     public function getPrueba() {
-        return view('pruebas');
+        $User = User::all();
+        return view('pruebas', array(User::all()));
     }
 
     public function getIndex() {
