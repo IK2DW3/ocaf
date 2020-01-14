@@ -11,6 +11,8 @@ class Carta extends Model
     protected $table = 'cartas';
     protected $link2 = 'continentes';
 
+    protected $fillable = ['nombre', 'apellido', 'fechaNacimiento', 'fechaMuerte', 'ambito_id', 'loreEsp', 'loreEng', 'loreEus', 'zonaGeografica', 'continente_id', 'imgRuta', 'imgDefault', 'enlaceReferencia', 'habilitado'];
+
     // Funciones
     public function ambito() {
         return $this->belongsTo('App\Ambito');

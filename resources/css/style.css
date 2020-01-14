@@ -30,7 +30,8 @@ div.contenedor div.contenido {
 
 div.contenedor div.box-index,
 div.contenedor div.box-mode,
-div.contenedor div.box-gamemode {
+div.contenedor div.box-gamemode,
+div.contenedor div.box-historia {
     align-items: center;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -149,13 +150,8 @@ div.col-logo {
 
 /* Historys */
 
-div.cartas {
-    padding: 1%;
-}
-
 div.card {
     height: 400px;
-    margin: 1% 0 5%;
     max-height: 400px;
 }
 
@@ -170,27 +166,10 @@ div.card img {
 
 /* History/+ */
 
-div.tarjeta {
-    background-color: #fff;
-    border-radius: 15px;
-    margin: 2.5% 25%;
-    min-height: 600px;
-    outline: 1px dashed #000;
-    outline-offset: -10px;
-    overflow: hidden;
-    padding: 2em;
-}
-
-div.colcard-img {
-    align-items: center;
-    display: inherit;
-    justify-content: center;
-}
-
-div.colcard-resumen {
-    margin: 5% 0 1em;
-    padding: 0 5%;
-    text-align: justify;
+div.box-historia img {
+    height: 200px;
+    min-width: 220px;
+    max-width: 250px;
 }
 
 
