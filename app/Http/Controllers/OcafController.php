@@ -20,6 +20,10 @@ class OcafController extends Controller
         return  redirect()->action('LoginController@login');
     }
 
+    public function getPrueba() {
+        return view('pruebas');
+    }
+
     public function getIndex() {
         return view('index');
     }
@@ -42,7 +46,7 @@ class OcafController extends Controller
         return view('gamemode', array('gamemode' => $mode));
     }
 
-    public function getHistorys() {        
+    public function getHistorys() {
         $Cartas = Carta::all();
         return view('historys', array('arrayCartas'=> $Cartas));
     }
