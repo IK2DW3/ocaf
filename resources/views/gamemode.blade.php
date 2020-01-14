@@ -5,7 +5,7 @@
 
     <div class="contenedor">
         <div class="row align-items-center justify-content-center contenido mx-2 my-2">
-            <div class="col-sm-8 col-md-8 col-lg-4 box-gamemode">
+            <div class="col-sm-8 col-md-8 col-lg-6 box-gamemode">
                 <div class="row box-gamemode-contenido">
                     <div class="col-sm-12 text-center">
                         <picture>

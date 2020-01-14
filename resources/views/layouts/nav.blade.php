@@ -17,25 +17,25 @@
             </li>
             @if (\Request::is('historys'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('mode') }}">Volver</a>
+                    <a class="nav-link" href="{{ url('mode') }}">Volver a Modo</a>
                 </li>
             @elseif (\Request::is('history/*'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('historys') }}">Volver</a>
+                    <a class="nav-link" href="{{ url('historys') }}">Historias</a>
                 </li>
-            @elseif (\Request::is('perfil') || \Request::is('panel'))
+            @elseif (\Request::is('panel'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
-            @elseif (\Request::is('panelusuarios') || \Request::is('panelcartas'))
+            @elseif (\Request::is('perfil') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('panel') }}">Volver</a>
+                    <a class="nav-link" href="{{ url('panel') }}">Volver al panel</a>
                 </li>
             @endif
         </ul>

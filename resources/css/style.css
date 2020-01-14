@@ -14,6 +14,27 @@ div.dropdown-menu {
     right: 0 !important;
 }
 
+/* Floating Action Button */
+div.fab {
+    align-items: flex-end;
+    bottom: 5%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    position: fixed;
+    right: 3%;
+    width: 300px;
+}
+
+div.fab button.btn-fab .icon {
+    font-size: 2em;
+}
+div.fab .btn-item .icon {
+    font-size: 1.5em;
+}
+
 
 /* INDEX */
 
@@ -24,8 +45,9 @@ div.contenedor {
     width: 100%;
 }
 
-div.contenedor div.contenido {
-    min-height: 100vh;
+div.contenedor div.contenido,
+div.contenedor-panel div.contenido {
+    min-height: 90vh;
 }
 
 div.contenedor div.box-index,
@@ -70,57 +92,6 @@ div.box-gamemode button.btn-primary:hover {
 div.contenedor div.box-index div.box-index-contenido {
     height: auto;
 }
-
-div.fab {
-    align-items: flex-end;
-    bottom: 5%;
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
-    height: auto;
-    justify-content: center;
-    position: fixed;
-    right: 3%;
-    width: 300px;
-}
-
-div.fab div.fab-action-btn {
-    flex-grow: 2;
-    flex-basis: 100%;
-}
-
-div.fab div.fab-action-btn button.btn-fab {
-    height: 60px;
-    width: 60px;
-}
-
-div.fab div.fab-action-btn button.btn-fab .icon {
-    font-size: 2em;
-}
-
-div.fab div.fab-action-menu {
-    align-items: center;
-    bottom: 10%;
-    display: inherit;
-    flex-direction: column;
-    flex-basis: 100%;
-    justify-content: space-between;
-    padding: 0 11.5px 5px 0;
-    right: 3.5%;
-}
-
-div.fab div.fab-action-menu div.fab-item {
-    align-items: center;
-    display: inherit;
-    justify-content: center;
-    margin: 1% 0;
-}
-
-div.fab div.fab-action-menu div.fab-item span {
-    margin-right: .5em;
-    padding: .3em;
-}
-
 
 /* LOGIN/REGISTER */
 
@@ -205,93 +176,49 @@ form.gamemode div.input-tableroDefault {
 
 /* Perfil - Panel */
 
-div.contenedor-perfil div.perfil {
-    background-color: #fff;
-    border-radius: 15px;
-    margin: 2.5% 25%;
-    min-height: 85vh;
-    outline: 1px dashed #000;
-    outline-offset: -10px;
-    overflow: hidden;
-    padding: 2em;
-}
-
-div.contenedor-perfil div.perfil div.perfil-opciones {
-    align-items: center;
-    display: flex;
-    height: 60vh;
-    justify-content: center !important;
-}
-
-div.contenedor-perfil div.perfil a.perfil-boton {
-    align-items: center;
-    border: 1px solid rgba(27, 31, 35, .2);
-    display: inherit;
-    height: 175px;
-    justify-content: center;
-    margin: 1%;
-    width: 175px;
-}
-
-div.contenedor-perfil div.perfil a.perfil-boton img {
+div.contenedor-panel div.box-panel a.panel-boton img {
     height: 90%;
     width: 100%;
 }
 
-
 /* Panel de conocimiento */
 
-div.contenedor-perfil,
 div.contenedor-panel {
     background-color: rgba(0, 0, 0, 0.952);
     min-height: 100vh;
     overflow: hidden;
 }
-
-div.contenedor-panel div.panel {
-    background-color: #eafff6;
-    min-height: 80vh;
-    margin: 2% 10%;
-    padding: 1%;
+div.contenedor-panel div.box-panel,
+div.contenedor-panel div.box-perfil,
+div.contenedor-panel div.panel-cartas {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    min-height: 400px;
+    min-width: 50%;
+    outline: 1px solid #C35662;
+    outline-offset: -10px;
+    overflow: hidden;
+    padding: 2em;
 }
 
-div.contenedor-panel div.panel h1 {
-    padding: 1% 0;
-}
-
-div.contenedor-panel div.panel div.contenido {
-    padding-top: 2%;
-}
-
-div.contenedor-panel div.panel div.table-mujeres {
+div.contenedor-panel div.table-mujeres {
     background-color: #f0f0f0;
-    box-shadow: inset 0 0 10px #000000;
+    border-collapse: collapse;
     max-height: 400px !important;
+    table-layout: fixed;
     overflow-y: scroll;
     width: 100%;
 }
 
-div.contenedor-panel div.panel div.panel-aside-navegador {
-    width: 100%;
-}
-
-div.contenedor-panel div.panel div.datosFormulario {
-    padding: 2% 0;
-}
-
-div.contenedor-panel div.panel div.datosFormulario textarea {
+div.contenedor-panel textarea {
     height: 150px;
 }
-
-div.contenedor-panel div.panel div.img-muestra {
-    align-items: stretch;
-    display: flex;
-    height: 140px;
-    justify-content: center;
-    width: 100%;
+div.contenedor-panel div.panel-contenido div.img-muestra {
+    height: 150px;
 }
-
-div.contenedor-panel div.panel div.img-muestra img {
+div.contenedor-panel div.panel-contenido div.img-muestra img {
+    height: 100%;
     width: 100%;
 }
 

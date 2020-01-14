@@ -34,6 +34,10 @@
 
     <div class="main">
       @yield('content')
+
+      @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
+        @include('layouts.fab')
+      @endif
     </div>
     <!-- Footer -->
     @include('layouts.footer')

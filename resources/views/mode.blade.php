@@ -50,31 +50,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="fab">
-            <div class="fab-action-btn">
-                <button type="button" class="btn btn-fab btn-light rounded-circle shadow-lg rounded">
-                    <i class="icon ion-md-menu"></i>
-                </button>
-            </div>
-
-            <div class="fab-action-menu">
-                <div class="fab-item">
-                    <span class="rounded-pill shadow-lg bg-white rounded">Este es un texto de referencia</span>
-                    <button type="button" class="btn btn-dark rounded-circle shadow-lg rounded">
-                        <i class="icon ion-md-eye"></i>
-                    </button>
-                </div>
-                <div class="fab-item">
-                    <span class="rounded-pill shadow-lg bg-white rounded">Este es un texto de referencia</span>
-                    <button type="button" class="btn btn-dark rounded-circle shadow-lg rounded">
-                        <i class="icon ion-md-contact"></i>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
     </div>
 
+    
 @stop
