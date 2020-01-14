@@ -36,6 +36,8 @@ function Imprimir() {
     document.getElementById("ficha2").style.display="none"
     document.getElementById("ficha3").style.display="none"
     document.getElementById("ficha4").style.display="none"
+    document.getElementById("texto").style.display="block"
+    document.getElementById("normas").style.display="block"
 
     
 

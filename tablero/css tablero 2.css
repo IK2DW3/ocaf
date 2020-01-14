@@ -1,5 +1,5 @@
 body{background-color:#F29199}
-#normas{font-size: 500%; margin-left: 100px; background-color: indigo; padding: 100px; color: white; margin-top: -300px; display: none;}
+
 #jugador1{ 
     opacity: 0.5;
     width: 460px;  
@@ -57,14 +57,14 @@ body{background-color:#F29199}
 
 #score{font-size: 200%; margin: 0px; color: white;}
 
-#debug{  left: 150vw;   position: fixed; background-color: yellowgreen; top:0px; width: 2000px; height: 500px; font-size: 200%; }
+#debug{  left: 150vw;   position: fixed; background-color: yellowgreen; top:0px; width: 2000px; height: 500px; font-size: 200%;}
 #btndebug{font-size: 200%;}
-#texto{font-size: 500%; margin-left: 100px; background-color: #C4EAF2; padding: 100px;display: none;}
+
 #panelDado{
     width: 600px; 
     height: 500px; 
     border:solid black 3px; 
-    background-color: grey; 
+    background-color: red; 
     position: fixed; 
     bottom:0px;
     left: 180vw;
@@ -134,30 +134,38 @@ body{background-color:#F29199}
     background-color: white;
   }
 
-#tablero{
-    margin-top: 70vh;
-    margin-bottom: 25vh;
-    margin-left: 28vw;
-    border:solid #C4EAF2 100px;
+  #tablero2{
+
     border-bottom-right-radius: 7%;
     border-bottom-left-radius: 7%;
     border-top-right-radius: 7%;
     border-top-left-radius: 7%;
+    border:solid #C4EAF2 100px;
+    margin-top: 70vh;
+    margin-bottom: 70vh;
+    margin-left: 28vw;
     width: 5000px;
-    height: 5000px;
+    height: 7000px;
     background-color: #BF6C3B;
     display: grid; 
-    grid-template-areas:  "c28 c27 c26 c25 c24 c23 c22 c21   c20 c19  "
-                          "c29 c60 c59 c58 c57 c56 c55 c54   c53 c18"
-                          "c30 c61 .   .   d   d   .   .     c52 c17"
-                          "c31 c62 c63 c63 c63 c63 c63 .     c51 c16"
-                          "c32 .   c63 c63 c63 c63 c63 .     c50 c15"
-                          "c33 .   c63 c63 c63 c63 c63 .     c49 c14"
-                          "c34 .   c63 c63 c63 c63 c63 .     c48 c13"
-                          "c35 .   c63 c63 c63 c63 c63 .     c47 c12"
-                          "c36 .   .   .   .   .   .   .     c46 c11"
-                          "c37 c38 c39 c40 c41 c42 c43 c44   c45 c10"
-                          "c1  c1  c2  c3  c4  c5  c6  c7    c8  c9 ";
+    grid-template-areas:  ".   .   .   c63 c63 c63 .   .    .   .  "
+                          ".   .   .   c63 c63 c63 .   .    .   .  "
+                          ".   .   .   c63 c63 c63 .   .    .   .  "
+                          "c59 c60 c61 c62 .   .   .   .    .   .  "
+                          "c58 .   .   .   .   .   .   .    .   .  "
+                          "c58 c57 c56 c55 c54 c53 c52 c51  c50 c49"
+                          ".   .   .   .   .   .   .   .    .   c48"
+                          "c39 c40 c41 c42 c43 c44 c45 c46  c47 c48"
+                          "c38 .   .   .   .   .   .   .    .   .  "
+                          "c38 c37 c36 c35 c34 c33 c32 c31  c30 c29"
+                          ".   .   .   .   .   .   .   .    .   c28"
+                          "c19 c20 c21 c22 c23 c24 c25 c26  c27 c28"
+                          "c18 .   .   .   .   .   .   .    .   .  "
+                          "c18 c17 c16 c15 c14 c13 c12 c11  c10 c9 "
+                          ".   .   .   .   .   .   .   .    .   c8 "
+                          ".   .   .   c2  c3  c4  c5  c6   c7  c8 "
+                          ".   .   c1  c1  .   .   .   .    .  .   "
+                          ".   .   c1  c1  .   .   .   .    .  .   ";
 
                           grid-template-columns:auto;
                           grid-template-rows:auto;
@@ -249,9 +257,11 @@ body{background-color:#F29199}
 .area{
     background-color: aqua;
     width: 400px;
-    height: 200px;
-display: flex;}
+    height: 300px;
+    display: grid; 
 
+
+}
         #area5{background-color: blueviolet;}
         #area14{background-color: blueviolet;}
         #area23{background-color: blueviolet;}
@@ -265,9 +275,4 @@ display: flex;}
         #area36{background-color: blueviolet;}
         #area45{background-color: blueviolet;}
         #area54{background-color: blueviolet;}
-
-        #area6{background-color: maroon;}
-        #area12{background-color: maroon;}
-
-        #area19{background-color: saddlebrown;}
     

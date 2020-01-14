@@ -110,42 +110,7 @@ body{background-color:#F29199}
     height: 350px;
 }
 
-#tablero2{
 
-    border-bottom-right-radius: 7%;
-    border-bottom-left-radius: 7%;
-    border-top-right-radius: 7%;
-    border-top-left-radius: 7%;
-    border:solid #C4EAF2 100px;
-    margin-top: 70vh;
-    margin-bottom: 70vh;
-    margin-left: 28vw;
-    width: 5000px;
-    height: 7000px;
-    background-color: #BF6C3B;
-    display: grid; 
-    grid-template-areas:  ".   .   .   c63 c63 c63 .   .    .   .  "
-                          ".   .   .   c63 c63 c63 .   .    .   .  "
-                          ".   .   .   c63 c63 c63 .   .    .   .  "
-                          "c59 c60 c61 c62 .   .   .   .    .   .  "
-                          "c58 .   .   .   .   .   .   .    .   .  "
-                          "c58 c57 c56 c55 c54 c53 c52 c51  c50 c49"
-                          ".   .   .   .   .   .   .   .    .   c48"
-                          "c39 c40 c41 c42 c43 c44 c45 c46  c47 c48"
-                          "c38 .   .   .   .   .   .   .    .   .  "
-                          "c38 c37 c36 c35 c34 c33 c32 c31  c30 c29"
-                          ".   .   .   .   .   .   .   .    .   c28"
-                          "c19 c20 c21 c22 c23 c24 c25 c26  c27 c28"
-                          "c18 .   .   .   .   .   .   .    .   .  "
-                          "c18 c17 c16 c15 c14 c13 c12 c11  c10 c9 "
-                          ".   .   .   .   .   .   .   .    .   c8 "
-                          ".   .   .   c2  c3  c4  c5  c6   c7  c8 "
-                          ".   .   c1  c1  .   .   .   .    .  .   "
-                          ".   .   c1  c1  .   .   .   .    .  .   ";
-
-                          grid-template-columns:auto;
-                          grid-template-rows:auto;
-                          }
     
                           
 
