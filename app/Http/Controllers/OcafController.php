@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
+use App\Ambito;
 Use Alert;
 
 class OcafController extends Controller
@@ -20,9 +21,8 @@ class OcafController extends Controller
         return  redirect()->action('LoginController@login');
     }
 
-    public function getPrueba() {
-        $User = User::all();
-        return view('pruebas', array(User::all()));
+    public function getPrueba(Request $request) {
+        return view('pruebas', array( 'ambitos' => response()->json(Ambito::all())));
     }
 
     public function getIndex() {
