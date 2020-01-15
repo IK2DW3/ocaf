@@ -34,7 +34,7 @@
                 - Bootstrap JS
                 - Vue.js
         -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{asset('js/app.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

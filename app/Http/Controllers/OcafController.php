@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +23,8 @@ class OcafController extends Controller
         return  redirect()->action('LoginController@login');
     }
 
-    public function getPrueba(Request $request) {
-        return view('pruebas', array( 'ambitos' => response()->json(Ambito::all())));
+    public function getPrueba() {
+        return view('pruebas');
     }
 
     public function getIndex() {

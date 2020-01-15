@@ -38,4 +38,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+/*
+CRUD Vue.js y Laravel
+*/
 Route::get('pruebas', 'OcafController@getPrueba');
+
+Route::get('/tareas', 'TaskController@index');
+
+Route::put('/tareas/actualizar', 'TaskController@update');
+
+Route::post('/tareas/guardar', 'TaskController@store');
+
+Route::delete('/tareas/borrar/{id}', 'TaskController@destroy');
+
+Route::get('/tareas/buscar', 'TaskController@show');
