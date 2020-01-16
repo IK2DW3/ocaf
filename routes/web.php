@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 /*
 CRUD Vue.js y Laravel
 */
+// Rutas para el panel de gestion de usuarios
 Route::get('pruebas', 'OcafController@getPrueba');
 
 Route::get('/user', 'TaskController@tableUser');
@@ -52,3 +53,19 @@ Route::post('/user/guardar', 'TaskController@storeUser');
 Route::delete('/user/borrar/{id}', 'TaskController@destroyUser');
 
 Route::get('/user/buscar', 'TaskController@showUser');
+
+// Rutas para el panel de gestion de cartas
+Route::get('/card', 'TaskController@tableCard');
+
+Route::put('/card/actualizar', 'TaskController@updateCard');
+
+Route::post('/card/guardar', 'TaskController@storeCard');
+
+Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
+
+Route::get('/card/buscar', 'TaskController@showCard');
+
+// Rutas para el panel de gestion de cartas
+Route::get('/ambit', 'TaskController@tableAmbit');
+// Rutas para el panel de gestion de cartas
+Route::get('/continent', 'TaskController@tableContinent');
