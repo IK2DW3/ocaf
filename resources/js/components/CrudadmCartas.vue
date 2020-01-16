@@ -23,7 +23,7 @@
                             <td v-text="carta.ambito.ambitoEsp"></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
+                                    <button role="button" class="btn btn-secondary" title="Ver" @click="showAlert()">&#x1F440;</button>
                                     <button type="button" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta)">&#x270E;</button>
                                     <button type="button" class="btn btn-secondary" title="Eliminar" @click="deleteTask(carta)">&#x2716;</button>
                                 </div>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <div class="img-muestra d-flex align-items-center justify-content-center">
-                                    <img src="#" class="rounded" alt="Cinque Terre" title="Imagen previa">
+                                    <img src="#" class="rounded" alt="Imagen previa" title="Imagen previa">
                                 </div>
                             </div>
                             <div class="form-group col-md-8">
@@ -100,7 +100,16 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <textarea v-model="loreEsp" class="form-control" id="cartaLore" placeholder="Añade aquí la historia..."></textarea>
+                                <label for="cartaLoreesp">Historia en Español</label>
+                                <textarea v-model="loreEsp" class="form-control" name="cartaLoreesp" id="cartaLoreesp" placeholder="Añade aquí la historia..."></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="cartaLoreeng">History in English</label>
+                                <textarea v-model="loreEng" class="form-control" name="cartaLoreeng" id="cartaLoreeng" placeholder="Añade aquí la historia..."></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="cartaLoreeus">Historia Euskarazen</label>
+                                <textarea v-model="loreEus" class="form-control" name="cartaLoreeus" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
                             </div>
                         </div>
                         <h4>Pregunta</h4>
@@ -160,56 +169,56 @@
     export default {
         data(){
             return{
+                // Parametros iniciales
                 nombre:"",
                 apellido:"",
                 fechaNacimiento:"",
                 fechaMuerte:"",
                 ambito_id:"",
-                loreEsp:"",  
+                loreEsp:"",
                 loreEng:"",
-                loreEus:"", 
+                loreEus:"",
                 zonaGeografica:"",
                 continente_id:"",
                 imgRuta:"",
-                imgDefault:"", 
+                imgDefault:"",
                 enlaceReferencia:"",
-                usuario_id:"", 
+                usuario_id:"",
                 habilitado:"",
                 update:0,
 
                 files:[],
-                arrayCartas:[], 
+                arrayCartas:[],
                 arrayAmbitos:[],
-                arrayContinentes:[], 
+                arrayContinentes:[],
             }
         },
         methods:{
+            // Metodo para recoger los datos
             getTasks(){
                 let me =this;
-                let url = 'card' //Ruta que hemos creado para que nos devuelva todas las tareas
+                let url = 'card';
                 axios.get(url).then(function (response) {
                     me.arrayCartas = response.data;
                 }).catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
                 axios.get('ambit').then(function (response) {
                     me.arrayAmbitos = response.data;
                 }).catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
                 axios.get('continent').then(function (response) {
                     me.arrayContinentes = response.data;
                 }).catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
             },
+            // Metodo para guardar los daots
             saveTasks(){
                 let me =this;
-                let url = 'card/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
-                axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
+                let url = 'card/guardar';
+                axios.post(url,{
                     'nombre':this.nombre,
                     'apellido':this.apellido,
                     'fechaNacimiento':this.fechaNacimiento,
@@ -226,16 +235,17 @@
                     'usuario_id':this.usuario_id,
                     'habilitado':this.habilitado,
                 }).then(function (response) {
-                    me.getTasks();//llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
-                    me.clearFields();//Limpiamos los campos e inicializamos la variable update a 0
+                    me.getTasks();
+                    me.clearFields();
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
             },
-            updateTasks(){/*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
-                tarea que queremos modificar*/
+            // Metodo para actualizar los datos
+            updateTasks(){
                 let me = this;
                 axios.put('card/actualizar',{
                     'id':this.update,
@@ -255,14 +265,16 @@
                     'usuario_id':this.usuario_id,
                     'habilitado':this.habilitado,
                 }).then(function (response) {
-                   me.getTasks();//llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
-                   me.clearFields();//Limpiamos los campos e inicializamos la variable update a 0
+                   me.getTasks();
+                   me.clearFields();
+                   this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
-            loadFieldsUpdate(data){ //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+            // Metodo para insertar los datos en los campos de texto
+            loadFieldsUpdate(data) {
                 this.update = data.id
                 let me =this;
                 let url = 'card/buscar?id='+this.update;
@@ -288,22 +300,38 @@
                     console.log(error);
                 });
             },
-            deleteTask(data){//Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+            // Metodo para eliminar los datos
+            deleteTask(data) {
                 let me =this;
                 let task_id = data.id
-                if (confirm('¿Seguro que deseas borrar esta tarea?')) {
-                    axios.delete('card/borrar/'+task_id
-                    ).then(function (response) {
-                        me.getTasks();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                }
+                this.$swal({
+                    title: '¿Seguro que deseas borrar esta carta?',
+                    text: 'No podras revertir ésta acción',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '¡Eliminar!',
+                    cancelButtonText: '¡No, mantenerlo!',
+                    showCloseButton: true,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    if(result.value) {
+                        this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success')
+                        axios.delete('card/borrar/'+task_id
+                        ).then(function (response) {
+                            me.getTasks();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    } else {
+                        this.$swal('Cancelado', 'La carta correspondiente sigue intacta', 'info')
+                    }
+                })
             },
             previewFiles(event) {
                 this.someData = event.target.files[0]
             },
+            // Metodo para limpiar los campos de texto
             clearFields(){
                 this.nombre ="";
                 this.apellido ="";
@@ -323,6 +351,7 @@
                 this.update = 0;
             }
         },
+        // Metodo de inicialización del archivo vue
         mounted() {
            this.getTasks();
         }

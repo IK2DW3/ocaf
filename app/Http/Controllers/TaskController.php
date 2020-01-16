@@ -8,6 +8,7 @@ use App\Carta;
 use App\Continente;
 use App\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TaskController extends Controller
 {
@@ -26,6 +27,7 @@ class TaskController extends Controller
         $task->tipo = $request->tipo;
         $task->password = bcrypt($request->password);
         $task->save();
+
 
     }
 
@@ -109,6 +111,6 @@ class TaskController extends Controller
     public function tableContinent(Request $request) {
 
         return Continente::all();
-        
+
     }
 }

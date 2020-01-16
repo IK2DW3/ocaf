@@ -115,8 +115,9 @@
                     'tipo':this.tipo,
                     'password':this.password,
                 }).then(function (response) {
-                    me.getTasks();//llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
-                    me.clearFields();//Limpiamos los campos e inicializamos la variable update a 0
+                    me.getTasks();
+                    me.clearFields();
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -133,10 +134,12 @@
                     'tipo':this.tipo,
                     'password':this.password,
                 }).then(function (response) {
-                   me.getTasks();//llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
-                   me.clearFields();//Limpiamos los campos e inicializamos la variable update a 0
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                    me.getTasks();
+                    me.clearFields();
                 })
                 .catch(function (error) {
+                    this.$swal('Error', 'Se ha producido un error', 'warning');
                     console.log(error);
                 });
             },
@@ -158,15 +161,29 @@
             deleteTask(data){//Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
                 let me =this;
                 let task_id = data.id
-                if (confirm('¿Seguro que deseas borrar esta tarea?')) {
-                    axios.delete('user/borrar/'+task_id
-                    ).then(function (response) {
-                        me.getTasks();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                }
+                this.$swal({
+                    title: '¿Seguro que deseas borrar éste usuario?',
+                    text: 'No podras revertir ésta acción',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '¡Eliminar!',
+                    cancelButtonText: '¡No, mantenerlo!',
+                    showCloseButton: true,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    if(result.value) {
+                        this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success')
+                        axios.delete('user/borrar/'+task_id
+                        ).then(function (response) {
+                            me.getTasks();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    } else {
+                        this.$swal('Cancelado', 'El usuario correspondiente sigue intacto', 'info')
+                    }
+                })
             },
             clearFields(){/*Limpia los campos e inicializa la variable update a 0*/
                 this.name = "";
