@@ -43,12 +43,12 @@ CRUD Vue.js y Laravel
 */
 Route::get('pruebas', 'OcafController@getPrueba');
 
-Route::get('/tareas', 'TaskController@index');
+Route::get('/user', 'TaskController@tableUser');
 
-Route::put('/tareas/actualizar', 'TaskController@update');
+Route::put('/user/actualizar', 'TaskController@updateUser');
 
-Route::post('/tareas/guardar', 'TaskController@store');
+Route::post('/user/guardar', 'TaskController@storeUser');
 
-Route::delete('/tareas/borrar/{id}', 'TaskController@destroy');
+Route::delete('/user/borrar/{id}', 'TaskController@destroyUser');
 
-Route::get('/tareas/buscar', 'TaskController@show');
+Route::get('/user/buscar', 'TaskController@showUser');

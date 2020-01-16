@@ -4,41 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\Ambito;
+use App\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index(Request $request)
+    public function tableUser(Request $request)
     {
-        $task = Ambito::all();
+        $task = User::all();
         return $task;
         //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
     }
 
-    public function store(Request $request)
+    public function storeUser(Request $request)
     {
-        $task = new Ambito();
-        $task->ambitoEsp = $request->ambitoEsp;
-        $task->ambitoEng = $request->ambitoEng;
-        $task->ambitoEus = $request->ambitoEus;
+        $task = new User();
+        $task->name = $request->name;
+        $task->email = $request->email;
+        $task->tipo = $request->tipo;
+        $task->password = bcrypt($request->password);
 
         $task->save();
         //Esta función guardará las tareas que enviaremos mediante vuejs
     }
-    public function show(Request $request)
+    public function showUser(Request $request)
     {
-        $task = Ambito::findOrFail($request->id);
+        $task = User::findOrFail($request->id);
         return $task;
         //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
     }
 
-    public function update(Request $request)
+    public function updateUser(Request $request)
     {
-        $task = Ambito::findOrFail($request->id);
+        $task = User::findOrFail($request->id);
 
-        $task->ambitoEsp = $request->ambitoEsp;
-        $task->ambitoEng = $request->ambitoEng;
-        $task->ambitoEus = $request->ambitoEus;
+        $task->name = $request->name;
+        $task->email = $request->email;
+        $task->tipo = $request->tipo;
+        $task->password = bcrypt($request->password);
 
         $task->save();
 
@@ -47,9 +50,9 @@ class TaskController extends Controller
 
     }
 
-    public function destroy(Request $request)
+    public function destroyUser(Request $request)
     {
-        $task = Ambito::destroy($request->id);
+        $task = User::destroy($request->id);
         return $task;
         //Esta función obtendra el id de la tarea que hayamos seleccionado y la borrará de nuestra BD
     }
