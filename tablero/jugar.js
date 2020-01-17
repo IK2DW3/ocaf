@@ -10,7 +10,9 @@ var jugador = function (nombre, puntos,posicion, color, turno, ficha, parar)
         }
 
 
+var num1= 0
 
+var jugadores = 4
 
 var jugador1 = new jugador ("pepe", 0, 1, "red",   1, "ficha1", 0)
 var jugador2 = new jugador ("juan", 0, 1, "green", 0, "ficha2", 0)
@@ -25,7 +27,7 @@ if (document.getElementById("nombre3").innerHTML=="nombre3"){ document.getElemen
 
 if (document.getElementById("nombre4").innerHTML=="nombre4"){ document.getElementById("nombre4").innerHTML=String(jugador4.nombre)}
 
-var casillaSel = 1;
+
 document.getElementById("ficha1").style.backgroundColor=String(jugador1.color)
 document.getElementById("ficha2").style.backgroundColor=String(jugador2.color)
 document.getElementById("ficha3").style.backgroundColor=String(jugador3.color)
@@ -44,44 +46,84 @@ document.getElementById("area1").append(FJ4)
 
 
 document.getElementById("botontirar").onclick=tirar
+document.getElementById("btn2jugadores").onclick=modo2jugadores
+document.getElementById("btn4Jugadores").onclick=modo4jugadores
+
+function modo2jugadores() {
+   
+   document.getElementById("jugador3").style.display="none"
+   document.getElementById("jugador4").style.display="none"
+   document.getElementById("ficha3").style.display="none"
+   document.getElementById("ficha4").style.display="none"
+
+    
+
+   jugadores=2
+}
+
+function modo4jugadores() {
+
+   document.getElementById("jugador3").style.display="block"
+   document.getElementById("jugador4").style.display="block"
+   document.getElementById("ficha3").style.display="block"
+   document.getElementById("ficha4").style.display="block"
+
+   jugadores = 4
+}
+
+
+
 
 function tirar() {
-    
+
     num1 =  Math.floor(Math.random() * 6) + 1
+    
+    var sonidito = new Audio('recursos/sonidito.mp3');
+    sonidito.play();
 
-/*vemos que numero sale y le asignamos una cara del dado */
-    switch (num1) {
-      case 1:
-      document.getElementById("dado1").src = "recursos/1.png"
-      break;
-  
-      case 2:
-      document.getElementById("dado1").src = "recursos/2.png"
-      break;
+    document.getElementById("dado1").src = "recursos/animacion.gif"
+    setTimeout(dados, 900);
+
+
+    
+   }
       
-      case 3:
-      document.getElementById("dado1").src = "recursos/3.png"  
-      break;
-  
-      case 4:
-      document.getElementById("dado1").src = "recursos/4.png"
-      break;
-  
-      case 5:
-      document.getElementById("dado1").src = "recursos/5.png"
-      break;
-  
-      case 6:
-      document.getElementById("dado1").src = "recursos/6.png"
-      break;
-      
-      }
 
-
+function dados(){
+      /*vemos que numero sale y le asignamos una cara del dado */
+          switch (num1) {
+            case 1:
+            document.getElementById("dado1").src = "recursos/1.png"
+            break;
+        
+            case 2:
+            document.getElementById("dado1").src = "recursos/2.png"
+            break;
+            
+            case 3:
+            document.getElementById("dado1").src = "recursos/3.png"  
+            break;
+        
+            case 4:
+            document.getElementById("dado1").src = "recursos/4.png"
+            break;
+        
+            case 5:
+            document.getElementById("dado1").src = "recursos/5.png"
+            break;
+        
+            case 6:
+            document.getElementById("dado1").src = "recursos/6.png"
+            break;
+          }
+          setTimeout(mover, 900);
+         }
+function mover() {
 /*si el turno es del jugador 1*/
 if (jugador1.turno == 1){ 
    
-    
+    FJ4.style.border="0px solid white"
+    FJ1.style.border="4px solid white"
     if (jugador1.parar>0){
                         jugador1.turno=0
                         jugador2.turno=1
@@ -91,8 +133,10 @@ if (jugador1.turno == 1){
     else{
         
     /*asignamos los turnos */
-    jugador1.turno=0; 
-    jugador2.turno=1; 
+      jugador1.turno=0; 
+      jugador2.turno=1;
+
+    
 
     /*si es la primera vez que se tira */
     if (jugador1.posicion ==1){jugador1.posicion=1+num1}
@@ -102,7 +146,15 @@ if (jugador1.turno == 1){
     if (jugador1.parar>0){pararj1}
     /*comprobamos en que casilla ha caido */
     switch (jugador1.posicion) {
-        
+       /*casos de laberinto */
+       case 42:console.log("muerte");setTimeout(muertej1,2000)
+           break
+      /*casos de laberinto */
+       case 42:console.log("laberinto");setTimeout(laberintoj1,2000)
+           break
+      /*casos de carcel*/
+        case 52:console.log("carcel");setTimeout(pararj1(2),2000)
+           break
         /*casos de posada*/
         case 19:console.log ("posada"); setTimeout(pararj1(1), 2000)
             break;
@@ -150,21 +202,34 @@ if (jugador1.turno == 1){
 }
 /*si el turno es del jugador 2*/
 else if (jugador2.turno==1){
-    
+   FJ1.style.border="0px solid white"
+   FJ2.style.border="4px solid white"
 if (jugador2.parar>0){
-        jugador2.turno=0
-        jugador3.turno=1}
+   if (jugadores >2){
+         jugador2.turno=0
+         jugador3.turno=1}}
 
 else{
-
+   if (jugadores ==4){
     jugador2.turno=0; 
-    jugador3.turno=1;
+    jugador3.turno=1;}
+   else if(jugadores=2||jugadores==1) {
+       jugador2.turno=0
+       jugador1.turno=1}
 
     if (jugador2.posicion==1){jugador2.posicion=1+num1}
     else {jugador2.posicion=jugador2.posicion+num1}
 
     switch (jugador2.posicion) {
-        
+       /*casos de muerte*/
+       case 58:console.log("laberinto");setTimeout(muertej2,2000)
+       break
+      /*casos de laberinto */
+       case 42:console.log("laberinto");setTimeout(laberintoj2,2000)
+       break
+        /*casos de carcel */
+         case 52:console.log("carcel");setTimeout(pararj2(2),2000)
+           break
         /*casos de posada*/
         case 19:console.log ("posada"); setTimeout(pararj2(1), 1000)
             break;
@@ -198,6 +263,7 @@ else{
            break;
         case 59: console.log ("oca"); setTimeout(oc1j2, 2000)
            break;
+        case 63:console.log("has ganado")
     }
     
     
@@ -211,16 +277,29 @@ else{
 /*si el turno es del jugador 3*/
 else if (jugador3.turno==1){
     
-    jugador3.turno=0; 
-    jugador4.turno=1;
+   FJ2.style.border="0px solid white"
+   FJ3.style.border="4px solid white"
+
 if (jugador2.parar>0){
         jugador2.turno=0
         jugador3.turno=1}
 else{
+
+    jugador3.turno=0; 
+    jugador4.turno=1;
     if (jugador3.posicion==1){jugador3.posicion=1+num1}
     else {jugador3.posicion=jugador3.posicion+num1}
 
     switch (jugador3.posicion) {
+       /*casos de muerte*/
+       case 58:console.log("muerte");setTimeout(muertej3,2000)
+       break
+       /*casos de laberinto */
+       case 42:console.log("laberinto");setTimeout(laberintoj3,2000)
+           break
+      /*casos de carcel */
+      case 52:console.log("carcel");setTimeout(pararj3(2),2000)
+      break
         
         /*casos de posada*/
         case 19:console.log ("posada"); setTimeout(posj3, 2000)
@@ -264,18 +343,30 @@ else{
 }
 /*si el turno es del jugador 4*/
 else if (jugador4.turno==1){
+   FJ3.style.border="0px solid white"
+   FJ4.style.border="4px solid white"
 
-
-    jugador4.turno=0; 
-    jugador1.turno=1;
+    
     if (jugador2.parar>0){
         jugador2.turno=0
         jugador3.turno=1}
     else{
+      jugador4.turno=0; 
+      jugador1.turno=1;
     if (jugador4.posicion==1){jugador4.posicion=1+num1}
     else {jugador4.posicion=jugador4.posicion+num1}
 
     switch (jugador4.posicion) {
+       /*casos de muerte*/
+       case 58:console.log("muerte");setTimeout(muertej4,2000)
+       break
+       /*casos de laberinto */
+       case 42:console.log("laberinto");setTimeout(laberintoj4,2000)
+           break
+
+      /*casos de carcel */
+      case 52:console.log("carcel");setTimeout(pararj4(2),2000)
+      break
         
         /*casos de posada*/
         case 19:console.log ("posada"); setTimeout(pararj4(1), 2000)
@@ -317,9 +408,8 @@ else if (jugador4.turno==1){
     
     
 }
+
 }
-
-
 }
 
 /*funciones para el jugador 1*/
@@ -493,4 +583,29 @@ function pararj3(turnos){
 function pararj4(turnos){
 
     if (turnos>0){jugador4.turno=0;jugador4.parar=turnos} 
+}
+
+
+function laberintoj1(){
+   jugador1.posicion=30
+   console.log(jugador1.posicion)
+   document.getElementById("area"+jugador1.posicion).append(FJ1)
+}
+
+function laberintoj2(){
+   jugador2.posicion=30
+   console.log(jugador2.posicion)
+   document.getElementById("area"+jugador2.posicion).append(FJ2)
+}
+
+function laberintoj3(){
+   jugador3.posicion=30
+   console.log(jugador3.posicion)
+   document.getElementById("area"+jugador3.posicion).append(FJ3)
+}
+
+function laberintoj4(){
+   jugador4.posicion=30
+   console.log(jugador4.posicion)
+   document.getElementById("area"+jugador4.posicion).append(FJ4)
 }

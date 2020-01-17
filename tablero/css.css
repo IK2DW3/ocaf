@@ -5,7 +5,7 @@ body{background-color:#F29199}
     width: 460px;  
     height: 520px; 
     border:solid black 3px; 
-    background-color: green; 
+    background-color: red; 
     position: fixed; 
     left: 0px;
     top:0px;
@@ -18,7 +18,7 @@ body{background-color:#F29199}
     width: 460px;  
     height: 520px;
     border:solid black 3px; 
-    background-color: blue; 
+    background-color: green; 
     position: fixed; 
     left: 0px;
     bottom:0px;
@@ -44,7 +44,7 @@ body{background-color:#F29199}
     width: 460px; 
     height: 520px;
     border:solid black 3px; 
-    background-color: red; 
+    background-color: blue; 
     position: fixed; 
     right:0px;
     top:0px;
@@ -102,7 +102,7 @@ body{background-color:#F29199}
 }
 
 .pregunta{
-    margin-top: -125px;
+    margin-top: -110px;
     margin-right: 10px;
     border-radius: 50%;
     font-size: 50px;
@@ -247,7 +247,7 @@ body{background-color:#F29199}
                               background-position: center;}
 
 .area{
-    background-color: aqua;
+    background-color: rgb(104, 104, 104);
     width: 400px;
     height: 200px;
 display: flex;}
@@ -270,4 +270,8 @@ display: flex;}
         #area12{background-color: maroon;}
 
         #area19{background-color: saddlebrown;}
+        #area52{background-color: black;}
+
+        #area58{background-color: lawngreen;}
+        #area42{background-color: pink;}
     
