@@ -107,10 +107,76 @@ class TaskController extends Controller
 
     }
 
+    public function storeAmbit(Request $request){
+
+        $task = new Ambito();
+        $task->ambitoEsp = $request->ambitoEsp;
+        $task->ambitoEng = $request->ambitoEng;
+        $task->ambitoEus = $request->ambitoEus;
+        $task->save();
+    }
+    public function showAmbit(Request $request) {
+
+        $task = Ambito::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updateAmbit(Request $request) {
+
+        $task = Ambito::findOrFail($request->id);
+        $task->ambitoEsp = $request->ambitoEsp;
+        $task->ambitoEng = $request->ambitoEng;
+        $task->ambitoEus = $request->ambitoEus;
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyAmbit(Request $request) {
+
+        $task = Ambito::destroy($request->id);
+        return $task;
+
+    }
+
     /* ----------------------------------------------------------------------------------------------- */
     public function tableContinent(Request $request) {
 
         return Continente::all();
+
+    }
+
+    public function storeContinent(Request $request){
+
+        $task = new Continente();
+        $task->continenteEsp = $request->continenteEsp;
+        $task->continenteEng = $request->continenteEng;
+        $task->continenteEus = $request->continenteEus;
+        $task->save();
+    }
+    public function showContinent(Request $request) {
+
+        $task = Continente::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updateContinent(Request $request) {
+
+        $task = Continente::findOrFail($request->id);
+        $task->continenteEsp = $request->continenteEsp;
+        $task->continenteEng = $request->continenteEng;
+        $task->continenteEus = $request->continenteEus;
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyContinent(Request $request) {
+
+        $task = Continente::destroy($request->id);
+        return $task;
 
     }
 }

@@ -9,11 +9,11 @@
                 <div class="row">
                     <div class="col-sm-6 text-center">
                         @if ($arrayCarta->imgRuta != '' || $arrayCarta->imgRuta != null)
-                            <img src="./../resources/img/cartas/{{$arrayCarta->imgRuta}}" class="card-img-top" alt="{{$arrayCarta->nombre}}" title="{{$arrayCarta->nombre}}">
+                            <img src="../../resources/img/cartas/{{$arrayCarta->imgRuta}}" class="card-img-top" alt="{{$arrayCarta->nombre}}" title="{{$arrayCarta->nombre}}">
                         @elseif ($arrayCarta->imgDefault != '' || $arrayCarta->imgDefault != null)
                             <img src="{{$arrayCarta->imgDefault}}" class="card-img-top" alt="{{$arrayCarta->nombre}}" title="{{$arrayCarta->nombre}}">
                         @else
-                            <img src="./../resources/img/imglogo.svg" class="card-img-top" alt="No encontrado" title="No encontrado">
+                            <img src="../../resources/img/imglogo.svg" class="card-img-top" alt="No encontrado" title="No encontrado">
                         @endif
                     </div>
                     <div class="col-sm-6">

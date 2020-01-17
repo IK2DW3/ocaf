@@ -6,8 +6,7 @@ window.Vue = require('vue');
  * https://sweetalert2.github.io/
  */
 import VueSweetalert2 from 'vue-sweetalert2';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-import 'sweetalert2/src/sweetalert2.scss';
+import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
 /**

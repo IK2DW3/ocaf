@@ -23,10 +23,6 @@ class OcafController extends Controller
         return  redirect()->action('LoginController@login');
     }
 
-    public function getPrueba() {
-        return view('pruebas');
-    }
-
     public function getIndex() {
         return view('index');
     }

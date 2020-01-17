@@ -175,11 +175,13 @@
                 fechaNacimiento:"",
                 fechaMuerte:"",
                 ambito_id:"",
+                ambitoEsp:"",
                 loreEsp:"",
                 loreEng:"",
                 loreEus:"",
                 zonaGeografica:"",
                 continente_id:"",
+                continenteEsp:"",
                 imgRuta:"",
                 imgDefault:"",
                 enlaceReferencia:"",
@@ -284,11 +286,23 @@
                     me.fechaNacimiento = response.data.fechaNacimiento;
                     me.fechaMuerte = response.data.fechaMuerte;
                     me.ambito_id = response.data.ambito_id;
+                    url = 'ambit/buscar?id=' + me.ambito_id;
+                    axios.get(url).then(function (response) {
+                        me.ambito_id = response.data.ambitoEsp;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                     me.loreEsp = response.data.loreEsp;
                     me.loreEng = response.data.loreEng;
                     me.loreEus = response.data.loreEus;
                     me.zonaGeografica = response.data.zonaGeografica;
                     me.continente_id = response.data.continente_id;
+                    url = 'continent/buscar?id=' + me.continente_id;
+                    axios.get(url).then(function (response) {
+                        me.continente_id = response.data.continenteEsp;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                     me.imgRuta = response.data.imgRuta;
                     me.imgDefault = response.data.imgDefault;
                     me.enlaceReferencia = response.data.enlaceReferencia;
@@ -296,7 +310,6 @@
                     me.habilitado = response.data.habilitado;
                 })
                 .catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
             },
