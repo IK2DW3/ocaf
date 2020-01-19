@@ -47,7 +47,7 @@
                                 <label for="cartaApellidos">Seleccionar tipo</label>
                                 <select v-model="tipo" class="custom-select">
                                     <option disabled value="">Seleccionar rango</option>
-                                    <option v-for="tipo in tipos" v-bind:value="tipo.value">
+                                    <option v-for="tipo in tipos" v-bind:key="tipo.id" :value="tipo.value">
                                         {{ tipo.text }}
                                     </option>
                                 </select>

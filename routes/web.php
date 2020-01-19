@@ -54,6 +54,7 @@ Route::put('/card/actualizar', 'TaskController@updateCard');
 Route::post('/card/guardar', 'TaskController@storeCard');
 Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
 Route::get('/card/buscar', 'TaskController@showCard');
+Route::get('/card/filtrar', 'TaskController@filterCard');
 
 // Rutas para el panel de gestion de cartas
 Route::get('/ambit', 'TaskController@tableAmbit');

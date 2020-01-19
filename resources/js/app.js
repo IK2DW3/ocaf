@@ -15,6 +15,7 @@ Vue.use(VueSweetalert2);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('crudadm-users', require('./components/CrudadmUsers.vue').default);
 Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
+Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 
 /**
  * Creacion de las nuevas instancias vue

@@ -8,7 +8,9 @@ use App\Carta;
 use App\Continente;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TaskController extends Controller
 {
@@ -96,6 +98,13 @@ class TaskController extends Controller
     public function destroyCard(Request $request) {
 
         $task = Carta::destroy($request->id);
+        return $task;
+
+    }
+
+    public function filterCard(Request $request) {
+
+        $task = Carta::with('ambito')->where('ambito_id',$request->ambito_id)->orderBy('nombre', 'asc')->get();
         return $task;
 
     }
