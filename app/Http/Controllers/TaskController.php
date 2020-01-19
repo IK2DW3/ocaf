@@ -63,7 +63,7 @@ class TaskController extends Controller
 
     public function tableCard(Request $request){
 
-        return Carta::with('ambito', 'continente')->get();
+        return Carta::with('ambito', 'continente')->orderBy('nombre')->get();
 
     }
 

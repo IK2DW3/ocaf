@@ -2644,7 +2644,7 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
 
       if (me.ambito_id === "") {
-        this.getTasks();
+        this.$swal('Advertencia', 'Debes seleccionar un tipo', 'error');
       } else {
         me.update = me.ambito_id;
         var url = 'card/filtrar?ambito_id=' + me.update;
@@ -42463,51 +42463,56 @@ var render = function() {
                 _c("td", { domProps: { textContent: _vm._s(user.tipo) } }),
                 _vm._v(" "),
                 _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-group",
-                      attrs: { role: "group", "aria-label": "Basic example" }
-                    },
-                    [
-                      _c(
-                        "a",
+                  user.tipo != "superadmin"
+                    ? _c(
+                        "div",
                         {
-                          staticClass: "btn btn-secondary",
-                          attrs: { href: "", role: "button", title: "Ver" }
-                        },
-                        [_vm._v("👀")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary",
-                          attrs: { type: "button", title: "Editar" },
-                          on: {
-                            click: function($event) {
-                              return _vm.loadFieldsUpdate(user)
-                            }
+                          staticClass: "btn-group",
+                          attrs: {
+                            role: "group",
+                            "aria-label": "Basic example"
                           }
                         },
-                        [_vm._v("✎")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary",
-                          attrs: { type: "button", title: "Eliminar" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteTask(user)
-                            }
-                          }
-                        },
-                        [_vm._v("✖")]
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { href: "", role: "button", title: "Ver" }
+                            },
+                            [_vm._v("👀")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", title: "Editar" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.loadFieldsUpdate(user)
+                                }
+                              }
+                            },
+                            [_vm._v("✎")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", title: "Eliminar" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteTask(user)
+                                }
+                              }
+                            },
+                            [_vm._v("✖")]
+                          )
+                        ]
                       )
-                    ]
-                  )
+                    : _vm._e()
                 ])
               ])
             }),
@@ -42625,13 +42630,17 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _vm._l(_vm.tipos, function(tipo) {
-                      return _c("option", { domProps: { value: tipo.value } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(tipo.text) +
-                            "\n                                "
-                        )
-                      ])
+                      return _c(
+                        "option",
+                        { key: tipo.id, domProps: { value: tipo.value } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(tipo.text) +
+                              "\n                                "
+                          )
+                        ]
+                      )
                     })
                   ],
                   2
@@ -42824,7 +42833,7 @@ var render = function() {
     { staticClass: "row px-4 py-2" },
     [
       _c("div", { staticClass: "col-sm-12" }, [
-        _c("div", { staticClass: "row bg-dark m-0 px-1 py-2 rounded" }, [
+        _c("div", { staticClass: "row bg-dark m-0 px-1 py-3 rounded" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-12 my-2" }, [

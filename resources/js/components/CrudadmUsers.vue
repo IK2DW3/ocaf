@@ -18,7 +18,7 @@
                             <td v-text="user.email"></td>
                             <td v-text="user.tipo"></td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <div v-if="user.tipo != 'superadmin'" class="btn-group" role="group" aria-label="Basic example">
                                     <a href="" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
                                     <button type="button" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(user)">&#x270E;</button>
                                     <button type="button" class="btn btn-secondary" title="Eliminar" @click="deleteTask(user)">&#x2716;</button>

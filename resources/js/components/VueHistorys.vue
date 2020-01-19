@@ -2,7 +2,7 @@
 
     <div class="row px-4 py-2">
         <div class="col-sm-12">
-            <div class="row bg-dark m-0 px-1 py-2 rounded">
+            <div class="row bg-dark m-0 px-1 py-3 rounded">
                 <div class="col-sm-12">
                     <h1 class="text-light">Filtrar</h1>
                 </div>
@@ -74,7 +74,7 @@ export default {
         filterTask() {
             let me =this;
             if (me.ambito_id === "") {
-                this.getTasks();
+                this.$swal('Advertencia', 'Debes seleccionar un tipo', 'error');
             } else {
                 me.update = me.ambito_id
                 let url = 'card/filtrar?ambito_id='+ me.update;
