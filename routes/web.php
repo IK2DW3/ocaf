@@ -15,7 +15,7 @@ Route::post('register', 'OcafController@postRegister');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('paneladmin', function(){
+    Route::GET('panel', function(){
         if (Auth::check()) {
             return Redirect::action('OcafController@getPanel');
         } else {
@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('/paneladmin', function(){
+    Route::get('/panel', function(){
         if (Auth::check()) {
             return Redirect::action('OcafController@getPanel');
         } else {
@@ -31,8 +31,46 @@ Route::group(['middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('paneladmin', 'OcafController@getPanel');
-    Route::post('paneladmin', 'OcafController@getPanel');
+    Route::get('panel', 'OcafController@getPanel');
+    Route::get('perfil', 'OcafController@getPerfil');
+    Route::get('panelcartas', 'OcafController@getPanelcartas');
+    Route::get('panelusuarios', 'OcafController@getPanelusuarios');
 
 });
+Route::get('pruebas', 'FileController@create');
+/*
+CRUD Vue.js y Laravel
+*/
+// Rutas para el panel de gestion de usuarios
+Route::get('/user', 'TaskController@tableUser');
+Route::put('/user/actualizar', 'TaskController@updateUser');
+Route::post('/user/guardar', 'TaskController@storeUser');
+Route::delete('/user/borrar/{id}', 'TaskController@destroyUser');
+Route::get('/user/buscar', 'TaskController@showUser');
 
+// Rutas para el panel de gestion de cartas
+Route::get('/card', 'TaskController@tableCard');
+Route::put('/card/actualizar', 'TaskController@updateCard');
+Route::post('/card/guardar', 'TaskController@storeCard');
+Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
+Route::get('/card/buscar', 'TaskController@showCard');
+Route::get('/card/filtrar', 'TaskController@filterCard');
+
+// Rutas para el panel de gestion de cartas
+Route::get('/ambit', 'TaskController@tableAmbit');
+Route::put('/ambit/actualizar', 'TaskController@updateAmbit');
+Route::post('/ambit/guardar', 'TaskController@storeAmbit');
+Route::delete('/ambit/borrar/{id}', 'TaskController@destroyAmbit');
+Route::get('/ambit/buscar', 'TaskController@showAmbit');
+
+// Rutas para el panel de gestion de cartas
+Route::get('/continent', 'TaskController@tableContinent');
+Route::put('/continent/actualizar', 'TaskController@updateContinent');
+Route::post('/continent/guardar', 'TaskController@storeContinent');
+Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
+Route::get('/continent/buscar', 'TaskController@showContinent');
+
+/**
+ * Subida de archivos
+ */
+Route::resource('file', 'FileController');
