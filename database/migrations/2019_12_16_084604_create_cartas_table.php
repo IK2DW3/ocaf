@@ -30,13 +30,11 @@ class CreateCartasTable extends Migration
             $table->string('imgRuta', 64)->nullable();
             $table->string('imgDefault', 512)->nullable();
             $table->string('enlaceReferencia', 500)->nullable();
-            $table->unsignedInteger('usuario_id')->nullable();
             $table->boolean('habilitado')->default(false);
             $table->timestamps();
 
             $table->foreign('ambito_id')->references('id')->on('ambitos');
             $table->foreign('continente_id')->references('id')->on('continentes');
-            $table->foreign('usuario_id')->references('id')->on('users');
         });
     }
 

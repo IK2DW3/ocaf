@@ -14,7 +14,9 @@ div.dropdown-menu {
     right: 0 !important;
 }
 
+
 /* Floating Action Button */
+
 div.fab {
     align-items: flex-end;
     bottom: 5%;
@@ -26,11 +28,13 @@ div.fab {
     position: fixed;
     right: 3%;
     width: 300px;
+    z-index: 1000;
 }
 
 div.fab button.btn-fab .icon {
     font-size: 2em;
 }
+
 div.fab .btn-item .icon {
     font-size: 1.5em;
 }
@@ -92,6 +96,7 @@ div.box-gamemode button.btn-primary:hover {
 div.contenedor div.box-index div.box-index-contenido {
     height: auto;
 }
+
 
 /* LOGIN/REGISTER */
 
@@ -181,6 +186,7 @@ div.contenedor-panel div.box-panel a.panel-boton img {
     width: 100%;
 }
 
+
 /* Panel de conocimiento */
 
 div.contenedor-panel {
@@ -188,6 +194,7 @@ div.contenedor-panel {
     min-height: 100vh;
     overflow: hidden;
 }
+
 div.contenedor-panel div.box-panel,
 div.contenedor-panel div.box-perfil,
 div.contenedor-panel div.panel-ambitos,
@@ -220,9 +227,11 @@ div.contenedor-panel div.table-mujeres {
 div.contenedor-panel textarea {
     height: 150px;
 }
+
 div.contenedor-panel div.panel-contenido div.img-muestra {
     height: 150px;
 }
+
 div.contenedor-panel div.panel-contenido div.img-muestra img {
     height: 100%;
     width: 100%;

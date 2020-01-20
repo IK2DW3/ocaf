@@ -1,8 +1,13 @@
 <template>
-    
+
     <div class="row" id="master">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-2">
             <h2>Tabla del NET</h2>
+        </div>
+        <div class="col-sm-12 my-2">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+        </div>
+        <div class="col-sm-12">
             <div class="table-responsive table-continentes">
                 <table class="table table-striped rounded">
                     <thead class="thead-dark">
@@ -14,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="continente in arrayContinentes" :key="continente.id">
+                        <tr v-for="continente in buscarContinente" :key="continente.id">
                             <td v-text="continente.continenteEsp"></td>
                             <td v-text="continente.continenteEng"></td>
                             <td v-text="continente.continenteEus"></td>
@@ -71,12 +76,13 @@
 export default {
     data(){
         return{
-            continenteEsp:"", 
-            continenteEng:"", 
-            continenteEus:"", 
+            continenteEsp:"",
+            continenteEng:"",
+            continenteEus:"",
             update:0,
-            
-            arrayContinentes:[], 
+            busqueda:"",
+
+            arrayContinentes:[],
         }
     },
     methods:{
@@ -126,7 +132,7 @@ export default {
                 console.log(error);
             });
         },
-        loadFieldsUpdate(data){ 
+        loadFieldsUpdate(data){
             this.update = data.id
             let me =this;
             let url = 'continent/buscar?id='+this.update;
@@ -172,6 +178,13 @@ export default {
             this.continenteEng = "";
             this.continenteEus = "";
             this.update = 0;
+            this.busqueda = "";
+        }
+    },
+    computed: {
+        buscarContinente() {
+            return this.arrayContinentes.filter((continente) => continente.continenteEsp.toLowerCase().includes(this.busqueda.toLowerCase()) || continente.continenteEng.toLowerCase().includes(this.busqueda.toLowerCase()) || continente.continenteEus.toLowerCase().includes(this.busqueda.toLowerCase())
+            );
         }
     },
     mounted() {

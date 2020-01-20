@@ -8,6 +8,7 @@ class Continente extends Model
 {
     // Parametros iniciales
     protected $table = 'continentes';
+    public $timestamps = false;
 
     protected $fillable = ['continenteEsp', 'continenteEng', 'continenteEus'];
 

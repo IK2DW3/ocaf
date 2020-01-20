@@ -2001,6 +2001,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2008,6 +2013,7 @@ __webpack_require__.r(__webpack_exports__);
       ambitoEng: "",
       ambitoEus: "",
       update: 0,
+      busqueda: "",
       arrayAmbitos: []
     };
   },
@@ -2105,6 +2111,16 @@ __webpack_require__.r(__webpack_exports__);
       this.ambitoEng = "";
       this.ambitoEus = "";
       this.update = 0;
+      this.busqueda = "";
+    }
+  },
+  computed: {
+    buscarAmbito: function buscarAmbito() {
+      var _this2 = this;
+
+      return this.arrayAmbitos.filter(function (ambito) {
+        return ambito.ambitoEsp.toLowerCase().includes(_this2.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(_this2.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(_this2.busqueda.toLowerCase());
+      });
     }
   },
   mounted: function mounted() {
@@ -2123,42 +2139,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2467,9 +2447,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    previewFiles: function previewFiles(event) {
-      this.someData = event.target.files[0];
-    },
     // Metodo para limpiar los campos de texto
     clearFields: function clearFields() {
       this.nombre = "";
@@ -2585,6 +2562,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2592,6 +2574,7 @@ __webpack_require__.r(__webpack_exports__);
       continenteEng: "",
       continenteEus: "",
       update: 0,
+      busqueda: "",
       arrayContinentes: []
     };
   },
@@ -2687,6 +2670,16 @@ __webpack_require__.r(__webpack_exports__);
       this.continenteEng = "";
       this.continenteEus = "";
       this.update = 0;
+      this.busqueda = "";
+    }
+  },
+  computed: {
+    buscarContinente: function buscarContinente() {
+      var _this2 = this;
+
+      return this.arrayContinentes.filter(function (continente) {
+        return continente.continenteEsp.toLowerCase().includes(_this2.busqueda.toLowerCase()) || continente.continenteEng.toLowerCase().includes(_this2.busqueda.toLowerCase()) || continente.continenteEus.toLowerCase().includes(_this2.busqueda.toLowerCase());
+      });
     }
   },
   mounted: function mounted() {
@@ -42112,16 +42105,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row", attrs: { id: "master" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.busqueda,
+            expression: "busqueda"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "search",
+          name: "buscador",
+          placeholder: "Buscar en la tabla",
+          autocomplete: "off"
+        },
+        domProps: { value: _vm.busqueda },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.busqueda = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "col-sm-12" }, [
-      _c("h2", [_vm._v("Tabla del NET")]),
-      _vm._v(" "),
       _c("div", { staticClass: "table-responsive table-ambitos" }, [
         _c("table", { staticClass: "table table-striped rounded" }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.arrayAmbitos, function(ambito) {
+            _vm._l(_vm.buscarAmbito, function(ambito) {
               return _c("tr", { key: ambito.id }, [
                 _c("td", {
                   domProps: { textContent: _vm._s(ambito.ambitoEsp) }
@@ -42190,7 +42212,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row my-4" }, [
-        _vm._m(1),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-12" }, [
           _c("form", [
@@ -42335,6 +42357,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("h2", [_vm._v("Tabla del NET")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42644,36 +42674,29 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(3),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "img-muestra d-flex align-items-center justify-content-center"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "rounded",
+                      attrs: {
+                        src: "../resources/img/imglogo.svg",
+                        alt: "Imagen previa",
+                        title: "Imagen previa"
+                      }
+                    })
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-8" }, [
                 _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-12" }, [
-                    _c("div", { staticClass: "custom-file" }, [
-                      _c("input", {
-                        staticClass: "custom-file-input",
-                        attrs: {
-                          type: "file",
-                          id: "customFileLang",
-                          lang: "es"
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.processFile($event)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "custom-file-label",
-                          attrs: { for: "customFileLang" }
-                        },
-                        [_vm._v("Seleccionar Archivo")]
-                      )
-                    ])
-                  ]),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("input", {
@@ -42928,10 +42951,6 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("h4", [_vm._v("Pregunta")]),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
             _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-12 text-center" }, [
                 _vm.update == 0
@@ -43027,114 +43046,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-4" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "img-muestra d-flex align-items-center justify-content-center"
-        },
-        [
-          _c("img", {
-            staticClass: "rounded",
-            attrs: { src: "#", alt: "Imagen previa", title: "Imagen previa" }
-          })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group col-md-12" }, [
+    return _c("div", { staticClass: "form-group col-md-12" }, [
+      _c("div", { staticClass: "custom-file" }, [
         _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "cartaPregunta",
-            placeholder: "Crea una pregunta..."
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-12" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c("div", { staticClass: "input-group-text" }, [
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "respuesta",
-                  id: "cartaRespuestauno",
-                  "aria-label": "Radio button for following text input"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Respuesta uno",
-              "aria-label": "Text input with radio button"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-12" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c("div", { staticClass: "input-group-text" }, [
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "respuesta",
-                  id: "cartaRespuestados",
-                  "aria-label": "Radio button for following text input"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Respuesta dos",
-              "aria-label": "Text input with radio button"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-12" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c("div", { staticClass: "input-group-text" }, [
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "respuesta",
-                  id: "cartaRespuestatres",
-                  "aria-label": "Radio button for following text input"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Respuesta tres",
-              "aria-label": "Text input with radio button"
-            }
-          })
-        ])
+          staticClass: "custom-file-input",
+          attrs: { type: "file", id: "customFileLang", lang: "es" }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "custom-file-label",
+            attrs: { for: "customFileLang" }
+          },
+          [_vm._v("Seleccionar Archivo")]
+        )
       ])
     ])
   }
@@ -43161,16 +43087,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row", attrs: { id: "master" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.busqueda,
+            expression: "busqueda"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "search",
+          name: "buscador",
+          placeholder: "Buscar en la tabla",
+          autocomplete: "off"
+        },
+        domProps: { value: _vm.busqueda },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.busqueda = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "col-sm-12" }, [
-      _c("h2", [_vm._v("Tabla del NET")]),
-      _vm._v(" "),
       _c("div", { staticClass: "table-responsive table-continentes" }, [
         _c("table", { staticClass: "table table-striped rounded" }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.arrayContinentes, function(continente) {
+            _vm._l(_vm.buscarContinente, function(continente) {
               return _c("tr", { key: continente.id }, [
                 _c("td", {
                   domProps: { textContent: _vm._s(continente.continenteEsp) }
@@ -43239,7 +43194,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row my-4" }, [
-        _vm._m(1),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-12" }, [
           _c("form", [
@@ -43396,6 +43351,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("h2", [_vm._v("Tabla del NET")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

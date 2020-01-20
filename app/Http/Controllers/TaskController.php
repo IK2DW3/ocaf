@@ -63,7 +63,7 @@ class TaskController extends Controller
 
     public function tableCard(Request $request){
 
-        return Carta::with('ambito', 'continente')->orderBy('nombre')->get();
+        return Carta::with('ambito', 'continente')->get();
 
     }
 
@@ -123,7 +123,7 @@ class TaskController extends Controller
         $task->ambitoEng = $request->ambitoEng;
         $task->ambitoEus = $request->ambitoEus;
         $task->save();
-        
+
 
     }
 

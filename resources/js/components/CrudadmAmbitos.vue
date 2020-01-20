@@ -1,8 +1,13 @@
 <template>
 
     <div class="row" id="master">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-2">
             <h2>Tabla del NET</h2>
+        </div>
+        <div class="col-sm-12 my-2">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+        </div>
+        <div class="col-sm-12">
             <div class="table-responsive table-ambitos">
                 <table class="table table-striped rounded">
                     <thead class="thead-dark">
@@ -14,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="ambito in arrayAmbitos" :key="ambito.id">
+                        <tr v-for="ambito in buscarAmbito" :key="ambito.id">
                             <td v-text="ambito.ambitoEsp"></td>
                             <td v-text="ambito.ambitoEng"></td>
                             <td v-text="ambito.ambitoEus"></td>
@@ -64,7 +69,7 @@
             </div>
         </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -74,9 +79,10 @@ export default {
             ambitoEsp:"",
             ambitoEng:"",
             ambitoEus:"",
-            update:0, 
-            
-            arrayAmbitos:[], 
+            update:0,
+            busqueda:"",
+
+            arrayAmbitos:[],
         }
     },
     methods:{
@@ -171,6 +177,13 @@ export default {
             this.ambitoEng = "";
             this.ambitoEus = "";
             this.update = 0;
+            this.busqueda = "";
+        }
+    },
+    computed: {
+        buscarAmbito() {
+            return this.arrayAmbitos.filter((ambito) => ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(this.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(this.busqueda.toLowerCase())
+            );
         }
     },
     mounted() {
