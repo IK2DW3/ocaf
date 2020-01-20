@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+Use Alert;
 use App\Task;
 use App\Ambito;
 use App\Carta;
@@ -9,15 +10,14 @@ use App\Continente;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class TaskController extends Controller
 {
     public function tableUser(Request $request) {
 
-        $task = User::all();
-        return $task;
+        $results = User::orderBy('name')->get();
+        return $results;
 
     }
 
@@ -112,7 +112,7 @@ class TaskController extends Controller
     /* - -------------------------------------------------------------------------------------------- */
     public function tableAmbit(Request $request) {
 
-        return Ambito::all();
+        return Ambito::orderBy('ambitoEsp')->get();
 
     }
 
@@ -123,12 +123,15 @@ class TaskController extends Controller
         $task->ambitoEng = $request->ambitoEng;
         $task->ambitoEus = $request->ambitoEus;
         $task->save();
+        
+
     }
+
     public function showAmbit(Request $request) {
 
         $task = Ambito::findOrFail($request->id);
-
         return $task;
+
     }
 
     public function updateAmbit(Request $request) {
@@ -138,7 +141,7 @@ class TaskController extends Controller
         $task->ambitoEng = $request->ambitoEng;
         $task->ambitoEus = $request->ambitoEus;
         $task->save();
-
+        Alert::success('Success', 'Datos actualizados correctamente');
         return $task;
     }
 

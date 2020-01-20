@@ -190,6 +190,9 @@ div.contenedor-panel {
 }
 div.contenedor-panel div.box-panel,
 div.contenedor-panel div.box-perfil,
+div.contenedor-panel div.panel-ambitos,
+div.contenedor-panel div.panel-continentes,
+div.contenedor-panel div.panel-usuarios,
 div.contenedor-panel div.panel-cartas {
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -202,6 +205,9 @@ div.contenedor-panel div.panel-cartas {
     padding: 2em;
 }
 
+div.contenedor-panel div.table-usuarios,
+div.contenedor-panel div.table-ambitos,
+div.contenedor-panel div.table-continentes,
 div.contenedor-panel div.table-mujeres {
     background-color: #f0f0f0;
     border-collapse: collapse;

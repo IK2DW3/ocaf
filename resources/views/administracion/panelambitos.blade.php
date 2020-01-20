@@ -8,7 +8,7 @@
             <div class="col-sm-12 text-center text-light">
                 <h1 class="">Panel del conocimiento</h1>
             </div>
-            <div class="row panel-usuarios mx-5 px-2 py-3 rounded w-100">
+            <div class="row panel-ambitos mx-5 px-2 py-3 rounded w-100">
                 <div class="col-md-2 panel-aside border-right px-2 py-2">
                     <h2>Gestionar</h2>
                     <div class="btn-group-vertical panel-aside-navegador w-100">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-md-10 panel-contenido px-2 py-2">
-                    <crudadm-users></crudadm-users>
+                    <crudadm-ambits></crudadm-ambits>
                 </div>
             </div>
         </div>

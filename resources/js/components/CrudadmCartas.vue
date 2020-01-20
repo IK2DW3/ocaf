@@ -1,7 +1,12 @@
 <template>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-2">
             <h2>Tabla del conocimiento</h2>
+        </div>
+        <div class="col-sm-12 my-2">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+        </div>
+        <div class="col-sm-12">
             <div class="table-responsive table-mujeres">
                 <table class="table table-striped rounded">
                     <thead class="thead-dark position-sticky">
@@ -15,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="carta in arrayCartas" :key="carta.id">
+                        <tr v-for="carta in buscarCartas" :key="carta.id">
                             <td v-text="carta.nombre"></td>
                             <td v-text="carta.apellido"></td>
                             <td v-text="carta.fechaNacimiento"></td>
@@ -23,7 +28,7 @@
                             <td v-text="carta.ambito.ambitoEsp"></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button role="button" class="btn btn-secondary" title="Ver" @click="showAlert()">&#x1F440;</button>
+                                    <a :href="'history/'+ carta.id" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
                                     <button type="button" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta)">&#x270E;</button>
                                     <button type="button" class="btn btn-secondary" title="Eliminar" @click="deleteTask(carta)">&#x2716;</button>
                                 </div>
@@ -189,6 +194,7 @@
                 habilitado:"",
                 update:0,
 
+                busqueda:"",
                 files:[],
                 arrayCartas:[],
                 arrayAmbitos:[],
@@ -362,6 +368,12 @@
                 this.usuario_id="";
                 this.habilitado="";
                 this.update = 0;
+            }
+        },
+        computed: {
+            buscarCartas() {
+                return this.arrayCartas.filter((carta) => carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase())                                           
+                );
             }
         },
         // Metodo de inicialización del archivo vue

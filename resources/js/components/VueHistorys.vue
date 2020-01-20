@@ -6,25 +6,19 @@
                 <div class="col-sm-12">
                     <h1 class="text-light">Filtrar</h1>
                 </div>
-                <div class="col-sm-12 my-2">
-                    <select v-model="ambito_id" class="custom-select">
+                <div class="col-sm-12 col-md-6 my-2">
+                    <select v-model="ambito_id" class="custom-select" @change="filterTask()">
                         <option disabled v-text="'Seleccionar ambito'" value=""></option>
+                        <option v-text="'Todo'" value="Todo"></option>
                         <option v-for="ambito in arrayAmbitos" v-bind:key="ambito.id" v-text="ambito.ambitoEsp" :value="ambito.id"></option>
                     </select>
                 </div>
-                <div class="col-sm-12 col-md-4">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button @click="filterTask()" class="btn btn-info w-100">Filtrar</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button @click="clearFields()" class="btn btn-info w-100">Limpiar</button>
-                        </div>
-                    </div>
+                <div class="col-sm-12 col-md-6 my-2">
+                    <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en página" autocomplete="off">
                 </div>
             </div>
         </div>
-        <div v-for="carta in arrayCartas" v-bind:key="carta.id" class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
+        <div v-for="carta in buscarCartas" v-bind:key="carta.id" class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
             <div class="card text-center my-2">
                 <div class="card-header">
                     <h2 v-text="carta.nombre +' '+ carta.apellido"></h2>
@@ -50,6 +44,7 @@ export default {
         return{
             // Parametros iniciales
             ambito_id:"",
+            busqueda:"",
             update:0,
             arrayCartas:[],
             arrayAmbitos:[],
@@ -75,6 +70,8 @@ export default {
             let me =this;
             if (me.ambito_id === "") {
                 this.$swal('Advertencia', 'Debes seleccionar un tipo', 'error');
+            } else if (me.ambito_id === "Todo") {
+                this.clearFields();
             } else {
                 me.update = me.ambito_id
                 let url = 'card/filtrar?ambito_id='+ me.update;
@@ -88,13 +85,21 @@ export default {
         },
         clearFields(){
             this.ambito_id="";
+            this.busqueda="";
             this.update=0;
             this.getTasks();
         },
+    },
+    computed: {
+        buscarCartas() {
+            return this.arrayCartas.filter((carta) => carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase())                                           
+            );
+        }
     },
     // Metodo de inicialización del archivo vue
     mounted() {
         this.getTasks();
     }
+    
 }
 </script>
