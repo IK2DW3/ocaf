@@ -71,6 +71,9 @@ Route::post('/continent/guardar', 'TaskController@storeContinent');
 Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
 Route::get('/continent/buscar', 'TaskController@showContinent');
 
+// Ruta para el selector de juego y el tablero
+Route::post('/modo', 'TaskController@getGamemode');
+
 /**
  * Subida de archivos
  */

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
@@ -41,8 +41,17 @@ class OcafController extends Controller
     }
 
     public function getGamemode(Request $request) {
-        $mode = $request->input('mode');
-        return view('gamemode', array('gamemode' => $mode));
+
+        $response = new \Illuminate\Http\Response(view('gamemode'));
+        $response->withCookie(cookie('modoSeleccionado', $request->input('mode')));
+        return $response;
+/*
+        $modo = $request->input('mode');
+        $cookie = cookie('modoSeleccionado', $modo);
+
+        return view('gamemode', ['name'=> $cookie]);*/
+        //return response()->json(['modo' => $modo]);
+        //return view('gamemode',['modo'=>$modo]);
     }
 
     public function getHistorys() {

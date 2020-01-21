@@ -191,4 +191,13 @@ class TaskController extends Controller
         return $task;
 
     }
+
+    /* ----------------------------------------------------------------------------------------------- */
+    public function getGamemode(Request $request) {
+        
+        $modo = $request->input('mode');
+        return response()->json(['modo' => $modo]);
+
+    }
+
 }
