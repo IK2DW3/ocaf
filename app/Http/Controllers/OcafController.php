@@ -40,18 +40,8 @@ class OcafController extends Controller
         return view('index', array('arrayRegistro'=> $registroPersona));
     }
 
-    public function getGamemode(Request $request) {
-
-        $response = new \Illuminate\Http\Response(view('gamemode'));
-        $response->withCookie(cookie('modoSeleccionado', $request->input('mode')));
-        return $response;
-/*
-        $modo = $request->input('mode');
-        $cookie = cookie('modoSeleccionado', $modo);
-
-        return view('gamemode', ['name'=> $cookie]);*/
-        //return response()->json(['modo' => $modo]);
-        //return view('gamemode',['modo'=>$modo]);
+    public function getGamemode() {
+        return view('gamemode');
     }
 
     public function getHistorys() {

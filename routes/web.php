@@ -9,7 +9,7 @@ Route::GET('logout', 'Auth/LoginController@logout');
 Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
-Route::post('gamemode', 'OcafController@getGamemode');
+Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
 Route::post('register', 'OcafController@postRegister');
 
 

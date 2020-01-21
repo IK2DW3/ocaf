@@ -3061,21 +3061,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getTasks: function getTasks() {
       var me = this;
-      axios.post('gamemode', me.gamemode).then(function (response) {
-        console.log($mode);
-        me.gamemode = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      me.gamemode = localStorage.getItem('modoSeleccionado');
       axios.get('ambit').then(function (response) {
         me.arrayAmbitos = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    usuarioLogueado: function usuarioLogueado() {
-      var usuarioLogueado = '{{Auth::user()->name}}';
-      return usuarioLogueado;
+    removeLocalStorage: function removeLocalStorage() {
+      localStorage.removeItem('modoSeleccionado');
     }
   },
   mounted: function mounted() {
@@ -44035,7 +44029,7 @@ var render = function() {
                   return _c("div", { key: n, staticClass: "col-md-3 mb-3" }, [
                     _vm.gamemode === "Individual"
                       ? _c("label", {
-                          attrs: { for: "lbljugador" + n },
+                          attrs: { for: "lbljugador" + (n = n + 1) },
                           domProps: { textContent: _vm._s("Jugador " + n) }
                         })
                       : _c("label", {
@@ -44143,7 +44137,8 @@ var render = function() {
           "a",
           {
             staticClass: "btn btn-outline-info",
-            attrs: { href: "mode", role: "button" }
+            attrs: { href: "mode", role: "button" },
+            on: { click: _vm.removeLocalStorage }
           },
           [_vm._v("← Volver")]
         )

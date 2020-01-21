@@ -24,7 +24,7 @@
                                 <input type="text" class="form-control" id="lbljugador1" :value="''" autocomplete="off" disabled readonly>
                             </div>
                             <div class="col-md-3 mb-3" v-for="n in 3" :key="n">
-                                <label v-if="gamemode === 'Individual'" :for="'lbljugador'+ n" v-text="'Jugador '+n"></label>
+                                <label v-if="gamemode === 'Individual'" :for="'lbljugador'+ (n=n+1)" v-text="'Jugador '+n"></label>
                                 <label v-else :for="'lbljugador'+ (n=n+1)" v-text="'Equipo '+ n"></label>
                                 <input type="text" class="form-control" :id="'lbljugador'+n" :value="''" autocomplete="off" required>
                             </div>
@@ -81,7 +81,7 @@
                 </form>
             </div>
             <div class="col-sm-12 text-center">
-                <a class="btn btn-outline-info" :href="'mode'" role="button">&#x2190; Volver</a>
+                <a class="btn btn-outline-info" :href="'mode'" role="button" @click="removeLocalStorage">&#x2190; Volver</a>
             </div>
         </div>
     </div>
@@ -101,22 +101,15 @@ export default {
     methods: {
         getTasks(){
             let me = this;
-            axios.post('gamemode',me.gamemode).then(function (response) {
-                console.log($mode);
-                me.gamemode = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-
+            me.gamemode = localStorage.getItem('modoSeleccionado');
             axios.get('ambit').then(function (response) {
                 me.arrayAmbitos = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
         },
-        usuarioLogueado(){
-            let usuarioLogueado =  '{{Auth::user()->name}}';
-            return usuarioLogueado;
+        removeLocalStorage(){
+            localStorage.removeItem('modoSeleccionado');
         }
     },
     mounted() {

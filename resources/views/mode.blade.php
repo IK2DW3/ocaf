@@ -21,22 +21,10 @@
                             <a class="btn btn-primary btn-lg" href="{{url('historys')}}" role="button">Historia</a>
                         </div>
                         <div class="row align-items-center justify-content-center my-2">
-                            <form action="{{url('gamemode')}}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="mode" value="Individual">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    Individual
-                                </button>
-                            </form>
+                            <a id="modoIndividual" class="btn btn-primary btn-lg" href="{{url('gamemode')}}" role="button">Individual</a>
                         </div>
                         <div class="row align-items-center justify-content-center my-2">
-                            <form action="{{url('gamemode')}}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="mode" value="Co-operativo">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    Co-operativo
-                                </button>
-                            </form>
+                            <a id="modoGrupal" class="btn btn-primary btn-lg" href="{{url('gamemode')}}" role="button">Co-Operativo</a>
                         </div>
                         @if (Auth::check() && Auth::user()->tipo == "superadmin")
                         <div class="row align-items-center justify-content-center my-2">
@@ -52,5 +40,5 @@
         </div>
     </div>
 
-    
+
 @stop
