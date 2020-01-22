@@ -17,6 +17,7 @@ Vue.component('crudadm-users', require('./components/CrudadmUsers.vue').default)
 Vue.component('crudadm-ambits', require('./components/CrudadmAmbitos.vue').default);
 Vue.component('crudadm-continents', require('./components/CrudadmContinentes.vue').default);
 Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
+Vue.component('login-register', require('./components/LoginRegister.vue').default);
 Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 
 Vue.component('selector-juego', require('./components/SelectorJuego.vue').default);
@@ -28,7 +29,21 @@ Vue.component('tablero-normal', require('./components/TableroNormal.vue').defaul
 const app = new Vue({
     el: '#app',
 });
-const options = {
-    confirmButtonColor: '#41b882',
-    cancelButtonColor: '#ff7674',
-};
+
+
+/**
+ * Funciones diferentes a Vue.js
+ */
+if ($("#modoIndividual") != null || $("#modoGrupal") != null) {
+
+    $("#modoIndividual").click(function(i) {
+        var modoSeleccionado = $(this).text();
+        localStorage.setItem('modoSeleccionado', modoSeleccionado);
+    });
+
+    $("#modoGrupal").click(function(i) {
+        var modoSeleccionado = $(this).text();
+        localStorage.setItem('modoSeleccionado', modoSeleccionado);
+    });
+
+}

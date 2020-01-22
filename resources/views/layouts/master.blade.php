@@ -47,6 +47,5 @@
 
         <!-- + Scripts -->
         <script src="{{asset('js/app.js')}}"></script>
-        <script src="{{asset('../resources/js/main.js')}}"></script>
   </body>
 </html>
