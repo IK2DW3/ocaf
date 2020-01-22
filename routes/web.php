@@ -4,7 +4,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'OcafController@getIndex');
 Route::get('index', 'OcafController@getIndex');
 
-Route::POST('comprobarlogin', 'OcafController@comprobarLogin');
 Route::GET('logout', 'Auth/LoginController@logout');
 
 Route::get('mode', 'OcafController@getMode');

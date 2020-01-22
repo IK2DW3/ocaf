@@ -17,7 +17,6 @@ Vue.component('crudadm-users', require('./components/CrudadmUsers.vue').default)
 Vue.component('crudadm-ambits', require('./components/CrudadmAmbitos.vue').default);
 Vue.component('crudadm-continents', require('./components/CrudadmContinentes.vue').default);
 Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
-Vue.component('login-register', require('./components/LoginRegister.vue').default);
 Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 
 Vue.component('selector-juego', require('./components/SelectorJuego.vue').default);
@@ -30,20 +29,39 @@ const app = new Vue({
     el: '#app',
 });
 
+$(document).ready(function() {
 
-/**
- * Funciones diferentes a Vue.js
- */
-if ($("#modoIndividual") != null || $("#modoGrupal") != null) {
+    if ($("#modoIndividual") != null || $("#modoGrupal") != null) {
 
-    $("#modoIndividual").click(function(i) {
-        var modoSeleccionado = $(this).text();
-        localStorage.setItem('modoSeleccionado', modoSeleccionado);
-    });
+        $("#modoIndividual").click(function(i) {
+            var modoSeleccionado = $(this).text();
+            localStorage.setItem('modoSeleccionado', modoSeleccionado);
+        });
 
-    $("#modoGrupal").click(function(i) {
-        var modoSeleccionado = $(this).text();
-        localStorage.setItem('modoSeleccionado', modoSeleccionado);
-    });
+        $("#modoGrupal").click(function(i) {
+            var modoSeleccionado = $(this).text();
+            localStorage.setItem('modoSeleccionado', modoSeleccionado);
+        });
 
-}
+    }
+
+    if ($("#btnLogin") != null) {
+
+        $("#btnLogin").click(function() {
+
+            // Previene el funcionamiento por defecto
+            //e.preventDefault();
+
+            var email = $("input[name=emailLogin]").val();
+            var password = $("input[name=passwordLogin]").val();
+
+            if (email == null || email == "") {
+                alert('Email incorrecto');
+            } else if (password == null || password == "") {
+                alert('Password incorrecto');
+            }
+
+        });
+    }
+
+});
