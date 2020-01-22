@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use App\Http\Controllers\Controller;
 use App\Carta;
+use App\User;
+use App\Ambito;
 Use Alert;
 
 class OcafController extends Controller
 {
-    //
+    // Inicio de las funciones
     public function getHome() {
         return  redirect()->action('LoginController@login');
     }
@@ -25,60 +31,75 @@ class OcafController extends Controller
         return view('mode');
     }
 
-    public function getPanel() {
-        $persona = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.*', 'continentes.*')
-                    ->get();
-        return view('paneladmin', array('arrayPersonas'=> $persona));
+    public function postRegister(Request $request) {
+        $registroPersona = new User;
+        $registroPersona->name = $request->input('newusername');
+        $registroPersona->email = $request->input('email');
+        $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
+        $registroPersona->save();
+        return view('index', array('arrayRegistro'=> $registroPersona));
     }
 
-    public function getGamemode(Request $request) {
-        $mode = $request->input('mode');
-        return view('gamemode', array('gamemode' => $mode));
+    public function getGamemode() {
+        return view('gamemode');
     }
- 
+
     public function getHistorys() {
-        $Ambitos = DB::table('ambitos')
-        ->select('*')
-        ->get();
-        /*$Continentes = DB::table('continentes')
-                    ->select('*')
-                    ->get();*/
-        $AC = DB::table('ambitos')
-                    ->join('continentes', 'ambitos.id', '=', 'continentes.id')
-                    ->select('continentes.continenteEsp', 'ambitos.ambitoEsp')
-                    ->get();
-        $Cartas = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp', 'continentes.continenteEsp')
-                    ->distinct()
-                    ->get();
-        return view('historys',array('arrayCartas'=> $Cartas),/*array('arrayContinentes' => $Continentes),*/ array('arrayAC' => $AC));
-        return view('historys',array('arrayCartas'=> $Cartas),/*array('arrayContinentes' => $Continentes),*/ array('arrayAC' => $AC));
+        return view('historys');
     }
 
     public function getHistory($id) {
-        $Carta = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp', 'continentes.continenteEng')
-                    ->where('cartas.id', '=', $id)
-                    ->get();
+        $Carta = Carta::findOrFail($id);
         return view('history', array('arrayCarta' => $Carta));
     }
 
-    public function getHistoryFiltro() {
-        $Ambitos = DB::table('ambitos')
-        ->select('*')
-        ->get();
-        $Continentes = DB::table('continentes')
-                    ->select('*')
-                    ->get();
-       
-        return view('historyFiltro',array('arrayContinentes'=> $Continentes), array('arrayAmbitos'=> $Ambitos));
+    public function getPanel() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panel');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPerfil() {
+        return view('administracion.perfil');
+    }
+
+    public function getPanelusuarios() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelusuarios');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelambitos() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelambitos');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelcontinentes() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelcontinentes');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelcartas() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelcartas');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
     }
 
 }

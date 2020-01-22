@@ -10,90 +10,105 @@ div.main {
 /* NAVEGADOR */
 
 div.dropdown-menu {
-    left: -50px !important;
+    left: -105px !important;
     right: 0 !important;
+}
+
+
+/* Floating Action Button */
+
+div.fab {
+    align-items: flex-end;
+    bottom: 5%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    position: fixed;
+    right: 3%;
+    width: 300px;
+    z-index: 1000;
+}
+
+div.fab button.btn-fab .icon {
+    font-size: 2em;
+}
+
+div.fab .btn-item .icon {
+    font-size: 1.5em;
 }
 
 
 /* INDEX */
 
-div.index,
 div.contenedor {
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     min-height: 100vh;
-    justify-content: center;
     overflow: hidden;
     width: 100%;
 }
 
-div.index div.box {
+div.contenedor div.contenido,
+div.contenedor-panel div.contenido {
+    min-height: 90vh;
+}
+
+div.contenedor div.box-index,
+div.contenedor div.box-mode,
+div.contenedor div.box-gamemode,
+div.contenedor div.box-historia {
     align-items: center;
-    display: inherit;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
-    flex-flow: column;
+    display: flex;
     min-height: 400px;
     justify-content: center;
     outline: 1px dashed #000;
     outline-offset: -10px;
     overflow: hidden;
     padding: 2em;
-    width: 40%;
 }
 
-div.box h1 {
-    margin-bottom: 10%;
-}
-
-div.box form {
-    margin: 1.5% 0;
-    width: 50%;
-}
-
-div.box form button {
-    width: 100%;
-}
-
-div.box a {
-    font-size: 1rem;
-    margin: 1.5% 0;
-    width: 50%;
-}
-
-div.box a.btn-primary,
-div.box button.btn-primary {
+div.box-index a.btn-primary,
+div.box-index button.btn-primary,
+div.box-mode a.btn-primary,
+div.box-mode button.btn-primary,
+div.box-gamemode a.btn-primary,
+div.box-gamemode button.btn-primary {
     background-color: #C35662 !important;
     border: none !important;
     border-radius: 5px;
     color: azure;
+    width: 250px;
 }
 
-div.box a.btn-primary:hover,
-div.box button.btn-primary:hover {
+div.box-index a.btn-primary:hover,
+div.box-index button.btn-primary:hover,
+div.box-mode a.btn-primary:hover,
+div.box-mode button.btn-primary:hover,
+div.box-gamemode a.btn-primary:hover,
+div.box-gamemode button.btn-primary:hover {
     background-color: #a54c56 !important;
+}
+
+div.contenedor div.box-index div.box-index-contenido {
+    height: auto;
 }
 
 
 /* LOGIN/REGISTER */
 
-form.login,
-form.registro {
-    align-items: center;
-    display: inherit;
+div.login,
+div.registro {
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
-    flex-flow: column;
-    min-height: 400px;
     justify-content: center;
     outline: 1px dashed #000;
     outline-offset: -10px;
-    overflow: hidden;
     padding: 2em;
-    width: 100%;
 }
 
 div.col-logo,
@@ -111,13 +126,8 @@ div.col-logo {
 
 /* Historys */
 
-div.cartas {
-    padding: 1%;
-}
-
 div.card {
     height: 400px;
-    margin: 1% 0 5%;
     max-height: 400px;
 }
 
@@ -132,35 +142,14 @@ div.card img {
 
 /* History/+ */
 
-div.tarjeta {
-    background-color: #fff;
-    border-radius: 15px;
-    margin: 2.5% 25%;
-    min-height: 600px;
-    outline: 1px dashed #000;
-    outline-offset: -10px;
-    overflow: hidden;
-    padding: 2em;
-}
-
-div.colcard-img {
-    align-items: center;
-    display: inherit;
-    justify-content: center;
-}
-
-div.colcard-resumen {
-    margin: 5% 0 1em;
-    padding: 0 5%;
-    text-align: justify;
+div.box-historia img {
+    height: 200px;
+    min-width: 220px;
+    max-width: 250px;
 }
 
 
 /* Gamemode */
-
-form.gamemode {
-    width: 70% !important;
-}
 
 form.gamemode h3 {
     padding: .5em 0;
@@ -190,6 +179,14 @@ form.gamemode div.input-tableroDefault {
 }
 
 
+/* Perfil - Panel */
+
+div.contenedor-panel div.box-panel a.panel-boton img {
+    height: 90%;
+    width: 100%;
+}
+
+
 /* Panel de conocimiento */
 
 div.contenedor-panel {
@@ -198,38 +195,45 @@ div.contenedor-panel {
     overflow: hidden;
 }
 
-div.contenedor-panel div.panel {
-    background-color: #f0f0f0;
-    min-height: 80vh;
-    margin: 2% 10%;
-    padding: 1%;
+div.contenedor-panel div.box-panel,
+div.contenedor-panel div.box-perfil,
+div.contenedor-panel div.panel-ambitos,
+div.contenedor-panel div.panel-continentes,
+div.contenedor-panel div.panel-usuarios,
+div.contenedor-panel div.panel-cartas {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    min-height: 400px;
+    min-width: 50%;
+    outline: 1px solid #C35662;
+    outline-offset: -10px;
+    overflow: hidden;
+    padding: 2em;
 }
 
-div.contenedor-panel div.panel div.table-mujeres {
+div.contenedor-panel div.table-usuarios,
+div.contenedor-panel div.table-ambitos,
+div.contenedor-panel div.table-continentes,
+div.contenedor-panel div.table-mujeres {
     background-color: #f0f0f0;
-    box-shadow: inset 0 0 10px #000000;
+    border-collapse: collapse;
     max-height: 400px !important;
+    table-layout: fixed;
     overflow-y: scroll;
     width: 100%;
 }
 
-div.contenedor-panel div.panel div.panel-aside-navegador {
-    width: 100%;
+div.contenedor-panel textarea {
+    height: 150px;
 }
 
-div.contenedor-panel div.panel div.datosFormulario {
-    padding: 2% 0;
+div.contenedor-panel div.panel-contenido div.img-muestra {
+    height: 150px;
 }
 
-div.contenedor-panel div.panel div.img-muestra {
-    align-items: stretch;
-    display: flex;
-    height: 140px;
-    justify-content: center;
-    width: 100%;
-}
-
-div.contenedor-panel div.panel div.img-muestra img {
+div.contenedor-panel div.panel-contenido div.img-muestra img {
+    height: 100%;
     width: 100%;
 }
 

@@ -21,22 +21,20 @@ class CreateCartasTable extends Migration
             $table->string('apellido', 50);
             $table->string('fechaNacimiento',10);
             $table->string('fechaMuerte',10)->nullable();
-            $table->unsignedInteger('codAmbito');
+            $table->unsignedInteger('ambito_id');
             $table->string('loreEsp', 5000)->nullable();
             $table->string('loreEng', 5000)->nullable();
             $table->string('loreEus', 5000)->nullable();
             $table->string('zonaGeografica')->nullable();
-            $table->unsignedInteger('codContinente');
+            $table->unsignedInteger('continente_id');
             $table->string('imgRuta', 64)->nullable();
             $table->string('imgDefault', 512)->nullable();
             $table->string('enlaceReferencia', 500)->nullable();
-            $table->unsignedInteger('codUsuario')->nullable();
             $table->boolean('habilitado')->default(false);
             $table->timestamps();
 
-            $table->foreign('codAmbito')->references('id')->on('ambitos');
-            $table->foreign('codContinente')->references('id')->on('continentes');
-            $table->foreign('codUsuario')->references('id')->on('users');
+            $table->foreign('ambito_id')->references('id')->on('ambitos');
+            $table->foreign('continente_id')->references('id')->on('continentes');
         });
     }
 
