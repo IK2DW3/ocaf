@@ -117,7 +117,6 @@ class DatabaseSeeder extends Seeder
         self::seedUsers();
         self::seedAmbitos();
         self::seedContinentes();
-        self::seedCartas();
 
         $this->command->info('Datos insertados correctamente!');
 
@@ -167,13 +166,6 @@ class DatabaseSeeder extends Seeder
             $p->continenteEus = $continente['eus'];
             $p->save();
         }
-
-    }
-
-    public function seedCartas()
-    {
-        // En primer lugar borramos el contenido de la tabla
-        // DB::table('cartas')->delete();
 
     }
 

@@ -1,8 +1,13 @@
 <template>
     <div class="row" id="master">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-2">
             <h2>Tabla del NET</h2>
-            <div class="table-responsive table-mujeres">
+        </div>
+        <div class="col-sm-12 my-2">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+        </div>
+        <div class="col-sm-12">
+            <div class="table-responsive table-usuarios">
                 <table class="table table-striped rounded">
                     <thead class="thead-dark">
                         <tr>
@@ -13,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="user in arrayTasks" :key="user.id">
+                        <tr v-for="user in buscarUsuarios" :key="user.id">
                             <td v-text="user.name"></td>
                             <td v-text="user.email"></td>
                             <td v-text="user.tipo"></td>
@@ -79,13 +84,14 @@
     export default {
         data(){
             return{
-                name:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                email:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                tipo:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                password:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                update:0, /*Esta variable contrarolará cuando es una nueva tarea o una modificación, si es 0 significará que no hemos seleccionado
-                          ninguna tarea, pero si es diferente de 0 entonces tendrá el id de la tarea y no mostrará el boton guardar sino el modificar*/
-                arrayTasks:[], //Este array contendrá las tareas de nuestra bd
+                name:"",
+                email:"", 
+                tipo:"", 
+                password:"", 
+                update:0, 
+                busqueda:"",
+
+                arrayUsuarios:[],
                 tipos: [
                     { text: 'Usuario', value: 'user' },
                     { text: 'Administrador', value: 'administrator' },
@@ -99,7 +105,7 @@
                 let url = 'user' //Ruta que hemos creado para que nos devuelva todas las tareas
                 axios.get(url).then(function (response) {
                     //creamos un array y guardamos el contenido que nos devuelve el response
-                    me.arrayTasks = response.data;
+                    me.arrayUsuarios = response.data;
                 })
                 .catch(function (error) {
                     // handle error
@@ -190,7 +196,14 @@
                 this.email = "";
                 this.tipo = "";
                 this.password = "";
+                this.busqueda="";
                 this.update = 0;
+            }
+        },
+        computed: {
+            buscarUsuarios() {
+                return this.arrayUsuarios.filter((user) => user.name.toLowerCase().includes(this.busqueda.toLowerCase()) || user.email.toLowerCase().includes(this.busqueda.toLowerCase()) || user.tipo.toLowerCase().includes(this.busqueda.toLowerCase())                                          
+                );
             }
         },
         mounted() {

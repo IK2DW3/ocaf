@@ -1,7 +1,12 @@
 <template>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 my-2">
             <h2>Tabla del conocimiento</h2>
+        </div>
+        <div class="col-sm-12 my-2">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+        </div>
+        <div class="col-sm-12">
             <div class="table-responsive table-mujeres">
                 <table class="table table-striped rounded">
                     <thead class="thead-dark position-sticky">
@@ -15,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="carta in arrayCartas" :key="carta.id">
+                        <tr v-for="carta in buscarCartas" :key="carta.id">
                             <td v-text="carta.nombre"></td>
                             <td v-text="carta.apellido"></td>
                             <td v-text="carta.fechaNacimiento"></td>
@@ -23,7 +28,7 @@
                             <td v-text="carta.ambito.ambitoEsp"></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button role="button" class="btn btn-secondary" title="Ver" @click="showAlert()">&#x1F440;</button>
+                                    <a :href="'history/'+ carta.id" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
                                     <button type="button" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta)">&#x270E;</button>
                                     <button type="button" class="btn btn-secondary" title="Eliminar" @click="deleteTask(carta)">&#x2716;</button>
                                 </div>
@@ -62,14 +67,14 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <div class="img-muestra d-flex align-items-center justify-content-center">
-                                    <img src="#" class="rounded" alt="Imagen previa" title="Imagen previa">
+                                    <img :src="'../resources/img/imglogo.svg'" class="rounded" alt="Imagen previa" title="Imagen previa">
                                 </div>
                             </div>
                             <div class="form-group col-md-8">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <div class="custom-file">
-                                            <input type="file" @change="processFile($event)" class="custom-file-input" id="customFileLang" lang="es">
+                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es">
                                             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                                         </div>
                                     </div>
@@ -110,42 +115,6 @@
                             <div class="form-group col-md-12">
                                 <label for="cartaLoreeus">Historia Euskarazen</label>
                                 <textarea v-model="loreEus" class="form-control" name="cartaLoreeus" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
-                            </div>
-                        </div>
-                        <h4>Pregunta</h4>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="cartaPregunta" placeholder="Crea una pregunta...">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <input type="radio" name="respuesta" id="cartaRespuestauno" aria-label="Radio button for following text input">
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Respuesta uno" aria-label="Text input with radio button">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <input type="radio" name="respuesta" id="cartaRespuestados" aria-label="Radio button for following text input">
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Respuesta dos" aria-label="Text input with radio button">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <input type="radio" name="respuesta" id="cartaRespuestatres" aria-label="Radio button for following text input">
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Respuesta tres" aria-label="Text input with radio button">
-                                </div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -189,6 +158,7 @@
                 habilitado:"",
                 update:0,
 
+                busqueda:"",
                 files:[],
                 arrayCartas:[],
                 arrayAmbitos:[],
@@ -341,9 +311,6 @@
                     }
                 })
             },
-            previewFiles(event) {
-                this.someData = event.target.files[0]
-            },
             // Metodo para limpiar los campos de texto
             clearFields(){
                 this.nombre ="";
@@ -362,6 +329,12 @@
                 this.usuario_id="";
                 this.habilitado="";
                 this.update = 0;
+            }
+        },
+        computed: {
+            buscarCartas() {
+                return this.arrayCartas.filter((carta) => carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase())
+                );
             }
         },
         // Metodo de inicialización del archivo vue

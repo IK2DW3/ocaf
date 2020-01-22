@@ -33,9 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('panel', 'OcafController@getPanel');
     Route::get('perfil', 'OcafController@getPerfil');
-    Route::get('panelcartas', 'OcafController@getPanelcartas');
     Route::get('panelusuarios', 'OcafController@getPanelusuarios');
-
+    Route::get('panelambitos', 'OcafController@getPanelambitos');
+    Route::get('panelcontinentes', 'OcafController@getPanelcontinentes');
+    Route::get('panelcartas', 'OcafController@getPanelcartas');
 });
 Route::get('pruebas', 'FileController@create');
 /*

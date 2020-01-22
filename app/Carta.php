@@ -21,4 +21,8 @@ class Carta extends Model
         return $this->belongsTo('App\Continente');
     }
 
+    public function pregunta() {
+        return $this->hasMany('App\Pregunta');
+    }
+
 }

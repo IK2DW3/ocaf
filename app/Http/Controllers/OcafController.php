@@ -32,12 +32,18 @@ class OcafController extends Controller
     }
 
     public function postRegister(Request $request) {
-        $registroPersona = new User;
-        $registroPersona->name = $request->input('newusername');
-        $registroPersona->email = $request->input('email');
-        $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
-        $registroPersona->save();
-        return view('index', array('arrayRegistro'=> $registroPersona));
+        $this->validate($request, ['email'=>'required|min:255',
+        'password'=>'required|min:8',
+        'newusername'=>'required|min:1'
+        ]);
+
+        User::create([
+            'newusername'=>$request->get('newusername'),
+            'email'=>$request->get('email'),
+            'confirmnewpassword'=>$request->get('confirmnewpassword'),
+        ]);
+   
+        return back()->with('mensaje','Usuario creado');
     }
 
     public function getGamemode(Request $request) {
@@ -46,8 +52,7 @@ class OcafController extends Controller
     }
 
     public function getHistorys() {
-        $Cartas = Carta::all();
-        return view('historys', array('arrayCartas'=> $Cartas));
+        return view('historys');
     }
 
     public function getHistory($id) {
@@ -68,22 +73,36 @@ class OcafController extends Controller
         return view('administracion.perfil');
     }
 
-    public function getPanelcartas() {
-        $Cartas = Carta::all();
-
+    public function getPanelusuarios() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelcartas', array('arrayCartas'=> $Cartas));
+            return view('administracion.panelusuarios');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
         }
     }
 
-    public function getPanelusuarios() {
-        $Usuarios = User::all();
-
+    public function getPanelambitos() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelusuarios', array('arrayUsuarios'=> $Usuarios));
+            return view('administracion.panelambitos');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelcontinentes() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelcontinentes');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelcartas() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelcartas');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
