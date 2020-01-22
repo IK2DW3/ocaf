@@ -87,17 +87,13 @@
                                     <div class="form-group col-md-6">
                                         <select v-model="ambito_id" class="custom-select">
                                             <option disabled value="">Seleccionar ambito</option>
-                                            <option v-for="ambito in arrayAmbitos" v-bind:key="ambito.id">
-                                                {{ ambito.ambitoEsp }}
-                                            </option>
+                                            <option v-for="ambito in arrayAmbitos" v-bind:key="ambito.id" v-text="ambito.ambitoEsp"></option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <select v-model="continente_id" class="custom-select">
                                             <option disabled value="">Seleccionar continente</option>
-                                            <option v-for="continente in arrayContinentes" v-bind:key="continente.id">
-                                                {{ continente.continenteEsp }}
-                                            </option>
+                                            <option v-for="continente in arrayContinentes" v-bind:key="continente.id" v-text="continente.continenteEsp"></option>
                                         </select>
                                     </div>
                                 </div>

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
@@ -32,23 +32,16 @@ class OcafController extends Controller
     }
 
     public function postRegister(Request $request) {
-        $this->validate($request, ['email'=>'required|min:255',
-        'password'=>'required|min:8',
-        'newusername'=>'required|min:1'
-        ]);
-
-        User::create([
-            'newusername'=>$request->get('newusername'),
-            'email'=>$request->get('email'),
-            'confirmnewpassword'=>$request->get('confirmnewpassword'),
-        ]);
-   
-        return back()->with('mensaje','Usuario creado');
+        $registroPersona = new User;
+        $registroPersona->name = $request->input('newusername');
+        $registroPersona->email = $request->input('email');
+        $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
+        $registroPersona->save();
+        return view('index', array('arrayRegistro'=> $registroPersona));
     }
 
-    public function getGamemode(Request $request) {
-        $mode = $request->input('mode');
-        return view('gamemode', array('gamemode' => $mode));
+    public function getGamemode() {
+        return view('gamemode');
     }
 
     public function getHistorys() {

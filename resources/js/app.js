@@ -19,11 +19,12 @@ Vue.component('crudadm-continents', require('./components/CrudadmContinentes.vue
 Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
 Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 
+Vue.component('selector-juego', require('./components/SelectorJuego.vue').default);
+Vue.component('tablero-normal', require('./components/TableroNormal.vue').default);
+
 /**
  * Creacion de las nuevas instancias vue
  */
-
- 
 const app = new Vue({
     el: '#app',
 });
@@ -31,4 +32,3 @@ const options = {
     confirmButtonColor: '#41b882',
     cancelButtonColor: '#ff7674',
 };
-

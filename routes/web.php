@@ -9,7 +9,7 @@ Route::GET('logout', 'Auth/LoginController@logout');
 Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
-Route::post('gamemode', 'OcafController@getGamemode');
+Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
 Route::post('register', 'OcafController@postRegister');
 
 
@@ -70,6 +70,9 @@ Route::put('/continent/actualizar', 'TaskController@updateContinent');
 Route::post('/continent/guardar', 'TaskController@storeContinent');
 Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
 Route::get('/continent/buscar', 'TaskController@showContinent');
+
+// Ruta para el selector de juego y el tablero
+Route::post('/modo', 'TaskController@getGamemode');
 
 /**
  * Subida de archivos
