@@ -119,8 +119,11 @@ function dados(){
           setTimeout(mover, 900);
          }
 function mover() {
+
 /*si el turno es del jugador 1*/
 if (jugador1.turno == 1){ 
+   
+   
    
     FJ4.style.border="0px solid white"
     FJ1.style.border="4px solid white"
@@ -142,10 +145,14 @@ if (jugador1.turno == 1){
     if (jugador1.posicion ==1){jugador1.posicion=1+num1}
 
     else {jugador1.posicion=jugador1.posicion+num1}
-
+    
     if (jugador1.parar>0){pararj1}
     /*comprobamos en que casilla ha caido */
     switch (jugador1.posicion) {
+       /*si se llega hasta el final */
+       case (jugador1.posicion>63):
+       case 63:alert("jugador 1 ha llegado al final")
+         break
        /*casos de laberinto */
        case 42:console.log("muerte");setTimeout(muertej1,2000)
            break
@@ -609,3 +616,17 @@ function laberintoj4(){
    console.log(jugador4.posicion)
    document.getElementById("area"+jugador4.posicion).append(FJ4)
 }
+
+function getOffset(el) {
+   var _x = 0;
+   var _y = 0;
+   while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+       _x += el.offsetLeft - el.scrollLeft;
+       _y += el.offsetTop - el.scrollTop;
+       el = el.offsetParent;
+   }
+   return { top: _y, left: _x };
+}
+
+
+

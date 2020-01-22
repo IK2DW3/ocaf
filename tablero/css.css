@@ -120,6 +120,12 @@ body{background-color:#F29199}
     background-color: white; 
     font-size: 350%; 
     padding:0px;
+    background-image: url(recursos/persona.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Impact, Charcoal, sans-serif;
+    color: darkmagenta;
     
 }
 
@@ -170,71 +176,70 @@ body{background-color:#F29199}
                           #casilla2{grid-area: c2;margin-bottom: 10px;}
                           #casilla3{grid-area: c3;margin-bottom: 10px;}
                           #casilla4{grid-area: c4;margin-bottom: 10px;}
-                          #casilla5{grid-area: c5;margin-bottom: 10px;}
+                          #casilla5{grid-area: c5;margin-bottom: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla6{grid-area: c6;margin-bottom: 10px;}
                           #casilla7{grid-area: c7;margin-bottom: 10px;}
                           #casilla8{grid-area: c8;margin-bottom: 10px;}
                           #casilla9{grid-area: c9;margin-bottom: 10px;border-bottom-right-radius: 50%;
-                                    margin-right: 10px;}
+                                    margin-right: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla10{grid-area:c10;margin-right: 10px;}
                           
                           #casilla11{grid-area: c11;margin-right: 10px;}
                           #casilla12{grid-area: c12;margin-right: 10px;}
                           #casilla13{grid-area: c13;margin-right: 10px;}
-                          #casilla14{grid-area: c14;margin-right: 10px;}
+                          #casilla14{grid-area: c14;margin-right: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla15{grid-area: c15;margin-right: 10px;}
                           #casilla16{grid-area: c16;margin-right: 10px;}
                           #casilla17{grid-area: c17;margin-right: 10px;}
-                          #casilla18{grid-area: c18;margin-right: 10px;}
-                          #casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;
-                                     border-top-right-radius: 50%;}
+                          #casilla18{grid-area: c18;margin-right: 10px; background-image: url(recursos/logo.jpg);}
+                          #casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;border-top-right-radius: 50%;}
                           #casilla20{grid-area: c20;margin-top: 10px;}
-                          
+                    
                           #casilla21{grid-area: c21;margin-top: 10px;}
                           #casilla22{grid-area: c22;margin-top: 10px;}
-                          #casilla23{grid-area: c23;margin-top: 10px;}
+                          #casilla23{grid-area: c23;margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla24{grid-area: c24;margin-top: 10px;}
                           #casilla25{grid-area: c25;margin-top: 10px;}
                           #casilla26{grid-area: c26;margin-top: 10px;}
-                          #casilla27{grid-area: c27; margin-top: 10px;}
+                          #casilla27{grid-area: c27; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla28{grid-area: c28; margin-left: 10px;border-top-left-radius: 50%; 
                                      margin-top: 10px;}
                           #casilla29{grid-area: c29; margin-left: 10px;}
                           #casilla30{grid-area: c30; margin-left: 10px;}
                           
                           #casilla31{grid-area: c31; margin-left: 10px;}
-                          #casilla32{grid-area: c32; margin-left: 10px;}
+                          #casilla32{grid-area: c32; margin-left: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla33{grid-area: c33; margin-left: 10px;}
                           #casilla34{grid-area: c34; margin-left: 10px;}
                           #casilla35{grid-area: c35;margin-left: 10px; }
-                          #casilla36{grid-area: c36; margin-left: 10px;}
+                          #casilla36{grid-area: c36; margin-left: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla37{grid-area: c37;margin-bottom: 10px; border-bottom-left-radius: 50%;
                                      margin-left: 10px;}
                           #casilla38{grid-area: c38;margin-bottom: 10px;}
                           #casilla39{grid-area: c39;margin-bottom: 10px;}
                           #casilla40{grid-area: c40;margin-bottom: 10px;}
                           
-                          #casilla41{grid-area: c41; margin-bottom: 10px;}
+                          #casilla41{grid-area: c41; margin-bottom: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla42{grid-area: c42; margin-bottom: 10px; }
                           #casilla43{grid-area: c43; margin-bottom: 10px;}
                           #casilla44{grid-area: c44; margin-bottom: 10px;}
-                          #casilla45{grid-area: c45; margin-right: 10px; border-bottom-right-radius: 50%;}
+                          #casilla45{grid-area: c45; margin-right: 10px; border-bottom-right-radius: 50%; background-image: url(recursos/logo.jpg);}
                           #casilla46{grid-area: c46; margin-right: 10px;}
                           #casilla47{grid-area: c47; margin-right: 10px;}
                           #casilla48{grid-area: c48; margin-right: 10px;}
                           #casilla49{grid-area: c49; margin-right: 10px; }
-                          #casilla50{grid-area: c50; margin-right: 10px;;}
+                          #casilla50{grid-area: c50; margin-right: 10px; background-image: url(recursos/logo.jpg);}
                           
                           #casilla51{grid-area: c51; margin-right: 10px;}
                           #casilla52{grid-area: c52; margin-right: 10px;}
                           #casilla53{grid-area: c53; margin-right: 10px; border-top-right-radius: 50%; 
                                      margin-top: 10px;}
-                          #casilla54{grid-area: c54; margin-top: 10px;}
+                          #casilla54{grid-area: c54; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla55{grid-area: c55; margin-top: 10px; }
                           #casilla56{grid-area: c56; margin-top: 10px;}
                           #casilla57{grid-area: c57; margin-top: 10px;}
                           #casilla58{grid-area: c58; margin-top: 10px;}
-                          #casilla59{grid-area: c59; margin-top: 10px;}
+                          #casilla59{grid-area: c59; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla60{grid-area: c60; margin-top: 10px;  border-top-left-radius: 50%; 
                                      margin-left: 10px;}
                           
@@ -247,24 +252,13 @@ body{background-color:#F29199}
                               background-position: center;}
 
 .area{
-    background-color: rgb(104, 104, 104);
+
     width: 400px;
     height: 200px;
-display: flex;}
+    display: flex;
+    
+    }
 
-        #area5{background-color: blueviolet;}
-        #area14{background-color: blueviolet;}
-        #area23{background-color: blueviolet;}
-        #area32{background-color: blueviolet;}
-        #area41{background-color: blueviolet;}
-        #area50{background-color: blueviolet;}
-        #area59{background-color: blueviolet;}
-        #area9{background-color: blueviolet;}
-        #area18{background-color: blueviolet;}
-        #area27{background-color: blueviolet;}
-        #area36{background-color: blueviolet;}
-        #area45{background-color: blueviolet;}
-        #area54{background-color: blueviolet;}
 
         #area6{background-color: maroon;}
         #area12{background-color: maroon;}
