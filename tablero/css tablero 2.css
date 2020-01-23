@@ -120,8 +120,12 @@ body{background-color:#F29199}
     background-color: white; 
     font-size: 350%; 
     padding:0px;
-    
-}
+    background-image: url(recursos/persona.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Impact, Charcoal, sans-serif;
+    color: darkmagenta;}
 
 .Nº {
     margin-top: 2px;
@@ -173,71 +177,71 @@ body{background-color:#F29199}
     
                           
 
-                          #casillaInicio{grid-area: c1;}
+                          #casillaInicio{grid-area: c1;background-image: url(recursos/inicio.png);}
 
                           #casilla2{grid-area: c2;margin-top: 10px; border-top-left-radius: 50%;}
                           #casilla3{grid-area: c3;margin-top: 10px;}
                           #casilla4{grid-area: c4;margin-top: 10px;}
-                          #casilla5{grid-area: c5;margin-top: 10px;}
-                          #casilla6{grid-area: c6;margin-top: 10px;}
+                          #casilla5{grid-area: c5;margin-top: 10px;background-image: url(recursos/logo.jpg);}
+                          #casilla6{grid-area: c6;margin-top: 10px;background-image: url(recursos/manifa1.jpg)}
                           #casilla7{grid-area: c7;margin-top: 10px;}
                           #casilla8{grid-area: c8;border-bottom-right-radius: 50%;}
-                          #casilla9{grid-area: c9; margin-top:10px;border-top-right-radius: 50%;}
+                          #casilla9{grid-area: c9; margin-top:10px;border-top-right-radius: 50%;background-image: url(recursos/logo.jpg);}
                           #casilla10{grid-area:c10;margin-top: 10px;}
                           
                           #casilla11{grid-area: c11;margin-top:10px;}
-                          #casilla12{grid-area: c12;margin-top:10px;}
+                          #casilla12{grid-area: c12;margin-top:10px;background-image: url(recursos/manifa2.jpg);}
                           #casilla13{grid-area: c13;margin-top:10px;}
-                          #casilla14{grid-area: c14;margin-top:10px;}
+                          #casilla14{grid-area: c14;margin-top:10px;background-image: url(recursos/logo.jpg);}
                           #casilla15{grid-area: c15;margin-top:10px;}
                           #casilla16{grid-area: c16;margin-top:10px;}
                           #casilla17{grid-area: c17;margin-top:10px;}
-                          #casilla18{grid-area: c18;border-bottom-left-radius: 50%;}
-                          #casilla19{grid-area: c19;margin-top: 10px; border-top-left-radius: 50%;}
+                          #casilla18{grid-area: c18;border-bottom-left-radius: 50%;background-image: url(recursos/logo.jpg);}
+                          #casilla19{grid-area: c19;margin-top: 10px; border-top-left-radius: 50%;background-image: url(recursos/posada.png);}
                           #casilla20{grid-area: c20;margin-top: 10px;}
                           
                           #casilla21{grid-area: c21;margin-top: 10px;}
                           #casilla22{grid-area: c22;margin-top: 10px;}
-                          #casilla23{grid-area: c23;margin-top: 10px;}
+                          #casilla23{grid-area: c23;margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           #casilla24{grid-area: c24;margin-top: 10px;}
                           #casilla25{grid-area: c25;margin-top: 10px;}
                           #casilla26{grid-area: c26;margin-top: 10px;}
-                          #casilla27{grid-area: c27;margin-top: 10px;}
+                          #casilla27{grid-area: c27;margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           #casilla28{grid-area: c28;border-bottom-right-radius: 50%;}
                           #casilla29{grid-area: c29; margin-top: 10px;border-top-right-radius: 50%;}
                           #casilla30{grid-area: c30; margin-top: 10px;}
                           
-                          #casilla31{grid-area: c31; margin-top: 10px;}
-                          #casilla32{grid-area: c32; margin-top: 10px;}
+                          #casilla31{grid-area: c31; margin-top: 10px;background-image: url(recursos/pozo.png);}
+                          #casilla32{grid-area: c32; margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           #casilla33{grid-area: c33; margin-top: 10px;}
                           #casilla34{grid-area: c34; margin-top: 10px;}
                           #casilla35{grid-area: c35;margin-top: 10px; }
-                          #casilla36{grid-area: c36;margin-top: 10px;}
+                          #casilla36{grid-area: c36;margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           #casilla37{grid-area: c37;margin-top: 10px;}
                           #casilla38{grid-area: c38;border-bottom-left-radius: 50%;}
                           #casilla39{grid-area: c39;margin-top: 10px;border-top-left-radius: 50%;}
                           #casilla40{grid-area: c40;margin-top: 10px;}
                           
-                          #casilla41{grid-area: c41; margin-top: 10px;}
-                          #casilla42{grid-area: c42; margin-top: 10px; }
+                          #casilla41{grid-area: c41; margin-top: 10px;background-image: url(recursos/logo.jpg);}
+                          #casilla42{grid-area: c42; margin-top: 10px; background-image: url(recursos/laberinto.png)}
                           #casilla43{grid-area: c43; margin-top: 10px;}
                           #casilla44{grid-area: c44; margin-top: 10px;}
-                          #casilla45{grid-area: c45; margin-top: 10px; }
+                          #casilla45{grid-area: c45; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla46{grid-area: c46; margin-top: 10px;}
                           #casilla47{grid-area: c47; margin-top: 10px;}
                           #casilla48{grid-area: c48; border-bottom-right-radius: 50%;}
                           #casilla49{grid-area: c49; margin-top: 10px;border-top-right-radius: 50%; }
-                          #casilla50{grid-area: c50; margin-top: 10px;;}
+                          #casilla50{grid-area: c50; margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           
                           #casilla51{grid-area: c51; margin-top: 10px;}
-                          #casilla52{grid-area: c52; margin-top: 10px;}
+                          #casilla52{grid-area: c52; margin-top: 10px;background-image: url(recursos/carcel.png);}
                           #casilla53{grid-area: c53; margin-top: 10px; margin-top: 10px;}
-                          #casilla54{grid-area: c54; margin-top: 10px;}
+                          #casilla54{grid-area: c54; margin-top: 10px;background-image: url(recursos/logo.jpg);}
                           #casilla55{grid-area: c55; margin-top: 10px; }
                           #casilla56{grid-area: c56; margin-top: 10px;}
                           #casilla57{grid-area: c57; margin-top: 10px;}
-                          #casilla58{grid-area: c58; border-bottom-left-radius: 50%;}
-                          #casilla59{grid-area: c59; margin-top: 10px;border-top-left-radius: 50%;}
+                          #casilla58{grid-area: c58; border-bottom-left-radius: 50%;background-image: url(recursos/muerte.png);}
+                          #casilla59{grid-area: c59; margin-top: 10px;border-top-left-radius: 50%;background-image: url(recursos/logo.jpg);}
                           #casilla60{grid-area: c60; margin-top: 10px;}
                           
                           #casilla61{grid-area: c61; margin-top: 10px;}
@@ -246,29 +250,18 @@ body{background-color:#F29199}
                           #casillaFinal{
                               grid-area: c63; 
                               background-repeat: no-repeat; 
-                              background-position: center;}
+                              background-position: center;background-image: url(recursos/logo.jpg);}
 
 .area{
-    background-color: aqua;
+    
     width: 400px;
-    height: 300px;
-    display: grid; 
+    height: 200px;
+    display: flex;
+
 
 
 }
-        #area5{background-color: blueviolet;}
-        #area14{background-color: blueviolet;}
-        #area23{background-color: blueviolet;}
-        #area32{background-color: blueviolet;}
-        #area41{background-color: blueviolet;}
-        #area50{background-color: blueviolet;}
-        #area59{background-color: blueviolet;}
-        #area9{background-color: blueviolet;}
-        #area18{background-color: blueviolet;}
-        #area27{background-color: blueviolet;}
-        #area36{background-color: blueviolet;}
-        #area45{background-color: blueviolet;}
-        #area54{background-color: blueviolet;}
+     
 #normas{font-size: 500%; margin-left: 100px; background-color: indigo; padding: 100px; color: white; margin-top: -300px; display: none;}
 #texto{font-size: 500%; margin-left: 100px; background-color: #C4EAF2; padding: 100px;display: none;}
     

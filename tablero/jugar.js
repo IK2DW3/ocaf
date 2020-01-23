@@ -150,7 +150,7 @@ if (jugador1.turno == 1){
     /*comprobamos en que casilla ha caido */
     switch (jugador1.posicion) {
        /*si se llega hasta el final */
-       case (jugador1.posicion>63):
+       case (jugador1.posicion>63):alert("jugador 1 ha llegado al final")
        case 63:alert("jugador 1 ha llegado al final")
          break
        /*casos de laberinto */
@@ -228,6 +228,9 @@ else{
     else {jugador2.posicion=jugador2.posicion+num1}
 
     switch (jugador2.posicion) {
+       /*si se llega hasta el final */
+       case (jugador2.posicion>63):alert("jugador 2 ha llegado al final")
+       case 63:alert("jugador 2 ha llegado al final")
        /*casos de muerte*/
        case 58:console.log("laberinto");setTimeout(muertej2,2000)
        break
@@ -298,6 +301,9 @@ else{
     else {jugador3.posicion=jugador3.posicion+num1}
 
     switch (jugador3.posicion) {
+       /*si se llega hasta el final */
+       case (jugador3.posicion>63):alert("jugador 3 ha llegado al final")
+       case 63:alert("jugador 3 ha llegado al final")
        /*casos de muerte*/
        case 58:console.log("muerte");setTimeout(muertej3,2000)
        break
@@ -309,7 +315,7 @@ else{
       break
         
         /*casos de posada*/
-        case 19:console.log ("posada"); setTimeout(posj3, 2000)
+        case 19:console.log ("posada"); setTimeout(pararj3(1), 2000)
             break;
         /*casos de puente */
         case 6: console.log ("puente"); setTimeout(puentj3, 2000)    
@@ -364,6 +370,9 @@ else if (jugador4.turno==1){
     else {jugador4.posicion=jugador4.posicion+num1}
 
     switch (jugador4.posicion) {
+       /*si se llega hasta el final */
+       case (jugador4.posicion>63):alert("jugador 4 ha llegado al final")
+       case 63:alert("jugador 4 ha llegado al final")
        /*casos de muerte*/
        case 58:console.log("muerte");setTimeout(muertej4,2000)
        break
@@ -615,6 +624,34 @@ function laberintoj4(){
    jugador4.posicion=30
    console.log(jugador4.posicion)
    document.getElementById("area"+jugador4.posicion).append(FJ4)
+}
+
+function muertej1() {
+   jugador1.posicion=1
+   console.log(jugador1.posicion)
+   document.getElementById("area"+jugador1.posicion).append(FJ1)
+   
+}
+
+function muertej2() {
+   jugador2.posicion=1
+   console.log(jugador2.posicion)
+   document.getElementById("area"+jugador2.posicion).append(FJ2)
+   
+}
+
+function muertej3() {
+   jugador3.posicion=1
+   console.log(jugador3.posicion)
+   document.getElementById("area"+jugador3.posicion).append(FJ3)
+   
+}
+
+function muertej4() {
+   jugador4.posicion=1
+   console.log(jugador4.posicion)
+   document.getElementById("area"+jugador4.posicion).append(FJ4)
+   
 }
 
 function getOffset(el) {

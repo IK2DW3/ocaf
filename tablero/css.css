@@ -171,13 +171,13 @@ body{background-color:#F29199}
     
                           
 
-                          #casillaInicio{grid-area: c1;margin-bottom: 10px; margin-left: 10px; border-bottom-left-radius: 30%; }
+                          #casillaInicio{grid-area: c1;margin-bottom: 10px; margin-left: 10px; border-bottom-left-radius: 30%; background-image: url(recursos/inicio.png);}
 
                           #casilla2{grid-area: c2;margin-bottom: 10px;}
                           #casilla3{grid-area: c3;margin-bottom: 10px;}
                           #casilla4{grid-area: c4;margin-bottom: 10px;}
                           #casilla5{grid-area: c5;margin-bottom: 10px; background-image: url(recursos/logo.jpg);}
-                          #casilla6{grid-area: c6;margin-bottom: 10px;}
+                          #casilla6{grid-area: c6;margin-bottom: 10px; background-image: url(recursos/manifa1.jpg);}
                           #casilla7{grid-area: c7;margin-bottom: 10px;}
                           #casilla8{grid-area: c8;margin-bottom: 10px;}
                           #casilla9{grid-area: c9;margin-bottom: 10px;border-bottom-right-radius: 50%;
@@ -185,14 +185,14 @@ body{background-color:#F29199}
                           #casilla10{grid-area:c10;margin-right: 10px;}
                           
                           #casilla11{grid-area: c11;margin-right: 10px;}
-                          #casilla12{grid-area: c12;margin-right: 10px;}
+                          #casilla12{grid-area: c12;margin-right: 10px; background-image: url(recursos/manifa2.jpg);}
                           #casilla13{grid-area: c13;margin-right: 10px;}
                           #casilla14{grid-area: c14;margin-right: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla15{grid-area: c15;margin-right: 10px;}
                           #casilla16{grid-area: c16;margin-right: 10px;}
                           #casilla17{grid-area: c17;margin-right: 10px;}
                           #casilla18{grid-area: c18;margin-right: 10px; background-image: url(recursos/logo.jpg);}
-                          #casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;border-top-right-radius: 50%;}
+                          #casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;border-top-right-radius: 50%; background-image: url(recursos/posada.png);}
                           #casilla20{grid-area: c20;margin-top: 10px;}
                     
                           #casilla21{grid-area: c21;margin-top: 10px;}
@@ -207,7 +207,7 @@ body{background-color:#F29199}
                           #casilla29{grid-area: c29; margin-left: 10px;}
                           #casilla30{grid-area: c30; margin-left: 10px;}
                           
-                          #casilla31{grid-area: c31; margin-left: 10px;}
+                          #casilla31{grid-area: c31; margin-left: 10px; background-image: url(recursos/pozo.png);}
                           #casilla32{grid-area: c32; margin-left: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla33{grid-area: c33; margin-left: 10px;}
                           #casilla34{grid-area: c34; margin-left: 10px;}
@@ -220,7 +220,7 @@ body{background-color:#F29199}
                           #casilla40{grid-area: c40;margin-bottom: 10px;}
                           
                           #casilla41{grid-area: c41; margin-bottom: 10px; background-image: url(recursos/logo.jpg);}
-                          #casilla42{grid-area: c42; margin-bottom: 10px; }
+                          #casilla42{grid-area: c42; margin-bottom: 10px; background-image: url(recursos/laberinto.png)}
                           #casilla43{grid-area: c43; margin-bottom: 10px;}
                           #casilla44{grid-area: c44; margin-bottom: 10px;}
                           #casilla45{grid-area: c45; margin-right: 10px; border-bottom-right-radius: 50%; background-image: url(recursos/logo.jpg);}
@@ -231,25 +231,29 @@ body{background-color:#F29199}
                           #casilla50{grid-area: c50; margin-right: 10px; background-image: url(recursos/logo.jpg);}
                           
                           #casilla51{grid-area: c51; margin-right: 10px;}
-                          #casilla52{grid-area: c52; margin-right: 10px;}
+                          #casilla52{grid-area: c52; margin-right: 10px; background-image: url(recursos/carcel.png);}
                           #casilla53{grid-area: c53; margin-right: 10px; border-top-right-radius: 50%; 
                                      margin-top: 10px;}
                           #casilla54{grid-area: c54; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla55{grid-area: c55; margin-top: 10px; }
                           #casilla56{grid-area: c56; margin-top: 10px;}
                           #casilla57{grid-area: c57; margin-top: 10px;}
-                          #casilla58{grid-area: c58; margin-top: 10px;}
+                          #casilla58{grid-area: c58; margin-top: 10px; background-image: url(recursos/muerte.png);}
                           #casilla59{grid-area: c59; margin-top: 10px; background-image: url(recursos/logo.jpg);}
                           #casilla60{grid-area: c60; margin-top: 10px;  border-top-left-radius: 50%; 
                                      margin-left: 10px;}
                           
                           #casilla61{grid-area: c61; margin-left: 10px;}
-                          #casilla62{grid-area: c62;margin-left: 10px; border-bottom-left-radius: 50%;}
+                          #casilla62{grid-area: c62;margin-left: 10px; border-bottom-left-radius: 50%; }
                           
                           #casillaFinal{
                               grid-area: c63; 
                               background-repeat: no-repeat; 
-                              background-position: center;}
+                              background-position: center;
+                              background-image: url(recursos/logo.jpg);
+                            border-bottom-left-radius: 25%;
+                            border-bottom-right-radius: 25%;
+                            border-top-right-radius: 25%;}
 
 .area{
 
@@ -258,14 +262,3 @@ body{background-color:#F29199}
     display: flex;
     
     }
-
-
-        #area6{background-color: maroon;}
-        #area12{background-color: maroon;}
-
-        #area19{background-color: saddlebrown;}
-        #area52{background-color: black;}
-
-        #area58{background-color: lawngreen;}
-        #area42{background-color: pink;}
-    
