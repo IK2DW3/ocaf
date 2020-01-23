@@ -14,7 +14,7 @@
                 var password1 = $("#newpassword").val();
                 var password2 = $("#confirmnewpassword").val();
 
-                if (nombre == "" || email == ""  || password1 == "" || password2 == "") {
+                if (nombre == "" || email == "" || password1 == "" || password2 == "") {
                     $("#mensajeAviso").fadeIn();
                     $("#mensajeAviso").text('Todos los campos son requeridos');
                     return false;
@@ -22,10 +22,10 @@
                     $("#mensajeAviso").fadeOut();
                 }
                 if (password1 != password2) {
-                        $("#mensajePassword2").fadeIn();
-                        $("#mensajePassword2").text('Las contraseñas no coinciden');
-                        return false;
-                    } else {
+                    $("#mensajePassword2").fadeIn();
+                    $("#mensajePassword2").text('Las contraseñas no coinciden');
+                    return false;
+                } else {
                     $("#mensajePassword2").fadeOut();
                 }
             }),
@@ -38,7 +38,7 @@
                 } else {
                     $("#mensajeNombre").fadeOut();
                 }
-            }),$("#newpassword").blur(function () {
+            }), $("#newpassword").blur(function () {
                 var password1 = $("#newpassword").val();
                 if (password1 == "") {
                     $("#mensajePassword1").fadeIn();
@@ -48,7 +48,7 @@
                 } else {
                     $("#mensajePassword1").fadeOut();
                 }
-            }),$("#confirmnewpassword").blur(function () {
+            }), $("#confirmnewpassword").blur(function () {
                 var password2 = $("#confirmnewpassword").val();
                 if (password2 == "") {
                     $("#mensajePassword2").fadeIn();
@@ -58,13 +58,18 @@
                 } else {
                     $("#mensajePassword2").fadeOut();
                 }
-            }),$("#emailx").blur(function () {
+            }), $("#emailx").blur(function () {
                 var email = $("#emailx").val();
-                if (!EmailFormato.test(email)) {
+                if (email == "") {
                     $("#mensajeEmail").fadeIn();
-                    $("#mensajeEmail").text('El formato del email no es correcta');
+                    $("#mensajeEmail").text('El campo email es requerido');
                     return false;
                 } else {
+                    if (!EmailFormato.test(email)) {
+                        $("#mensajeEmail").fadeIn();
+                        $("#mensajeEmail").text('El formato del email no es correcta');
+                        return false;
+                    }
                     $("#mensajeEmail").fadeOut();
                 }
             });
@@ -146,7 +151,7 @@
                         </div>
 
                         <div class="form-group text-center">
-                        <p id="mensajeAviso"></p>
+                            <p id="mensajeAviso"></p>
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;"
                                 name="registrarse" id="registrarse">
                                 Registrarse
