@@ -39,6 +39,19 @@ div.fab .btn-item .icon {
     font-size: 1.5em;
 }
 
+/* menu abajo derecha*/
+div.fab .menuslide{
+    display: none;
+}
+
+div.fab .esconder{
+    display: none;
+}
+
+div.fab #btn-txt{
+    display: none;
+}
+
 
 /* INDEX */
 
@@ -116,7 +129,6 @@ div.col-volver {
     display: inherit;
     align-items: center;
     justify-content: center;
-    margin: 5% 0;
 }
 
 div.col-logo {

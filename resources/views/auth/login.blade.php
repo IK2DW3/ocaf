@@ -6,7 +6,7 @@
     <div class="contenedor">
         <div class="row align-items-start justify-content-center contenido px-2">
 
-            <div class="col-sm-12 col-logo">
+            <div class="col-sm-12 col-logo my-3">
                 <picture>
                     <source srcset="../resources/img/imglogo.svg" type="image/svg+xml">
                     <img src="../resources/img/imglogo.png" alt="SVG con fallback de png" title="OCA-F">
@@ -17,23 +17,26 @@
             <div class="col-sm-8 col-md-8 col-lg-3 cont-login mx-2 my-2">
                 <div class="row">
                     <div class="col-sm-12 login">
-                        <form class="overflow-hidden" role="form" method="POST" action="{{ url('/login') }}">
+                        <form class="overflow-hidden" id="formLogin" role="form" method="POST" action="{{ url('/login') }}">
                             <h2>Inicio sesión</h2>
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="emailLogin">Correo electrónico</label>
-                                <input type="text" name="emailLogin" class="form-control" autocomplete="off">
+                                <label for="email">Correo electrónico</label>
+                                <input type="text" name="email" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <label for="passwordLogin">Contraseña</label>
-                                <input type="password" name="passwordLogin" class="form-control" autocomplete="off">
+                                <label for="password">Contraseña</label>
+                                <input type="password" name="password" class="form-control" autocomplete="off">
                             </div>
 
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="localStorageLogin">
+                                <label class="form-check-label" for="exampleCheck1">Recordar inicio sesion</label>
+                              </div>
+
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary" id="#btnLogin" style="padding:8px 100px;margin-top:25px;" >
-                                    Entrar
-                                </button>
+                                <input type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;" value="Entrar" >
                             </div>
                         </form>
                     </div>

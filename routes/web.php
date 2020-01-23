@@ -42,6 +42,10 @@ Route::get('pruebas', 'FileController@create');
 /*
 CRUD Vue.js y Laravel
 */
+// Rutas para el perfil del usuario
+Route::get('/profile', 'TaskController@getPerfiluser');
+Route::put('/profile/actualizar', 'TaskController@updatePerfiluser');
+
 // Rutas para el panel de gestion de usuarios
 Route::get('/user', 'TaskController@tableUser');
 Route::put('/user/actualizar', 'TaskController@updateUser');
@@ -78,3 +82,4 @@ Route::post('/modo', 'TaskController@getGamemode');
  * Subida de archivos
  */
 Route::resource('file', 'FileController');
+

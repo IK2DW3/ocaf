@@ -10,6 +10,7 @@ use App\Continente;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 
 class TaskController extends Controller
@@ -194,5 +195,25 @@ class TaskController extends Controller
 
     /* ----------------------------------------------------------------------------------------------- */
 
+    public function getPerfiluser(Request $request) {
+        
+        if (Auth::check()) {
+            $user = Auth::user();
+            return $user;
+        }
+
+    }
+
+    public function updatePerfiluser(Request $request) {
+
+        $user = User::findOrFail($request->id);
+        $user->name = $request->perfilNombre;
+        $user->email = $request->pefilEmail;
+        $user->password = bcrypt($request->perfilConfirmarcontraseña);
+        $user->save();
+
+        return $user;
+
+    }
 
 }
