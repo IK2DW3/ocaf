@@ -1,7 +1,76 @@
 @extends('layouts.master')
 
 @section('content')
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var EmailFormato = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
+    $(document).ready(function () {
+        $("#registrarse").click(function () {
+                var nombre = $("#newusername").val();
+                var email = $("#emailx").val();
+                var password1 = $("#newpassword").val();
+                var password2 = $("#confirmnewpassword").val();
+
+                if (nombre == "" || email == ""  || password1 == "" || password2 == "") {
+                    $("#mensajeAviso").fadeIn();
+                    $("#mensajeAviso").text('Todos los campos son requeridos');
+                    return false;
+                } else {
+                    $("#mensajeAviso").fadeOut();
+                }
+                if (password1 != password2) {
+                        $("#mensajePassword2").fadeIn();
+                        $("#mensajePassword2").text('Las contraseñas no coinciden');
+                        return false;
+                    } else {
+                    $("#mensajePassword2").fadeOut();
+                }
+            }),
+            $("#newusername").blur(function () {
+                var nombre = $("#newusername").val();
+                if (nombre == "") {
+                    $("#mensajeNombre").fadeIn();
+                    $("#mensajeNombre").text('El campo nombre es requerido');
+                    return false;
+                } else {
+                    $("#mensajeNombre").fadeOut();
+                }
+            }),$("#newpassword").blur(function () {
+                var password1 = $("#newpassword").val();
+                if (password1 == "") {
+                    $("#mensajePassword1").fadeIn();
+                    $("#mensajePassword1").text('Por seguridad es requerido una contraseña');
+
+                    return false;
+                } else {
+                    $("#mensajePassword1").fadeOut();
+                }
+            }),$("#confirmnewpassword").blur(function () {
+                var password2 = $("#confirmnewpassword").val();
+                if (password2 == "") {
+                    $("#mensajePassword2").fadeIn();
+                    $("#mensajePassword2").text('Por seguridad es requerido una contraseña');
+
+                    return false;
+                } else {
+                    $("#mensajePassword2").fadeOut();
+                }
+            }),$("#emailx").blur(function () {
+                var email = $("#emailx").val();
+                if (!EmailFormato.test(email)) {
+                    $("#mensajeEmail").fadeIn();
+                    $("#mensajeEmail").text('El formato del email no es correcta');
+                    return false;
+                } else {
+                    $("#mensajeEmail").fadeOut();
+                }
+            });
+    })
+
+</script>
 
 <div class="contenedor">
     <div class="row align-items-start justify-content-center contenido px-2">
@@ -34,7 +103,7 @@
 
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;"
-                            name="iniciar" id="iniciar">
+                                name="iniciar" id="iniciar">
                                 Entrar
                             </button>
                         </div>
@@ -52,14 +121,15 @@
                         <div class="form-group">
                             <label for="newusername">Nombre usuario</label>
                             <p id="mensajeNombre"></p>
-                            <input type="text" name="newusername" id="newusername" class="form-control" autocomplete="off">
+                            <div id="mensajeNombre"></div>
+                            <input type="text" name="newusername" id="newusername" class="form-control"
+                                autocomplete="off">
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <p id="mensajeEmail"></p>
-                            <input type="email" name="email" id="emailx" class="form-control" 
-                                autocomplete="off">
+                            <input type="email" name="email" id="emailx" class="form-control" autocomplete="off">
                         </div>
 
                         <div class="form-group">
@@ -76,8 +146,9 @@
                         </div>
 
                         <div class="form-group text-center">
+                        <p id="mensajeAviso"></p>
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;"
-                            name="registrarse" id="registrarse">
+                                name="registrarse" id="registrarse">
                                 Registrarse
                             </button>
                         </div>
@@ -92,201 +163,6 @@
 
     </div>
 </div>
-<script type="text/javascript">
 
-    window.addEventListener("load", validar);
-    document.formulario.addEventListener("submit",ValidarTodo);
-
-    function validar() {
-    document.getElementById("emailx").addEventListener("blur", ComprobarEmail);
-    document.getElementById("email").addEventListener("blur", ComprobarEmailLogin);
-    document.getElementById("newusername").addEventListener("blur", ComprobarNombre);
-    document.getElementById("newpassword").addEventListener("blur", ComprobarPassword1);
-    document.getElementById("confirmnewpassword").addEventListener("blur", ComprobarPassword2);
-    document.getElementById("password").addEventListener("blur", ComprobarPasswordLogin);
-    document.getElementById("registrarse").addEventListener("click", ComprobarEmail);
-    document.getElementById("registrarse").addEventListener("click", ComprobarPassword1);
-    document.getElementById("registrarse").addEventListener("click", ComprobarNombre);
-    document.getElementById("registrarse").addEventListener("click", ComprobarPassword2);
-    document.getElementById("iniciar").addEventListener("click", ComprobarPasswordLogin);
-    document.getElementById("iniciar").addEventListener("click", ComprobarEmailLogin);
-    }
-
-
-
-        //Validaciones del Formulario
-        function ComprobarEmail() {
-			var valor = document.getElementById("emailx").value;
-
-			console.log(valor);
-
-
-			re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-			if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
-
-				//alert("Campo Obligatorio");
-				document.getElementById("emailx").style.border = ".1em " + "red" + " solid";
-				document.getElementById("mensajeEmail").innerHTML = "<p>Campo Obligatorio *</p>";
-                document.getElementById("mensajeEmail").style.color = "red";
-                event.preventDefault();
-			} else {
-				if (!re.test(valor)) {
-
-					//alert('email no valido');
-					document.getElementById("emailx").style.border = ".1em " + "red" + " solid";
-					document.getElementById("mensajeEmail").innerHTML = "<p>Email no valido *</p>";
-
-					document.getElementById("mensajeEmail").style.color = "red";
-                    document.getElementById("mensajeEmail").clear;
-                    event.preventDefault();
-				} else {
-
-					document.getElementById("emailx").style.border = ".1em " + "green" + " solid";
-					document.getElementById("mensajeEmail").innerHTML = "<p></p>";
-
-				}
-
-			}
-        }
-        function ComprobarEmailLogin() {
-			var valor = document.getElementById("email").value;
-
-			console.log(valor);
-
-
-			re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-			if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
-
-				//alert("Campo Obligatorio");
-				document.getElementById("email").style.border = ".1em " + "red" + " solid";
-				document.getElementById("mensajeEmail2").innerHTML = "<p>Campo Obligatorio *</p>";
-                document.getElementById("mensajeEmail2").style.color = "red";
-                event.preventDefault();
-			} else {
-				if (!re.test(valor)) {
-
-					//alert('email no valido');
-					document.getElementById("email").style.border = ".1em " + "red" + " solid";
-					document.getElementById("mensajeEmail2").innerHTML = "<p>Email no valido *</p>";
-
-					document.getElementById("mensajeEmail2").style.color = "red";
-                    document.getElementById("mensajeEmail2").clear;
-                    event.preventDefault();
-				} else {
-
-					document.getElementById("email").style.border = ".1em " + "green" + " solid";
-					document.getElementById("mensajeEmail2").innerHTML = "<p></p>";
-
-				}
-
-			}
-		}
-
-		function ComprobarNombre() {
-			var valor = document.getElementById("newusername").value;
-			console.log(valor);
-			if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
-				//alert("Campo Obligatorio");
-				document.getElementById("newusername").style.border = ".1em " + "red" + " solid";
-				document.getElementById("mensajeNombre").innerHTML = "<p>Campo Obligatorio *</p>";
-                document.getElementById("mensajeNombre").style.color = "red";
-                event.preventDefault();
-			} else {
-				document.getElementById("newusername").style.border = ".1em " + "green" + " solid";
-				document.getElementById("mensajeNombre").innerHTML = "<p></p>";
-
-			}
-		}
-        function ComprobarPasswordLogin() {
-            var valor1 = document.getElementById("password").value;
-			console.log(valor1);
-
-			if (valor1 == null || valor1.length == 0 || /^\s+$/.test(valor1)) {
-
-
-				document.getElementById("mensajePasswordLogin").innerHTML = "<p>Campo Obligatorio *</p>";
-				document.getElementById("mensajePasswordLogin").style.color = "red";
-                document.getElementById("password").style.border = ".1em " + "red" + " solid";
-                event.preventDefault();
-			} else {
-				if (valor1.length < 8) {
-					document.getElementById("mensajePasswordLogin").innerHTML = "<p>La contraseña tiene que más de 8 carácteres *</p>";
-					document.getElementById("mensajePasswordLogin").style.color = "red";
-                    document.getElementById("password").style.border = ".1em " + "red" + " solid";
-                    event.preventDefault();
-				} else {
-					document.getElementById("mensajePasswordLogin").innerHTML = "<p></p>";
-
-					document.getElementById("password").style.border = ".1em " + "green" + " solid";
-				}
-			}
-
-        }
-
-		function ComprobarPassword1() {
-            var valor1 = document.getElementById("newpassword").value;
-            var valor2 = document.getElementById("confirmnewpassword").value;
-			console.log(valor1);
-
-			if (valor1 == null || valor1.length == 0 || /^\s+$/.test(valor1)) {
-
-
-				document.getElementById("mensajePassword1").innerHTML = "<p>Campo Obligatorio *</p>";
-				document.getElementById("mensajePassword1").style.color = "red";
-                document.getElementById("newpassword").style.border = ".1em " + "red" + " solid";
-                event.preventDefault();
-			} else {
-				if (valor1.length < 8) {
-					document.getElementById("mensajePassword1").innerHTML = "<p>La contraseña tiene que más de 8 carácteres *</p>";
-					document.getElementById("mensajePassword1").style.color = "red";
-                    document.getElementById("newpassword").style.border = ".1em " + "red" + " solid";
-                    event.preventDefault();
-				} else {
-					document.getElementById("mensajePassword1").innerHTML = "<p></p>";
-
-					document.getElementById("newpassword").style.border = ".1em " + "green" + " solid";
-				}
-			}
-
-        }
-        function ComprobarPassword2() {
-            var valor1 = document.getElementById("newpassword").value;
-            var valor2 = document.getElementById("confirmnewpassword").value;
-			console.log(valor1);
-
-			if (valor1 == null || valor1.length == 0 || /^\s+$/.test(valor1)) {
-
-
-				document.getElementById("mensajePassword2").innerHTML = "<p>Campo Obligatorio *</p>";
-				document.getElementById("mensajePassword2").style.color = "red";
-                document.getElementById("confirmnewpassword").style.border = ".1em " + "red" + " solid";
-                event.preventDefault();
-			} else {
-				if (valor1.length < 8) {
-					document.getElementById("mensajePassword2").innerHTML = "<p>La contraseña tiene que más de 8 carácteres *</p>";
-					document.getElementById("mensajePassword2").style.color = "red";
-                    document.getElementById("confirmnewpassword").style.border = ".1em " + "red" + " solid";
-                    event.preventDefault();
-				} else {
-                    if (valor1 != valor2) {
-                        document.getElementById("mensajePassword2").innerHTML = "<p>La contraseña no coinciden *</p>";
-					    document.getElementById("mensajePassword2").style.color = "red";
-                        document.getElementById("confirmnewpassword").style.border = ".1em " + "red" + " solid";
-                        event.preventDefault();
-                    }
-                    else{
-					document.getElementById("mensajePassword2").innerHTML = "<p></p>";
-
-                    document.getElementById("confirmnewpassword").style.border = ".1em " + "green" + " solid";
-                }
-				}
-			}
-
-        }
-        
-
-</script>
 
 @stop
