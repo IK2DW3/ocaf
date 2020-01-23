@@ -205,7 +205,7 @@
                 }).then(function (response) {
                     me.getTasks();
                     me.clearFields();
-                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -235,7 +235,7 @@
                 }).then(function (response) {
                    me.getTasks();
                    me.clearFields();
-                   this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
+                   this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -284,9 +284,9 @@
                 let me =this;
                 let task_id = data.id
                 this.$swal({
+                    icon: 'warning',
                     title: '¿Seguro que deseas borrar esta carta?',
                     text: 'No podras revertir ésta acción',
-                    type: 'warning',
                     showCancelButton: true,
                     confirmButtonText: '¡Eliminar!',
                     cancelButtonText: '¡No, mantenerlo!',

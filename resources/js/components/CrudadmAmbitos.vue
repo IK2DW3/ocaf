@@ -108,7 +108,7 @@ export default {
             }).then(function (response) {
                 me.getTasks();
                 me.clearFields();
-                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
             })
             .catch(function (error) {
                 console.log(error);
@@ -149,9 +149,9 @@ export default {
             let me =this;
             let task_id = data.id
             this.$swal({
+                icon: 'warning',
                 title: '¿Seguro que deseas borrar éste ambito?',
                 text: 'No podras revertir ésta acción',
-                type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: '¡Eliminar!',
                 cancelButtonText: '¡No, mantenerlo!',

@@ -2042,7 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2083,9 +2083,9 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var task_id = data.id;
       this.$swal({
+        icon: 'warning',
         title: '¿Seguro que deseas borrar éste ambito?',
         text: 'No podras revertir ésta acción',
-        type: 'warning',
         showCancelButton: true,
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
@@ -2344,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2372,7 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
-        this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
+        this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2421,9 +2421,9 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var task_id = data.id;
       this.$swal({
+        icon: 'warning',
         title: '¿Seguro que deseas borrar esta carta?',
         text: 'No podras revertir ésta acción',
-        type: 'warning',
         showCancelButton: true,
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
@@ -2612,7 +2612,7 @@ __webpack_require__.r(__webpack_exports__);
         'continenteEng': this.continenteEng,
         'continenteEus': this.continenteEus
       }).then(function (response) {
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
         me.getTasks();
         me.clearFields();
       })["catch"](function (error) {
@@ -2639,9 +2639,9 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var task_id = data.id;
       this.$swal({
+        icon: 'warning',
         title: '¿Seguro que deseas borrar éste usuario?',
         text: 'No podras revertir ésta acción',
-        type: 'warning',
         showCancelButton: true,
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
@@ -2785,6 +2785,7 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       update: 0,
       busqueda: "",
+      valido: true,
       arrayUsuarios: [],
       tipos: [{
         text: 'Usuario',
@@ -2801,37 +2802,90 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getTasks: function getTasks() {
       var me = this;
-      var url = 'user'; //Ruta que hemos creado para que nos devuelva todas las tareas
-
+      var url = 'user';
       axios.get(url).then(function (response) {
-        //creamos un array y guardamos el contenido que nos devuelve el response
         me.arrayUsuarios = response.data;
       })["catch"](function (error) {
         // handle error
         console.log(error);
       });
     },
-    saveTasks: function saveTasks() {
+    saveTasks: function saveTasks(event) {
       var me = this;
-      var url = 'user/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+      var url = 'user/guardar';
+      var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; // Condiciones
 
-      axios.post(url, {
-        //estas variables son las que enviaremos para que crear la tarea
-        'name': this.name,
-        'email': this.email,
-        'tipo': this.tipo,
-        'password': this.password
-      }).then(function (response) {
-        me.getTasks();
-        me.clearFields();
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (me.name === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Nombre',
+          text: 'Campo nombre vacio'
+        });
+        me.valido = false;
+      } else if (me.name < 6 || me.name > 12) {
+        this.$swal({
+          icon: 'error',
+          title: 'Nombre',
+          text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres'
+        });
+        me.valido = false;
+      } else if (me.email === "" || /^\s+$/.test(me.email)) {
+        this.$swal({
+          icon: 'error',
+          title: 'Email',
+          text: 'Campo email vacio'
+        });
+        me.valido = false;
+      } else if (!testEmail.test(me.email)) {
+        this.$swal({
+          icon: 'error',
+          title: 'Email',
+          text: 'No has introducido un email válido'
+        });
+        me.valido = false;
+      } else if (me.tipo === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Tipo',
+          text: 'Debes seleccionar un tipo de usuario'
+        });
+        me.valido = false;
+      } else if (me.password === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Contraseña',
+          text: 'El campo contraseña está vacio'
+        });
+        me.valido = false;
+      } else if (me.password.length < 6 || me.password.length > 16) {
+        this.$swal({
+          icon: 'error',
+          title: 'Contraseña',
+          text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres'
+        });
+        me.valido = false;
+      } else {
+        me.valido = true;
+      }
+
+      if (me.valido) {
+        axios.post(url, {
+          'name': this.name,
+          'email': this.email,
+          'tipo': this.tipo,
+          'password': this.password
+        }).then(function (response) {
+          me.getTasks();
+          me.clearFields();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } // Previene el funcionamiento por defecto
+
+
+      event.preventDefault();
     },
     updateTasks: function updateTasks() {
-      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
-      tarea que queremos modificar*/
       var me = this;
       axios.put('user/actualizar', {
         'id': this.update,
@@ -2840,7 +2894,7 @@ __webpack_require__.r(__webpack_exports__);
         'tipo': this.tipo,
         'password': this.password
       }).then(function (response) {
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
         me.getTasks();
         me.clearFields();
       })["catch"](function (error) {
@@ -2849,7 +2903,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     loadFieldsUpdate: function loadFieldsUpdate(data) {
-      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
       this.update = data.id;
       var me = this;
       var url = 'user/buscar?id=' + this.update;
@@ -2866,13 +2919,12 @@ __webpack_require__.r(__webpack_exports__);
     deleteTask: function deleteTask(data) {
       var _this = this;
 
-      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
       var me = this;
       var task_id = data.id;
       this.$swal({
+        icon: 'warning',
         title: '¿Seguro que deseas borrar éste usuario?',
         text: 'No podras revertir ésta acción',
-        type: 'warning',
         showCancelButton: true,
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
@@ -2893,7 +2945,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clearFields: function clearFields() {
-      /*Limpia los campos e inicializa la variable update a 0*/
       this.name = "";
       this.email = "";
       this.tipo = "";
@@ -3002,20 +3053,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       perfilNombre: null,
       pefilEmail: null,
-      perfilContraseña: null,
       perfilNuevacontraseña: null,
       perfilConfirmarcontraseña: null,
       valido: true,
@@ -3044,51 +3086,36 @@ __webpack_require__.r(__webpack_exports__);
       // Inicializacion de variable
       var me = this; // Condiciones
 
-      if (me.perfilContraseña == null || me.perfilContraseña == "") {
+      if (me.perfilNuevacontraseña === "" || me.perfilConfirmarcontraseña === "") {
         this.$swal({
           icon: 'error',
           title: 'Contraseña',
           text: 'El campo contraseña esta vacio'
-        }); //password.css('border','1px solid red');
-        //password.attr("placeholder", "Campo vacio");
-
-        me.valido = false;
-      } else if (me.perfilContraseña != me.arrayUsuario.password) {
-        this.$swal({
-          icon: 'error',
-          title: 'Contraseña',
-          text: 'El campo contraseña esta vacio'
-        }); //password.css('border','1px solid red');
-        //password.attr("placeholder", "Contraseña incorrecta");
-
+        });
         me.valido = false;
       } else if (me.perfilNuevacontraseña.length < 6 || me.perfilNuevacontraseña.length > 16) {
         this.$swal({
           icon: 'error',
           title: 'Contraseña',
           text: 'La contraseña nueva es demasiado corta o larga. Min 6 - Max 16'
-        }); //passwordNueva.css('border','1px solid red');
-        //passwordNueva.attr("placeholder", "Contraseña incorrecta");
-
+        });
         me.valido = false;
       } else if (me.perfilNuevacontraseña != me.perfilConfirmarcontraseña) {
         this.$swal({
           icon: 'error',
           title: 'Contraseña',
-          text: 'Las contraseñas no coinciden'
-        }); //passwordNueva.css('border','1px solid red');
-        //passwordNueva.attr("placeholder", "Contraseña incorrecta");
-        //passwordNuevaConfirmar.css('border','1px solid red');
-        //passwordNuevaConfirmar.attr("placeholder", "Contraseña incorrecta");
-
+          text: 'Las contraseñas nuevas no coinciden'
+        });
         me.valido = false;
+      } else {
+        me.valido = true;
       }
 
       if (me.valido) {
         this.$swal({
+          icon: 'warning',
           title: '¿Seguro que deseas actualizar tu contraseña?',
           text: 'No podras revertir ésta acción',
-          type: 'warning',
           showCancelButton: true,
           confirmButtonText: '¡Actualizar!',
           cancelButtonText: '¡Cancelar!',
@@ -3096,15 +3123,14 @@ __webpack_require__.r(__webpack_exports__);
           showLoaderOnConfirm: true
         }).then(function (result) {
           if (result.value) {
-            _this.$swal('Actualizacion', 'Has actualizado tu contraseña correctamente', 'success');
+            _this.$swal('Actualizacion', 'Ha aceptado la actualización de tu contraseña', 'success');
 
             axios.put('profile/actualizar', {
               'id': _this.update,
-              'name': _this.perfilNombre,
-              'email': _this.pefilEmail,
               'password': _this.perfilConfirmarcontraseña
             }).then(function (response) {
               me.getTasks();
+              me.perfilNuevacontraseña = "", me.perfilConfirmarcontraseña = "";
             })["catch"](function (error) {
               this.$swal({
                 icon: 'error',
@@ -3114,7 +3140,7 @@ __webpack_require__.r(__webpack_exports__);
             });
             return me.valido;
           } else {
-            _this.$swal('Actualizacion', 'Has denegado actualizado tu contraseña correctamente', 'info');
+            _this.$swal('Actualizacion', 'Has denegado la actualizado tu contraseña correctamente', 'info');
 
             me.valido = false;
             return me.valido;
@@ -47017,11 +47043,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-success",
-                        on: {
-                          click: function($event) {
-                            return _vm.saveTasks()
-                          }
-                        }
+                        on: { click: _vm.saveTasks }
                       },
                       [_vm._v("Añadir")]
                     )
@@ -47236,40 +47258,16 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.perfilContraseña,
-                  expression: "perfilContraseña"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Contraseña actual" },
-              domProps: { value: _vm.perfilContraseña },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.perfilContraseña = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
                   value: _vm.perfilNuevacontraseña,
                   expression: "perfilNuevacontraseña"
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Nueva contraseña" },
+              attrs: {
+                type: "password",
+                placeholder: "Nueva contraseña",
+                autocomplete: "off"
+              },
               domProps: { value: _vm.perfilNuevacontraseña },
               on: {
                 input: function($event) {
@@ -47285,7 +47283,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -47297,7 +47295,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Confirmar contraseña" },
+              attrs: {
+                type: "password",
+                placeholder: "Confirmar contraseña",
+                autocomplete: "off"
+              },
               domProps: { value: _vm.perfilConfirmarcontraseña },
               on: {
                 input: function($event) {
@@ -47315,11 +47317,7 @@ var render = function() {
           _c("input", {
             staticClass: "btn btn-primary",
             attrs: { type: "submit", value: "Actualizar" },
-            on: {
-              click: function($event) {
-                return _vm.validarLogin()
-              }
-            }
+            on: { click: _vm.validarLogin }
           })
         ])
       ])
@@ -47343,16 +47341,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text" }, [_vm._v("@")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("div", { staticClass: "input-group-text" }, [
-        _c("i", { staticClass: "icon ion-md-unlock" })
-      ])
     ])
   },
   function() {
