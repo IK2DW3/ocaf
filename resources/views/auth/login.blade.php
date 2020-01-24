@@ -4,7 +4,7 @@
 
 
     <div class="contenedor">
-        <div class="row align-items-start justify-content-center contenido px-2">
+        <div class="row align-items-center justify-content-center contenido px-2">
 
             <div class="col-sm-12 col-logo my-3">
                 <picture>
@@ -14,7 +14,7 @@
                 <h1>OCA-F</h1>
             </div>
 
-            <div class="col-sm-8 col-md-8 col-lg-3 cont-login mx-2 my-2">
+            <div class="col-sm-8 col-md-8 col-lg-3 cont-login mx-2 my-2 h-100">
                 <div class="row">
                     <div class="col-sm-12 login">
                         <form class="overflow-hidden" id="formLogin" role="form" method="POST" action="{{ url('/login') }}">
@@ -46,7 +46,7 @@
             <div class="col-sm-12 col-md-8 col-lg-3 col-register mx-2 my-2">
                 <div class="row">
                     <div class="col-sm-12 registro">
-                        <form class="overflow-hidden" action="{{ url('register') }}" method="POST">
+                        <form class="overflow-hidden" id="formRegister" role="form" action="{{ url('register') }}" method="POST">
                             <h2>¡Únete!</h2>
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -56,17 +56,17 @@
 
                             <div class="form-group">
                                 <label for="emailRegister">Email</label>
-                                <input type="email" name="emailRegister" class="form-control" autocomplete="off">
+                                <input type="email" name="userEmailRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
                                 <label for="passwordRegister">Contraseña</label>
-                                <input type="password" name="passwordRegister" class="form-control" autocomplete="off">
+                                <input type="password" name="userPasswordRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
                                 <label for="confirmnpasswordRegister">Confirmar contraseña</label>
-                                <input type="password" name="confirmnpasswordRegister" class="form-control" autocomplete="off">
+                                <input type="password" name="userConfirmnPasswordRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group text-center">

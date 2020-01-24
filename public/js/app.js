@@ -2030,22 +2030,26 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    saveTasks: function saveTasks() {
+    saveTasks: function saveTasks(event) {
       var me = this;
-      var url = 'ambit/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+      me.validarCampos();
 
-      axios.post(url, {
-        //estas variables son las que enviaremos para que crear la tarea
-        'ambitoEsp': this.ambitoEsp,
-        'ambitoEng': this.ambitoEng,
-        'ambitoEus': this.ambitoEus
-      }).then(function (response) {
-        me.getTasks();
-        me.clearFields();
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (true) {
+        var url = 'ambit/guardar';
+        axios.post(url, {
+          'ambitoEsp': this.ambitoEsp,
+          'ambitoEng': this.ambitoEng,
+          'ambitoEus': this.ambitoEus
+        }).then(function (response) {
+          me.getTasks();
+          me.clearFields();
+          this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+
+      event.preventDefault();
     },
     updateTasks: function updateTasks() {
       var me = this;
@@ -2112,6 +2116,26 @@ __webpack_require__.r(__webpack_exports__);
       this.ambitoEus = "";
       this.update = 0;
       this.busqueda = "";
+    },
+    campoInvalido: function campoInvalido(campo) {
+      $(campo).css('border', '1px solid red');
+    },
+    validarCampos: function validarCampos() {
+      var me = this;
+
+      if (me.ambitoEsp === "" || me.ambitoEsp === "" || me.ambitoEus) {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campos vacios'
+        });
+        me.campoInvalido('#ambitoEsp');
+        me.campoInvalido('#ambitoEng');
+        me.campoInvalido('#ambitoEus');
+        return false;
+      } else {
+        return true;
+      }
     }
   },
   computed: {
@@ -2587,22 +2611,28 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    saveTasks: function saveTasks() {
+    saveTasks: function saveTasks(event) {
       var me = this;
-      var url = 'continent/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+      me.validarCampos();
 
-      axios.post(url, {
-        //estas variables son las que enviaremos para que crear la tarea
-        'continenteEsp': this.continenteEsp,
-        'continenteEng': this.continenteEng,
-        'continenteEus': this.continenteEus
-      }).then(function (response) {
-        me.getTasks();
-        me.clearFields();
-        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (true) {
+        var url = 'continent/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+
+        axios.post(url, {
+          //estas variables son las que enviaremos para que crear la tarea
+          'continenteEsp': this.continenteEsp,
+          'continenteEng': this.continenteEng,
+          'continenteEus': this.continenteEus
+        }).then(function (response) {
+          me.getTasks();
+          me.clearFields();
+          this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+
+      event.preventDefault();
     },
     updateTasks: function updateTasks() {
       var me = this;
@@ -2660,6 +2690,26 @@ __webpack_require__.r(__webpack_exports__);
           _this.$swal('Cancelado', 'El usuario correspondiente sigue intacto', 'info');
         }
       });
+    },
+    campoInvalido: function campoInvalido(campo) {
+      $(campo).css('border', '1px solid red');
+    },
+    validarCampos: function validarCampos() {
+      var me = this;
+
+      if (me.continenteEsp === "" || me.continenteEng === "" || me.continenteEus) {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campos vacios'
+        });
+        me.campoInvalido('#continenteEsp');
+        me.campoInvalido('#continenteEng');
+        me.campoInvalido('#continenteEus');
+        return false;
+      } else {
+        return true;
+      }
     },
     clearFields: function clearFields() {
       this.continenteEsp = "";
@@ -2813,7 +2863,7 @@ __webpack_require__.r(__webpack_exports__);
     saveTasks: function saveTasks(event) {
       var me = this;
       var url = 'user/guardar';
-      var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; // Condiciones
+      var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // Condiciones
 
       if (me.name === "") {
         this.$swal({
@@ -2821,6 +2871,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Nombre',
           text: 'Campo nombre vacio'
         });
+        me.campoInvalido('#userNombre');
         me.valido = false;
       } else if (me.name < 6 || me.name > 12) {
         this.$swal({
@@ -2828,6 +2879,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Nombre',
           text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres'
         });
+        me.campoInvalido('#userNombre');
         me.valido = false;
       } else if (me.email === "" || /^\s+$/.test(me.email)) {
         this.$swal({
@@ -2835,6 +2887,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Email',
           text: 'Campo email vacio'
         });
+        me.campoInvalido('#userEmail');
         me.valido = false;
       } else if (!testEmail.test(me.email)) {
         this.$swal({
@@ -2842,6 +2895,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Email',
           text: 'No has introducido un email válido'
         });
+        me.campoInvalido('#userEmail');
         me.valido = false;
       } else if (me.tipo === "") {
         this.$swal({
@@ -2849,6 +2903,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Tipo',
           text: 'Debes seleccionar un tipo de usuario'
         });
+        me.campoInvalido('#userTipo');
         me.valido = false;
       } else if (me.password === "") {
         this.$swal({
@@ -2856,6 +2911,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Contraseña',
           text: 'El campo contraseña está vacio'
         });
+        me.campoInvalido('#userPassword');
         me.valido = false;
       } else if (me.password.length < 6 || me.password.length > 16) {
         this.$swal({
@@ -2863,6 +2919,7 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Contraseña',
           text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres'
         });
+        me.campoInvalido('#userPassword');
         me.valido = false;
       } else {
         me.valido = true;
@@ -2951,6 +3008,9 @@ __webpack_require__.r(__webpack_exports__);
       this.password = "";
       this.busqueda = "";
       this.update = 0;
+    },
+    campoInvalido: function campoInvalido(campo) {
+      $(campo).css('border', '1px solid red');
     }
   },
   computed: {
@@ -3398,6 +3458,49 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    checkAmbit: function checkAmbit() {
+      var _this = this;
+
+      this.arrayCartas.forEach(function (carta) {
+        if (carta.ambito.ambitoEsp == "Antropología") {
+          $(_this).css({
+            'border': '1px solid orange'
+          });
+        } else if (carta.ambito.ambitoEsp == "Derecho") {
+          $(_this).css({
+            'border': '1px solid #29ffff'
+          });
+        } else if (carta.ambito.ambitoEsp == "Economía") {
+          $('.carta').css({
+            'border': '1px solid pink'
+          });
+        } else if (carta.ambito.ambitoEsp == "Filosofía") {
+          $('.carta').css({
+            'border': '1px solid purple'
+          });
+        } else if (carta.ambito.ambitoEsp == "Geografía") {
+          $('.carta').css({
+            'border': '1px solid red'
+          });
+        } else if (carta.ambito.ambitoEsp == "Historia") {
+          $('.carta').css({
+            'border': '1px solid brown'
+          });
+        } else if (carta.ambito.ambitoEsp == "Pedagogía") {
+          $('.carta').css({
+            'border': '1px solid #45ff29'
+          });
+        } else if (carta.ambito.ambitoEsp == "Psicología") {
+          $('.carta').css({
+            'border': '1px solid blue'
+          });
+        } else if (carta.ambito.ambitoEsp == "Sociología") {
+          $('.carta').css({
+            'border': '1px solid yellow'
+          });
+        }
+      });
+    },
     clearFields: function clearFields() {
       this.ambito_id = "";
       this.busqueda = "";
@@ -3407,10 +3510,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     buscarCartas: function buscarCartas() {
-      var _this = this;
+      var _this2 = this;
 
       return this.arrayCartas.filter(function (carta) {
-        return carta.nombre.toLowerCase().includes(_this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(_this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(_this.busqueda.toLowerCase());
+        return carta.nombre.toLowerCase().includes(_this2.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(_this2.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(_this2.busqueda.toLowerCase());
       });
     }
   },
@@ -45677,11 +45780,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-success",
-                        on: {
-                          click: function($event) {
-                            return _vm.saveTasks()
-                          }
-                        }
+                        on: { click: _vm.saveTasks }
                       },
                       [_vm._v("Añadir")]
                     )
@@ -46667,11 +46766,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-success",
-                        on: {
-                          click: function($event) {
-                            return _vm.saveTasks()
-                          }
-                        }
+                        on: { click: _vm.saveTasks }
                       },
                       [_vm._v("Añadir")]
                     )
@@ -46900,7 +46995,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
-                    id: "cartaNombres",
+                    id: "userNombre",
                     autocomplete: "off"
                   },
                   domProps: { value: _vm.name },
@@ -46930,11 +47025,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "cartaApellidos",
-                    autocomplete: "off"
-                  },
+                  attrs: { type: "text", id: "userEmail", autocomplete: "off" },
                   domProps: { value: _vm.email },
                   on: {
                     input: function($event) {
@@ -46964,6 +47055,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
+                    attrs: { id: "userTipo" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -47020,7 +47112,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "password",
-                    id: "cartaFmuerte",
+                    id: "userPassword",
                     autocomplete: "off"
                   },
                   domProps: { value: _vm.password },
@@ -47841,7 +47933,7 @@ var render = function() {
             staticClass: "col-sm-12 col-md-4 col-lg-3 col-xl-2"
           },
           [
-            _c("div", { staticClass: "card text-center my-2" }, [
+            _c("div", { staticClass: "card text-center carta my-2" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h2", {
                   domProps: {
@@ -47891,13 +47983,20 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-footer text-muted" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(carta.ambito.ambitoEsp) +
-                    "\n            "
-                )
-              ])
+              _c(
+                "div",
+                {
+                  staticClass: "card-footer text-muted",
+                  on: { mouseover: _vm.checkAmbit }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(carta.ambito.ambitoEsp) +
+                      "\n            "
+                  )
+                ]
+              )
             ])
           ]
         )
@@ -60155,6 +60254,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_0__["default"]);
+window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+window.JQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /**
  * Creacion de los componentes vue a usar
  */
@@ -60186,7 +60287,7 @@ $(function () {
     // Inicializacion de variables
     var email = $("input[name=email]").val();
     var password = $("input[name=password]").val();
-    var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var valido = true; // Condiciones
 
     if (email == "" && password == "") {
@@ -60255,6 +60356,127 @@ $(function () {
     }
 
     $('#formLogin').on('submit', validarLogin);
+    $('input[name=email]').on('change', volverCss);
+    $('input[name=password]').on('change', volverCss);
+  }
+
+  function validarRegistro(event) {
+    var nombre = $("input[name=userRegister]").val();
+    var email = $("input[name=userEmailRegister]").val();
+    var password = $("input[name=userPasswordRegister]").val();
+    var confirmPassword = $("input[name=userConfirmnPasswordRegister]").val();
+    var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (nombre == "" && email == "" && password == "" && confirmPassword == "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos Requeridos',
+        text: 'Todos los campos son requeridos'
+      });
+      $("input[name*=user]").css({
+        'border': '1px solid red'
+      });
+      $("input[name*=user]").attr("placeholder", "Campo requerido");
+      return false;
+    } else if (nombre == "" || nombre == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Nombre',
+        text: 'Campo nombre vacio'
+      });
+      $("input[name*=userRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (nombre.length < 6 || nombre.length > 16) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Nombre',
+        text: 'Longitud del campo incorrecto. Min (6) - Max (16)'
+      });
+      $("input[name*=userRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (email == "" || email == null || /^\s+$/.test(email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email',
+        text: 'Campo email vacio o inválido'
+      });
+      $("input[name=userEmailRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (!testEmail.test(email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email',
+        text: 'Formato de email incorrecto'
+      });
+      $("input[name=userEmailRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (password == "" || password == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña',
+        text: 'Campo nombre vacio'
+      });
+      $("input[name=userPasswordRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (password.length < 6 || password.length > 16) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña',
+        text: 'Longitud del campo incorrecto. Min (6) - Max (16)'
+      });
+      $("input[name=userPasswordRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (confirmPassword == "" || confirmPassword == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña',
+        text: 'Campo de confirmacion vacio'
+      });
+      $("input[name=userConfirmnPasswordRegister]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else if (password != confirmPassword) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña',
+        text: 'Las contraseñas que has introducido no coinciden'
+      });
+      $("input[name*=Password]").css({
+        'border': '1px solid red'
+      });
+      return false;
+    } else {
+      return true;
+    } // Previene el funcionamiento por defecto
+
+
+    event.preventDefault();
+  }
+
+  function volverCss() {
+    $(this).css({
+      'border': '1px solid #ced4da',
+      'color': '#495057'
+    });
+  }
+
+  if ($("#formRegister") != null) {
+    // Inicializacion de variables
+    $('#formRegister').on('submit', validarRegistro);
+    $('input[name*=Register]').on('keypress', volverCss);
   }
   /**
    * Creacion de localStorage para seleccion de juego

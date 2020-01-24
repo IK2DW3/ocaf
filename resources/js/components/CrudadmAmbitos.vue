@@ -57,7 +57,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 text-center">
                                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                <button v-if="update == 0" @click="saveTasks()" class="btn btn-success">Añadir</button>
+                                <button v-if="update == 0" @click="saveTasks" class="btn btn-success">Añadir</button>
                                 <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
                                 <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
                                 <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
@@ -98,21 +98,26 @@ export default {
                 console.log(error);
             });
         },
-        saveTasks(){
-            let me =this;
-            let url = 'ambit/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
-            axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                'ambitoEsp':this.ambitoEsp,
-                'ambitoEng':this.ambitoEng,
-                'ambitoEus':this.ambitoEus,
-            }).then(function (response) {
-                me.getTasks();
-                me.clearFields();
-                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        saveTasks(event){
+
+            let me = this;
+            me.validarCampos();
+            if(true) {
+                let url = 'ambit/guardar';
+                axios.post(url,{ 
+                    'ambitoEsp':this.ambitoEsp,
+                    'ambitoEng':this.ambitoEng,
+                    'ambitoEus':this.ambitoEus,
+                }).then(function (response) {
+                    me.getTasks();
+                    me.clearFields();
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            event.preventDefault();
 
         },
         updateTasks(){
@@ -178,6 +183,27 @@ export default {
             this.ambitoEus = "";
             this.update = 0;
             this.busqueda = "";
+        },
+        campoInvalido(campo){
+            $(campo).css('border','1px solid red');
+        },
+        validarCampos() {
+
+            let me = this;
+            if (me.ambitoEsp === "" || me.ambitoEsp === "" || me.ambitoEus) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Validación',
+                    text: 'Campos vacios',
+                });
+                me.campoInvalido('#ambitoEsp');
+                me.campoInvalido('#ambitoEng');
+                me.campoInvalido('#ambitoEus');
+                return false;
+            } else {
+                return true;
+            }
+            
         }
     },
     computed: {

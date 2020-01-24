@@ -9,6 +9,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
+window.$ = require('jquery');
+window.JQuery = require('jquery');
+
 /**
  * Creacion de los componentes vue a usar
  */
@@ -44,7 +47,7 @@ $(function(){
         // Inicializacion de variables
         var email = $("input[name=email]").val();
         var password = $("input[name=password]").val();
-        var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         var valido = true;
         // Condiciones
         if (email == "" && password == "") {
@@ -112,6 +115,115 @@ $(function(){
             $("#localStorageLogin").prop('checked', true);
         }
         $('#formLogin').on('submit',validarLogin);
+        $('input[name=email]').on('change',volverCss);
+        $('input[name=password]').on('change',volverCss);
+    }
+
+    function validarRegistro(event) {
+
+        var nombre = $("input[name=userRegister]").val();
+        var email = $("input[name=userEmailRegister]").val();
+        var password = $("input[name=userPasswordRegister]").val();
+        var confirmPassword = $("input[name=userConfirmnPasswordRegister]").val();
+        var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (nombre == "" && email == "" && password == "" && confirmPassword == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Campos Requeridos',
+                text: 'Todos los campos son requeridos',
+            });
+            $("input[name*=user]").css({'border':'1px solid red'});
+            $("input[name*=user]").attr("placeholder", "Campo requerido");
+            return false;
+
+        } else if (nombre == "" || nombre == null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Nombre',
+                text: 'Campo nombre vacio',
+            });
+            $("input[name*=userRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (nombre.length < 6 || nombre.length > 16) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Nombre',
+                text: 'Longitud del campo incorrecto. Min (6) - Max (16)',
+            });
+            $("input[name*=userRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (email == "" || email == null || /^\s+$/.test(email)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Email',
+                text: 'Campo email vacio o inválido',
+            });
+            $("input[name=userEmailRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (!testEmail.test(email)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Email',
+                text: 'Formato de email incorrecto',
+            });
+            $("input[name=userEmailRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (password == "" || password == null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña',
+                text: 'Campo nombre vacio',
+            });
+            $("input[name=userPasswordRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (password.length < 6 || password.length > 16) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña',
+                text: 'Longitud del campo incorrecto. Min (6) - Max (16)',
+            });
+            $("input[name=userPasswordRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (confirmPassword == "" || confirmPassword == null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña',
+                text: 'Campo de confirmacion vacio',
+            });
+            $("input[name=userConfirmnPasswordRegister]").css({'border':'1px solid red'});
+            return false;
+
+        } else if (password != confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña',
+                text: 'Las contraseñas que has introducido no coinciden',
+            });
+            $("input[name*=Password]").css({'border':'1px solid red'});
+            return false;
+
+        } else {
+            return true;
+        }
+
+        // Previene el funcionamiento por defecto
+        event.preventDefault();
+
+    }
+    function volverCss() {
+        $(this).css({'border':'1px solid #ced4da','color':'#495057'});
+    }
+    if ($("#formRegister") != null ) {
+        // Inicializacion de variables
+        $('#formRegister').on('submit',validarRegistro);
+        $('input[name*=Register]').on('keypress',volverCss);
     }
 
     /**

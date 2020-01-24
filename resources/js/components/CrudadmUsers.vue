@@ -42,15 +42,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="cartaNombres">Nombre</label>
-                                <input v-model="name" type="text" class="form-control" id="cartaNombres" autocomplete="off">
+                                <input v-model="name" type="text" class="form-control" id="userNombre" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="cartaApellidos">Email</label>
-                                <input v-model="email" type="text" class="form-control" id="cartaApellidos" autocomplete="off">
+                                <input v-model="email" type="text" class="form-control" id="userEmail" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="cartaApellidos">Seleccionar tipo</label>
-                                <select v-model="tipo" class="custom-select">
+                                <select v-model="tipo" class="custom-select" id="userTipo">
                                     <option disabled value="">Seleccionar rango</option>
                                     <option v-for="tipo in tipos" v-bind:key="tipo.id" :value="tipo.value">
                                         {{ tipo.text }}
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="cartaFmuerte">Contraseña</label>
-                                <input v-model="password" type="password" class="form-control" id="cartaFmuerte" autocomplete="off">
+                                <input v-model="password" type="password" class="form-control" id="userPassword" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-row">
@@ -115,7 +115,7 @@
             saveTasks(event){
                 let me =this;
                 let url = 'user/guardar';
-                var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 // Condiciones
                 if (me.name === "") {
                     this.$swal({
@@ -123,6 +123,7 @@
                         title: 'Nombre',
                         text: 'Campo nombre vacio',
                     });
+                    me.campoInvalido('#userNombre');
                     me.valido = false;
                 } else if (me.name < 6 || me.name > 12) {
                     this.$swal({
@@ -130,6 +131,7 @@
                         title: 'Nombre',
                         text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres',
                     });
+                    me.campoInvalido('#userNombre');
                     me.valido = false;
                 } else if (me.email === "" || /^\s+$/.test(me.email)) {
                     this.$swal({
@@ -137,6 +139,7 @@
                         title: 'Email',
                         text: 'Campo email vacio',
                     });
+                    me.campoInvalido('#userEmail');
                     me.valido = false;
                 } else if (!testEmail.test(me.email)) {
                     this.$swal({
@@ -144,6 +147,7 @@
                         title: 'Email',
                         text: 'No has introducido un email válido',
                     });
+                    me.campoInvalido('#userEmail');
                     me.valido = false;
                 } else if (me.tipo === "") {
                     this.$swal({
@@ -151,6 +155,7 @@
                         title: 'Tipo',
                         text: 'Debes seleccionar un tipo de usuario',
                     });
+                    me.campoInvalido('#userTipo');
                     me.valido = false;
                 } else if (me.password === "") {
                     this.$swal({
@@ -158,6 +163,7 @@
                         title: 'Contraseña',
                         text: 'El campo contraseña está vacio',
                     });
+                    me.campoInvalido('#userPassword');
                     me.valido = false;
                 } else if (me.password.length < 6 || me.password.length > 16) {
                     this.$swal({
@@ -165,6 +171,7 @@
                         title: 'Contraseña',
                         text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres',
                     });
+                    me.campoInvalido('#userPassword');
                     me.valido = false;
                 }  else {
                     me.valido = true;
@@ -259,6 +266,9 @@
                 this.password = "";
                 this.busqueda="";
                 this.update = 0;
+            },
+            campoInvalido(campo){
+                $(campo).css('border','1px solid red');
             }
         },
         computed: {

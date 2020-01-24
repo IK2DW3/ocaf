@@ -19,7 +19,7 @@
             </div>
         </div>
         <div v-for="carta in buscarCartas" v-bind:key="carta.id" class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
-            <div class="card text-center my-2">
+            <div class="card text-center carta my-2">
                 <div class="card-header">
                     <h2 v-text="carta.nombre +' '+ carta.apellido"></h2>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="card-body">
                     <a class="btn btn-primary" :href="'history/'+ carta.id">Ver</a>
                 </div>
-                <div class="card-footer text-muted">
+                <div class="card-footer text-muted" @mouseover="checkAmbit">
                     {{carta.ambito.ambitoEsp}}
                 </div>
             </div>
@@ -82,6 +82,31 @@ export default {
                 });
             }
 
+        },
+        checkAmbit() {
+            
+            this.arrayCartas.forEach(carta => {
+                if (carta.ambito.ambitoEsp == "Antropología") {
+                    $(this).css({'border':'1px solid orange'})
+                } else if (carta.ambito.ambitoEsp == "Derecho") {
+                    $(this).css({'border':'1px solid #29ffff'})
+                } else if (carta.ambito.ambitoEsp == "Economía") {
+                    $('.carta').css({'border':'1px solid pink'})
+                } else if (carta.ambito.ambitoEsp == "Filosofía") {
+                    $('.carta').css({'border':'1px solid purple'})
+                } else if (carta.ambito.ambitoEsp == "Geografía") {
+                    $('.carta').css({'border':'1px solid red'})
+                } else if (carta.ambito.ambitoEsp == "Historia") {
+                    $('.carta').css({'border':'1px solid brown'})
+                } else if (carta.ambito.ambitoEsp == "Pedagogía") {
+                    $('.carta').css({'border':'1px solid #45ff29'})
+                } else if (carta.ambito.ambitoEsp == "Psicología") {
+                    $('.carta').css({'border':'1px solid blue'})
+                } else if (carta.ambito.ambitoEsp == "Sociología") {
+                    $('.carta').css({'border':'1px solid yellow'})
+                }
+            });
+            
         },
         clearFields(){
             this.ambito_id="";

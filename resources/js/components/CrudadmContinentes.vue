@@ -57,7 +57,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 text-center">
                                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                <button v-if="update == 0" @click="saveTasks()" class="btn btn-success">Añadir</button>
+                                <button v-if="update == 0" @click="saveTasks" class="btn btn-success">Añadir</button>
                                 <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
                                 <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
                                 <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
@@ -98,21 +98,25 @@ export default {
                 console.log(error);
             });
         },
-        saveTasks(){
+        saveTasks(event){
             let me =this;
-            let url = 'continent/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
-            axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                'continenteEsp':this.continenteEsp,
-                'continenteEng':this.continenteEng,
-                'continenteEus':this.continenteEus,
-            }).then(function (response) {
-                me.getTasks();
-                me.clearFields();
-                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            me.validarCampos();
+            if (true) {
+                let url = 'continent/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
+                axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
+                    'continenteEsp':this.continenteEsp,
+                    'continenteEng':this.continenteEng,
+                    'continenteEus':this.continenteEus,
+                }).then(function (response) {
+                    me.getTasks();
+                    me.clearFields();
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            event.preventDefault();
 
         },
         updateTasks(){
@@ -172,6 +176,27 @@ export default {
                     this.$swal('Cancelado', 'El usuario correspondiente sigue intacto', 'info')
                 }
             })
+        },
+        campoInvalido(campo){
+            $(campo).css('border','1px solid red');
+        },
+        validarCampos() {
+
+            let me = this;
+            if (me.continenteEsp === "" || me.continenteEng === "" || me.continenteEus) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Validación',
+                    text: 'Campos vacios',
+                });
+                me.campoInvalido('#continenteEsp');
+                me.campoInvalido('#continenteEng');
+                me.campoInvalido('#continenteEus');
+                return false;
+            } else {
+                return true;
+            }
+            
         },
         clearFields(){
             this.continenteEsp = "";
