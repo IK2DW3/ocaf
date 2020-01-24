@@ -33,9 +33,9 @@ class OcafController extends Controller
 
     public function postRegister(Request $request) {
         $registroPersona = new User;
-        $registroPersona->name = $request->input('newusername');
-        $registroPersona->email = $request->input('email');
-        $registroPersona->password = bcrypt($request->input('confirmnewpassword'));
+        $registroPersona->name = $request->input('userRegister');
+        $registroPersona->email = $request->input('emailRegister');
+        $registroPersona->password = bcrypt($request->input('confirmnpasswordRegister'));
         $registroPersona->save();
         return view('index', array('arrayRegistro'=> $registroPersona));
     }
@@ -53,6 +53,10 @@ class OcafController extends Controller
         return view('history', array('arrayCarta' => $Carta));
     }
 
+    public function getPerfil() {
+        return view('administracion.perfil');
+    }
+
     public function getPanel() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panel');
@@ -60,10 +64,6 @@ class OcafController extends Controller
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
         }
-    }
-
-    public function getPerfil() {
-        return view('administracion.perfil');
     }
 
     public function getPanelusuarios() {

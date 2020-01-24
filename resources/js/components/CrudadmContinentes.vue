@@ -123,7 +123,7 @@ export default {
                 'continenteEng':this.continenteEng,
                 'continenteEus':this.continenteEus,
             }).then(function (response) {
-                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
                 me.getTasks();
                 me.clearFields();
             })
@@ -150,9 +150,9 @@ export default {
             let me =this;
             let task_id = data.id
             this.$swal({
+                icon: 'warning',
                 title: '¿Seguro que deseas borrar éste usuario?',
                 text: 'No podras revertir ésta acción',
-                type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: '¡Eliminar!',
                 cancelButtonText: '¡No, mantenerlo!',
