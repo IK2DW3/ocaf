@@ -5,9 +5,10 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-    var EmailFormato = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
+    var EmailFormato = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,2})+$/;
+    var EmailInvalido = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,9})+$/;
     $(document).ready(function () {
+
         $("#registrarse").click(function () {
                 var nombre = $("#newusername").val();
                 var email = $("#emailx").val();
@@ -16,6 +17,7 @@
 
                 if (nombre == "" || email == "" || password1 == "" || password2 == "") {
                     $("#mensajeAviso").fadeIn();
+                    $("#mensajeAviso").css("color", "red");
                     $("#mensajeAviso").text('Todos los campos son requeridos');
                     return false;
                 } else {
@@ -23,7 +25,11 @@
                 }
                 if (password1 != password2) {
                     $("#mensajePassword2").fadeIn();
+                    $("#mensajePassword2").css("color", "red");
                     $("#mensajePassword2").text('Las contraseñas no coinciden');
+                    $("#newpassword").css("border", ".15em " + "red" + " solid");
+                    $("#confirmnewpassword").css("border", ".15em " + "red" + " solid");
+
                     return false;
                 } else {
                     $("#mensajePassword2").fadeOut();
@@ -34,49 +40,112 @@
                 if (nombre == "") {
                     $("#mensajeNombre").fadeIn();
                     $("#mensajeNombre").text('El campo nombre es requerido');
+                    $("#newusername").css("border", ".15em " + "red" + " solid");
+                    $("#mensajeNombre").css("color", "red");
                     return false;
                 } else {
                     $("#mensajeNombre").fadeOut();
+                    $("#newusername").css("border", ".15em " + "green" + " solid");
+                }
+            }), $("#newusername").keydown(function () {
+                var nombre = $("#newusername").val();
+                if (!nombre == "") {
+                    $("#mensajeNombre").fadeOut();
+                    $("#newusername").css("border", ".15em " + "green" + " solid");
                 }
             }), $("#newpassword").blur(function () {
                 var password1 = $("#newpassword").val();
                 if (password1 == "") {
                     $("#mensajePassword1").fadeIn();
-                    $("#mensajePassword1").text('Por seguridad es requerido una contraseña');
 
+
+                    $("#newpassword").css("border", ".15em " + "red" + " solid");
+                    $("#mensajePassword1").text('Por seguridad es requerido una contraseña');
+                    $("#mensajePassword1").css("color", "red");
+
+                    return false;
+                } else if (password1.length < 8) {
+                    $("#mensajePassword1").fadeIn();
+                    $("#newpassword").css("border", ".15em " + "red" + " solid");
+                    $("#mensajePassword1").text('La contraseña debe tener mínimo 8 caracteres');
+                    $("#mensajePassword1").css("color", "red");
                     return false;
                 } else {
                     $("#mensajePassword1").fadeOut();
+                    $("#newpassword").css("border", ".15em " + "green" + " solid");
+                }
+            }), $("#newpassword").keydown(function () {
+                var password1 = $("#newpassword").val();
+                if (password1.length > 8) {
+                    $("#mensajePassword1").fadeOut();
+                    $("#newpassword").css("border", ".15em " + "green" + " solid");
                 }
             }), $("#confirmnewpassword").blur(function () {
                 var password2 = $("#confirmnewpassword").val();
                 if (password2 == "") {
                     $("#mensajePassword2").fadeIn();
+                    $("#confirmnewpassword").css("border", ".15em " + "red" + " solid");
                     $("#mensajePassword2").text('Por seguridad es requerido una contraseña');
+                    $("#mensajePassword2").css("color", "red");
+
 
                     return false;
                 } else {
                     $("#mensajePassword2").fadeOut();
+                    $("#confirmnewpassword").css("border", ".15em " + "green" + " solid");
                 }
             }), $("#emailx").blur(function () {
                 var email = $("#emailx").val();
                 if (email == "") {
                     $("#mensajeEmail").fadeIn();
                     $("#mensajeEmail").text('El campo email es requerido');
+                    $("#emailx").css("border", ".15em " + "red" + " solid");
+                    $("#mensajeEmail").css("color", "red");
                     return false;
                 } else {
                     if (!EmailFormato.test(email)) {
                         $("#mensajeEmail").fadeIn();
+                        $("#mensajeEmail").css("color", "red");
+                        $("#emailx").css("border", ".15em " + "red" + " solid");
                         $("#mensajeEmail").text('El formato del email no es correcta');
                         return false;
+                    } else if (EmailInvalido.test(email)) {
+                        $("#mensajeEmail").fadeIn();
+                        $("#mensajeEmail").text('Despues del punto solo de admite 2 o 3 caracteres');
+                        $("#emailx").css("border", ".15em " + "red" + " solid");
+                        return false;
                     }
+                    $("#mensajeEmail").fadeOut();
+                }
+            }), $("#emailx").keypress(function () {
+                var email = $("#emailx").val();
+                if (EmailFormato.test(email)) {
+                    $("#emailx").css("border", ".15em " + "green" + " solid");
+
+                } else if (EmailInvalido.test(email)) {
+                    $("#emailx").css("border", ".2em " + "red" + " solid");
+
+                } else {
                     $("#mensajeEmail").fadeOut();
                 }
             });
     })
 
 </script>
+<style type="text/css">
+    .errores {
+        color: red;
+    }
 
+    .campoErroneo {
+        border: ".5em "+ "red"+ " solid";
+    }
+
+    ·campoCorrecto {
+        border: ".5em "+ "green"+ " solid";
+    }
+
+</style>
 <div class="contenedor">
     <div class="row align-items-start justify-content-center contenido px-2">
 
