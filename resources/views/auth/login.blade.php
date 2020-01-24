@@ -4,9 +4,19 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
+.errores{
+    color:red;
+}
+.campoError{
+    border: ".15em " + "red" + " solid";
+}
+.campoCorrecto{
+    border: ".15em " + "green" + " solid";
+}
+</style>
 <script type="text/javascript">
-    var EmailFormato = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,2})+$/;
-    var EmailInvalido = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,9})+$/;
+    var EmailFormato = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     $(document).ready(function () {
 
         $("#registrarse").click(function () {
@@ -52,6 +62,9 @@
                 if (!nombre == "") {
                     $("#mensajeNombre").fadeOut();
                     $("#newusername").css("border", ".15em " + "green" + " solid");
+                }else if (nombre == "") {
+                    $("#mensajeNombre").fadeOut();
+                    $("#newusername").css("border", ".15em " + "red" + " solid");
                 }
             }), $("#newpassword").blur(function () {
                 var password1 = $("#newpassword").val();
@@ -96,12 +109,14 @@
                 }
             }), $("#emailx").blur(function () {
                 var email = $("#emailx").val();
-                if (email == "") {
+                if (email == ""||!EmailFormato.test(email)) {
                     $("#mensajeEmail").fadeIn();
-                    $("#mensajeEmail").text('El campo email es requerido');
+                    $("#mensajeEmail").text('El campo email es requerido con su correspondiente formato');
                     $("#emailx").css("border", ".15em " + "red" + " solid");
                     $("#mensajeEmail").css("color", "red");
                     return false;
+                    
+                   
                 } else {
                     if (!EmailFormato.test(email)) {
                         $("#mensajeEmail").fadeIn();
@@ -109,23 +124,16 @@
                         $("#emailx").css("border", ".15em " + "red" + " solid");
                         $("#mensajeEmail").text('El formato del email no es correcta');
                         return false;
-                    } else if (EmailInvalido.test(email)) {
-                        $("#mensajeEmail").fadeIn();
-                        $("#mensajeEmail").text('Despues del punto solo de admite 2 o 3 caracteres');
-                        $("#emailx").css("border", ".15em " + "red" + " solid");
-                        return false;
+                    }else{
+                        $("#mensajeEmail").fadeOut();
                     }
-                    $("#mensajeEmail").fadeOut();
                 }
             }), $("#emailx").keypress(function () {
                 var email = $("#emailx").val();
                 if (EmailFormato.test(email)) {
                     $("#emailx").css("border", ".15em " + "green" + " solid");
 
-                } else if (EmailInvalido.test(email)) {
-                    $("#emailx").css("border", ".2em " + "red" + " solid");
-
-                } else {
+                }else {
                     $("#mensajeEmail").fadeOut();
                 }
             });
