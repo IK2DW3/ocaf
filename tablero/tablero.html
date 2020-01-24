@@ -14,7 +14,7 @@
 
     <body id="body">
         <div id="loader"></div>
-        
+        <!-- un menu de debug para que los administradores puedan cambiar algunos aspectos del juego sin tener que volver-->
             <div id=debug>
                     
                     jugadores
@@ -30,10 +30,19 @@
                         <br>
                     otros
                     <button class="btndebug" id=btnImprimir>Imprimir</button>
+                    <button class="btndebug" id=btnmensajer>mostrar</button> 
+                    <br>
+
+                    <input type="text" id ="NJ1" placeholder="jugador1">
+                    <input type="text" id ="NJ2" placeholder="jugador2">
+                    <input type="text" id ="NJ3" placeholder="jugador3">
+                    <input type="text" id ="NJ4" placeholder="jugador4">
+                    
+                    <button class="btndebug" id=btnNombres>nombrar</button>
                         
             </div>
         
-    
+    <!-- el tablero esta formado de 63 casillas que dependeiendo de su tipo tendran o no : un boton de pregunta, un numero y un area donde se guardan las fichas de juego si se cae en dicha casilla-->
         <div id ="tablero">
                 <div class="casilla" id= "casillaInicio"><p class="Nº">1</p><button class="pregunta">?</button><div class="area" id="area1"></div></div>
     
@@ -103,7 +112,7 @@
                 
                 <div class="casilla" id= "casillaFinal"><p class="Nº">63</p><button class="pregunta">?</button><div class="area" id="area63"></div></div>
         </div>
-    
+    <!-- los jugadores -->
         <div class ="contjugador" id ="jugador1">
             <p id="nombre1">nombre1</p> 
             <img class ="jugador" src="user1.png" alt="usuario1">
@@ -133,12 +142,12 @@
             <button id ="botontirar">Tirar</button>
             
         </div>
-    
+    <!-- las ficahs -->
         <div class="ficha" id =ficha1></div>
         <div class="ficha" id =ficha2></div>
         <div class="ficha" id =ficha3></div>
         <div class="ficha" id =ficha4></div>
-
+    <!--Las normas-->
         <div id ="normas">NORMAS</div>
         <div id ="texto"> 
             <p>+>Oca = Logo de Desayunos Feministas. 
@@ -170,18 +179,24 @@
         
                 </div>>
     
+        <div id ="mensajes"></div>
+
+        <div id ="carta">
+            <img src="recursos/persona.jpg" alt="Foto" id="foto">
+            <p id ="name"></p>
+            <p id ="apellidos"></p>
+            <p id ="pregunta"></p>
+            <input type="radio" name="respuesta" id="R1" value="Respuesta 1" aria-label="Respuesta 1">
+            <input type="radio" name="respuesta" id="R2" value="Respuesta 2"aria-label="Respuesta 2">
+            <input type="radio" name="respuesta" id="R3" value="Respuesta 3"aria-label="Respuesta 3">
+        </div>
+
     </body>
 
 
 
-    <script>
 
-    </script>
-
-
-
-<script src="inicio.js"></script>
-
+<!-- Scripts -->
 <script src="GenerarTablero.js"></script>
 
 <script src="jugar.js"></script>

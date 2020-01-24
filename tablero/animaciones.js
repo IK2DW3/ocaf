@@ -12,7 +12,7 @@ $(function(e){
     console.log ("pepe")
     
     el.animate({ // Animate to the static position
-        duration: 1000,
+        duration: 1500,
         left: 3000
     }, function() { // Make it static
         $(this).css('position', 'static');

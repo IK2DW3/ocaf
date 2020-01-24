@@ -19,13 +19,26 @@ var jugador2 = new jugador ("juan", 0, 1, "green", 0, "ficha2", 0)
 var jugador3 = new jugador ("juana",0, 1, "yellow",0, "ficha3", 0)
 var jugador4 = new jugador ("pepa", 0, 1, "blue",  0, "ficha4", 0)
 
-if (document.getElementById("nombre1").innerHTML=="nombre1"){ document.getElementById("nombre1").innerHTML=String(jugador1.nombre)}
+document.getElementById("btnNombres").onclick=nombrarjugadores;
 
-if (document.getElementById("nombre2").innerHTML=="nombre2"){ document.getElementById("nombre2").innerHTML=String(jugador2.nombre)}
+function nombrarjugadores(){
+   jugador1.nombre=document.getElementById("NJ1").value
+   jugador2.nombre=document.getElementById("NJ2").value
+   jugador3.nombre=document.getElementById("NJ3").value
+   jugador4.nombre=document.getElementById("NJ4").value
 
-if (document.getElementById("nombre3").innerHTML=="nombre3"){ document.getElementById("nombre3").innerHTML=String(jugador3.nombre)}
+   
+document.getElementById("nombre1").innerHTML=String(jugador1.nombre)
+document.getElementById("nombre2").innerHTML=String(jugador2.nombre)
+document.getElementById("nombre3").innerHTML=String(jugador3.nombre)
+document.getElementById("nombre4").innerHTML=String(jugador4.nombre)
+}
 
-if (document.getElementById("nombre4").innerHTML=="nombre4"){ document.getElementById("nombre4").innerHTML=String(jugador4.nombre)}
+document.getElementById("nombre1").innerHTML=String(jugador1.nombre)
+document.getElementById("nombre2").innerHTML=String(jugador2.nombre)
+document.getElementById("nombre3").innerHTML=String(jugador3.nombre)
+document.getElementById("nombre4").innerHTML=String(jugador4.nombre)
+
 
 
 document.getElementById("ficha1").style.backgroundColor=String(jugador1.color)
@@ -33,6 +46,7 @@ document.getElementById("ficha2").style.backgroundColor=String(jugador2.color)
 document.getElementById("ficha3").style.backgroundColor=String(jugador3.color)
 document.getElementById("ficha4").style.backgroundColor=String(jugador4.color)
 
+var mensaje = document.getElementById("mensajes")
 
 FJ1 = document.getElementById("ficha1")
 FJ2 = document.getElementById("ficha2")
@@ -46,8 +60,13 @@ document.getElementById("area1").append(FJ4)
 
 
 document.getElementById("botontirar").onclick=tirar
+
+document.getElementById("btnmensajer").onclick=mostrarmensaje;
 document.getElementById("btn2jugadores").onclick=modo2jugadores
 document.getElementById("btn4Jugadores").onclick=modo4jugadores
+
+document.getElementById("btnImprimir").onclick=Imprimir
+
 
 function modo2jugadores() {
    
@@ -150,57 +169,60 @@ if (jugador1.turno == 1){
     /*comprobamos en que casilla ha caido */
     switch (jugador1.posicion) {
        /*si se llega hasta el final */
-       case (jugador1.posicion>63):alert("jugador 1 ha llegado al final")
-       case 63:alert("jugador 1 ha llegado al final")
+       case (jugador1.posicion>63):mensaje.innerText=jugador1.nombre+" ha llegado al FINAL"; mostrarmensaje()
+       case 63:mensaje.innerText=jugador1.nombre+" ha llegado al FINAL"; mostrarmensaje()
          break
        /*casos de laberinto */
-       case 42:console.log("muerte");setTimeout(muertej1,2000)
+       case 42:mensaje.innerText=jugador1.nombre+" ha muerto"; mostrarmensaje() ;setTimeout(muertej1,2000)
            break
       /*casos de laberinto */
-       case 42:console.log("laberinto");setTimeout(laberintoj1,2000)
+       case 42:mensaje.innerText=jugador1.nombre+" ha caido en el laberinto"; mostrarmensaje();setTimeout(laberintoj1,2000)
            break
       /*casos de carcel*/
-        case 52:console.log("carcel");setTimeout(pararj1(2),2000)
+        case 52:mensaje.innerText=jugador1.nombre+" ha sido detenid@"; mostrarmensaje();setTimeout(pararj1(2),2000)
            break
         /*casos de posada*/
-        case 19:console.log ("posada"); setTimeout(pararj1(1), 2000)
+        case 19:mensaje.innerText=jugador1.nombre+" se ha tomado un descanso"; mostrarmensaje(); setTimeout(pararj1(1), 2000)
             break;
         /*casos de puente */
-        case 6: console.log ("puente"); setTimeout(puentj1, 2000)    
+        case 6: mensaje.innerText=jugador1.nombre+": De manifestación en manifestación hasta la liberación! "; mostrarmensaje(); setTimeout(puentj1, 2000)    
             break;
         /*casos de oca a oca */
-        case 5: console.log ("oca"); setTimeout(oc1j1, 2000)    
+        case 5:  mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)    
             break;
-        case 9: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 9: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 14: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 14: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
-        case 18: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 18: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 23: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 23: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
-        case 27: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 27: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 32: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 32: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
-        case 36: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 36: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 41: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 41: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
-        case 45: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 45: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 50: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 50: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
-        case 54: console.log ("oca"); setTimeout(oc2j1, 2000)
+        case 54: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc2j1, 2000)
            break;
-        case 59: console.log ("oca"); setTimeout(oc1j1, 2000)
+        case 59: mensaje.innerText=jugador1.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! "; mostrarmensaje(); setTimeout(oc1j1, 2000)
            break;
     }
 
     
     
     console.log(jugador1.posicion)
-    document.getElementById("area"+jugador1.posicion).append(FJ1) ;
+    if (jugador1.posicion<63)
+    { document.getElementById("area"+jugador1.posicion).append(FJ1),10000}
+    else{document.getElementById("area63").append(FJ1);}
+   
     
 }
     
@@ -229,51 +251,50 @@ else{
 
     switch (jugador2.posicion) {
        /*si se llega hasta el final */
-       case (jugador2.posicion>63):alert("jugador 2 ha llegado al final")
-       case 63:alert("jugador 2 ha llegado al final")
+       case (jugador2.posicion>63):mensaje.innerText=jugador2.nombre+" ha llegado al FINAL"; mostrarmensaje()
+       case 63:mensaje.innerText=jugador2.nombre+" ha llegado al FINAL"; mostrarmensaje()
        /*casos de muerte*/
-       case 58:console.log("laberinto");setTimeout(muertej2,2000)
+       case 58:mensaje.innerText=jugador2.nombre+" ha muerto"; mostrarmensaje();setTimeout(muertej2,2000)
        break
       /*casos de laberinto */
-       case 42:console.log("laberinto");setTimeout(laberintoj2,2000)
+       case 42:mensaje.innerText=jugador2.nombre+" ha caido en el laberinto"; mostrarmensaje();setTimeout(laberintoj2,2000)
        break
         /*casos de carcel */
-         case 52:console.log("carcel");setTimeout(pararj2(2),2000)
+         case 52:mensaje.innerText=jugador2.nombre+" ha sido detenido"; mostrarmensaje();console.log("carcel");setTimeout(pararj2(2),2000)
            break
         /*casos de posada*/
-        case 19:console.log ("posada"); setTimeout(pararj2(1), 1000)
+        case 19:mensaje.innerText=jugador2.nombre+" se ha tomado un descanso"; mostrarmensaje(); setTimeout(pararj2(1), 1000)
             break;
         /*casos de puente */
-        case 6: console.log ("puente"); setTimeout(puentj2, 2000)    
+        case 6: mensaje.innerText=jugador2.nombre+": De manifestación en manifestación hasta la liberación!";mostrarmensaje(); setTimeout(puentj2, 2000)
             break;
         /*casos de oca a oca */
-        case 5: console.log ("oca"); setTimeout(oc1j2, 2000)    
+        case 5: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)    
             break;
-        case 9: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 9: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 14: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 14: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 18: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 18: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 23: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 23: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 27: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 27: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 32: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 32: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 36: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 36: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 41: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 41: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 45: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 45: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 50: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 50: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 54: console.log ("oca"); setTimeout(oc2j2, 2000)
+        case 54: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc2j2, 2000)
            break;
-        case 59: console.log ("oca"); setTimeout(oc1j2, 2000)
+        case 59: mensaje.innerText=jugador2.nombre+ ": ¡De desayuno a desayuno, y si la conozco, gano uno! ";mostrarmensaje(); setTimeout(oc1j2, 2000)
            break;
-        case 63:console.log("has ganado")
     }
     
     
@@ -302,50 +323,50 @@ else{
 
     switch (jugador3.posicion) {
        /*si se llega hasta el final */
-       case (jugador3.posicion>63):alert("jugador 3 ha llegado al final")
-       case 63:alert("jugador 3 ha llegado al final")
+       case (jugador3.posicion>63):mensaje.innerText=jugador3.nombre+ " ha llegado al final";mostrarmensaje();
+       case 63:mensaje.innerText=jugador3.nombre+ " ha llegado al final";mostrarmensaje();
        /*casos de muerte*/
-       case 58:console.log("muerte");setTimeout(muertej3,2000)
+       case 58:mensaje.innerText=jugador3.nombre+ " ha muerto";mostrarmensaje();setTimeout(muertej3,2000)
        break
        /*casos de laberinto */
-       case 42:console.log("laberinto");setTimeout(laberintoj3,2000)
+       case 42:mensaje.innerText=jugador3.nombre+ " ha caido en el laberinto";mostrarmensaje();;setTimeout(laberintoj3,2000)
            break
       /*casos de carcel */
-      case 52:console.log("carcel");setTimeout(pararj3(2),2000)
+      case 52:mensaje.innerText=jugador3.nombre+ " ha sido detenid@";mostrarmensaje();setTimeout(pararj3(2),2000)
       break
         
         /*casos de posada*/
-        case 19:console.log ("posada"); setTimeout(pararj3(1), 2000)
+        case 19:mensaje.innerText=jugador3.nombre+ " se ha tomado un descanso";mostrarmensaje(); setTimeout(pararj3(1), 2000)
             break;
         /*casos de puente */
-        case 6: console.log ("puente"); setTimeout(puentj3, 2000)    
+        case 6:mensaje.innerText=jugador3.nombre+ ": De manifestación en manifestación hasta la liberación!";mostrarmensaje(); setTimeout(puentj3, 2000)    
             break;
         /*casos de oca a oca */
-        case 5: console.log ("oca"); setTimeout(oc1j3, 2000)    
+        case 5: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)    
             break;
-        case 9: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 9: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 14: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 14: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
-        case 18: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 18: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 23: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 23: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
-        case 27: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 27: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 32: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 32: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
-        case 36: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 36: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 41: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 41: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
-        case 45: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 45: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 50: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 50: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
-        case 54: console.log ("oca"); setTimeout(oc2j3, 2000)
+        case 54: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j3, 2000)
            break;
-        case 59: console.log ("oca"); setTimeout(oc1j3, 2000)
+        case 59: mensaje.innerText=jugador3.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j3, 2000)
            break;
     }
 
@@ -371,51 +392,51 @@ else if (jugador4.turno==1){
 
     switch (jugador4.posicion) {
        /*si se llega hasta el final */
-       case (jugador4.posicion>63):alert("jugador 4 ha llegado al final")
-       case 63:alert("jugador 4 ha llegado al final")
+       case (jugador4.posicion>63):mensaje.innerText=jugador4.nombre+ " ha llegado al final";mostrarmensaje();
+       case 63:mensaje.innerText=jugador4.nombre+ " ha llegado al final";mostrarmensaje();
        /*casos de muerte*/
-       case 58:console.log("muerte");setTimeout(muertej4,2000)
+       case 58:mensaje.innerText=jugador4.nombre+ " ha muerto";mostrarmensaje();setTimeout(muertej4,2000)
        break
        /*casos de laberinto */
-       case 42:console.log("laberinto");setTimeout(laberintoj4,2000)
+       case 42:mensaje.innerText=jugador4.nombre+ " ha caido en el laberinto";mostrarmensaje();setTimeout(laberintoj4,2000)
            break
 
       /*casos de carcel */
-      case 52:console.log("carcel");setTimeout(pararj4(2),2000)
+      case 52:mensaje.innerText=jugador4.nombre+ " ha sido detenid@";mostrarmensaje();setTimeout(pararj4(2),2000)
       break
         
         /*casos de posada*/
-        case 19:console.log ("posada"); setTimeout(pararj4(1), 2000)
+        case 19:mensaje.innerText=jugador4.nombre+ " se ha tomado un descanso";mostrarmensaje(); setTimeout(pararj4(1), 2000)
             break;
         /*casos de puente */
-        case 6: console.log ("puente"); setTimeout(puentj4, 2000)    
+        case 6: mensaje.innerText=jugador4.nombre+ ": De manifestación en manifestación hasta la liberación!";mostrarmensaje(); setTimeout(puentj4, 2000)    
             break;
         /*casos de oca a oca */
-        case 5: console.log ("oca"); setTimeout(oc1j4, 2000)    
+        case 5: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)    
             break;
-        case 9: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 9: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 14: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 14: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
-        case 18: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 18: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 23: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 23: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
-        case 27: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 27: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 32: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 32: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
-        case 36: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 36: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 41: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 41: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
-        case 45: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 45:mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 50: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 50: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
-        case 54: console.log ("oca"); setTimeout(oc2j4, 2000)
+        case 54: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc2j4, 2000)
            break;
-        case 59: console.log ("oca"); setTimeout(oc1j4, 2000)
+        case 59: mensaje.innerText=jugador4.nombre+ " : ¡De desayuno a desayuno, y si la conozco, gano uno!";mostrarmensaje(); setTimeout(oc1j4, 2000)
            break;
     }
 
@@ -665,5 +686,69 @@ function getOffset(el) {
    return { top: _y, left: _x };
 }
 
+function Imprimir() {
+   /*pedimos que el usuario confirme que quiere imprimir ya que reinicia el progrso del jugo */
+       if (confirm('si desea imprimir el progreso de la partida se reiniciara')) {
+           alert('Recomendamos una escala de 90 y activar los graficos fondos a la hora de imprimir');
+       document.getElementById("debug").style.display="none"
+       document.getElementById("jugador1").style.display="none"
+       document.getElementById("jugador2").style.display="none"
+       document.getElementById("jugador3").style.display="none"
+       document.getElementById("jugador4").style.display="none"
+       document.getElementById("panelDado").style.display="none"
+       document.getElementById("tablero").style.marginLeft="0px"
+       document.getElementById("tablero").style.marginTop="0px"
+       document.getElementById("normas").style.marginLeft="0px"
+       document.getElementById("texto").style.marginLeft="0px"
+       document.getElementById("ficha1").style.display="none"
+       document.getElementById("ficha2").style.display="none"
+       document.getElementById("ficha3").style.display="none"
+       document.getElementById("ficha4").style.display="none"
+       document.getElementById("texto").style.display="block"
+       document.getElementById("normas").style.display="block"
+   
+       
+   
+       window.print()
+       alert("volviendo al juego")
+       setTimeout(reload, 1000)
+   
+       function reload() {
+           location.reload();
+       }
+       } else {
+           alert('Volviendo al juego');
+       }
+       
+   }
 
 
+  
+function mostrarmensaje(){
+     if (jugador1.turno==1){mensaje.style.backgroundColor="blue"}
+     else if (jugador2.turno==1){mensaje.style.backgroundColor="red"}
+     else if (jugador3.turno==1){mensaje.style.backgroundColor="green"}
+     else if (jugador4.turno==1){mensaje.style.backgroundColor="yellow"}
+     mensaje.style.display="block"
+     animacion()
+  } 
+
+  function animacion() {
+     mensaje.animate([
+      // keyframes
+      { transform: 'translateY(-500px)' },
+         { transform: 'translateY(+1px)' },
+    ], { 
+      // timing options
+      duration: 1000,
+    });
+
+    setTimeout(volver,2000)
+
+   
+  }
+
+  function volver(){
+ 
+   $("#mensajes").fadeOut();
+}
