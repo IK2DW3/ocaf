@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row px-4 py-2">
+    <div class="row px-4 py-2" id="cartas">
         <div class="col-sm-12">
             <div class="row bg-dark m-0 px-1 py-3 rounded">
                 <div class="col-sm-12">
@@ -19,19 +19,17 @@
             </div>
         </div>
         <div v-for="carta in buscarCartas" v-bind:key="carta.id" class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
-            <div class="card text-center carta my-2">
-                <div class="card-header">
-                    <h2 v-text="carta.nombre +' '+ carta.apellido"></h2>
+            <div class="card text-center my-2">
+                <div class="card-header d-flex align-items-center justify-content-center">
+                    <h2 v-text="carta.nombre +' '+ carta.apellido" class="font-weight-bolder m-0"></h2>
                 </div>
                     <img v-if="carta.imgRuta != ''" :src="'../resources/img/cartas/'+ carta.imgRuta" class="card-img-top" v-bind:alt='carta.nombre' v-bind:title='carta.nombre' style="height:200px">
                     <img v-else-if="carta.imgDefault != ''" :src="carta.imgDefault" class="card-img-top" v-bind:alt="carta.nombre" v-bind:title="carta.nombre" style="height:200px">
                     <img v-else :src="'../resources/img/imglogo.svg'" class="card-img-top" v-bind:alt="'No encontrado'" v-bind:title="'No encontrado'" style="height:200px">
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center justify-content-center">
                     <a class="btn btn-primary" :href="'history/'+ carta.id">Ver</a>
                 </div>
-                <div class="card-footer text-muted" @mouseover="checkAmbit">
-                    {{carta.ambito.ambitoEsp}}
-                </div>
+                <div class="card-footer" v-text="carta.ambito.ambitoEsp"></div>
             </div>
         </div>
     </div>
@@ -83,31 +81,6 @@ export default {
             }
 
         },
-        checkAmbit() {
-            
-            this.arrayCartas.forEach(carta => {
-                if (carta.ambito.ambitoEsp == "Antropología") {
-                    $(this).css({'border':'1px solid orange'})
-                } else if (carta.ambito.ambitoEsp == "Derecho") {
-                    $(this).css({'border':'1px solid #29ffff'})
-                } else if (carta.ambito.ambitoEsp == "Economía") {
-                    $('.carta').css({'border':'1px solid pink'})
-                } else if (carta.ambito.ambitoEsp == "Filosofía") {
-                    $('.carta').css({'border':'1px solid purple'})
-                } else if (carta.ambito.ambitoEsp == "Geografía") {
-                    $('.carta').css({'border':'1px solid red'})
-                } else if (carta.ambito.ambitoEsp == "Historia") {
-                    $('.carta').css({'border':'1px solid brown'})
-                } else if (carta.ambito.ambitoEsp == "Pedagogía") {
-                    $('.carta').css({'border':'1px solid #45ff29'})
-                } else if (carta.ambito.ambitoEsp == "Psicología") {
-                    $('.carta').css({'border':'1px solid blue'})
-                } else if (carta.ambito.ambitoEsp == "Sociología") {
-                    $('.carta').css({'border':'1px solid yellow'})
-                }
-            });
-            
-        },
         clearFields(){
             this.ambito_id="";
             this.busqueda="";
@@ -117,14 +90,16 @@ export default {
     },
     computed: {
         buscarCartas() {
-            return this.arrayCartas.filter((carta) => carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase())                                           
-            );
+            return this.arrayCartas.filter((carta) =>
+                carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) ||
+                carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) ||
+                carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase()));
         }
     },
     // Metodo de inicialización del archivo vue
     mounted() {
         this.getTasks();
     }
-    
+
 }
 </script>

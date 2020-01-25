@@ -39,16 +39,18 @@ div.fab .btn-item .icon {
     font-size: 1.5em;
 }
 
+
 /* menu abajo derecha*/
-div.fab .menuslide{
+
+div.fab .menuslide {
     display: none;
 }
 
-div.fab .esconder{
+div.fab .esconder {
     display: none;
 }
 
-div.fab #btn-txt{
+div.fab #btn-txt {
     display: none;
 }
 
@@ -149,6 +151,45 @@ div.card h2 {
 
 div.card img {
     height: 180px;
+}
+
+.antropologia {
+    background-color: #fec57c;
+}
+
+.derecho {
+    background-color: #9fffff;
+}
+
+.economia {
+    background-color: #ffd6dd;
+}
+
+.filosofia {
+    background-color: #fd7cfd;
+}
+
+.geografia {
+    background-color: #fe9494;
+    color: #fff;
+}
+
+.historia {
+    background-color: #a76f62;
+    color: #fff;
+}
+
+.pedagogia {
+    background-color: #aaf59e;
+}
+
+.psicologia {
+    background-color: #a8a8ff;
+    color: #fff;
+}
+
+.sociologia {
+    background-color: #fefe85;
 }
 
 

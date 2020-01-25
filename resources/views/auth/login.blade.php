@@ -4,7 +4,7 @@
 
 
     <div class="contenedor">
-        <div class="row align-items-center justify-content-center contenido px-2">
+        <div class="row align-items-center justify-content-center contenido py-4">
 
             <div class="col-sm-12 col-logo my-3">
                 <picture>

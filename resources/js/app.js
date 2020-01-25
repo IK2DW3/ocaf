@@ -36,14 +36,14 @@ const app = new Vue({
 });
 const Swal = require('sweetalert2');
 
-$(function(){
+$(function() {
 
     /**
      * Comprobacion del login
      */
-    
+
     function validarLogin(event) {
-        
+
         // Inicializacion de variables
         var email = $("input[name=email]").val();
         var password = $("input[name=password]").val();
@@ -56,8 +56,8 @@ $(function(){
                 title: 'Email y contraseña vacios',
                 text: 'El campo email esta vacio',
             });
-            $("input[name=email]").css('border','1px solid red');
-            $("input[name=password]").css('border','1px solid red');
+            $("input[name=email]").css('border', '1px solid red');
+            $("input[name=password]").css('border', '1px solid red');
             $("input[name=email]").attr("placeholder", "Email incorrecto");
             $("input[name=password]").attr("placeholder", "Contraseña incorrecta");
             valido = false;
@@ -67,7 +67,7 @@ $(function(){
                 title: 'Email',
                 text: 'El campo email esta vacio',
             });
-            $("input[name=email]").css('border','1px solid red');
+            $("input[name=email]").css('border', '1px solid red');
             $("input[name=email]").attr("placeholder", "Email incorrecto");
             valido = false;
         } else if (!testEmail.test(email)) {
@@ -76,7 +76,7 @@ $(function(){
                 title: 'Email',
                 text: 'Tipo de email esta incorrecto',
             });
-            $("input[name=email]").css('border','1px solid red');
+            $("input[name=email]").css('border', '1px solid red');
             $("input[name=email]").attr("placeholder", "Tipo email incorrecto");
             valido = false;
         } else if (password == null || password == "") {
@@ -85,16 +85,15 @@ $(function(){
                 title: 'Contraseña',
                 text: 'El campo contraseña esta vacio',
             });
-            $("input[name=password]").css('border','1px solid red');
+            $("input[name=password]").css('border', '1px solid red');
             $("input[name=password]").attr("placeholder", "Contraseña incorrecta");
             valido = false;
         }
 
-        if($("#localStorageLogin")[0].checked ){
-            localStorage.setItem('usuarioLogeado',email);
-            localStorage.setItem('contraseñaLogeado',password);
-        }
-        else{
+        if ($("#localStorageLogin")[0].checked) {
+            localStorage.setItem('usuarioLogeado', email);
+            localStorage.setItem('contraseñaLogeado', password);
+        } else {
             localStorage.removeItem('usuarioLogeado');
             localStorage.removeItem('contraseñaLogeado');
         }
@@ -107,16 +106,16 @@ $(function(){
         event.preventDefault();
     }
     // Pasar el parametro onsubmit al formulario
-    if ($("#formLogin") != null ) {
+    if ($("#formLogin") != null) {
         // Inicializacion de variables
-        if(localStorage.getItem("usuarioLogeado") && localStorage.getItem("contraseñaLogeado")){
+        if (localStorage.getItem("usuarioLogeado") && localStorage.getItem("contraseñaLogeado")) {
             $("input[name=email]").val(localStorage.getItem("usuarioLogeado"));
             $("input[name=password]").val(localStorage.getItem("contraseñaLogeado"));
             $("#localStorageLogin").prop('checked', true);
         }
-        $('#formLogin').on('submit',validarLogin);
-        $('input[name=email]').on('change',volverCss);
-        $('input[name=password]').on('change',volverCss);
+        $('#formLogin').on('submit', validarLogin);
+        $('input[name=email]').on('change', volverCss);
+        $('input[name=password]').on('change', volverCss);
     }
 
     function validarRegistro(event) {
@@ -133,7 +132,7 @@ $(function(){
                 title: 'Campos Requeridos',
                 text: 'Todos los campos son requeridos',
             });
-            $("input[name*=user]").css({'border':'1px solid red'});
+            $("input[name*=user]").css({ 'border': '1px solid red' });
             $("input[name*=user]").attr("placeholder", "Campo requerido");
             return false;
 
@@ -143,7 +142,7 @@ $(function(){
                 title: 'Nombre',
                 text: 'Campo nombre vacio',
             });
-            $("input[name*=userRegister]").css({'border':'1px solid red'});
+            $("input[name*=userRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (nombre.length < 6 || nombre.length > 16) {
@@ -152,7 +151,7 @@ $(function(){
                 title: 'Nombre',
                 text: 'Longitud del campo incorrecto. Min (6) - Max (16)',
             });
-            $("input[name*=userRegister]").css({'border':'1px solid red'});
+            $("input[name*=userRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (email == "" || email == null || /^\s+$/.test(email)) {
@@ -161,7 +160,7 @@ $(function(){
                 title: 'Email',
                 text: 'Campo email vacio o inválido',
             });
-            $("input[name=userEmailRegister]").css({'border':'1px solid red'});
+            $("input[name=userEmailRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (!testEmail.test(email)) {
@@ -170,7 +169,7 @@ $(function(){
                 title: 'Email',
                 text: 'Formato de email incorrecto',
             });
-            $("input[name=userEmailRegister]").css({'border':'1px solid red'});
+            $("input[name=userEmailRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (password == "" || password == null) {
@@ -179,7 +178,7 @@ $(function(){
                 title: 'Contraseña',
                 text: 'Campo nombre vacio',
             });
-            $("input[name=userPasswordRegister]").css({'border':'1px solid red'});
+            $("input[name=userPasswordRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (password.length < 6 || password.length > 16) {
@@ -188,7 +187,7 @@ $(function(){
                 title: 'Contraseña',
                 text: 'Longitud del campo incorrecto. Min (6) - Max (16)',
             });
-            $("input[name=userPasswordRegister]").css({'border':'1px solid red'});
+            $("input[name=userPasswordRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (confirmPassword == "" || confirmPassword == null) {
@@ -197,7 +196,7 @@ $(function(){
                 title: 'Contraseña',
                 text: 'Campo de confirmacion vacio',
             });
-            $("input[name=userConfirmnPasswordRegister]").css({'border':'1px solid red'});
+            $("input[name=userConfirmnPasswordRegister]").css({ 'border': '1px solid red' });
             return false;
 
         } else if (password != confirmPassword) {
@@ -206,7 +205,7 @@ $(function(){
                 title: 'Contraseña',
                 text: 'Las contraseñas que has introducido no coinciden',
             });
-            $("input[name*=Password]").css({'border':'1px solid red'});
+            $("input[name*=Password]").css({ 'border': '1px solid red' });
             return false;
 
         } else {
@@ -217,13 +216,14 @@ $(function(){
         event.preventDefault();
 
     }
+
     function volverCss() {
-        $(this).css({'border':'1px solid #ced4da','color':'#495057'});
+        $(this).css({ 'border': '1px solid #ced4da', 'color': '#495057' });
     }
-    if ($("#formRegister") != null ) {
+    if ($("#formRegister") != null) {
         // Inicializacion de variables
-        $('#formRegister').on('submit',validarRegistro);
-        $('input[name*=Register]').on('keypress',volverCss);
+        $('#formRegister').on('submit', validarRegistro);
+        $('input[name*=Register]').on('keypress', volverCss);
     }
 
     /**
@@ -244,41 +244,98 @@ $(function(){
 
     }
 
-    
+    /**
+     * Colorizacion de cartas en modo historia
+     */
+    function checkAmbit() {
+
+        var element = $('.card-footer');
+
+        element.each(function(index, element) {
+
+            if ($(element).text() == "Antropología") {
+                $(this).parent().children().first().addClass('antropologia');
+                $(this).addClass('antropologia');
+
+            } else if ($(element).text() == "Derecho") {
+                $(this).parent().children().first().addClass('derecho');
+                $(this).addClass('derecho');
+
+            } else if ($(element).text() == "Economía") {
+                $(this).parent().children().first().addClass('economia');
+                $(this).addClass('economia');
+
+            } else if ($(element).text() == "Filosofía") {
+                $(this).parent().children().first().addClass('filosofia');
+                $(this).addClass('filosofia');
+
+            } else if ($(element).text() == "Geografía") {
+                $(this).parent().children().first().addClass('geografia');
+                $(this).addClass('geografia');
+
+            } else if ($(element).text() == "Historia") {
+                $(this).parent().children().first().addClass('historia');
+                $(this).addClass('historia');
+
+            } else if ($(element).text() == "Pedagogía") {
+                $(this).parent().children().first().addClass('pedagogia');
+                $(this).addClass('pedagogia');
+
+            } else if ($(element).text() == "Psicología") {
+                $(this).parent().children().first().addClass('psicologia');
+                $(this).addClass('psicologia');
+
+            } else if ($(element).text() == "Sociología") {
+                $(this).parent().children().first().addClass('sociologia');
+                $(this).addClass('sociologia');
+            }
+        });
+
+    }
+    if ($("#cartas") != null) {
+        // Si el componente esta cargado
+        setTimeout(checkAmbit, 500);
+        // Si hay cambios en el div #cartas...
+        $("#cartas").on("DOMSubtreeModified", function() {
+            setTimeout(checkAmbit, 100);
+        });
+
+    }
+
 
     /**
      * Configuracion del Floatin Action Button
      */
 
     /* Desplegable del menu */
-    $('.btn-fab').click(function (e) {
+    $('.btn-fab').click(function(e) {
         $('.menuslide').slideToggle('fast');
     });
 
     /* Mostrar texto */
-    $('.btn-fab').hover(function(){
-        $(this).parent().siblings('div').children().first().slideToggle('fast');
-    });  
-    /*Boton subir */
-    $('#botonSubir').hover(function(){
+    $('.btn-fab').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
-    $('#botonSubir').click(function(){
-        $("html, body").animate({scrollTop:0});       
+    /*Boton subir */
+    $('#botonSubir').hover(function() {
+        $(this).parent().siblings('div').children().first().slideToggle('fast');
+    });
+    $('#botonSubir').click(function() {
+        $("html, body").animate({ scrollTop: 0 });
     });
     /*Boton bajar */
-    $('#botonBajar').hover(function(){
+    $('#botonBajar').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
-    $('#botonBajar').click(function(){
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+    $('#botonBajar').click(function() {
+        $("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
     });
 
-    $('#botonPerfil').hover(function(){
+    $('#botonPerfil').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
 
-    $('#botonPanel').hover(function(){
+    $('#botonPanel').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
 
