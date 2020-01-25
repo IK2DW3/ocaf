@@ -60435,8 +60435,92 @@ $(function () {
 
   if ($("#formRegister") != null) {
     // Inicializacion de variables
+    $("input[name=userRegister]").keypress(function () {
+      var nombre = $(this).val();
+
+      if (nombre.length < 6 || nombre.length > 16) {
+        $("#mensajeNombre").fadeIn();
+        $("#mensajeNombre").text("* Nombre no válido").css({
+          'color': 'red'
+        });
+        $("input[name=userRegister]").css({
+          'border': "1px solid red"
+        });
+      } else {
+        $("#mensajeNombre").fadeOut();
+        $(this).css({
+          'border': "1.5px solid green"
+        });
+      }
+    });
+    $("input[name=userEmailRegister]").keypress(function () {
+      var email = $(this).val();
+      var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      if (!testEmail.test(email)) {
+        $("#mensajeEmail").fadeIn();
+        $("#mensajeEmail").text("* Formato de email no válido").css({
+          'color': 'red'
+        });
+        $("input[name=userEmailRegister]").css({
+          'border': "1px solid red"
+        });
+      } else {
+        $("#mensajeEmail").fadeOut();
+        $(this).css({
+          'border': "1px solid green"
+        });
+      }
+    });
+    $("input[name=userPasswordRegister]").keypress(function () {
+      var password = $(this).val();
+
+      if (password.length < 6 || password.length > 16) {
+        $("#mensajePassword1").fadeIn();
+        $("#mensajePassword1").text("* Min(6) - Max(16)").css({
+          'color': 'red'
+        });
+        $("input[name=userPasswordRegister]").css({
+          'border': "1px solid red"
+        });
+      } else {
+        $("#mensajePassword1").fadeOut();
+        $(this).css({
+          'border': "1px solid green"
+        });
+      }
+    });
+    $("input[name=userConfirmnPasswordRegister]").keyup(function () {
+      var password = $("input[name=userPasswordRegister]").val();
+      var confirmPassword = $("input[name=userConfirmnPasswordRegister]").val();
+
+      if (!(confirmPassword === password)) {
+        $("#mensajePassword1").fadeIn();
+        $("#mensajePassword2").fadeIn();
+        $("#mensajePassword1").text("* Las contraseñas no coinciden").css({
+          'color': 'red'
+        });
+        $("#mensajePassword2").text("* Las contraseñas no coinciden").css({
+          'color': 'red'
+        });
+        $("input[name=userConfirmnPasswordRegister]").css({
+          'border': "1px solid red"
+        });
+        $("input[name=userPasswordRegister]").css({
+          'border': "1px solid red"
+        });
+      } else {
+        $("#mensajePassword1").fadeOut();
+        $("#mensajePassword2").fadeOut();
+        $("input[name=userConfirmnPasswordRegister]").css({
+          'border': "1px solid green"
+        });
+        $("input[name=userPasswordRegister]").css({
+          'border': "1px solid green"
+        });
+      }
+    });
     $('#formRegister').on('submit', validarRegistro);
-    $('input[name*=Register]').on('keypress', volverCss);
   }
   /**
    * Creacion de localStorage para seleccion de juego

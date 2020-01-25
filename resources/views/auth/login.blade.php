@@ -50,22 +50,22 @@
                             <h2>¡Únete!</h2>
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="userRegister">Nombre usuario</label>
+                                <label for="userRegister">Nombre usuario <span id="mensajeNombre"></span></label>
                                 <input type="text" name="userRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <label for="emailRegister">Email</label>
+                                <label for="emailRegister">Email <span id="mensajeEmail"></span></label>
                                 <input type="email" name="userEmailRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <label for="passwordRegister">Contraseña</label>
+                                <label for="passwordRegister">Contraseña <span id="mensajePassword1"></span></label>
                                 <input type="password" name="userPasswordRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <label for="confirmnpasswordRegister">Confirmar contraseña</label>
+                                <label for="confirmnpasswordRegister">Confirmar contraseña <span id="mensajePassword2"></span></label>
                                 <input type="password" name="userConfirmnPasswordRegister" class="form-control" autocomplete="off">
                             </div>
 
