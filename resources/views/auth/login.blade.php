@@ -51,7 +51,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="userRegister">Nombre usuario <span id="mensajeNombre"></span></label>
-                                <input type="text" name="userRegister" class="form-control" autocomplete="off">
+                                <input type="text" name="userRegister" id="userRegister" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group">

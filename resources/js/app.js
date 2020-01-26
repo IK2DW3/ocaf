@@ -104,7 +104,7 @@ $(function() {
         // Previene el funcionamiento por defecto
         event.preventDefault();
     }
-    // Pasar el parametro onsubmit al formulario
+    /* Pasar valores al formulario cuando está visible */
     if ($("#formLogin") != null) {
         // Inicializacion de variables
         if (localStorage.getItem("usuarioLogeado") && localStorage.getItem("contraseñaLogeado")) {
@@ -113,8 +113,6 @@ $(function() {
             $("#localStorageLogin").prop('checked', true);
         }
         $('#formLogin').on('submit', validarLogin);
-        $('input[name=email]').on('change', volverCss);
-        $('input[name=password]').on('change', volverCss);
     }
 
     function validarRegistro(event) {
@@ -215,67 +213,68 @@ $(function() {
         event.preventDefault();
 
     }
+    function validacioDinamica(campo,mensajeID,mensaje,boolEmail,boolPass,campoPass) {
+        var campoInput = $(campo);
+        var idMensaje = $(mensajeID);
+        var email = boolEmail;
+        var confirmPassword = boolPass;
+        if (email) {
+            campoInput.keypress(function () {
+                var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (!testEmail.test($(this).val())) {
+                    idMensaje.fadeIn();
+                    idMensaje.text('* ' + mensaje).css({ 'color': 'red' });
+                    campoInput.css({ 'border': "1px solid red" });
+                } else {
+                    idMensaje.fadeOut();
+                    $(this).css({ 'border': "1px solid green" });
+                }
+            });
 
+        } else if (confirmPassword) {
+            campoInput.keyup(function () {
+                var password = $(campoPass).val();
+                var campoConfirm = $(this).val();
+                if (!(campoConfirm === password)) {
+                    idMensaje.fadeIn();
+                    idMensaje.text('* ' + mensaje).css({ 'color': 'red' });
+                    campoInput.css({ 'border': "1px solid red" });
+                } else {
+                    idMensaje.fadeOut();
+                    campoInput.css({ 'border': "1px solid green" });
+                }
+            });
+
+        } else {
+            campoInput.keypress(function () {
+
+                if ($(this).val().length < 6 || $(this).val().length > 16) {
+                    idMensaje.fadeIn();
+                    idMensaje.text('* ' + mensaje).css({ 'color': 'red' });
+                    campoInput.css({ 'border': "1px solid red" });
+                } else {
+                    idMensaje.fadeOut();
+                    $(this).css({ 'border': "1px solid green" });
+                }
+            });
+        }
+
+    }
+    /* Pasar valores al formulario cuando está visible */
     if ($("#formRegister") != null) {
         // Inicializacion de variables
-        $("input[name=userRegister]").keypress(function () {
-            var nombre = $(this).val();
-            if (nombre.length < 6 || nombre.length > 16) {
-                $("#mensajeNombre").fadeIn();
-                $("#mensajeNombre").text("* Nombre no válido").css({ 'color': 'red' });
-                $("input[name=userRegister]").css({ 'border': "1px solid red" });
-            } else {
-                $("#mensajeNombre").fadeOut();
-                $(this).css({ 'border': "1.5px solid green" });
-            }
-        });
-        $("input[name=userEmailRegister]").keypress(function() {
-            var email = $(this).val();
-            var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (!testEmail.test(email)) {
-                $("#mensajeEmail").fadeIn();
-                $("#mensajeEmail").text("* Formato de email no válido").css({'color':'red'});
-                $("input[name=userEmailRegister]").css({'border': "1px solid red"});
-            } else {
-                $("#mensajeEmail").fadeOut();
-                $(this).css({'border': "1px solid green" });
-            }
-        });
-        $("input[name=userPasswordRegister]").keypress(function () {
-            var password = $(this).val();
-            if (password.length < 6 || password.length > 16) {
-                $("#mensajePassword1").fadeIn();
-                $("#mensajePassword1").text("* Min(6) - Max(16)").css({ 'color': 'red' });
-                $("input[name=userPasswordRegister]").css({ 'border': "1px solid red" });
-            } else {
-                $("#mensajePassword1").fadeOut();
-                $(this).css({ 'border': "1px solid green" });
-            }
-        });
-        $("input[name=userConfirmnPasswordRegister]").keyup(function () {
-            var password = $("input[name=userPasswordRegister]").val();
-            var confirmPassword = $("input[name=userConfirmnPasswordRegister]").val();
-            if (!(confirmPassword === password)) {
-                $("#mensajePassword1").fadeIn();
-                $("#mensajePassword2").fadeIn();
-                $("#mensajePassword1").text("* Las contraseñas no coinciden").css({ 'color': 'red' });
-                $("#mensajePassword2").text("* Las contraseñas no coinciden").css({ 'color': 'red' });
-                $("input[name=userConfirmnPasswordRegister]").css({ 'border': "1px solid red" });
-                $("input[name=userPasswordRegister]").css({ 'border': "1px solid red" });
-            } else {
-                $("#mensajePassword1").fadeOut();
-                $("#mensajePassword2").fadeOut();
-                $("input[name=userConfirmnPasswordRegister]").css({ 'border': "1px solid green" });
-                $("input[name=userPasswordRegister]").css({ 'border': "1px solid green" });
-            }
-        });
+        validacioDinamica("input[name=userRegister]", '#mensajeNombre', 'Min(6) Max(16)', false, false, '');
+        validacioDinamica("input[name=userEmailRegister]", '#mensajeEmail', 'Formate de email no valido', true, false, '');
+        validacioDinamica("input[name=userPasswordRegister]", '#mensajePassword1', 'Min(6) Max(16)', false, false, '');
+        validacioDinamica("input[name=userConfirmnPasswordRegister]", '#mensajePassword2', 'Las contraseñas no coinciden', false, true, "input[name=userPasswordRegister]");
         $('#formRegister').on('submit', validarRegistro);
     }
+
 
     /**
      * Creacion de localStorage para seleccion de juego
      */
-
+    /* LocalStorage en el inicio de sesion */
     if ($("#modoIndividual") != null || $("#modoGrupal") != null) {
 
         $("#modoIndividual").click(function(i) {
@@ -293,6 +292,8 @@ $(function() {
     /**
      * Colorizacion de cartas en modo historia
      */
+
+    /* Funcion para comprobar el ambito que contiene la carta */
     function checkAmbit() {
 
         var element = $('.card-footer');
@@ -338,6 +339,7 @@ $(function() {
         });
 
     }
+    /* Pasar valores al formulario cuando está visible */
     if ($("#cartas") != null) {
         // Si el componente esta cargado
         setTimeout(checkAmbit, 500);
@@ -346,6 +348,30 @@ $(function() {
             setTimeout(checkAmbit, 100);
         });
 
+    }
+
+    /**
+     *  Validacion de la creación de cartas
+     */
+
+    /* Previsualizar la imagen de la carta */
+    function filePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#formCartas + img').remove();
+                $('#imgPrevia').attr('src', e.target.result).css({'width':'50%'});
+                $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, ''));
+                //$('#imgPrevia').after('<img src="' + e.target.result + '" width="450" height="300"/>');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    /* Pasar valores al formulario cuando está visible */
+    if ($('#formCartas') != null) {
+        $("#fileCartas").change(function () {
+            filePreview(this);
+        });
     }
 
 
@@ -357,19 +383,18 @@ $(function() {
     $('.btn-fab').click(function(e) {
         $('.menuslide').slideToggle('fast');
     });
-
     /* Mostrar texto */
     $('.btn-fab').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
-    /*Boton subir */
+    /* Boton subir */
     $('#botonSubir').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
     $('#botonSubir').click(function() {
         $("html, body").animate({ scrollTop: 0 });
     });
-    /*Boton bajar */
+    /* Boton bajar */
     $('#botonBajar').hover(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });

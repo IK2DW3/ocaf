@@ -42,7 +42,7 @@
                     <h3>Datos</h3>
                 </div>
                 <div class="col-sm-12">
-                    <form>
+                    <form id="formCartas" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="cartaNombres">Nombre/s</label>
@@ -67,15 +67,15 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <div class="img-muestra d-flex align-items-center justify-content-center">
-                                    <img :src="'../resources/img/imglogo.svg'" class="rounded" alt="Imagen previa" title="Imagen previa">
+                                    <img :src="'../resources/img/imglogo.svg'" class="rounded" id="imgPrevia" alt="Imagen previa" title="Imagen previa">
                                 </div>
                             </div>
                             <div class="form-group col-md-8">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                            <input type="file" class="custom-file-input" id="fileCartas" lang="es">
+                                            <label class="custom-file-label" id="fileTxt" for="customFileLang" v-text="'Seleccionar Archivo'"></label>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -111,6 +111,18 @@
                             <div class="form-group col-md-12">
                                 <label for="cartaLoreeus">Historia Euskarazen</label>
                                 <textarea v-model="loreEus" class="form-control" name="cartaLoreeus" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input  v-model="habilitado" type="checkbox" id="habi_des" aria-label="Checkbox for following text input" @change="checked">
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="habi_desText" aria-label="Text input with checkbox" value="Deshabilitado" disabled readonly>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -183,34 +195,38 @@
                 });
             },
             // Metodo para guardar los daots
-            saveTasks(){
+            saveTasks(event){
                 let me =this;
-                let url = 'card/guardar';
-                axios.post(url,{
-                    'nombre':this.nombre,
-                    'apellido':this.apellido,
-                    'fechaNacimiento':this.fechaNacimiento,
-                    'fechaMuerte':this.fechaMuerte,
-                    'ambito_id':this.ambito_id,
-                    'loreEsp':this.loreEsp,
-                    'loreEng':this.loreEng,
-                    'loreEus':this.loreEus,
-                    'zonaGeografica':this.zonaGeografica,
-                    'continente_id':this.continente_id,
-                    'imgRuta':this.imgRuta,
-                    'imgDefault':this.imgDefault,
-                    'enlaceReferencia':this.enlaceReferencia,
-                    'usuario_id':this.usuario_id,
-                    'habilitado':this.habilitado,
-                }).then(function (response) {
-                    me.getTasks();
-                    me.clearFields();
-                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
+                me.validarCampos();
+                if (true) {
+                    let url = 'card/guardar';
+                    axios.post(url,{
+                        'nombre':this.nombre,
+                        'apellido':this.apellido,
+                        'fechaNacimiento':this.fechaNacimiento,
+                        'fechaMuerte':this.fechaMuerte,
+                        'ambito_id':this.ambito_id,
+                        'loreEsp':this.loreEsp,
+                        'loreEng':this.loreEng,
+                        'loreEus':this.loreEus,
+                        'zonaGeografica':this.zonaGeografica,
+                        'continente_id':this.continente_id,
+                        'imgRuta':this.imgRuta,
+                        'imgDefault':this.imgDefault,
+                        'enlaceReferencia':this.enlaceReferencia,
+                        'usuario_id':this.usuario_id,
+                        'habilitado':this.habilitado,
+                    }).then(function (response) {
+                        me.getTasks();
+                        me.clearFields();
+                        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
+                // Previene el funcionamiento por defecto
+                event.preventDefault();
             },
             // Metodo para actualizar los datos
             updateTasks(){
@@ -271,9 +287,23 @@
                     });
                     me.imgRuta = response.data.imgRuta;
                     me.imgDefault = response.data.imgDefault;
+                    if(me.imgRuta != null || me.imgRuta != '') {
+                        $('#fileTxt').text(response.data.imgRuta);
+                        $('#imgPrevia').attr('src','../resources/img/cartas/' + response.data.imgRuta).css({'width':'50%'});
+                    } else if (me.imgDefault != null || me.imgDefault != '') {
+                        $('#imgPrevia').attr('src',response.data.imgDefault).css({'width':'50%'});
+                    } else {
+                        $('#fileTxt').text('No tiene imagen');
+                        $('#imgPrevia').attr('src','../resources/img/imglogo.svg').css({'width':'50%'});
+                    }
                     me.enlaceReferencia = response.data.enlaceReferencia;
                     me.usuario_id = response.data.usuario_id;
                     me.habilitado = response.data.habilitado;
+                    if (me.habilitado == 1 || me.habilitado) {
+                        $('#habi_desText').val('Habilitado');
+                    } else {
+                        $('#habi_desText').val('Deshabilitado');
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -319,12 +349,40 @@
                 this.loreEus="";
                 this.zonaGeografica="";
                 this.continente_id="";
+                $('#fileTxt').text('Seleccionar archivo');
+                $('#imgPrevia').attr('src','../resources/img/imglogo.svg').css({'width':'50%'});
                 this.imgRuta="";
                 this.imgDefault="";
                 this.enlaceReferencia="";
                 this.usuario_id="";
-                this.habilitado="";
+                this.habilitado=0;
+                $('#habi_desText').val('Deshabilitado');
                 this.update = 0;
+            },
+            checked() {
+                if(this.habilitado) {
+                    $('#habi_desText').val('Habilitado');
+                } else {
+                    $('#habi_desText').val('Deshabilitado');
+                }
+            },
+            campoInvalido(campo){
+                $(campo).css('border','1px solid red');
+            },
+            validarCampos() {
+                let me = this;
+                if (me.nombre === "" || me.apellido === "") {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Validación',
+                        text: 'Campos vacios',
+                    });
+                    me.campoInvalido('#cartaNombres');
+                    return false;
+                } else {
+                    return true;
+                }
+
             }
         },
         computed: {
