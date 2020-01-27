@@ -21,6 +21,7 @@ Vue.component('crudadm-ambits', require('./components/CrudadmAmbitos.vue').defau
 Vue.component('crudadm-continents', require('./components/CrudadmContinentes.vue').default);
 Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
 Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
+Vue.component('crudadm-preguntas', require('./components/CrudadmPreguntas.vue').default); 
 
 Vue.component('selector-juego', require('./components/SelectorJuego.vue').default);
 Vue.component('tablero-normal', require('./components/TableroNormal.vue').default);

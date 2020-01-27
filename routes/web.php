@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('panelambitos', 'OcafController@getPanelambitos');
     Route::get('panelcontinentes', 'OcafController@getPanelcontinentes');
     Route::get('panelcartas', 'OcafController@getPanelcartas');
+    Route::get('panelpreguntas', 'OcafController@getPanelpreguntas');
 });
 Route::get('pruebas', 'FileController@create');
 /*
@@ -61,19 +62,26 @@ Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
 Route::get('/card/buscar', 'TaskController@showCard');
 Route::get('/card/filtrar', 'TaskController@filterCard');
 
-// Rutas para el panel de gestion de cartas
+// Rutas para el panel de gestion de ambitos
 Route::get('/ambit', 'TaskController@tableAmbit');
 Route::put('/ambit/actualizar', 'TaskController@updateAmbit');
 Route::post('/ambit/guardar', 'TaskController@storeAmbit');
 Route::delete('/ambit/borrar/{id}', 'TaskController@destroyAmbit');
 Route::get('/ambit/buscar', 'TaskController@showAmbit');
 
-// Rutas para el panel de gestion de cartas
+// Rutas para el panel de gestion de continente
 Route::get('/continent', 'TaskController@tableContinent');
 Route::put('/continent/actualizar', 'TaskController@updateContinent');
 Route::post('/continent/guardar', 'TaskController@storeContinent');
 Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
 Route::get('/continent/buscar', 'TaskController@showContinent');
+
+// Rutas para el panel de gestion de Preguntas
+Route::get('/pregunt', 'TaskController@tablePregunt');
+Route::put('/pregunt/actualizar', 'TaskController@updatePregunt');
+Route::post('/pregunt/guardar', 'TaskController@storePregunt');
+Route::delete('/pregunt/borrar/{id}', 'TaskController@destroyPregunt');
+Route::get('/pregunt/buscar', 'TaskController@showPregunt');
 
 // Ruta para el selector de juego y el tablero
 Route::post('/modo', 'TaskController@getGamemode');

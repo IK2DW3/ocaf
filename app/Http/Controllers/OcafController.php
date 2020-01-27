@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
 use App\Ambito;
+use App\Pregunta;
 Use Alert;
 
 class OcafController extends Controller
@@ -96,6 +97,15 @@ class OcafController extends Controller
     public function getPanelcartas() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panelcartas');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelpreguntas() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelpreguntas');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');
