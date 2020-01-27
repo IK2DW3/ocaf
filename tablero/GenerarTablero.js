@@ -15,6 +15,14 @@ var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respues
         /*creamos una pregunta para la casilla 10 */
 var casilla10 = new casillaPregunta("q tal", "muy bien", "muy mal", "fatal", 0)
 
+document.getElementById("respuesta1").onclick=responder;
+document.getElementById("respuesta2").onclick=responder;
+document.getElementById("respuesta3").onclick=responder;
+document.getElementById("quitarcarta").onclick=quitarcarta;
+document.getElementById("aceptar").onclick=aceptarcarta;
+
+
+var respuestaE = ""
 /*configuramos el zoom de la pagina para que se vea bien */
 document.body.style.zoom = "22%"
 /*creamos un array con las casillas que tiene preguntas */
@@ -51,7 +59,7 @@ numeros[59].style.marginLeft="200px"
 preguntas[52].style.marginRight="200px"
 /*cuando hacemos click en cualquier pregunta */
 for (i = 0; i < preguntas.length; i++) {
-    const element = preguntas[i].onclick=preguntar;}
+    preguntas[i].onclick=sacarcarta;}
 /*muestra un alert con la pregunta si el modo trivia esta activado */
 function preguntar() {
 
@@ -101,17 +109,57 @@ function fade() {
    
 }
 
-function preguntar() {
 
+function responder() {
+    respuestaE= this.id
+
+    document.getElementById("respuesta1").style.backgroundColor="thistle"
+    document.getElementById("respuesta2").style.backgroundColor="thistle"
+    document.getElementById("respuesta3").style.backgroundColor="thistle"
+   
+    document.getElementById(respuestaE).style.backgroundColor="lightblue"
+    
+    console.log(respuestaE)
+}
+
+function sacarcarta() {
+
+    var deg=360
+
+    document.getElementById("carta").style.display="block"
+    $("#carta").animate({left: '+=2000px'}, 1000);
+    
+    $('#carta').animate(
+        { deg: deg },
+        {
+          duration: 1200,
+          step: function(now) {
+            $(this).css({ transform: 'rotate(' + now + 'deg)' });
+          }
+        }
+      );
+       
     document.getElementById("name").innerText="pepa"
     document.getElementById("apellidos").innerText="Lopez Lopez"
     document.getElementById("foto").src="recursos/persona.jpg"
     document.getElementById("pregunta").innerText="¿Que tal?"
-    document.getElementById("R1").value="Hola"
-    document.getElementById("R2").value="adios"
-    document.getElementById("R3").value="nastardes"
-
-
+    document.getElementById("respuesta1").innerText="Hola"
+    document.getElementById("respuesta2").innerText="adios"
+    document.getElementById("respuesta3").innerText="nastardes"
+    document.getElementById("respuesta1").onmouseover=document.getElementById("respuesta1").style.cursor= "pointer"
+    document.getElementById("respuesta2").onmouseover=document.getElementById("respuesta2").style.cursor= "pointer"
+    document.getElementById("respuesta3").onmouseover=document.getElementById("respuesta3").style.cursor= "pointer"
     
+ }
+
+function quitarcarta() {
+    document.getElementById("carta").style.display="none"
+    document.getElementById("carta").style.left="0"
 }
+
+function aceptarcarta() {
+    document.getElementById("carta").style.display="none"
+    document.getElementById("carta").style.left="0"
+}
+
     

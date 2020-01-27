@@ -285,15 +285,20 @@ body{background-color:#F29199}
     border: solid 20px white;
     background-color: gray; 
     position: fixed;
-    left: 32%;
+    left: 0%;
     top: 10%;
     font-size: 500%;
     padding: 30px;
+    display: none;
 }
 
 #foto{
     width:1000px;
     height: 1000px;
     border: 10px solid white;}
-    
-radio{width: 200px ; height: 200px;}
+#respuesta1{margin: 10px; padding: 10px;background-color: thistle;}
+#respuesta2{margin: 10px; padding: 10px;background-color: thistle;}
+#respuesta3{margin: 10px; padding: 10px;background-color: thistle;}
+
+#quitarcarta{width: 100px; height: 100px;}
+#aceptar{width: 500px; height: 200px; font-size: 150%;}
