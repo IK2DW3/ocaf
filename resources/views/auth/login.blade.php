@@ -14,7 +14,7 @@
                 <h1>OCA-F</h1>
             </div>
 
-            <div class="col-sm-8 col-md-8 col-lg-3 cont-login mx-2 my-2 h-100">
+            <div class="col-sm-8 col-md-8 col-lg-4 cont-login mx-2 my-2 h-100">
                 <div class="row">
                     <div class="col-sm-12 login">
                         <form class="overflow-hidden" id="formLogin" role="form" method="POST" action="{{ url('/login') }}">
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-8 col-lg-3 col-register mx-2 my-2">
+            <div class="col-sm-12 col-md-8 col-lg-4 col-register mx-2 my-2">
                 <div class="row">
                     <div class="col-sm-12 registro">
                         <form class="overflow-hidden" id="formRegister" role="form" action="{{ url('register') }}" method="POST">

@@ -264,7 +264,7 @@ $(function() {
     if ($("#formRegister") != null) {
         // Inicializacion de variables
         validacioDinamica("input[name=userRegister]", '#mensajeNombre', 'Min(6) Max(16)', false, false, '');
-        validacioDinamica("input[name=userEmailRegister]", '#mensajeEmail', 'Formate de email no valido', true, false, '');
+        validacioDinamica("input[name=userEmailRegister]", '#mensajeEmail', 'Formato de email no valido', true, false, '');
         validacioDinamica("input[name=userPasswordRegister]", '#mensajePassword1', 'Min(6) Max(16)', false, false, '');
         validacioDinamica("input[name=userConfirmnPasswordRegister]", '#mensajePassword2', 'Las contraseñas no coinciden', false, true, "input[name=userPasswordRegister]");
         $('#formRegister').on('submit', validarRegistro);
