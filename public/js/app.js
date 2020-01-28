@@ -2823,23 +2823,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveTasks: function saveTasks() {
       var me = this;
-      var url = 'card/guardar';
+      var url = 'pregunt/guardar';
       axios.post(url, {
-        'nombre': this.nombre,
-        'apellido': this.apellido,
-        'fechaNacimiento': this.fechaNacimiento,
-        'fechaMuerte': this.fechaMuerte,
+        'carta_id': this.carta_id,
+        'pregunta': this.pregunta,
+        'respuesta_1': this.respuesta_1,
+        'respuesta_2': this.respuesta_2,
         'ambito_id': this.ambito_id,
-        'loreEsp': this.loreEsp,
-        'loreEng': this.loreEng,
-        'loreEus': this.loreEus,
-        'zonaGeografica': this.zonaGeografica,
-        'continente_id': this.continente_id,
-        'imgRuta': this.imgRuta,
-        'imgDefault': this.imgDefault,
-        'enlaceReferencia': this.enlaceReferencia,
-        'usuario_id': this.usuario_id,
-        'habilitado': this.habilitado
+        'respuesta_3': this.respuesta_3
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
@@ -2851,7 +2842,7 @@ __webpack_require__.r(__webpack_exports__);
     // Metodo para actualizar los datos
     updateTasks: function updateTasks() {
       var me = this;
-      axios.put('card/actualizar', {
+      axios.put('pregunt/actualizar', {
         'id': this.update,
         'nombre': this.nombre,
         'apellido': this.apellido,
@@ -2880,7 +2871,7 @@ __webpack_require__.r(__webpack_exports__);
     loadFieldsUpdate: function loadFieldsUpdate(data) {
       this.update = data.id;
       var me = this;
-      var url = 'card/buscar?id=' + this.update;
+      var url = 'pregunt/buscar?id=' + this.update;
       axios.get(url).then(function (response) {
         me.nombre = response.data.nombre;
         me.apellido = response.data.apellido;
@@ -47276,7 +47267,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { autocomplete: "off", id: "respuesta1" },
+                attrs: { autocomplete: "off", id: "respuesta_1" },
                 domProps: { value: _vm.respuesta_1 },
                 on: {
                   input: function($event) {
@@ -47304,7 +47295,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { autocomplete: "off", id: "respuesta1" },
+                attrs: { autocomplete: "off", id: "respuesta_2" },
                 domProps: { value: _vm.respuesta_2 },
                 on: {
                   input: function($event) {
@@ -47332,7 +47323,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { autocomplete: "off", id: "respuesta2" },
+                attrs: { autocomplete: "off", id: "respuesta_3" },
                 domProps: { value: _vm.respuesta_3 },
                 on: {
                   input: function($event) {

@@ -65,17 +65,17 @@
                         <div class="form-row">
                             <label for="respuesta_1">Respuesta Correcta</label>
                             <textarea v-model="respuesta_1" class="form-control" autocomplete="off"
-                                id="respuesta1"></textarea>
+                                id="respuesta_1"></textarea>
                         </div>
                         <div class="form-row">
                             <label for="respuesta_2">Respuesta Erronea 1</label>
                             <textarea v-model="respuesta_2" class="form-control" autocomplete="off"
-                                id="respuesta1"></textarea>
+                                id="respuesta_2"></textarea>
                         </div>
                         <div class="form-row">
                             <label for="respuesta_3">Respuesta Erronea 2</label>
                             <textarea v-model="respuesta_3" class="form-control" autocomplete="off"
-                                id="respuesta2"></textarea>
+                                id="respuesta_3"></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 text-center">
@@ -129,23 +129,14 @@
             },
             saveTasks(){
                 let me =this;
-                let url = 'card/guardar';
+                let url = 'pregunt/guardar';
                 axios.post(url,{
-                    'nombre':this.nombre,
-                    'apellido':this.apellido,
-                    'fechaNacimiento':this.fechaNacimiento,
-                    'fechaMuerte':this.fechaMuerte,
+                    'carta_id':this.carta_id,
+                    'pregunta':this.pregunta,
+                    'respuesta_1':this.respuesta_1,
+                    'respuesta_2':this.respuesta_2,
                     'ambito_id':this.ambito_id,
-                    'loreEsp':this.loreEsp,
-                    'loreEng':this.loreEng,
-                    'loreEus':this.loreEus,
-                    'zonaGeografica':this.zonaGeografica,
-                    'continente_id':this.continente_id,
-                    'imgRuta':this.imgRuta,
-                    'imgDefault':this.imgDefault,
-                    'enlaceReferencia':this.enlaceReferencia,
-                    'usuario_id':this.usuario_id,
-                    'habilitado':this.habilitado,
+                    'respuesta_3':this.respuesta_3,
                 }).then(function (response) {
                     me.getTasks();
                     me.clearFields();
@@ -159,7 +150,7 @@
             // Metodo para actualizar los datos
             updateTasks(){
                 let me = this;
-                axios.put('card/actualizar',{
+                axios.put('pregunt/actualizar',{
                     'id':this.update,
                     'nombre':this.nombre,
                     'apellido':this.apellido,
@@ -189,7 +180,7 @@
             loadFieldsUpdate(data) {
                 this.update = data.id
                 let me =this;
-                let url = 'card/buscar?id='+this.update;
+                let url = 'pregunt/buscar?id='+this.update;
                 axios.get(url).then(function (response) {
                     me.nombre = response.data.nombre;
                     me.apellido = response.data.apellido;
