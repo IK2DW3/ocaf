@@ -72,12 +72,24 @@ class TaskController extends Controller
     public function storeCard(Request $request){
 
         $task = new Carta();
-        $task->name = $request->name;
-        $task->email = $request->email;
-        $task->tipo = $request->tipo;
-        $task->password = bcrypt($request->password);
+        $task->nombre = $request->nombre;
+        $task->apellido = $request->apellido;
+        $task->fechaNacimiento = $request->fechaNacimiento;
+        $task->fechaMuerte = $request->fechaMuerte;
+        $task->ambito_id = $request->ambito_id;
+        $task->loreEsp = $request->loreEsp;
+        $task->loreEng = $request->loreEng;
+        $task->loreEus = $request->loreEus;
+        $task->zonaGeografica = $request->zonaGeografica;
+        $task->continente_id = $request->continente_id;
+        $task->imgRuta = $request->imgRuta;
+        $task->imgDefault = $request->imgDefault;
+        $task->enlaceReferencia = $request->enlaceReferencia;
+        $task->habilitado = $request->habilitado;
         $task->save();
+
     }
+
     public function showCard(Request $request) {
 
         $task = Carta::findOrFail($request->id);
@@ -190,6 +202,52 @@ class TaskController extends Controller
     public function destroyContinent(Request $request) {
 
         $task = Continente::destroy($request->id);
+        return $task;
+
+    }
+
+    /* ----------------------------------------------------------------------------------------------- */
+    public function tableQuest(Request $request) {
+
+        return Pregunta::orderBy('carta_id')->get();
+
+
+    }
+
+    public function storeQuest(Request $request){
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+        $task->save();
+    }
+    public function showQuest(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updateQuest(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyQuest(Request $request) {
+
+        $task = Pregunta::destroy($request->id);
         return $task;
 
     }

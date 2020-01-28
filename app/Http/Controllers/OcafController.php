@@ -102,4 +102,13 @@ class OcafController extends Controller
         }
     }
 
+    public function getPanelpreguntas() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelpreguntas');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
 }

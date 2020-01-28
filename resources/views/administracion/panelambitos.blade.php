@@ -16,6 +16,7 @@
                         <a href="{{url('panelambitos')}}" type="button" class="btn btn-secondary">&#x1F393; Ambitos</a>
                         <a href="{{url('panelcontinentes')}}" type="button" class="btn btn-secondary">&#x1F310; Continentes</a>
                         <a href="{{url('panelcartas')}}" type="button" class="btn btn-secondary">&#x1F4D6; Historias</a>
+                        <a href="{{url('panelpreguntas')}}" type="button" class="btn btn-secondary">&#x2047; Preguntas</a>
                     </div>
                 </div>
                 <div class="col-md-10 panel-contenido px-2 py-2">

@@ -102,15 +102,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="cartaLoreesp">Historia en Español</label>
-                                <textarea v-model="loreEsp" class="form-control" name="cartaLoreesp" id="cartaLoreesp" placeholder="Añade aquí la historia..."></textarea>
+                                <textarea v-model="loreEsp" class="form-control" id="cartaLoreesp" placeholder="Añade aquí la historia..."></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="cartaLoreeng">History in English</label>
-                                <textarea v-model="loreEng" class="form-control" name="cartaLoreeng" id="cartaLoreeng" placeholder="Añade aquí la historia..."></textarea>
+                                <textarea v-model="loreEng" class="form-control" id="cartaLoreeng" placeholder="Add history here..."></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="cartaLoreeus">Historia Euskarazen</label>
-                                <textarea v-model="loreEus" class="form-control" name="cartaLoreeus" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
+                                <textarea v-model="loreEus" class="form-control" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
                             </div>
                         </div>
                         <div class="form-row">
@@ -198,7 +198,7 @@
             saveTasks(event){
                 let me =this;
                 me.validarCampos();
-                if (true) {
+                if(true) {
                     let url = 'card/guardar';
                     axios.post(url,{
                         'nombre':this.nombre,

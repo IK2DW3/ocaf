@@ -2807,6 +2807,238 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      pregunta: "",
+      respuesta_1: "",
+      respuesta_2: "",
+      respuesta_3: "",
+      carta_id: "",
+      update: 0,
+      busqueda: "",
+      arrayPreguntas: [],
+      arrayCartas: []
+    };
+  },
+  methods: {
+    getTasks: function getTasks() {
+      var me = this;
+      var url = 'quest';
+      axios.get(url).then(function (response) {
+        me.arrayPreguntas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get('card').then(function (response) {
+        me.arrayCartas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    saveTasks: function saveTasks() {
+      var me = this;
+      var url = 'quest/guardar';
+      axios.post(url, {
+        'pregunta': this.pregunta,
+        'respuesta_1': this.respuesta_1,
+        'respuesta_2': this.respuesta_2,
+        'respuesta_3': this.respuesta_3,
+        'carta_id': this.carta_id
+      }).then(function (response) {
+        me.getTasks();
+        me.clearFields();
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    // Metodo para actualizar los datos
+    updateTasks: function updateTasks() {
+      var me = this;
+      axios.put('quest/actualizar', {
+        'id': this.update,
+        'pregunta': this.pregunta,
+        'respuesta_1': this.respuesta_1,
+        'respuesta_2': this.respuesta_2,
+        'respuesta_3': this.respuesta_3,
+        'carta_id': this.carta_id
+      }).then(function (response) {
+        me.getTasks();
+        me.clearFields();
+        this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    // Metodo para insertar los datos en los campos de texto
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      this.update = data.id;
+      var me = this;
+      var url = 'quest/buscar?id=' + this.update;
+      axios.get(url).then(function (response) {
+        me.pregunta = response.data.pregunta;
+        me.respuesta_1 = response.data.respuesta_1;
+        me.respuesta_2 = response.data.respuesta_2;
+        me.respuesta_3 = response.data.respuesta_3;
+        me.carta_id = response.data.carta_id;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    // Metodo para eliminar los datos
+    deleteTask: function deleteTask(data) {
+      var _this = this;
+
+      var me = this;
+      var task_id = data.id;
+      this.$swal({
+        icon: 'warning',
+        title: '¿Seguro que deseas borrar esta carta?',
+        text: 'No podras revertir ésta acción',
+        showCancelButton: true,
+        confirmButtonText: '¡Eliminar!',
+        cancelButtonText: '¡No, mantenerlo!',
+        showCloseButton: true,
+        showLoaderOnConfirm: true
+      }).then(function (result) {
+        if (result.value) {
+          _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
+
+          axios["delete"]('quest/borrar/' + task_id).then(function (response) {
+            me.getTasks();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else {
+          _this.$swal('Cancelado', 'La carta correspondiente sigue intacta', 'info');
+        }
+      });
+    },
+    // Metodo para limpiar los campos de texto
+    clearFields: function clearFields() {
+      this.pregunta = "";
+      this.respuesta_1 = "";
+      this.respuesta_2 = "";
+      this.respuesta_3 = "";
+      this.carta_id = null;
+      this.update = 0;
+    }
+  },
+  computed: {
+    buscarPregunta: function buscarPregunta() {
+      var _this2 = this;
+
+      return this.arrayPreguntas.filter(function (pregunta) {
+        return pregunta.carta_id.toLowerCase().includes(_this2.busqueda.toLowerCase());
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getTasks();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CrudadmUsers.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CrudadmUsers.vue?vue&type=script&lang=js& ***!
@@ -46381,7 +46613,6 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      name: "cartaLoreesp",
                       id: "cartaLoreesp",
                       placeholder: "Añade aquí la historia..."
                     },
@@ -46413,9 +46644,8 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      name: "cartaLoreeng",
                       id: "cartaLoreeng",
-                      placeholder: "Añade aquí la historia..."
+                      placeholder: "Add history here..."
                     },
                     domProps: { value: _vm.loreEng },
                     on: {
@@ -46445,7 +46675,6 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      name: "cartaLoreeus",
                       id: "cartaLoreeus",
                       placeholder: "Añade aquí la historia..."
                     },
@@ -46926,6 +47155,400 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Continent in English")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Kontinente Euskeraz")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("h3", [_vm._v("Datos")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { id: "master" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.busqueda,
+            expression: "busqueda"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "search",
+          name: "buscador",
+          placeholder: "Buscar en la tabla",
+          autocomplete: "off"
+        },
+        domProps: { value: _vm.busqueda },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.busqueda = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-12" }, [
+      _c("div", { staticClass: "table-responsive table-ambitos" }, [
+        _c("table", { staticClass: "table table-striped rounded" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.arrayPreguntas, function(pregunta) {
+              return _c("tr", { key: pregunta.id }, [
+                _c("td", {
+                  domProps: { textContent: _vm._s(pregunta.carta_id) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(pregunta.pregunta) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(pregunta.respuesta_1) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(pregunta.respuesta_2) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(pregunta.respuesta_3) }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group",
+                      attrs: { role: "group", "aria-label": "Basic example" }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { href: "", role: "button", title: "Ver" }
+                        },
+                        [_vm._v("👀")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", title: "Editar" },
+                          on: {
+                            click: function($event) {
+                              return _vm.loadFieldsUpdate(_vm.ambito)
+                            }
+                          }
+                        },
+                        [_vm._v("✎")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", title: "Eliminar" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteTask(_vm.ambito)
+                            }
+                          }
+                        },
+                        [_vm._v("✖")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row my-4" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-12" }, [
+          _c("form", [
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "mujer" } }, [_vm._v("Mujer")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.carta_id,
+                        expression: "carta_id"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.carta_id = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Seleccionar mujer")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayCartas, function(carta) {
+                      return _c("option", {
+                        key: carta.id,
+                        domProps: { textContent: _vm._s(carta.nombre) }
+                      })
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "pregunta" } }, [
+                _vm._v("Preguntas")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pregunta,
+                    expression: "pregunta"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { autocomplete: "off", id: "pregunta" },
+                domProps: { value: _vm.pregunta },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.pregunta = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "respuesta_1" } }, [
+                _vm._v("Respuesta Correcta")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.respuesta_1,
+                    expression: "respuesta_1"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { autocomplete: "off", id: "respuesta_1" },
+                domProps: { value: _vm.respuesta_1 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.respuesta_1 = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "respuesta_2" } }, [
+                _vm._v("Respuesta Erronea 1")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.respuesta_2,
+                    expression: "respuesta_2"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { autocomplete: "off", id: "respuesta_2" },
+                domProps: { value: _vm.respuesta_2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.respuesta_2 = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "respuesta_3" } }, [
+                _vm._v("Respuesta Erronea 2")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.respuesta_3,
+                    expression: "respuesta_3"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { autocomplete: "off", id: "respuesta_3" },
+                domProps: { value: _vm.respuesta_3 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.respuesta_3 = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-12 text-center" }, [
+                _vm.update == 0
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.saveTasks()
+                          }
+                        }
+                      },
+                      [_vm._v("Añadir")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.update != 0
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning",
+                        on: {
+                          click: function($event) {
+                            return _vm.updateTasks()
+                          }
+                        }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.update != 0
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-info",
+                        on: {
+                          click: function($event) {
+                            return _vm.clearFields()
+                          }
+                        }
+                      },
+                      [_vm._v("Atrás")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 my-2" }, [
+      _c("h2", [_vm._v("Tabla del NET")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Mujer")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pregunta")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Correcta")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea1")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea2")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])
@@ -60366,6 +60989,7 @@ Vue.component('crudadm-users', __webpack_require__(/*! ./components/CrudadmUsers
 Vue.component('crudadm-ambits', __webpack_require__(/*! ./components/CrudadmAmbitos.vue */ "./resources/js/components/CrudadmAmbitos.vue")["default"]);
 Vue.component('crudadm-continents', __webpack_require__(/*! ./components/CrudadmContinentes.vue */ "./resources/js/components/CrudadmContinentes.vue")["default"]);
 Vue.component('crudadm-cartas', __webpack_require__(/*! ./components/CrudadmCartas.vue */ "./resources/js/components/CrudadmCartas.vue")["default"]);
+Vue.component('crudadm-preguntas', __webpack_require__(/*! ./components/CrudadmPreguntas.vue */ "./resources/js/components/CrudadmPreguntas.vue")["default"]);
 Vue.component('vue-historys', __webpack_require__(/*! ./components/VueHistorys.vue */ "./resources/js/components/VueHistorys.vue")["default"]);
 Vue.component('selector-juego', __webpack_require__(/*! ./components/SelectorJuego.vue */ "./resources/js/components/SelectorJuego.vue")["default"]);
 Vue.component('tablero-normal', __webpack_require__(/*! ./components/TableroNormal.vue */ "./resources/js/components/TableroNormal.vue")["default"]);
@@ -60635,7 +61259,7 @@ $(function () {
   if ($("#formRegister") != null) {
     // Inicializacion de variables
     validacioDinamica("input[name=userRegister]", '#mensajeNombre', 'Min(6) Max(16)', false, false, '');
-    validacioDinamica("input[name=userEmailRegister]", '#mensajeEmail', 'Formate de email no valido', true, false, '');
+    validacioDinamica("input[name=userEmailRegister]", '#mensajeEmail', 'Formato de email no valido', true, false, '');
     validacioDinamica("input[name=userPasswordRegister]", '#mensajePassword1', 'Min(6) Max(16)', false, false, '');
     validacioDinamica("input[name=userConfirmnPasswordRegister]", '#mensajePassword2', 'Las contraseñas no coinciden', false, true, "input[name=userPasswordRegister]");
     $('#formRegister').on('submit', validarRegistro);
@@ -61030,6 +61654,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmContinentes_vue_vue_type_template_id_a049787e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmContinentes_vue_vue_type_template_id_a049787e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CrudadmPreguntas.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/CrudadmPreguntas.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CrudadmPreguntas.vue?vue&type=template&id=eda69930& */ "./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930&");
+/* harmony import */ var _CrudadmPreguntas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CrudadmPreguntas.vue?vue&type=script&lang=js& */ "./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CrudadmPreguntas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CrudadmPreguntas.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmPreguntas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CrudadmPreguntas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CrudadmPreguntas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmPreguntas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CrudadmPreguntas.vue?vue&type=template&id=eda69930& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CrudadmPreguntas.vue?vue&type=template&id=eda69930&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrudadmPreguntas_vue_vue_type_template_id_eda69930___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
