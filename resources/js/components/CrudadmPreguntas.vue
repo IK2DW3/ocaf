@@ -1,36 +1,41 @@
 <template>
-    <div class="row">
+
+    <div class="row" id="master">
         <div class="col-sm-12 my-2">
-            <h2>Tabla del conocimiento</h2>
+            <h2>Tabla del NET</h2>
         </div>
         <div class="col-sm-12 my-2">
-            <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
+            <input class="form-control" type="search" v-model="busqueda" name="buscador"
+                placeholder="Buscar en la tabla" autocomplete="off">
         </div>
         <div class="col-sm-12">
-            <div class="table-responsive table-mujeres">
+            <div class="table-responsive table-ambitos">
                 <table class="table table-striped rounded">
-                    <thead class="thead-dark position-sticky">
+                    <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">F. Nacimiento</th>
-                            <th scope="col">F. Muerte</th>
-                            <th scope="col">Ambito</th>
+                            <th scope="col">Mujer</th>
+                            <th scope="col">Pregunta</th>
+                            <th scope="col">Respuesta Correcta</th>
+                            <th scope="col">Respuesta Erronea1</th>
+                            <th scope="col">Respuesta Erronea2</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="carta in buscarCartas" :key="carta.id">
-                            <td v-text="carta.nombre"></td>
-                            <td v-text="carta.apellido"></td>
-                            <td v-text="carta.fechaNacimiento"></td>
-                            <td v-text="carta.fechaMuerte"></td>
-                            <td v-text="carta.ambito.ambitoEsp"></td>
+                        <tr v-for="pregunta in arrayPreguntas" :key="pregunta.id">
+                            <td v-text="pregunta.carta_id"></td>
+                            <td v-text="pregunta.pregunta"></td>
+                            <td v-text="pregunta.respuesta_1"></td>
+                            <td v-text="pregunta.respuesta_2"></td>
+                            <td v-text="pregunta.respuesta_3"></td>
+
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a :href="'history/'+ carta.id" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
-                                    <button type="button" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta)">&#x270E;</button>
-                                    <button type="button" class="btn btn-secondary" title="Eliminar" @click="deleteTask(carta)">&#x2716;</button>
+                                    <a href="" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
+                                    <button type="button" class="btn btn-secondary" title="Editar"
+                                        @click="loadFieldsUpdate(ambito)">&#x270E;</button>
+                                    <button type="button" class="btn btn-secondary" title="Eliminar"
+                                        @click="deleteTask(ambito)">&#x2716;</button>
                                 </div>
                             </td>
                         </tr>
@@ -45,80 +50,40 @@
                     <form>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="cartaNombres">Nombre/s</label>
-                                <input v-model="nombre" type="text" class="form-control" id="cartaNombres">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cartaApellidos">Apellido/s</label>
-                                <input v-model="apellido" type="text" class="form-control" id="cartaApellidos">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cartaFnacimiento">Fecha Nacimiento</label>
-                                <input v-model="fechaNacimiento" type="text" class="form-control" id="cartaFnacimiento">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cartaFmuerte">Fecha Muerte</label>
-                                <input v-model="fechaMuerte" type="text" class="form-control" id="cartaFmuerte">
+                                <label for="mujer">Mujer</label>
+                                    <select v-model="carta_id" class="custom-select">
+                                            <option disabled value="">Seleccionar mujer</option>
+                                            <option v-for="carta in arrayCartas" v-bind:key="carta.id" v-text="carta.nombre"></option>
+                                     </select>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input v-model="enlaceReferencia" type="text" class="form-control" id="cartaEnlacereferencia" placeholder="Enlace referencia...">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="img-muestra d-flex align-items-center justify-content-center">
-                                    <img :src="'../resources/img/imglogo.svg'" class="rounded" alt="Imagen previa" title="Imagen previa">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-8">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input v-model="imgDefault" type="text" class="form-control" id="cartaImagenalternativa" placeholder="Enlace imagen alternativa...">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input v-model="zonaGeografica" type="text" class="form-control" id="cartaZonageografica" placeholder="Zona geográfica">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <select v-model="ambito_id" class="custom-select">
-                                            <option disabled value="">Seleccionar ambito</option>
-                                            <option v-for="ambito in arrayAmbitos" v-bind:key="ambito.id" v-text="ambito.ambitoEsp"></option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <select v-model="continente_id" class="custom-select">
-                                            <option disabled value="">Seleccionar continente</option>
-                                            <option v-for="continente in arrayContinentes" v-bind:key="continente.id" v-text="continente.continenteEsp"></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="pregunta">Preguntas</label>
+                            <textarea v-model="pregunta" class="form-control" autocomplete="off"
+                                id="pregunta"></textarea>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="cartaLoreesp">Historia en Español</label>
-                                <textarea v-model="loreEsp" class="form-control" name="cartaLoreesp" id="cartaLoreesp" placeholder="Añade aquí la historia..."></textarea>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="cartaLoreeng">History in English</label>
-                                <textarea v-model="loreEng" class="form-control" name="cartaLoreeng" id="cartaLoreeng" placeholder="Añade aquí la historia..."></textarea>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="cartaLoreeus">Historia Euskarazen</label>
-                                <textarea v-model="loreEus" class="form-control" name="cartaLoreeus" id="cartaLoreeus" placeholder="Añade aquí la historia..."></textarea>
-                            </div>
+                            <label for="respuesta_1">Respuesta Correcta</label>
+                            <textarea v-model="respuesta_1" class="form-control" autocomplete="off"
+                                id="respuesta1"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label for="respuesta_2">Respuesta Erronea 1</label>
+                            <textarea v-model="respuesta_2" class="form-control" autocomplete="off"
+                                id="respuesta1"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label for="respuesta_3">Respuesta Erronea 2</label>
+                            <textarea v-model="respuesta_3" class="form-control" autocomplete="off"
+                                id="respuesta2"></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 text-center">
                                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
                                 <button v-if="update == 0" @click="saveTasks()" class="btn btn-success">Añadir</button>
                                 <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
+                                <button v-if="update != 0" @click="updateTasks()"
+                                    class="btn btn-warning">Actualizar</button>
                                 <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
                                 <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
                             </div>
@@ -128,61 +93,40 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
     export default {
-        data(){
-            return{
-                // Parametros iniciales
-                nombre:"",
-                apellido:"",
-                fechaNacimiento:"",
-                fechaMuerte:"",
-                ambito_id:"",
-                ambitoEsp:"",
-                loreEsp:"",
-                loreEng:"",
-                loreEus:"",
-                zonaGeografica:"",
-                continente_id:"",
-                continenteEsp:"",
-                imgRuta:"",
-                imgDefault:"",
-                enlaceReferencia:"",
-                usuario_id:"",
-                habilitado:"",
-                update:0,
+        data() {
+            return {
+                carta_id: "",
+                pregunta: "",
+                respuesta_1: "",
+                respuesta_2: "",
+                respuesta_3: "",
+                update: 0,
+                busqueda: "",
 
-                busqueda:"",
-                files:[],
+                arrayPreguntas: [],
                 arrayCartas:[],
-                arrayAmbitos:[],
-                arrayContinentes:[],
             }
         },
-        methods:{
-            // Metodo para recoger los datos
-            getTasks(){
+        methods: {
+            getTasks() {
                 let me =this;
-                let url = 'card';
+                let url = 'pregunt';
                 axios.get(url).then(function (response) {
+                    me.arrayPreguntas = response.data;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+                axios.get('card').then(function (response) {
                     me.arrayCartas = response.data;
                 }).catch(function (error) {
                     console.log(error);
                 });
-                axios.get('ambit').then(function (response) {
-                    me.arrayAmbitos = response.data;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-                axios.get('continent').then(function (response) {
-                    me.arrayContinentes = response.data;
-                }).catch(function (error) {
-                    console.log(error);
-                });
             },
-            // Metodo para guardar los daots
             saveTasks(){
                 let me =this;
                 let url = 'card/guardar';
@@ -328,14 +272,16 @@
             }
         },
         computed: {
-            buscarCartas() {
-                return this.arrayCartas.filter((carta) => carta.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(this.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(this.busqueda.toLowerCase())
-                );
+            buscarPregunta() {
+                return this.arrayPreguntas.filter((pregunta) => pregunta.carta_id.toLowerCase().includes(this.busqueda
+                    .toLowerCase()));
+
+
             }
         },
-        // Metodo de inicialización del archivo vue
         mounted() {
-           this.getTasks();
+            this.getTasks();
         }
     }
+
 </script>

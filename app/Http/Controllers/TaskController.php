@@ -8,12 +8,15 @@ use App\Ambito;
 use App\Carta;
 use App\Continente;
 use App\User;
+use App\Pregunta;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
-class TaskController extends Controller
-{
+class TaskController extends Controller{
+
     public function tableUser(Request $request) {
 
         $results = User::orderBy('name')->get();
@@ -194,5 +197,79 @@ class TaskController extends Controller
 
     /* ----------------------------------------------------------------------------------------------- */
 
+    public function getPerfiluser(Request $request) {
+
+        if (Auth::check()) {
+
+            $user = Auth::user();
+            return $user;
+
+        }
+
+    }
+
+    public function updatePerfiluser(Request $request) {
+
+        if (Auth::check()) {
+
+                $userUp = User::findOrFail($request->id);
+                $userUp->password = bcrypt($request->password);
+                $userUp->save();
+
+                return $userUp;
+
+        } else {
+
+            return view('index');
+
+        }
+
+    }
+    
+    /* ----------------------------------------------------------------------------------------------- */
+    public function tablePregunt(Request $request) {
+
+        return Pregunta::orderBy('carta_id')->get();
+
+
+    }
+
+    public function storePregunt(Request $request){
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+        $task->save();
+    }
+    public function showPregunt(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updatePregunt(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyPregunt(Request $request) {
+
+        $task = Pregunta::destroy($request->id);
+        return $task;
+
+    }
 
 }

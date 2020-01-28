@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
-            @elseif (\Request::is('perfil') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelcartas'))
+            @elseif (\Request::is('perfil') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelpreguntas') || \Request::is('panelcartas'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>

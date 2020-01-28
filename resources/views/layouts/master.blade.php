@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+
         <!-- Required meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,21 +24,24 @@
             <link rel="stylesheet" href="../resources/css/style.css">
             <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
         @endif
+
         <!-- Titulo de la web recogido del archivo .env -->
         <title>{{ config('app.name', 'Laravel') }}</title>
+
   </head>
   <body>
+
         <!-- Incluir metodo de notificaciones -->
         @include('sweetalert::alert')
 
-        @if (\Request::is('historys') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelcartas') || \Request::is('history/*'))
+        @if (\Request::is('historys') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelcartas') || \Request::is('panelpreguntas')|| \Request::is('history/*'))
             @include('layouts.nav')
         @endif
 
         <div id="app" class="main">
             @yield('content')
 
-            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
+            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas') || \Request::is('panelpreguntas'))
                 @include('layouts.fab')
             @endif
         </div>
@@ -47,7 +51,9 @@
 
         <!-- + Scripts -->
         <script src="{{asset('js/app.js')}}"></script>
-        <script src="{{asset('../resources/js/main.js')}}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        @if ( \Request::is('/login'))
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @endif
+
   </body>
 </html>

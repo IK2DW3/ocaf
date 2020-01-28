@@ -16,7 +16,8 @@
 }
 </style>
 <script type="text/javascript">
-    var EmailFormato = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var EmailFormato = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,2})+$/;
+    var EmailInvalido = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,9})+$/;
     $(document).ready(function () {
 
         $("#registrarse").click(function () {
@@ -38,6 +39,7 @@
                     $("#mensajePassword2").css("color", "red");
                     $("#mensajePassword2").text('Las contraseñas no coinciden');
                     $("#newpassword").css("border", ".15em " + "red" + " solid");
+                  //  $("#newpassword").addClass('campoError')
                     $("#confirmnewpassword").css("border", ".15em " + "red" + " solid");
 
                     return false;
@@ -50,7 +52,9 @@
                 if (nombre == "") {
                     $("#mensajeNombre").fadeIn();
                     $("#mensajeNombre").text('El campo nombre es requerido');
-                    $("#newusername").css("border", ".15em " + "red" + " solid");
+                   // $("#newusername").css("border", ".15em " + "red" + " solid");
+                
+                    $("#newusername").addClass('campoError');
                     $("#mensajeNombre").css("color", "red");
                     return false;
                 } else {
@@ -62,9 +66,6 @@
                 if (!nombre == "") {
                     $("#mensajeNombre").fadeOut();
                     $("#newusername").css("border", ".15em " + "green" + " solid");
-                }else if (nombre == "") {
-                    $("#mensajeNombre").fadeOut();
-                    $("#newusername").css("border", ".15em " + "red" + " solid");
                 }
             }), $("#newpassword").blur(function () {
                 var password1 = $("#newpassword").val();
@@ -109,14 +110,12 @@
                 }
             }), $("#emailx").blur(function () {
                 var email = $("#emailx").val();
-                if (email == ""||!EmailFormato.test(email)) {
+                if (email == "") {
                     $("#mensajeEmail").fadeIn();
-                    $("#mensajeEmail").text('El campo email es requerido con su correspondiente formato');
+                    $("#mensajeEmail").text('El campo email es requerido');
                     $("#emailx").css("border", ".15em " + "red" + " solid");
                     $("#mensajeEmail").css("color", "red");
                     return false;
-                    
-                   
                 } else {
                     if (!EmailFormato.test(email)) {
                         $("#mensajeEmail").fadeIn();
@@ -124,16 +123,23 @@
                         $("#emailx").css("border", ".15em " + "red" + " solid");
                         $("#mensajeEmail").text('El formato del email no es correcta');
                         return false;
-                    }else{
-                        $("#mensajeEmail").fadeOut();
+                    } else if (EmailInvalido.test(email)) {
+                        $("#mensajeEmail").fadeIn();
+                        $("#mensajeEmail").text('Despues del punto solo de admite 2 o 3 caracteres');
+                        $("#emailx").css("border", ".15em " + "red" + " solid");
+                        return false;
                     }
+                    $("#mensajeEmail").fadeOut();
                 }
             }), $("#emailx").keypress(function () {
                 var email = $("#emailx").val();
                 if (EmailFormato.test(email)) {
                     $("#emailx").css("border", ".15em " + "green" + " solid");
 
-                }else {
+                } else if (EmailInvalido.test(email)) {
+                    $("#emailx").css("border", ".2em " + "red" + " solid");
+
+                } else {
                     $("#mensajeEmail").fadeOut();
                 }
             });

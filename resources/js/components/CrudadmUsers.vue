@@ -65,7 +65,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 text-center">
                                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                <button v-if="update == 0" @click="saveTasks()" class="btn btn-success">Añadir</button>
+                                <button v-if="update == 0" @click="saveTasks" class="btn btn-success">Añadir</button>
                                 <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
                                 <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
                                 <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
@@ -85,11 +85,12 @@
         data(){
             return{
                 name:"",
-                email:"", 
-                tipo:"", 
-                password:"", 
-                update:0, 
+                email:"",
+                tipo:"",
+                password:"",
+                update:0,
                 busqueda:"",
+                valido:true,
 
                 arrayUsuarios:[],
                 tipos: [
@@ -102,9 +103,8 @@
         methods:{
             getTasks(){
                 let me =this;
-                let url = 'user' //Ruta que hemos creado para que nos devuelva todas las tareas
+                let url = 'user'
                 axios.get(url).then(function (response) {
-                    //creamos un array y guardamos el contenido que nos devuelve el response
                     me.arrayUsuarios = response.data;
                 })
                 .catch(function (error) {
@@ -112,26 +112,86 @@
                     console.log(error);
                 });
             },
-            saveTasks(){
+            saveTasks(event){
                 let me =this;
-                let url = 'user/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
-                axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                    'name':this.name,
-                    'email':this.email,
-                    'tipo':this.tipo,
-                    'password':this.password,
-                }).then(function (response) {
-                    me.getTasks();
-                    me.clearFields();
-                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                let url = 'user/guardar';
+                var testEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                // Condiciones
+                if (me.name === "") {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Nombre',
+                        text: 'Campo nombre vacio',
+                    });
+                    me.valido = false;
+                } else if (me.name < 6 || me.name > 12) {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Nombre',
+                        text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres',
+                    });
+                    me.valido = false;
+                } else if (me.email === "" || /^\s+$/.test(me.email)) {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Email',
+                        text: 'Campo email vacio',
+                    });
+                    me.valido = false;
+                } else if (!testEmail.test(me.email)) {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Email',
+                        text: 'No has introducido un email válido',
+                    });
+                    me.valido = false;
+                } else if (me.tipo === "") {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Tipo',
+                        text: 'Debes seleccionar un tipo de usuario',
+                    });
+                    me.valido = false;
+                } else if (me.password === "") {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Contraseña',
+                        text: 'El campo contraseña está vacio',
+                    });
+                    me.valido = false;
+                } else if (me.password.length < 6 || me.password.length > 16) {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Contraseña',
+                        text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres',
+                    });
+                    me.valido = false;
+                }  else {
+                    me.valido = true;
+                }
+
+                if (me.valido) {
+
+                    axios.post(url,{
+                        'name':this.name,
+                        'email':this.email,
+                        'tipo':this.tipo,
+                        'password':this.password,
+                    }).then(function (response) {
+                        me.getTasks();
+                        me.clearFields();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                }
+                // Previene el funcionamiento por defecto
+                event.preventDefault();
 
             },
-            updateTasks(){/*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
-                tarea que queremos modificar*/
+            updateTasks(){
+
                 let me = this;
                 axios.put('user/actualizar',{
                     'id':this.update,
@@ -140,7 +200,7 @@
                     'tipo':this.tipo,
                     'password':this.password,
                 }).then(function (response) {
-                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+                    this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
                     me.getTasks();
                     me.clearFields();
                 })
@@ -148,8 +208,9 @@
                     this.$swal('Error', 'Se ha producido un error', 'warning');
                     console.log(error);
                 });
+
             },
-            loadFieldsUpdate(data){ //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+            loadFieldsUpdate(data){
                 this.update = data.id
                 let me =this;
                 let url = 'user/buscar?id='+this.update;
@@ -164,13 +225,13 @@
                     console.log(error);
                 });
             },
-            deleteTask(data){//Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+            deleteTask(data){
                 let me =this;
                 let task_id = data.id
                 this.$swal({
+                    icon: 'warning',
                     title: '¿Seguro que deseas borrar éste usuario?',
                     text: 'No podras revertir ésta acción',
-                    type: 'warning',
                     showCancelButton: true,
                     confirmButtonText: '¡Eliminar!',
                     cancelButtonText: '¡No, mantenerlo!',
@@ -191,7 +252,7 @@
                     }
                 })
             },
-            clearFields(){/*Limpia los campos e inicializa la variable update a 0*/
+            clearFields(){
                 this.name = "";
                 this.email = "";
                 this.tipo = "";
@@ -202,7 +263,7 @@
         },
         computed: {
             buscarUsuarios() {
-                return this.arrayUsuarios.filter((user) => user.name.toLowerCase().includes(this.busqueda.toLowerCase()) || user.email.toLowerCase().includes(this.busqueda.toLowerCase()) || user.tipo.toLowerCase().includes(this.busqueda.toLowerCase())                                          
+                return this.arrayUsuarios.filter((user) => user.name.toLowerCase().includes(this.busqueda.toLowerCase()) || user.email.toLowerCase().includes(this.busqueda.toLowerCase()) || user.tipo.toLowerCase().includes(this.busqueda.toLowerCase())
                 );
             }
         },
