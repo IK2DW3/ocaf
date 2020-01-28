@@ -2773,6 +2773,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2813,7 +2821,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       return this.arrayPreguntas.filter(function (pregunta) {
-        return pregunta.carta_id.toLowerCase().includes(_this.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(_this.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(_this.busqueda.toLowerCase());
+        return pregunta.carta_id.toLowerCase().includes(_this.busqueda.toLowerCase());
       });
     }
   },
@@ -46949,7 +46957,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.buscarPregunta, function(pregunta) {
+            _vm._l(_vm.arrayPreguntas, function(pregunta) {
               return _c("tr", { key: pregunta.id }, [
                 _c("td", {
                   domProps: { textContent: _vm._s(pregunta.carta_id) }
@@ -47034,8 +47042,34 @@ var render = function() {
           _c("form", [
             _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "mujer" } }, [_vm._v("Mujer")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mujer,
+                      expression: "mujer"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "ambitoEsp", autocomplete: "off" },
+                  domProps: { value: _vm.mujer },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.mujer = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
                 _c("label", { attrs: { for: "ambitoEsp" } }, [
-                  _vm._v("Ambito en Español")
+                  _vm._v("Preguntas")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -47043,19 +47077,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.ambitoEsp,
-                      expression: "ambitoEsp"
+                      value: _vm.preguntas,
+                      expression: "preguntas"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", id: "ambitoEsp", autocomplete: "off" },
-                  domProps: { value: _vm.ambitoEsp },
+                  domProps: { value: _vm.preguntas },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.ambitoEsp = $event.target.value
+                      _vm.preguntas = $event.target.value
                     }
                   }
                 })
@@ -47063,7 +47097,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-3" }, [
                 _c("label", { attrs: { for: "ambitoEng" } }, [
-                  _vm._v("Ambit in English")
+                  _vm._v("Respuesta Correcta")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -47071,27 +47105,61 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.ambitoEng,
-                      expression: "ambitoEng"
+                      value: _vm.respuesta_1,
+                      expression: "respuesta_1"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", id: "ambitoEng", autocomplete: "off" },
-                  domProps: { value: _vm.ambitoEng },
+                  domProps: { value: _vm.respuesta_1 },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.ambitoEng = $event.target.value
+                      _vm.respuesta_1 = $event.target.value
                     }
                   }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-3" }, [
-                _c("label", { attrs: { for: "ambitoEus" } }, [
-                  _vm._v("Eremu Euskeraz")
+                _c(
+                  "label",
+                  {
+                    staticStyle: { color: "white" },
+                    attrs: { for: "ambitoEus" }
+                  },
+                  [_vm._v("Respuesta Erronea 1")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.respuesta_2,
+                      expression: "respuesta_2"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { width: "20%" },
+                  attrs: { type: "text", id: "ambitoEus", autocomplete: "off" },
+                  domProps: { value: _vm.respuesta_2 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.respuesta_2 = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "ambitoEsp" } }, [
+                  _vm._v("Respuesta Erronea 2")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -47099,19 +47167,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.ambitoEus,
-                      expression: "ambitoEus"
+                      value: _vm.respuesta_3,
+                      expression: "respuesta_3"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "ambitoEus", autocomplete: "off" },
-                  domProps: { value: _vm.ambitoEus },
+                  attrs: { type: "text", id: "ambitoEsp", autocomplete: "off" },
+                  domProps: { value: _vm.respuesta_3 },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.ambitoEus = $event.target.value
+                      _vm.respuesta_3 = $event.target.value
                     }
                   }
                 })

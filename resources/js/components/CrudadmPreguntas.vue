@@ -17,17 +17,17 @@
                             <th scope="col">Respuesta Correcta</th>
                             <th scope="col">Respuesta Erronea1</th>
                             <th scope="col">Respuesta Erronea2</th>
-                            
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="pregunta in buscarPregunta" :key="pregunta.id">
+                        <tr v-for="pregunta in arrayPreguntas" :key="pregunta.id">
                             <td v-text="pregunta.carta_id"></td>
                             <td v-text="pregunta.pregunta"></td>
                             <td v-text="pregunta.respuesta_1"></td>
                             <td v-text="pregunta.respuesta_2"></td>
                             <td v-text="pregunta.respuesta_3"></td>
-                            <th scope="col">Acciones</th>
+                            
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
@@ -47,16 +47,24 @@
                     <form>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="ambitoEsp">Ambito en Español</label>
-                                <input v-model="ambitoEsp" type="text" class="form-control" id="ambitoEsp" autocomplete="off">
+                                <label for="mujer">Mujer</label>
+                                <input v-model="mujer" type="text" class="form-control" id="carta_id" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="ambitoEng">Ambit in English</label>
-                                <input v-model="ambitoEng" type="text" class="form-control" id="ambitoEng" autocomplete="off">
+                                <label for="ambitoEsp">Preguntas</label>
+                                <input v-model="preguntas" type="text" class="form-control" id="ambitoEsp" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="ambitoEus">Eremu Euskeraz</label>
-                                <input v-model="ambitoEus" type="text" class="form-control" id="ambitoEus" autocomplete="off">
+                                <label for="ambitoEng">Respuesta Correcta</label>
+                                <input v-model="respuesta_1" type="text" class="form-control" id="ambitoEng" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="color:white" for="ambitoEus">Respuesta Erronea 1</label>
+                                <input style="width:20%" v-model="respuesta_2" type="text" class="form-control" id="ambitoEus" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="ambitoEsp">Respuesta Erronea 2</label>
+                                <input v-model="respuesta_3" type="text" class="form-control" id="ambitoEsp" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-row">
@@ -115,8 +123,10 @@ export default {
     },
     computed: {
         buscarPregunta() {
-            return this.arrayPreguntas.filter((pregunta) => pregunta.carta_id.toLowerCase().includes(this.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(this.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(this.busqueda.toLowerCase())
+            return this.arrayPreguntas.filter((pregunta) => pregunta.carta_id.toLowerCase().includes(this.busqueda.toLowerCase())
             );
+
+            
         }
     },
     mounted() {
