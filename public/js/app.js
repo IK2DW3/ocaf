@@ -2792,6 +2792,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2805,7 +2806,8 @@ __webpack_require__.r(__webpack_exports__);
       update: 0,
       busqueda: "",
       arrayPreguntas: [],
-      arrayCartas: []
+      arrayCartas: [],
+      mujerId: ""
     };
   },
   methods: {
@@ -2842,7 +2844,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Metodo para actualizar los datos
     updateTasks: function updateTasks() {
-      alert("INSERTADO");
       var me = this;
       axios.put('pregunt/actualizar', {
         'id': this.update,
@@ -2857,7 +2858,6 @@ __webpack_require__.r(__webpack_exports__);
         this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
-        alert("ERROR");
       });
     },
     // Metodo para insertar los datos en los campos de texto
@@ -2873,7 +2873,14 @@ __webpack_require__.r(__webpack_exports__);
         me.carta_id = response.data.carta_id;
         url = 'card/buscar?id=' + me.carta_id;
         axios.get(url).then(function (response) {
-          me.carta_id = response.data.apellido;
+          me.carta_id = response.data.id;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+        me.nombre = response.data.nombre;
+        url = 'card/buscar?id=' + me.carta_id;
+        axios.get(url).then(function (response) {
+          me.nombre = response.data.nombre;
         })["catch"](function (error) {
           console.log(error);
         });
@@ -47185,7 +47192,12 @@ var render = function() {
                     _vm._l(_vm.arrayCartas, function(carta) {
                       return _c("option", {
                         key: carta.id,
-                        domProps: { textContent: _vm._s(carta.apellido) }
+                        domProps: {
+                          value: carta.id,
+                          textContent: _vm._s(
+                            carta.nombre + " " + carta.apellido
+                          )
+                        }
                       })
                     })
                   ],
@@ -47194,7 +47206,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "pregunta" } }, [
                 _vm._v("Preguntas")
               ]),
@@ -47222,7 +47234,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "respuesta_1" } }, [
                 _vm._v("Respuesta Correcta")
               ]),
@@ -47250,7 +47262,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "respuesta_2" } }, [
                 _vm._v("Respuesta Erronea 1")
               ]),
@@ -47278,7 +47290,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "respuesta_3" } }, [
                 _vm._v("Respuesta Erronea 2")
               ]),

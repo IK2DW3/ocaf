@@ -51,28 +51,29 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="mujer">Mujer</label>
-                                    <select v-model="carta_id" class="custom-select">
+                                  
+                                  <select v-model="carta_id" class="custom-select">
                                             <option disabled value="">Seleccionar mujer</option>
-                                            <option v-for="carta in arrayCartas" v-bind:key="carta.id" v-text="carta.apellido"></option>
+                                            <option v-for="carta in arrayCartas" v-bind:key="carta.id" v-bind:value="carta.id" v-text="carta.nombre +' '+ carta.apellido" ></option>
                                      </select>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="pregunta">Preguntas</label>
                             <textarea v-model="pregunta" class="form-control" autocomplete="off"
                                 id="pregunta"></textarea>
                         </div>
-                        <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="respuesta_1">Respuesta Correcta</label>
                             <textarea v-model="respuesta_1" class="form-control" autocomplete="off"
                                 id="respuesta_1"></textarea>
                         </div>
-                        <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="respuesta_2">Respuesta Erronea 1</label>
                             <textarea v-model="respuesta_2" class="form-control" autocomplete="off"
                                 id="respuesta_2"></textarea>
                         </div>
-                        <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="respuesta_3">Respuesta Erronea 2</label>
                             <textarea v-model="respuesta_3" class="form-control" autocomplete="off"
                                 id="respuesta_3"></textarea>
@@ -112,6 +113,7 @@
 
                 arrayPreguntas: [],
                 arrayCartas:[],
+                mujerId:"",
             }
         },
         methods: {
@@ -160,14 +162,12 @@
                     'respuesta_3':this.respuesta_3,
                     'carta_id':this.carta_id,
                 }).then(function (response) {
-
                    me.getTasks();
                    me.clearFields();
                    this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
                 })
                 .catch(function (error) {
                     console.log(error);
-                    alert("ERROR");
                 });
             },
             // Metodo para insertar los datos en los campos de texto
@@ -184,7 +184,14 @@
                     me.carta_id = response.data.carta_id;
                     url = 'card/buscar?id=' + me.carta_id;
                     axios.get(url).then(function (response) {
-                        me.carta_id = response.data.apellido;
+                        me.carta_id = response.data.id;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    me.nombre = response.data.nombre;
+                    url = 'card/buscar?id=' + me.carta_id;
+                    axios.get(url).then(function (response) {
+                        me.nombre = response.data.nombre;
                     }).catch(function (error) {
                         console.log(error);
                     });
