@@ -229,24 +229,27 @@ class TaskController extends Controller{
     /* ----------------------------------------------------------------------------------------------- */
     public function tablePregunt(Request $request) {
 
-        return Pregunta::orderBy('carta_id')->get();
+        return Pregunta::with('carta')->get();
 
 
     }
 
     public function storePregunt(Request $request){
 
-        $task = Pregunta::findOrFail($request->id);
-        $task->carta_id = $request->carta_id;
+        $task = new Pregunta(); 
+        
         $task->pregunta = $request->pregunta;
         $task->respuesta_1 = $request->respuesta_1;
         $task->respuesta_2 = $request->respuesta_2;
         $task->respuesta_3 = $request->respuesta_3;
+        $task->carta_id = $request->carta_id;
+        
         $task->save();
     }
     public function showPregunt(Request $request) {
 
         $task = Pregunta::findOrFail($request->id);
+
 
         return $task;
     }
@@ -254,12 +257,13 @@ class TaskController extends Controller{
     public function updatePregunt(Request $request) {
 
         $task = Pregunta::findOrFail($request->id);
-        $task->carta_id = $request->carta_id;
+         
         $task->pregunta = $request->pregunta;
         $task->respuesta_1 = $request->respuesta_1;
         $task->respuesta_2 = $request->respuesta_2;
         $task->respuesta_3 = $request->respuesta_3;
-
+        $task->carta_id = $request->carta_id;
+    
         $task->save();
 
         return $task;

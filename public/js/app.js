@@ -2795,7 +2795,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      nombre: "",
       carta_id: "",
+      id: "",
       pregunta: "",
       respuesta_1: "",
       respuesta_2: "",
@@ -2825,12 +2827,11 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = 'pregunt/guardar';
       axios.post(url, {
-        'carta_id': this.carta_id,
         'pregunta': this.pregunta,
         'respuesta_1': this.respuesta_1,
         'respuesta_2': this.respuesta_2,
-        'ambito_id': this.ambito_id,
-        'respuesta_3': this.respuesta_3
+        'respuesta_3': this.respuesta_3,
+        'carta_id': this.carta_id
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
@@ -2841,30 +2842,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Metodo para actualizar los datos
     updateTasks: function updateTasks() {
+      alert("INSERTADO");
       var me = this;
       axios.put('pregunt/actualizar', {
         'id': this.update,
-        'nombre': this.nombre,
-        'apellido': this.apellido,
-        'fechaNacimiento': this.fechaNacimiento,
-        'fechaMuerte': this.fechaMuerte,
-        'ambito_id': this.ambito_id,
-        'loreEsp': this.loreEsp,
-        'loreEng': this.loreEng,
-        'loreEus': this.loreEus,
-        'zonaGeografica': this.zonaGeografica,
-        'continente_id': this.continente_id,
-        'imgRuta': this.imgRuta,
-        'imgDefault': this.imgDefault,
-        'enlaceReferencia': this.enlaceReferencia,
-        'usuario_id': this.usuario_id,
-        'habilitado': this.habilitado
+        'pregunta': this.pregunta,
+        'respuesta_1': this.respuesta_1,
+        'respuesta_2': this.respuesta_2,
+        'respuesta_3': this.respuesta_3,
+        'carta_id': this.carta_id
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
         this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
+        alert("ERROR");
       });
     },
     // Metodo para insertar los datos en los campos de texto
@@ -2873,33 +2866,17 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = 'pregunt/buscar?id=' + this.update;
       axios.get(url).then(function (response) {
-        me.nombre = response.data.nombre;
-        me.apellido = response.data.apellido;
-        me.fechaNacimiento = response.data.fechaNacimiento;
-        me.fechaMuerte = response.data.fechaMuerte;
-        me.ambito_id = response.data.ambito_id;
-        url = 'ambit/buscar?id=' + me.ambito_id;
+        me.pregunta = response.data.pregunta;
+        me.respuesta_1 = response.data.respuesta_1;
+        me.respuesta_2 = response.data.respuesta_2;
+        me.respuesta_3 = response.data.respuesta_3;
+        me.carta_id = response.data.carta_id;
+        url = 'card/buscar?id=' + me.carta_id;
         axios.get(url).then(function (response) {
-          me.ambito_id = response.data.ambitoEsp;
+          me.carta_id = response.data.apellido;
         })["catch"](function (error) {
           console.log(error);
         });
-        me.loreEsp = response.data.loreEsp;
-        me.loreEng = response.data.loreEng;
-        me.loreEus = response.data.loreEus;
-        me.zonaGeografica = response.data.zonaGeografica;
-        me.continente_id = response.data.continente_id;
-        url = 'continent/buscar?id=' + me.continente_id;
-        axios.get(url).then(function (response) {
-          me.continente_id = response.data.continenteEsp;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-        me.imgRuta = response.data.imgRuta;
-        me.imgDefault = response.data.imgDefault;
-        me.enlaceReferencia = response.data.enlaceReferencia;
-        me.usuario_id = response.data.usuario_id;
-        me.habilitado = response.data.habilitado;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2912,7 +2889,7 @@ __webpack_require__.r(__webpack_exports__);
       var task_id = data.id;
       this.$swal({
         icon: 'warning',
-        title: '¿Seguro que deseas borrar esta carta?',
+        title: '¿Seguro que deseas borrar esta pregunta?',
         text: 'No podras revertir ésta acción',
         showCancelButton: true,
         confirmButtonText: '¡Eliminar!',
@@ -2921,36 +2898,25 @@ __webpack_require__.r(__webpack_exports__);
         showLoaderOnConfirm: true
       }).then(function (result) {
         if (result.value) {
-          _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
+          _this.$swal('Eliminado', 'La pregunta ha sido eliminada correctamente', 'success');
 
-          axios["delete"]('card/borrar/' + task_id).then(function (response) {
+          axios["delete"]('pregunt/borrar/' + task_id).then(function (response) {
             me.getTasks();
           })["catch"](function (error) {
             console.log(error);
           });
         } else {
-          _this.$swal('Cancelado', 'La carta correspondiente sigue intacta', 'info');
+          _this.$swal('Cancelado', 'La pregunta correspondiente sigue intacta', 'info');
         }
       });
     },
     // Metodo para limpiar los campos de texto
     clearFields: function clearFields() {
-      this.nombre = "";
-      this.apellido = "";
-      this.fechaNacimiento = "";
-      this.fechaMuerte = "";
-      this.ambito_id = "";
-      this.loreEsp = "";
-      this.loreEng = "";
-      this.loreEus = "";
-      this.zonaGeografica = "";
-      this.continente_id = "";
-      this.imgRuta = "";
-      this.imgDefault = "";
-      this.enlaceReferencia = "";
-      this.usuario_id = "";
-      this.habilitado = "";
-      this.update = 0;
+      this.carta_id = "";
+      this.pregunta = "";
+      this.respuesta_1 = "";
+      this.respuesta_2 = "";
+      this.respuesta_3 = "";
     }
   },
   computed: {
@@ -2958,7 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.arrayPreguntas.filter(function (pregunta) {
-        return pregunta.carta_id.toLowerCase().includes(_this2.busqueda.toLowerCase());
+        return pregunta.carta.nombre.toLowerCase().includes(_this2.busqueda.toLowerCase()) || pregunta.carta.apellido.toLowerCase().includes(_this2.busqueda.toLowerCase());
       });
     }
   },
@@ -47094,10 +47060,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.arrayPreguntas, function(pregunta) {
+            _vm._l(_vm.buscarPregunta, function(pregunta) {
               return _c("tr", { key: pregunta.id }, [
                 _c("td", {
-                  domProps: { textContent: _vm._s(pregunta.carta_id) }
+                  domProps: {
+                    textContent: _vm._s(
+                      pregunta.carta.nombre + " " + pregunta.carta.apellido
+                    )
+                  }
                 }),
                 _vm._v(" "),
                 _c("td", {
@@ -47140,7 +47110,7 @@ var render = function() {
                           attrs: { type: "button", title: "Editar" },
                           on: {
                             click: function($event) {
-                              return _vm.loadFieldsUpdate(_vm.ambito)
+                              return _vm.loadFieldsUpdate(pregunta)
                             }
                           }
                         },
@@ -47154,7 +47124,7 @@ var render = function() {
                           attrs: { type: "button", title: "Eliminar" },
                           on: {
                             click: function($event) {
-                              return _vm.deleteTask(_vm.ambito)
+                              return _vm.deleteTask(pregunta)
                             }
                           }
                         },
@@ -47215,7 +47185,7 @@ var render = function() {
                     _vm._l(_vm.arrayCartas, function(carta) {
                       return _c("option", {
                         key: carta.id,
-                        domProps: { textContent: _vm._s(carta.nombre) }
+                        domProps: { textContent: _vm._s(carta.apellido) }
                       })
                     })
                   ],
@@ -47405,15 +47375,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Mujer")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Mujer Feminista")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Pregunta")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Correcta")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea1")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea 1")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea2")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Respuesta Erronea 2")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])
