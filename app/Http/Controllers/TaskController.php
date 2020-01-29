@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-Use Alert;
 use App\Task;
 use App\Ambito;
 use App\Carta;
@@ -12,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class TaskController extends Controller
@@ -82,10 +82,16 @@ class TaskController extends Controller
         $task->loreEus = $request->loreEus;
         $task->zonaGeografica = $request->zonaGeografica;
         $task->continente_id = $request->continente_id;
-        $task->imgRuta = $request->imgRuta;
+        //$task->imgRuta = "";//$request->imgRuta;
         $task->imgDefault = $request->imgDefault;
         $task->enlaceReferencia = $request->enlaceReferencia;
-        $task->habilitado = $request->habilitado;
+        if ($request->habilitado == true || $request->habilitado == 1) {
+            $request->habilitado == 1;
+            $task->habilitado = $request->habilitado;
+        } else {
+            $request->habilitado == 0;
+            $task->habilitado = $request->habilitado;
+        }
         $task->save();
 
     }
@@ -100,10 +106,26 @@ class TaskController extends Controller
     public function updateCard(Request $request) {
 
         $task = Carta::findOrFail($request->id);
-        $task->name = $request->name;
-        $task->email = $request->email;
-        $task->tipo = $request->tipo;
-        $task->password = bcrypt($request->password);
+        $task->nombre = $request->nombre;
+        $task->apellido = $request->apellido;
+        $task->fechaNacimiento = $request->fechaNacimiento;
+        $task->fechaMuerte = $request->fechaMuerte;
+        $task->ambito_id = $request->ambito_id;
+        $task->loreEsp = $request->loreEsp;
+        $task->loreEng = $request->loreEng;
+        $task->loreEus = $request->loreEus;
+        $task->zonaGeografica = $request->zonaGeografica;
+        $task->continente_id = $request->continente_id;
+        //$task->imgRuta = $request->imgRuta;
+        $task->imgDefault = $request->imgDefault;
+        $task->enlaceReferencia = $request->enlaceReferencia;
+        if ($request->habilitado == true || $request->habilitado == 1) {
+            $request->habilitado == 1;
+            $task->habilitado = $request->habilitado;
+        } else {
+            $request->habilitado == 0;
+            $task->habilitado = $request->habilitado;
+        }
         $task->save();
 
         return $task;

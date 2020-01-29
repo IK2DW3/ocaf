@@ -2325,10 +2325,11 @@ __webpack_require__.r(__webpack_exports__);
       continenteEsp: "",
       imgRuta: "",
       imgDefault: "",
+      imagenPrevia: '../resources/img/imglogo.svg',
       enlaceReferencia: "",
-      usuario_id: "",
-      habilitado: "",
+      habilitado: false,
       update: 0,
+      valido: true,
       busqueda: "",
       files: [],
       arrayCartas: [],
@@ -2360,10 +2361,65 @@ __webpack_require__.r(__webpack_exports__);
     // Metodo para guardar los daots
     saveTasks: function saveTasks(event) {
       var me = this;
-      me.validarCampos();
+      var url = 'card/guardar';
 
-      if (true) {
-        var url = 'card/guardar';
+      if (me.nombre === "" && me.apellido === "" && me.fechaNacimiento === "" && me.ambito_id === "" && me.continente_id === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campos vacios'
+        });
+        me.campoInvalido('#cartaNombre');
+        me.campoInvalido('#cartaApellido');
+        me.campoInvalido('#cartaFnacimiento');
+        me.campoInvalido('#cartaAmbito');
+        me.campoInvalido('#cartaContinente');
+        me.valido = false;
+      } else if (me.nombre == "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campo nombre vacio'
+        });
+        me.campoInvalido('#cartaNombre');
+        me.valido = false;
+      } else if (me.apellido == "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campo apellido vacio'
+        });
+        me.campoInvalido('#cartaApellido');
+        me.valido = false;
+      } else if (me.fechaNacimiento == "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Campos fecha nacimiento vacio'
+        });
+        me.campoInvalido('#cartaFnacimiento');
+        me.valido = false;
+      } else if (me.ambito_id == "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Debes seleccionar un ambito'
+        });
+        me.campoInvalido('#cartaAmbito');
+        me.valido = false;
+      } else if (me.continente_id == "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Validación',
+          text: 'Debes seleccionar un continente'
+        });
+        me.campoInvalido('#cartaContinente');
+        me.valido = false;
+      } else {
+        me.valido = true;
+      }
+
+      if (me.valido) {
         axios.post(url, {
           'nombre': this.nombre,
           'apellido': this.apellido,
@@ -2375,15 +2431,13 @@ __webpack_require__.r(__webpack_exports__);
           'loreEus': this.loreEus,
           'zonaGeografica': this.zonaGeografica,
           'continente_id': this.continente_id,
-          'imgRuta': this.imgRuta,
+          //'imgRuta':this.imgRuta,
           'imgDefault': this.imgDefault,
           'enlaceReferencia': this.enlaceReferencia,
-          'usuario_id': this.usuario_id,
           'habilitado': this.habilitado
         }).then(function (response) {
           me.getTasks();
           me.clearFields();
-          this.$swal('Guardado', 'Los datos se han guardado correctamente', 'success');
         })["catch"](function (error) {
           console.log(error);
         });
@@ -2407,15 +2461,13 @@ __webpack_require__.r(__webpack_exports__);
         'loreEus': this.loreEus,
         'zonaGeografica': this.zonaGeografica,
         'continente_id': this.continente_id,
-        'imgRuta': this.imgRuta,
+        //'imgRuta':this.imgRuta,
         'imgDefault': this.imgDefault,
         'enlaceReferencia': this.enlaceReferencia,
-        'usuario_id': this.usuario_id,
         'habilitado': this.habilitado
       }).then(function (response) {
         me.getTasks();
         me.clearFields();
-        this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'success');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2431,27 +2483,20 @@ __webpack_require__.r(__webpack_exports__);
         me.fechaNacimiento = response.data.fechaNacimiento;
         me.fechaMuerte = response.data.fechaMuerte;
         me.ambito_id = response.data.ambito_id;
-        url = 'ambit/buscar?id=' + me.ambito_id;
-        axios.get(url).then(function (response) {
-          me.ambito_id = response.data.ambitoEsp;
-        })["catch"](function (error) {
-          console.log(error);
-        });
         me.loreEsp = response.data.loreEsp;
         me.loreEng = response.data.loreEng;
         me.loreEus = response.data.loreEus;
         me.zonaGeografica = response.data.zonaGeografica;
         me.continente_id = response.data.continente_id;
-        url = 'continent/buscar?id=' + me.continente_id;
-        axios.get(url).then(function (response) {
-          me.continente_id = response.data.continenteEsp;
-        })["catch"](function (error) {
-          console.log(error);
-        });
         me.imgRuta = response.data.imgRuta;
         me.imgDefault = response.data.imgDefault;
 
-        if (me.imgRuta != null || me.imgRuta != '') {
+        if (me.imgRuta == null || me.imgRuta == 'null' || me.imgRuta == '') {
+          $('#fileTxt').text('No tiene imagen');
+          $('#imgPrevia').attr('src', me.imagenPrevia).css({
+            'width': '50%'
+          });
+        } else if (me.imgRuta != null || me.imgRuta != 'null' || me.imgRuta != '') {
           $('#fileTxt').text(response.data.imgRuta);
           $('#imgPrevia').attr('src', '../resources/img/cartas/' + response.data.imgRuta).css({
             'width': '50%'
@@ -2462,7 +2507,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         } else {
           $('#fileTxt').text('No tiene imagen');
-          $('#imgPrevia').attr('src', '../resources/img/imglogo.svg').css({
+          $('#imgPrevia').attr('src', me.imagenPrevia).css({
             'width': '50%'
           });
         }
@@ -2476,6 +2521,18 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           $('#habi_desText').val('Deshabilitado');
         }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      var urlAmbito = 'ambit/buscar?id=' + me.ambito_id;
+      axios.get(urlAmbito).then(function (response) {
+        me.ambitoEsp = response.data.ambitoEsp;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      var urlContinente = 'continent/buscar?id=' + me.continente_id;
+      axios.get(url).then(function (response) {
+        me.continenteEsp = response.data.continenteEsp;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2522,40 +2579,40 @@ __webpack_require__.r(__webpack_exports__);
       this.zonaGeografica = "";
       this.continente_id = "";
       $('#fileTxt').text('Seleccionar archivo');
-      $('#imgPrevia').attr('src', '../resources/img/imglogo.svg').css({
-        'width': '50%'
-      });
       this.imgRuta = "";
       this.imgDefault = "";
+      $('#imgPrevia').attr('src', this.imagenPrevia);
+      $('#fileCartas').val(null);
       this.enlaceReferencia = "";
       this.usuario_id = "";
       this.habilitado = 0;
       $('#habi_desText').val('Deshabilitado');
       this.update = 0;
+      this.volverCss();
     },
     checked: function checked() {
       if (this.habilitado) {
         $('#habi_desText').val('Habilitado');
+        this.update = 0;
       } else {
         $('#habi_desText').val('Deshabilitado');
+        this.update = 0;
       }
     },
     campoInvalido: function campoInvalido(campo) {
       $(campo).css('border', '1px solid red');
+      $(campo).attr('placeholder', 'Campo obligatorio');
     },
-    validarCampos: function validarCampos() {
-      var me = this;
-
-      if (me.nombre === "" || me.apellido === "") {
-        this.$swal({
-          icon: 'error',
-          title: 'Validación',
-          text: 'Campos vacios'
-        });
-        me.campoInvalido('#cartaNombres');
-        return false;
+    volverCss: function volverCss() {
+      $('input').css('border', '1px solid #ced4da');
+      $('input').attr('placeholder', '');
+      $('select').css('border', '1px solid #ced4da');
+    },
+    imagPrev: function imagPrev() {
+      if (!$("#fileCartas").val() == "") {
+        this.update = 1;
       } else {
-        return true;
+        this.update = 0;
       }
     }
   },
@@ -46276,7 +46333,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", id: "cartaNombres" },
+                    attrs: { type: "text", id: "cartaNombre" },
                     domProps: { value: _vm.nombre },
                     on: {
                       input: function($event) {
@@ -46304,7 +46361,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", id: "cartaApellidos" },
+                    attrs: { type: "text", id: "cartaApellido" },
                     domProps: { value: _vm.apellido },
                     on: {
                       input: function($event) {
@@ -46414,7 +46471,7 @@ var render = function() {
                       _c("img", {
                         staticClass: "rounded",
                         attrs: {
-                          src: "../resources/img/imglogo.svg",
+                          src: _vm.imagenPrevia,
                           id: "imgPrevia",
                           alt: "Imagen previa",
                           title: "Imagen previa"
@@ -46430,7 +46487,8 @@ var render = function() {
                       _c("div", { staticClass: "custom-file" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
-                          attrs: { type: "file", id: "fileCartas", lang: "es" }
+                          attrs: { type: "file", id: "fileCartas", lang: "es" },
+                          on: { change: _vm.imagPrev }
                         }),
                         _vm._v(" "),
                         _c("label", {
@@ -46512,6 +46570,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "custom-select",
+                          attrs: { id: "cartaAmbito" },
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -46537,6 +46596,7 @@ var render = function() {
                             return _c("option", {
                               key: ambito.id,
                               domProps: {
+                                value: ambito.id,
                                 textContent: _vm._s(ambito.ambitoEsp)
                               }
                             })
@@ -46559,6 +46619,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "custom-select",
+                          attrs: { id: "cartaContinente" },
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -46584,6 +46645,7 @@ var render = function() {
                             return _c("option", {
                               key: continente.id,
                               domProps: {
+                                value: continente.id,
                                 textContent: _vm._s(continente.continenteEsp)
                               }
                             })
@@ -46661,7 +46723,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-12" }, [
                   _c("label", { attrs: { for: "cartaLoreeus" } }, [
-                    _vm._v("Historia Euskarazen")
+                    _vm._v("Historia Euskeraz")
                   ]),
                   _vm._v(" "),
                   _c("textarea", {
@@ -46676,7 +46738,7 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: {
                       id: "cartaLoreeus",
-                      placeholder: "Añade aquí la historia..."
+                      placeholder: "Geitu hemen historia..."
                     },
                     domProps: { value: _vm.loreEus },
                     on: {
@@ -46766,11 +46828,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          on: {
-                            click: function($event) {
-                              return _vm.saveTasks()
-                            }
-                          }
+                          on: { click: _vm.saveTasks }
                         },
                         [_vm._v("Añadir")]
                       )
@@ -61348,7 +61406,7 @@ $(function () {
         $('#imgPrevia').attr('src', e.target.result).css({
           'width': '50%'
         });
-        $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, '')); //$('#imgPrevia').after('<img src="' + e.target.result + '" width="450" height="300"/>');
+        $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, ''));
       };
 
       reader.readAsDataURL(input.files[0]);

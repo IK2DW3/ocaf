@@ -364,7 +364,6 @@ $(function() {
                 $('#formCartas + img').remove();
                 $('#imgPrevia').attr('src', e.target.result).css({'width':'50%'});
                 $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, ''));
-                //$('#imgPrevia').after('<img src="' + e.target.result + '" width="450" height="300"/>');
             };
             reader.readAsDataURL(input.files[0]);
         }

@@ -173,7 +173,7 @@
                     });
                     me.campoInvalido('#userPassword');
                     me.valido = false;
-                }  else {
+                } else {
                     me.valido = true;
                 }
 
