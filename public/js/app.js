@@ -2094,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
         showCloseButton: true,
-        showLoaderOnConfirm: true
+        showLoaderOnConfirm: false
       }).then(function (result) {
         if (result.value) {
           _this.$swal('Eliminado', 'El ambito ha sido eliminado correctamente', 'success');
@@ -2316,22 +2316,21 @@ __webpack_require__.r(__webpack_exports__);
       fechaNacimiento: "",
       fechaMuerte: "",
       ambito_id: "",
-      ambitoEsp: "",
       loreEsp: "",
       loreEng: "",
       loreEus: "",
       zonaGeografica: "",
       continente_id: "",
-      continenteEsp: "",
       imgRuta: "",
       imgDefault: "",
       imagenPrevia: '../resources/img/imglogo.svg',
+      fileCarta: $('input[name=fileCarta]'),
+      file: '',
       enlaceReferencia: "",
       habilitado: false,
       update: 0,
       valido: true,
       busqueda: "",
-      files: [],
       arrayCartas: [],
       arrayAmbitos: [],
       arrayContinentes: []
@@ -2360,8 +2359,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Metodo para guardar los daots
     saveTasks: function saveTasks(event) {
+      // Previene el funcionamiento por defecto
+      event.preventDefault();
       var me = this;
       var url = 'card/guardar';
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
 
       if (me.nombre === "" && me.apellido === "" && me.fechaNacimiento === "" && me.ambito_id === "" && me.continente_id === "") {
         this.$swal({
@@ -2431,7 +2437,7 @@ __webpack_require__.r(__webpack_exports__);
           'loreEus': this.loreEus,
           'zonaGeografica': this.zonaGeografica,
           'continente_id': this.continente_id,
-          //'imgRuta':this.imgRuta,
+          'imgRuta': this.imgRuta,
           'imgDefault': this.imgDefault,
           'enlaceReferencia': this.enlaceReferencia,
           'habilitado': this.habilitado
@@ -2441,10 +2447,11 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (error) {
           console.log(error);
         });
-      } // Previene el funcionamiento por defecto
 
-
-      event.preventDefault();
+        if (!(me.imgRuta == null) || !(me.imgRuta == '')) {
+          this.imgUpload();
+        }
+      }
     },
     // Metodo para actualizar los datos
     updateTasks: function updateTasks() {
@@ -2461,7 +2468,7 @@ __webpack_require__.r(__webpack_exports__);
         'loreEus': this.loreEus,
         'zonaGeografica': this.zonaGeografica,
         'continente_id': this.continente_id,
-        //'imgRuta':this.imgRuta,
+        'imgRuta': this.imgRuta,
         'imgDefault': this.imgDefault,
         'enlaceReferencia': this.enlaceReferencia,
         'habilitado': this.habilitado
@@ -2490,6 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
         me.continente_id = response.data.continente_id;
         me.imgRuta = response.data.imgRuta;
         me.imgDefault = response.data.imgDefault;
+        $('#fileCartas').val('');
 
         if (me.imgRuta == null || me.imgRuta == 'null' || me.imgRuta == '') {
           $('#fileTxt').text('No tiene imagen');
@@ -2524,18 +2532,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
-      var urlAmbito = 'ambit/buscar?id=' + me.ambito_id;
-      axios.get(urlAmbito).then(function (response) {
-        me.ambitoEsp = response.data.ambitoEsp;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      var urlContinente = 'continent/buscar?id=' + me.continente_id;
-      axios.get(url).then(function (response) {
-        me.continenteEsp = response.data.continenteEsp;
-      })["catch"](function (error) {
-        console.log(error);
-      });
     },
     // Metodo para eliminar los datos
     deleteTask: function deleteTask(data) {
@@ -2551,7 +2547,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
         showCloseButton: true,
-        showLoaderOnConfirm: true
+        showLoaderOnConfirm: false
       }).then(function (result) {
         if (result.value) {
           _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
@@ -2582,7 +2578,7 @@ __webpack_require__.r(__webpack_exports__);
       this.imgRuta = "";
       this.imgDefault = "";
       $('#imgPrevia').attr('src', this.imagenPrevia);
-      $('#fileCartas').val(null);
+      $('#fileCartas').val('');
       this.enlaceReferencia = "";
       this.usuario_id = "";
       this.habilitado = 0;
@@ -2608,12 +2604,32 @@ __webpack_require__.r(__webpack_exports__);
       $('input').attr('placeholder', '');
       $('select').css('border', '1px solid #ced4da');
     },
-    imagPrev: function imagPrev() {
-      if (!$("#fileCartas").val() == "") {
-        this.update = 1;
+    imagPrev: function imagPrev(e) {
+      if (!$("#filename").val() == "") {
+        this.imgRuta = $("#filename").val().replace(/C:\\fakepath\\/i, '');
+        this.file = e.target.files[0];
       } else {
         this.update = 0;
       }
+    },
+    imgUpload: function imgUpload() {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('file', this.file);
+      axios.post('card/imagen', formData, config).then(function (response) {
+        console.log(response);
+        this.$swal({
+          icon: 'success',
+          title: 'Imagen',
+          text: 'Imagen subida correctamente'
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
@@ -2805,7 +2821,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
         showCloseButton: true,
-        showLoaderOnConfirm: true
+        showLoaderOnConfirm: false
       }).then(function (result) {
         if (result.value) {
           _this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success');
@@ -3055,7 +3071,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
         showCloseButton: true,
-        showLoaderOnConfirm: true
+        showLoaderOnConfirm: false
       }).then(function (result) {
         if (result.value) {
           _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
@@ -3347,7 +3363,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: '¡Eliminar!',
         cancelButtonText: '¡No, mantenerlo!',
         showCloseButton: true,
-        showLoaderOnConfirm: true
+        showLoaderOnConfirm: false
       }).then(function (result) {
         if (result.value) {
           _this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success');
@@ -3541,7 +3557,7 @@ __webpack_require__.r(__webpack_exports__);
           confirmButtonText: '¡Actualizar!',
           cancelButtonText: '¡Cancelar!',
           showCloseButton: true,
-          showLoaderOnConfirm: true
+          showLoaderOnConfirm: false
         }).then(function (result) {
           if (result.value) {
             _this.$swal('Actualizacion', 'Ha aceptado la actualización de tu contraseña', 'success');
@@ -46487,7 +46503,11 @@ var render = function() {
                       _c("div", { staticClass: "custom-file" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
-                          attrs: { type: "file", id: "fileCartas", lang: "es" },
+                          attrs: {
+                            type: "file",
+                            name: "filename",
+                            id: "filename"
+                          },
                           on: { change: _vm.imagPrev }
                         }),
                         _vm._v(" "),
@@ -46839,11 +46859,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-warning",
-                          on: {
-                            click: function($event) {
-                              return _vm.updateTasks()
-                            }
-                          }
+                          on: { click: _vm.updateTasks }
                         },
                         [_vm._v("Actualizar")]
                       )
@@ -61406,7 +61422,7 @@ $(function () {
         $('#imgPrevia').attr('src', e.target.result).css({
           'width': '50%'
         });
-        $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, ''));
+        $('#fileTxt').text($("#fileCarta").val().replace(/C:\\fakepath\\/i, ''));
       };
 
       reader.readAsDataURL(input.files[0]);
@@ -61416,7 +61432,7 @@ $(function () {
 
 
   if ($('#formCartas') != null) {
-    $("#fileCartas").change(function () {
+    $("#fileCarta").change(function () {
       filePreview(this);
     });
   }

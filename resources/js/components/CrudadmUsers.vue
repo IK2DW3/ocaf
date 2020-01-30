@@ -243,7 +243,7 @@
                     confirmButtonText: '¡Eliminar!',
                     cancelButtonText: '¡No, mantenerlo!',
                     showCloseButton: true,
-                    showLoaderOnConfirm: true
+                    showLoaderOnConfirm: false
                 }).then((result) => {
                     if(result.value) {
                         this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success')

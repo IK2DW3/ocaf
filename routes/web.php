@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('panelpreguntas', 'OcafController@getPanelpreguntas');
 
 });
-Route::get('pruebas', 'FileController@create');
+
 /*
 CRUD Vue.js y Laravel
 */
@@ -59,6 +59,7 @@ Route::get('/user/buscar', 'TaskController@showUser');
 Route::get('/card', 'TaskController@tableCard');
 Route::put('/card/actualizar', 'TaskController@updateCard');
 Route::post('/card/guardar', 'TaskController@storeCard');
+Route::post('/card/imagen', 'TaskController@uploadImage');
 Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
 Route::get('/card/buscar', 'TaskController@showCard');
 Route::get('/card/filtrar', 'TaskController@filterCard');
@@ -84,12 +85,15 @@ Route::post('/quest/guardar', 'TaskController@storeQuest');
 Route::delete('/quest/borrar/{id}', 'TaskController@destroyQuest');
 Route::get('/quest/buscar', 'TaskController@showQuest');
 
-
 // Ruta para el selector de juego y el tablero
 Route::post('/modo', 'TaskController@getGamemode');
 
 /**
  * Subida de archivos
  */
+Route::get('pruebas', 'FileController@create');
 Route::resource('file', 'FileController');
+Route::resource('file', 'TaskController');
+
+
 

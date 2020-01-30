@@ -363,14 +363,14 @@ $(function() {
             reader.onload = function (e) {
                 $('#formCartas + img').remove();
                 $('#imgPrevia').attr('src', e.target.result).css({'width':'50%'});
-                $('#fileTxt').text($("#fileCartas").val().replace(/C:\\fakepath\\/i, ''));
+                $('#fileTxt').text($("#fileCarta").val().replace(/C:\\fakepath\\/i, ''));
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
     /* Pasar valores al formulario cuando está visible */
     if ($('#formCartas') != null) {
-        $("#fileCartas").change(function () {
+        $("#fileCarta").change(function () {
             filePreview(this);
         });
     }

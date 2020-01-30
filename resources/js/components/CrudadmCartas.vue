@@ -74,7 +74,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="fileCartas" lang="es" @change="imagPrev">
+                                            <input type="file" class="custom-file-input" name="filename" id="filename" @change="imagPrev">
                                             <label class="custom-file-label" id="fileTxt" for="customFileLang" v-text="'Seleccionar Archivo'"></label>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
                                 <button v-if="update == 0" @click="saveTasks" class="btn btn-success">Añadir</button>
                                 <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
+                                <button v-if="update != 0" @click="updateTasks" class="btn btn-warning">Actualizar</button>
                                 <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
                                 <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
                             </div>
@@ -152,16 +152,16 @@
                 fechaNacimiento:"",
                 fechaMuerte:"",
                 ambito_id:"",
-                ambitoEsp:"",
                 loreEsp:"",
                 loreEng:"",
                 loreEus:"",
                 zonaGeografica:"",
                 continente_id:"",
-                continenteEsp:"",
                 imgRuta:"",
                 imgDefault:"",
                 imagenPrevia:'../resources/img/imglogo.svg',
+                fileCarta: $('input[name=fileCarta]'),
+                file: '',
                 enlaceReferencia:"",
                 habilitado:false,
                 update:0,
@@ -169,7 +169,6 @@
                 valido:true,
 
                 busqueda:"",
-                files:[],
                 arrayCartas:[],
                 arrayAmbitos:[],
                 arrayContinentes:[],
@@ -198,8 +197,15 @@
             },
             // Metodo para guardar los daots
             saveTasks(event){
+                // Previene el funcionamiento por defecto
+                event.preventDefault();
+
                 let me =this;
                 let url = 'card/guardar';
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+                
                 if (me.nombre === "" && me.apellido === "" && me.fechaNacimiento === "" && me.ambito_id === "" && me.continente_id === "" ) {
                     this.$swal({
                         icon: 'error',
@@ -255,8 +261,9 @@
                 } else {
                     me.valido = true;
                 }
+
                 if(me.valido) {
-                    
+
                     axios.post(url,{
                         'nombre':this.nombre,
                         'apellido':this.apellido,
@@ -268,7 +275,7 @@
                         'loreEus':this.loreEus,
                         'zonaGeografica':this.zonaGeografica,
                         'continente_id':this.continente_id,
-                        //'imgRuta':this.imgRuta,
+                        'imgRuta':this.imgRuta,
                         'imgDefault':this.imgDefault,
                         'enlaceReferencia':this.enlaceReferencia,
                         'habilitado':this.habilitado,
@@ -279,10 +286,13 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+                    
+                    if (!(me.imgRuta == null) || !(me.imgRuta == '')) {
+                        this.imgUpload();
+                    }
 
                 }
-                // Previene el funcionamiento por defecto
-                event.preventDefault();
+                
             },
             // Metodo para actualizar los datos
             updateTasks(){
@@ -299,7 +309,7 @@
                     'loreEus':this.loreEus,
                     'zonaGeografica':this.zonaGeografica,
                     'continente_id':this.continente_id,
-                    //'imgRuta':this.imgRuta,
+                    'imgRuta':this.imgRuta,
                     'imgDefault':this.imgDefault,
                     'enlaceReferencia':this.enlaceReferencia,
                     'habilitado':this.habilitado,
@@ -329,6 +339,7 @@
                     me.continente_id = response.data.continente_id;
                     me.imgRuta = response.data.imgRuta;
                     me.imgDefault = response.data.imgDefault;
+                    $('#fileCartas').val('');
                     if(me.imgRuta == null || me.imgRuta == 'null' || me.imgRuta == '') {
                         $('#fileTxt').text('No tiene imagen');
                         $('#imgPrevia').attr('src',me.imagenPrevia).css({'width':'50%'});
@@ -353,18 +364,6 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-                let urlAmbito = 'ambit/buscar?id=' + me.ambito_id;
-                axios.get(urlAmbito).then(function (response) {
-                   me.ambitoEsp = response.data.ambitoEsp;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-                let urlContinente = 'continent/buscar?id=' + me.continente_id;
-                axios.get(url).then(function (response) {
-                    me.continenteEsp = response.data.continenteEsp;
-                }).catch(function (error) {
-                    console.log(error);
-                });
             },
             // Metodo para eliminar los datos
             deleteTask(data) {
@@ -378,7 +377,7 @@
                     confirmButtonText: '¡Eliminar!',
                     cancelButtonText: '¡No, mantenerlo!',
                     showCloseButton: true,
-                    showLoaderOnConfirm: true
+                    showLoaderOnConfirm: false
                 }).then((result) => {
                     if(result.value) {
                         this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success')
@@ -410,7 +409,7 @@
                 this.imgRuta="";
                 this.imgDefault="";
                 $('#imgPrevia').attr('src',this.imagenPrevia);
-                $('#fileCartas').val(null);
+                $('#fileCartas').val('');
                 this.enlaceReferencia="";
                 this.usuario_id="";
                 this.habilitado=0;
@@ -436,12 +435,35 @@
                 $('input').attr('placeholder','');
                 $('select').css('border','1px solid #ced4da');
             },
-            imagPrev(){
-                if (!$("#fileCartas").val() == "") {
-                    this.update = 1;
+            imagPrev(e){
+                if (!$("#filename").val() == "") {
+                    this.imgRuta = $("#filename").val().replace(/C:\\fakepath\\/i, '');
+                    this.file = e.target.files[0];
                 } else {
                     this.update = 0;
                 }
+            },
+            imgUpload() {
+
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+    
+                let formData = new FormData();
+                formData.append('file', this.file);
+   
+                axios.post('card/imagen', formData, config)
+                .then(function (response) {
+                    console.log(response);
+                    this.$swal({
+                        icon: 'success',
+                        title: 'Imagen',
+                        text: 'Imagen subida correctamente',
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             }
         },
         computed: {

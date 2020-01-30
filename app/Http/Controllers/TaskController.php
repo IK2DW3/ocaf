@@ -7,10 +7,17 @@ use App\Ambito;
 use App\Carta;
 use App\Continente;
 use App\User;
+use Illuminate\Support\Facades\Validator;
+use Redirect;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\FileIlluminate\Http\UploadedFile;
+use Illuminate\Filesystem\Filesystem;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -69,6 +76,16 @@ class TaskController extends Controller
 
     }
 
+    public function uploadImage(Request $request) {
+        
+        /* Metodo para subir archivos */
+        $fileName = $request->file->getClientOriginalName();
+        $request->file->move(public_path('../resources/img/cartas'), $fileName);
+        /* Devolver la informacion */
+        return alert('Imagen subida correctamente');
+
+    }
+
     public function storeCard(Request $request){
 
         $task = new Carta();
@@ -82,7 +99,13 @@ class TaskController extends Controller
         $task->loreEus = $request->loreEus;
         $task->zonaGeografica = $request->zonaGeografica;
         $task->continente_id = $request->continente_id;
-        //$task->imgRuta = "";//$request->imgRuta;
+        
+        if (!($request->imgRuta == "") || !($request->imgRuta == null)) {
+            $task->imgRuta = $request->imgRuta;
+        } else {
+            $task->imgRuta = '';
+        }
+        
         $task->imgDefault = $request->imgDefault;
         $task->enlaceReferencia = $request->enlaceReferencia;
         if ($request->habilitado == true || $request->habilitado == 1) {
@@ -116,7 +139,7 @@ class TaskController extends Controller
         $task->loreEus = $request->loreEus;
         $task->zonaGeografica = $request->zonaGeografica;
         $task->continente_id = $request->continente_id;
-        //$task->imgRuta = $request->imgRuta;
+        $task->imgRuta = $request->imgRuta;
         $task->imgDefault = $request->imgDefault;
         $task->enlaceReferencia = $request->enlaceReferencia;
         if ($request->habilitado == true || $request->habilitado == 1) {
@@ -127,7 +150,6 @@ class TaskController extends Controller
             $task->habilitado = $request->habilitado;
         }
         $task->save();
-
         return $task;
     }
 

@@ -183,7 +183,7 @@
                     confirmButtonText: '¡Eliminar!',
                     cancelButtonText: '¡No, mantenerlo!',
                     showCloseButton: true,
-                    showLoaderOnConfirm: true
+                    showLoaderOnConfirm: false
                 }).then((result) => {
                     if(result.value) {
                         this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success')
