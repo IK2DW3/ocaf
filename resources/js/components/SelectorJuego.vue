@@ -91,6 +91,7 @@
 export default {
     data(){
         return{
+            usuarioLogin:"",
             gamemode:"",
             modoJuego:"",
             update:0,
@@ -105,6 +106,12 @@ export default {
             axios.get('ambit').then(function (response) {
                 me.arrayAmbitos = response.data;
             }).catch(function (error) {
+                console.log(error);
+            });
+            axios.get('profile').then(function (response) {
+                me.usuarioLogin = response.data;
+            })
+            .catch(function (error) {
                 console.log(error);
             });
         },

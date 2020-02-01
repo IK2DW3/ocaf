@@ -44,6 +44,10 @@ class OcafController extends Controller
         return view('gamemode');
     }
 
+    public function getTabnormal() {
+        return view('tableros.tabnormal');
+    }
+
     public function getHistorys() {
         return view('historys');
     }

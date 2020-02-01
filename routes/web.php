@@ -5,12 +5,13 @@ Route::get('/', 'OcafController@getIndex');
 Route::get('index', 'OcafController@getIndex');
 
 Route::GET('logout', 'Auth/LoginController@logout');
+Route::post('register', 'OcafController@postRegister');
 
 Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
 Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
-Route::post('register', 'OcafController@postRegister');
+Route::get('tablero/normal', 'OcafController@getTabnormal')->name('gamemode');
 
 
 Route::group(['middleware' => 'auth'], function () {
