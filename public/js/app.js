@@ -3897,6 +3897,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -48787,14 +48819,14 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-sm-8" }, [
+                        _c("div", { staticClass: "col-sm-8 casillaHead" }, [
                           _c("p", {
                             staticClass: "numCasilla",
                             domProps: { textContent: _vm._s("1") }
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-4" }, [
+                        _c("div", { staticClass: "col-sm-4 casillaHead" }, [
                           _c("button", {
                             staticClass: "pregunta",
                             domProps: { textContent: _vm._s("?") }
@@ -48816,14 +48848,14 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-sm-8" }, [
+                          _c("div", { staticClass: "col-sm-8 casillaHead" }, [
                             _c("p", {
                               staticClass: "numCasilla",
                               domProps: { textContent: _vm._s(n) }
                             })
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-sm-4" }, [
+                          _c("div", { staticClass: "col-sm-4 casillaHead" }, [
                             _c("button", {
                               staticClass: "pregunta",
                               domProps: { textContent: _vm._s("?") }
@@ -48832,48 +48864,58 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-sm-12 w-100" }, [
-                            _c("div", {
-                              staticClass: "area",
-                              attrs: { id: "area" + n }
-                            })
-                          ])
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12 w-100 casillaBody" },
+                            [
+                              _c("div", {
+                                staticClass: "area",
+                                attrs: { id: "area" + n }
+                              })
+                            ]
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-sm-12" }, [
-                            n !== 5 &&
-                            n !== 6 &&
-                            n !== 9 &&
-                            n !== 12 &&
-                            n !== 14 &&
-                            n !== 18 &&
-                            n !== 19 &&
-                            n !== 23 &&
-                            n !== 27 &&
-                            n !== 31 &&
-                            n !== 32 &&
-                            n !== 35 &&
-                            n !== 41 &&
-                            n !== 42 &&
-                            n !== 45 &&
-                            n !== 50 &&
-                            n !== 52 &&
-                            n !== 54 &&
-                            n !== 59 &&
-                            n !== 59
-                              ? _c("p", {
-                                  staticClass: "m-0",
-                                  domProps: {
-                                    textContent: _vm._s("Pepa Perez")
-                                  }
-                                })
-                              : _vm._e()
-                          ])
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12 casillaFooter" },
+                            [
+                              n !== 5 &&
+                              n !== 6 &&
+                              n !== 9 &&
+                              n !== 12 &&
+                              n !== 14 &&
+                              n !== 18 &&
+                              n !== 19 &&
+                              n !== 23 &&
+                              n !== 27 &&
+                              n !== 31 &&
+                              n !== 32 &&
+                              n !== 35 &&
+                              n !== 41 &&
+                              n !== 42 &&
+                              n !== 45 &&
+                              n !== 50 &&
+                              n !== 52 &&
+                              n !== 54 &&
+                              n !== 59 &&
+                              n !== 59
+                                ? _c("p", {
+                                    staticClass: "m-0",
+                                    domProps: {
+                                      textContent: _vm._s("Pepa Perez")
+                                    }
+                                  })
+                                : _vm._e()
+                            ]
+                          )
                         ])
                       ]
                     )
                   }),
+                  _vm._v(" "),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -48883,14 +48925,14 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-sm-8" }, [
+                        _c("div", { staticClass: "col-sm-8 casillaHead" }, [
                           _c("p", {
                             staticClass: "numCasilla",
                             domProps: { textContent: _vm._s("63") }
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-4" }, [
+                        _c("div", { staticClass: "col-sm-4 casillaHead" }, [
                           _c("button", {
                             staticClass: "pregunta",
                             domProps: { textContent: _vm._s("?") }
@@ -48898,7 +48940,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(3)
+                      _vm._m(4)
                     ]
                   )
                 ],
@@ -48950,11 +48992,13 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(4, true)
+                  _vm._m(5, true)
                 ])
               ]
             )
           }),
+          _vm._v(" "),
+          _vm._m(6),
           _vm._v(" "),
           _c(
             "div",
@@ -48982,11 +49026,38 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(5),
+          _vm._m(7),
           _vm._v(" "),
-          _vm._m(6),
-          _vm._v(" "),
-          _vm._m(7)
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col", attrs: { id: "carta" } }, [
+              _c("div", { staticClass: "card text-center card-tablero" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      _c("img", {
+                        attrs: {
+                          src:
+                            "../../resources/img/tablero/tablero/casillas/persona.jpg",
+                          alt: "Foto",
+                          id: "foto"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(11)
+                ]),
+                _vm._v(" "),
+                _vm._m(12)
+              ])
+            ])
+          ])
         ],
         2
       )
@@ -49084,7 +49155,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
+      _c("div", { staticClass: "col-sm-12 casillaBody" }, [
         _c("div", { staticClass: "area", attrs: { id: "area1" } })
       ])
     ])
@@ -49093,8 +49164,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "casillaNormas p-2", attrs: { id: "casillaNormas" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "row align-items-center justify-content-center h-100"
+          },
+          [
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-light",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#mostrarNormas"
+                  }
+                },
+                [_c("strong", [_vm._v("Ver normas")])]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
+      _c("div", { staticClass: "col-sm-12 casillaBody" }, [
         _c("div", { staticClass: "area", attrs: { id: "area63" } })
       ])
     ])
@@ -49112,58 +49216,135 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col", attrs: { id: "texto" } }, [
-        _c("p", { attrs: { id: "normas" } }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Oca = Logo de Desayunos Feministas. \n                    Si se cae en una de estas casillas, se puede\n                    avanzar hasta la siguiente casilla en la que hay un logo y volver atirar\n                    ¡De desayuno a +>desayuno, y si la conozco, gano uno"
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Puente = Manifestación. Casillas 6 y 12: se salta de la 6 a la 12 y se vuelve a tirar. ¡De manifestación en manifestación hasta la liberación!"
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("+>Posada. Casilla 19: se pierde un turno.")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Cárcel de sufragistas. Casilla 56: Si se cae en esta casilla, hay que permanecer dos turnos sin jugar.\n                    Dados. "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Casillas 26 y 53: Si se cae en estas casillas, se suma la marcación de la casilla de los dados (26 o 53)\n                    y se avanza tanto como resulte."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Pozo. Casilla 31: no se puede volver a jugar hasta que no pase otro jugador por esa casilla."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Laberinto. Casilla 42: Si se cae en esta casilla, se está obligado a retroceder a la casilla 30."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>Calavera. Casilla 58: Si se cae en esta casilla, hay que volver a la Casilla 1."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "+>¡Llegaste! Casilla 63. Es necesario sacar los puntos justos para quedarte en esta casilla y terminar!"
-          )
-        ])
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "mostrarNormas",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalCenterTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      { staticClass: "modal-title", attrs: { id: "normas" } },
+                      [_vm._v("Normas")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Oca: ")]),
+                      _vm._v(
+                        " Logo de Desayunos Feministas. \n                                Si se cae en una de estas casillas, se puede\n                                avanzar hasta la siguiente casilla en la que hay un logo y volver atirar\n                                ¡De desayuno a +>desayuno, y si la conozco, gano uno"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [
+                        _vm._v("+>Puente - Manifestación. Casillas 6 y 12:")
+                      ]),
+                      _vm._v(
+                        " se salta de la 6 a la 12 y se vuelve a tirar. ¡De manifestación en manifestación hasta la liberación!"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Posada - Casilla 19:")]),
+                      _vm._v(" se pierde un turno.")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [
+                        _vm._v("+>Cárcel de sufragistas - Casilla 56:")
+                      ]),
+                      _vm._v(
+                        " Si se cae en esta casilla, hay que permanecer dos turnos sin jugar. Dados."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Casillas 26 y 53:")]),
+                      _vm._v(
+                        " Si se cae en estas casillas, se suma la marcación de la casilla de los dados (26 o 53)\n                                y se avanza tanto como resulte."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Pozo - Casilla 31:")]),
+                      _vm._v(
+                        " No se puede volver a jugar hasta que no pase otro jugador por esa casilla."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Laberinto - Casilla 42:")]),
+                      _vm._v(
+                        " Si se cae en esta casilla, se está obligado a retroceder a la casilla 30."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Calavera - Casilla 58:")]),
+                      _vm._v(
+                        " Si se cae en esta casilla, hay que volver a la Casilla 1."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>¡Llegaste! Casilla 63.")]),
+                      _vm._v(
+                        " Es necesario sacar los puntos justos para quedarte en esta casilla y terminar!"
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ])
   },
@@ -49179,29 +49360,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col", attrs: { id: "carta" } }, [
-        _c("button", { attrs: { id: "quitarcarta" } }, [_vm._v("X")]),
-        _c("br"),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-10" }, [
+          _c("p", { attrs: { id: "ambito" } })
+        ]),
         _vm._v(" "),
-        _c("img", {
-          attrs: { src: "recursos/persona.jpg", alt: "Foto", id: "foto" }
-        }),
-        _vm._v(" "),
-        _c("p", { attrs: { id: "name" } }),
-        _vm._v(" "),
-        _c("p", { attrs: { id: "apellidos" } }),
-        _vm._v(" "),
-        _c("p", { attrs: { id: "pregunta" } }),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "respuesta1" } }),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "respuesta2" } }),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "respuesta3" } }),
-        _vm._v(" "),
-        _c("button", { attrs: { id: "aceptar" } }, [_vm._v("Aceptar")])
+        _c("div", { staticClass: "col-sm-2" }, [
+          _c("button", { attrs: { id: "quitarcarta" } }, [_vm._v("X")]),
+          _c("br")
+        ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("p", { attrs: { id: "name" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("p", { attrs: { id: "apellidos" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { attrs: { id: "pregunta" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta1" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta2" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta3" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("button", { attrs: { id: "aceptar" } }, [_vm._v("Aceptar")])
     ])
   }
 ]

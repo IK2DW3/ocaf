@@ -1,5 +1,4 @@
 #body{background-color:#F29199}
-#normas{font-size: 500%; margin-left: 100px; background-color: indigo; padding: 100px; color: white; margin-top: -300px; display: none;}
 .jugador{
     width: 50px;
     height: 50px;
@@ -63,7 +62,7 @@
     "c33 .   c63 c63 c63 c63 c63 .   c49 c14"
     "c34 .   c63 c63 c63 c63 c63 .   c48 c13"
     "c35 .   c63 c63 c63 c63 c63 .   c47 c12"
-    "c36 .   .   .   .   .   .   .   c46 c11"
+    "c36 .   .   .   .   .   .   n   c46 c11"
     "c37 c38 c39 c40 c41 c42 c43 c44 c45 c10"
     "c1  c1  c2  c3  c4  c5  c6  c7  c8  c9 "
     ;
@@ -76,19 +75,65 @@
 }
 
 .casilla {
-    min-width: 6vw;
-    min-height: 10vh; 
-    border:solid black 1px; 
-    background-color: white; 
-    font-size: 1rem; 
-    padding:0;
     background-image: url(../../../resources/img/tablero/tablero/casillas/persona.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    border:solid black 1px;
+    color: #fff;
+    min-width: 6vw;
+    min-height: 10vh !important;
+    font-size: 1rem; 
     font-family: Impact, Charcoal, sans-serif;
-    color: darkmagenta;
     overflow: hidden;
+    position: relative;
+}
+.casilla::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color:#190c1b;
+    opacity: 0.4;
+    z-index: 0;
+}
+.casillaHead {
+    z-index: 1;
+}
+.casillaBody {
+    z-index: 1;
+}
+.casillaFooter {
+    z-index: 1;
+}
+.pregunta{
+    background-color: #fff;
+    border:solid  #000 4px;
+    border-radius: 50%;
+    float: right;
+    font-size: 1rem;
+    text-align: center;
+    width: 30px;
+}
+
+.numCasilla {
+    background-color:  #fff;
+    border:solid #000 4px;
+    border-radius: 50%;
+    color: darkmagenta;
+    cursor: default;
+    font-size: 1rem;
+    margin-top: 2px;
+    text-align: center;
+    width: 30px;
+}
+
+.area{
+    display: flex;
+    height: 40px;
 }
 
 #casillaInicio{grid-area: c1;margin-bottom: 10px; margin-left: 10px; border-bottom-left-radius: 30%; background-image: url(../../../resources/img/tablero/tablero/casillas/inicio.png);}
@@ -162,36 +207,10 @@
     border-bottom-right-radius: 25%;
     border-top-right-radius: 25%;
 }
-
-.pregunta{
-    border-radius: 50%;
-    font-size: 1rem;
-    border:solid black 4px;
-    text-align: center;
-    background-color: grey;
-    float: right;
-    width: 30px;
-}
-
-.numCasilla {
-    margin-top: 2px;
-    border-radius: 50%;
-    font-size: 1rem;
-    border:solid black 4px;
-    width: 30px;
-    text-align: center;
-    background-color: white;
-}
-
-.area{
-    height: 40px;
-    display: flex;
-}
-
-#foto{
-    width:1000px;
-    height: 1000px;
-    border: 10px solid white;
+#casillaNormas{
+    grid-area: n;
+    transform: rotateY(0deg) rotate(45deg); /* needs Y at 0 deg to behave properly*/
+    transition: transform 2s;
 }
 
 .ficha{
@@ -209,7 +228,8 @@
     max-height: 15vh;
     position: fixed;
     text-align: center;
-    width: 200px; 
+    width: 200px;
+    z-index: 1000;
 }
 
 #botontirar{
@@ -245,23 +265,29 @@
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
 }
-
+.card-tablero {
+    height: auto !important;
+    max-height: 700px !important;
+    width: 30% !important;
+}
 #carta{
-    width:2000px;
-    height: 2500px;
-    border: solid 20px white;
-    background-color: gray; 
+    height: 100vh;
     position: fixed;
     left: 0%;
-    top: 10%;
-    font-size: 500%;
+    top: 0%;
+    font-size: 1em;
     padding: 30px;
     display: none;
+    width: 100%;
+    z-index: 500;
 }
-
-#respuesta1{margin: 10px; padding: 10px;background-color: thistle;}
-#respuesta2{margin: 10px; padding: 10px;background-color: thistle;}
-#respuesta3{margin: 10px; padding: 10px;background-color: thistle;}
-
-#quitarcarta{width: 100px; height: 100px;}
-#aceptar{width: 500px; height: 200px; font-size: 150%;}
+#quitarcarta{width: auto; height: auto;}
+#foto{
+    width:30%;
+    height: 150px;
+    border: 5px solid white;
+}
+#respuesta1{margin: 1%; padding: 1%;background-color: #f3e1f3;}
+#respuesta2{margin: 1%; padding: 1%;background-color: #f3e1f3;}
+#respuesta3{margin: 1%; padding: 1%;background-color: #f3e1f3;}
+#aceptar{width: auto; height: auto; font-size: 1em;}

@@ -117,11 +117,11 @@ function responder() {
 }
 
 function sacarcarta() {
-    var deg=360
-    document.getElementById("carta").style.display="block";
-    $("#carta").animate({left: '+=2000px'}, 1000);
+    var deg=360;
+    $("#carta").css({'display':'flex','align-items':'center','justify-content':'center'});
+    $(".card-tablero").animate({left: '-=1px'}, 1000);
     
-    $('#carta').animate(
+    $('.card-tablero').animate(
         { deg: deg },
         {
             duration: 1200,
@@ -131,16 +131,16 @@ function sacarcarta() {
         }
     );
        
-    document.getElementById("name").innerText="pepa";;
-    document.getElementById("apellidos").innerText="Lopez Lopez";;
-    document.getElementById("foto").src="recursos/persona.jpg";;
-    document.getElementById("pregunta").innerText="¿Que tal?";;
-    document.getElementById("respuesta1").innerText="Hola";;
-    document.getElementById("respuesta2").innerText="adios";;
-    document.getElementById("respuesta3").innerText="nastardes";;
-    document.getElementById("respuesta1").onmouseover=document.getElementById("respuesta1").style.cursor= "pointer";;
-    document.getElementById("respuesta2").onmouseover=document.getElementById("respuesta2").style.cursor= "pointer";;
-    document.getElementById("respuesta3").onmouseover=document.getElementById("respuesta3").style.cursor= "pointer";;
+    document.getElementById("name").innerText="Algo";
+    document.getElementById("apellidos").innerText="Lopez Lopez";
+    document.getElementById("foto").src ="../../resources/img/tablero/tablero/casillas/persona.jpg";
+    document.getElementById("pregunta").innerText="¿Que tal?";
+    document.getElementById("respuesta1").innerText="Hola";
+    document.getElementById("respuesta2").innerText="adios";
+    document.getElementById("respuesta3").innerText="nastardes";
+    document.getElementById("respuesta1").onmouseover=document.getElementById("respuesta1").style.cursor= "pointer";
+    document.getElementById("respuesta2").onmouseover=document.getElementById("respuesta2").style.cursor= "pointer";
+    document.getElementById("respuesta3").onmouseover=document.getElementById("respuesta3").style.cursor= "pointer";
     
 }
 
