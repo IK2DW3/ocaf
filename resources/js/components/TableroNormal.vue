@@ -146,7 +146,7 @@
             <!-- El dado -->
             <div class="row align-items-center justify-content-center" id="panelDado">
                 <div class="col-sm-12"><img id="dado1" :src="'../../resources/img/tablero/tablero/dado/1.png'" alt="Dado"></div>
-                <div class="col-sm-12"><button id="botontirar" v-text="'Tirar'"></button></div>
+                <div class="col-sm-12"><button id="botontirar" class="btn btn-light font-weight-bold" v-text="'Tirar'"></button></div>
             </div>
 
             <div class="row">

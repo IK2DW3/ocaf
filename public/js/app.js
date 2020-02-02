@@ -49019,6 +49019,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-12" }, [
                 _c("button", {
+                  staticClass: "btn btn-light font-weight-bold",
                   attrs: { id: "botontirar" },
                   domProps: { textContent: _vm._s("Tirar") }
                 })

@@ -8,6 +8,7 @@ var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respues
     this.respuesta3 = respuesta3
     this.estado = estado
 }
+
 alert("Bienvenid@!\nPorfavor tomate un momento para leer las normas y mas informacion sobre el juego dandole click al boton mas informacion.\nGracias!");
 
 casillas=document.getElementsByClassName("casilla");
