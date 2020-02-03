@@ -1,26 +1,19 @@
 $(function () {
 
     /**
- * Creacion de un object que guarda los datos de las casillas que tiene preguntas 
- * */
-var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respuesta3, estado) {
-    this.pregunta = pregunta
-    this.respuestaCorrecta = respuestaCorrecta
-    this.respuesta2 = respuesta2
-    this.respuesta3 = respuesta3
-    this.estado = estado
-}
-
-    alert("Bienvenid@!\nPorfavor tomate un momento para leer las normas y mas informacion sobre el juego dandole click al boton mas informacion.\nGracias!");
+     * Creacion de un object que guarda los datos de las casillas que tiene preguntas 
+     * */
+    var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respuesta3, estado) {
+        this.pregunta = pregunta
+        this.respuestaCorrecta = respuestaCorrecta
+        this.respuesta2 = respuesta2
+        this.respuesta3 = respuesta3
+        this.estado = estado
+    }
 
     casillas=document.getElementsByClassName("casilla");
 
     /*si paso el raton por enciam de las fichas de jugador se reslataran */
-    document.getElementById("jugador1").onmouseover=ganafoco;
-    document.getElementById("jugador2").onmouseover=ganafoco;
-    document.getElementById("jugador3").onmouseover=ganafoco;
-    document.getElementById("jugador4").onmouseover=ganafoco;
-
     document.getElementById("btntrivia").onclick=cambiarmodo;
 
     var trivia = 0;
@@ -35,7 +28,7 @@ var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respues
 
     var respuestaE = "";
     /*configuramos el zoom de la pagina para que se vea bien */
-    document.body.style.zoom = "80%";
+    //document.body.style.zoom = "80%";
     /*creamos un array con las casillas que tiene preguntas */
     preguntas = document.getElementsByClassName("pregunta");
     /*creamos un array con las casillas que tiene numeros */
@@ -91,27 +84,7 @@ var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respues
         if (trivia==1){trivia=0}
         else if (trivia==0){trivia=1}
     }
-    /*esta funcion cambia la opacidad de los usuarios dependiendo de si el raton esta encima */
-    function ganafoco() {
-
-        if (this.id==="jugador1"||this.parentNode.id==="jugador1"){ 
-            document.getElementById("jugador1").style.opacity = "1";
-            myVar = setTimeout(fade, 4000);
-        }
-        else if (this.id==="jugador2"||this.parentNode.id==="jugador2"){ myVar = setTimeout(fade, 3000);document.getElementById("jugador2").style.opacity = "1";}
-        else if (this.id==="jugador3"||this.parentNode.id==="jugador3"){ myVar = setTimeout(fade, 3000);document.getElementById("jugador3").style.opacity = "1";}
-        else if (this.id==="jugador4"||this.parentNode.id==="jugador4"){ myVar = setTimeout(fade, 3000);document.getElementById("jugador4").style.opacity = "1";}
-    }
     
-    function fade() {
-        /*esto hace que los jugadores se vuelvan a su opacidad inicial */
-        document.getElementById("jugador1").style.opacity = "0.5";
-        document.getElementById("jugador2").style.opacity = "0.5";
-        document.getElementById("jugador3").style.opacity = "0.5";
-        document.getElementById("jugador4").style.opacity = "0.5";
-    }
-
-
     function responder() {
         respuestaE= this.id;
         document.getElementById("respuesta1").style.backgroundColor="thistle";

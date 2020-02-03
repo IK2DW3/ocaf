@@ -55,7 +55,7 @@
 
         <!-- + Scripts -->
         <script src="{{asset('js/app.js')}}"></script>
-        @if ( \Request::is('/login'))
+        @if ( \Request::is('/login') || \Request::is('tablero/*'))
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         @endif
         @if (\Request::is('tablero/*'))

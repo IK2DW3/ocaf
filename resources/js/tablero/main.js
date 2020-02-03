@@ -3,6 +3,7 @@ $(function () {
    * Inicializacion de variables
    */
    var num1 = 0;
+   var elegirTurno = Math.floor(Math.random() * 4) + 1;
    var jugadores = 4;
    var mensaje = $('#mensajes');
    var FJ1 = $('#ficha1');
@@ -15,23 +16,26 @@ $(function () {
     * Metodo donde se recoge al jugador que esté jugando
     */
    var jugador = function (nombre, puntos, posicion, color, turno, ficha, parar) {
-      this.nombre = nombre
-      this.puntos = puntos
-      this.posicion = posicion
-      this.color = color
-      this.turno = turno
-      this.ficha = ficha
-      this.parar = parar
+      this.nombre = nombre;
+      this.puntos = puntos;
+      this.posicion = posicion;
+      this.color = color;
+      this.turno = turno;
+      this.ficha = ficha;
+      this.parar = parar;
    }
 
    /**
     * Declarando jugadores por defecto
     */
-   var jugador1 = new jugador("Player 1", 0, 1, "red", 1, "ficha1", 0);
+   var jugador1 = new jugador("Player 1", 0, 1, "red", 0, "ficha1", 0);
    var jugador2 = new jugador("Player 2", 0, 1, "green", 0, "ficha2", 0);
    var jugador3 = new jugador("Player 3", 0, 1, "yellow", 0, "ficha3", 0);
    var jugador4 = new jugador("Player 4", 0, 1, "blue", 0, "ficha4", 0);
 
+   /**
+    * Declarando funciones y asignar elementos por defecto
+    */
    $('#area1').append($(FJ1));
    $('#area1').append($(FJ2));
    $('#area1').append($(FJ3));
@@ -53,14 +57,6 @@ $(function () {
    $('#ficha2').css({ 'backgroundColor': String(jugador2.color)});
    $('#ficha3').css({ 'backgroundColor': String(jugador3.color)});
    $('#ficha4').css({ 'backgroundColor': String(jugador4.color)});
-
-   function tirar() {
-      num1 = Math.floor(Math.random() * 6) + 1;;
-      var sonidito = new Audio('../../resources/img/tablero/tablero/sonido/dado.mp3');
-      sonidito.play();
-      $('#dado1').attr('src','../../resources/img/tablero/tablero/dado/animacion.gif');
-      setTimeout(dados, 900);
-   }
 
    function nombrarjugadores() {
       jugador1.nombre = $('#NJ1').val();
@@ -89,6 +85,90 @@ $(function () {
       jugadores = 4
    }
 
+   function fijarTurno() {
+      if (elegirTurno == 1) { 
+         jugador1.turno = 1;
+         comprobarTurno();
+      }
+      else if (elegirTurno == 2) { 
+         jugador2.turno = 1;
+         comprobarTurno();
+      }
+      else if (elegirTurno == 3) { 
+         jugador3.turno = 1;
+         comprobarTurno();
+      }
+      else { 
+         jugador4.turno = 1;
+         comprobarTurno();
+      }
+   }
+   fijarTurno();
+
+   function comprobarTurno() {
+      if (jugador1.turno == 1) {
+         $(FJ1).css({ 'border': '4px solid white' });
+         $(FJ2).css({ 'border': '0px solid white' });
+         $(FJ3).css({ 'border': '0px solid white' });
+         $(FJ4).css({ 'border': '0px solid white' });
+         focoTurno();
+      }
+      else if (jugador2.turno == 1) {
+         $(FJ2).css({ 'border': '4px solid white' });
+         $(FJ1).css({ 'border': '0px solid white' });
+         $(FJ3).css({ 'border': '0px solid white' });
+         $(FJ4).css({ 'border': '0px solid white' });
+         focoTurno();
+      }
+      else if (jugador3.turno == 1) {
+         $(FJ3).css({ 'border': '4px solid white' });
+         $(FJ1).css({ 'border': '0px solid white' });
+         $(FJ2).css({ 'border': '0px solid white' });
+         $(FJ4).css({ 'border': '0px solid white' });
+         focoTurno();
+      }
+      else {
+         $(FJ4).css({ 'border': '4px solid white' });
+         $(FJ1).css({ 'border': '0px solid white' });
+         $(FJ2).css({ 'border': '0px solid white' });
+         $(FJ3).css({ 'border': '0px solid white' });
+         focoTurno();
+      }
+   }
+   function focoTurno() {
+      if (jugador1.turno == 1) {
+         $('#jugador1').css({ 'opacity': '1' });
+         $('#jugador2').css({ 'opacity': '0.5' });
+         $('#jugador3').css({ 'opacity': '0.5' });
+         $('#jugador4').css({ 'opacity': '0.5' });
+      }
+      else if (jugador2.turno == 1) {
+         $('#jugador2').css({ 'opacity': '1' });
+         $('#jugador1').css({ 'opacity': '0.5' });
+         $('#jugador3').css({ 'opacity': '0.5' });
+         $('#jugador4').css({ 'opacity': '0.5' });
+      }
+      else if (jugador3.turno == 1) {
+         $('#jugador3').css({ 'opacity': '1' });
+         $('#jugador1').css({ 'opacity': '0.5' });
+         $('#jugador2').css({ 'opacity': '0.5' });
+         $('#jugador4').css({ 'opacity': '0.5' });
+      }
+      else {
+         $('#jugador4').css({ 'opacity': '1' });
+         $('#jugador1').css({ 'opacity': '0.5' });
+         $('#jugador2').css({ 'opacity': '0.5' });
+         $('#jugador3').css({ 'opacity': '0.5' });
+      }
+   }
+
+   function tirar() {
+      num1 = Math.floor(Math.random() * 6) + 1;
+      var sonidito = new Audio('../../resources/img/tablero/tablero/sonido/dado.mp3');
+      sonidito.play();
+      $('#dado1').attr('src','../../resources/img/tablero/tablero/dado/animacion.gif');
+      setTimeout(dados, 900);
+   }
 
    function dados() {
       /*vemos que numero sale y le asignamos una cara del dado */
@@ -124,19 +204,18 @@ $(function () {
 
       /*si el turno es del jugador 1*/
       if (jugador1.turno == 1) {
-
-         $(FJ4).css({ 'border': '0px solid white'});
-         $(FJ1).css({ 'border': '4px solid white' });
+         comprobarTurno();
          if (jugador1.parar > 0) {
-
             jugador1.turno = 0;
             jugador2.turno = 1;
             jugador1.parar = jugador1.parar - 1;
+            comprobarTurno();
 
          } else {
             /*asignamos los turnos */
             jugador1.turno = 0;
             jugador2.turno = 1;
+            comprobarTurno();
 
             /*si es la primera vez que se tira */
             if (jugador1.posicion == 1) { jugador1.posicion = 1 + num1 }
@@ -198,28 +277,26 @@ $(function () {
             else { $('#area63').append($(FJ1)); }
 
          }
-
-
-
+         $('#posicionCasilla1').text('Casilla: ' + jugador1.posicion);
       }
       /*si el turno es del jugador 2*/
       else if (jugador2.turno == 1) {
-         $(FJ1).css({ 'border': '0px solid white' });
-         $(FJ2).css({ 'border': '4px solid white' });
+         comprobarTurno();
          if (jugador2.parar > 0) {
             if (jugadores > 2) {
                jugador2.turno = 0;
                jugador3.turno = 1;
+               comprobarTurno();
             }
-         }
-
-         else {
+         } else {
             if (jugadores == 4) {
                jugador2.turno = 0;
                jugador3.turno = 1;
+               comprobarTurno();
             } else if (jugadores = 2 || jugadores == 1) {
                jugador2.turno = 0;
                jugador1.turno = 1;
+               comprobarTurno();
             }
 
             if (jugador2.posicion == 1) { jugador2.posicion = 1 + num1 }
@@ -276,21 +353,21 @@ $(function () {
             $('#area' + jugador2.posicion).append($(FJ2));
 
          }
+         $('#posicionCasilla2').text('Casilla: ' + jugador2.posicion);
 
       }
       /*si el turno es del jugador 3*/
       else if (jugador3.turno == 1) {
-
-         $(FJ2).css({ 'border': '0px solid white' });
-         $(FJ3).css({ 'border': '4px solid white' });
-
+         comprobarTurno();
          if (jugador2.parar > 0) {
             jugador2.turno = 0;
             jugador3.turno = 1;
+            comprobarTurno();
          } else {
 
             jugador3.turno = 0;
             jugador4.turno = 1;
+            comprobarTurno();
             if (jugador3.posicion == 1) { jugador3.posicion = 1 + num1 }
             else { jugador3.posicion = jugador3.posicion + num1 }
 
@@ -346,20 +423,20 @@ $(function () {
             $('#area' + jugador3.posicion).append($(FJ3));
 
          }
+         $('#posicionCasilla3').text('Casilla: ' + jugador3.posicion);
 
       }
       /*si el turno es del jugador 4*/
       else if (jugador4.turno == 1) {
-         $(FJ3).css({ 'border': '0px solid white' });
-         $(FJ4).css({ 'border': '4px solid white' });
-
-
+         comprobarTurno();
          if (jugador2.parar > 0) {
             jugador2.turno = 0;
             jugador3.turno = 1;
+            comprobarTurno();
          } else {
             jugador4.turno = 0;
             jugador1.turno = 1;
+            comprobarTurno();
             if (jugador4.posicion == 1) { jugador4.posicion = 1 + num1 }
             else { jugador4.posicion = jugador4.posicion + num1 }
 
@@ -414,6 +491,7 @@ $(function () {
             $('#area' + jugador4.posicion).append($(FJ4));
 
          }
+         $('#posicionCasilla4').text('Casilla: ' + jugador4.posicion);
 
       }
 
@@ -423,6 +501,7 @@ $(function () {
    function oc1j1() {
       jugador1.turno = 1;
       jugador2.turno = 0;
+      comprobarTurno();
       jugador1.posicion = jugador1.posicion + 4;
       console.log(jugador1.posicion);
       $('#area' + jugador1.posicion).append($(FJ1));
@@ -431,6 +510,7 @@ $(function () {
    function oc2j1() {
       jugador1.turno = 1;
       jugador2.turno = 0;
+      comprobarTurno();
       jugador1.posicion = jugador1.posicion + 5;
       console.log(jugador1.posicion);
       $('#area' + jugador1.posicion).append($(FJ1));
@@ -441,6 +521,7 @@ $(function () {
    function oc1j2() {
       jugador2.turno = 1;
       jugador3.turno = 0;
+      comprobarTurno();
       jugador2.posicion = jugador2.posicion + 4;
       console.log(jugador2.posicion);
       $('#area' + jugador2.posicion).append($(FJ2));
@@ -449,6 +530,7 @@ $(function () {
    function oc2j2() {
       jugador2.turno = 1;
       jugador3.turno = 0;
+      comprobarTurno();
       jugador2.posicion = jugador2.posicion + 5;
       console.log(jugador2.posicion);
       $('#area' + jugador2.posicion).append($(FJ2));
@@ -458,6 +540,7 @@ $(function () {
    function oc1j3() {
       jugador3.turno = 1;
       jugador4.turno = 0;
+      comprobarTurno();
       jugador3.posicion = jugador3.posicion + 4;
       console.log(jugador3.posicion);
       $('#area' + jugador3.posicion).append($(FJ3));
@@ -466,6 +549,7 @@ $(function () {
    function oc2j3() {
       jugador3.turno = 1;
       jugador4.turno = 0;
+      comprobarTurno();
       jugador3.posicion = jugador3.posicion + 5;
       console.log(jugador3.posicion);
       $('#area' + jugador3.posicion).append($(FJ3));
@@ -475,6 +559,7 @@ $(function () {
    function oc1j4() {
       jugador4.turno = 1;
       jugador1.turno = 0;
+      comprobarTurno();
       jugador4.posicion = jugador4.posicion + 4;
       console.log(jugador4.posicion);
       $('#area' + jugador4.posicion).append($(FJ4));
@@ -483,6 +568,7 @@ $(function () {
    function oc2j4() {
       jugador4.turno = 1;
       jugador1.turno = 0;
+      comprobarTurno();
       jugador4.posicion = jugador4.posicion + 5;
       console.log(jugador4.posicion);
       $('#area' + jugador4.posicion).append($(FJ4));
@@ -492,6 +578,7 @@ $(function () {
    function puentj1() {
       jugador1.turno = 1;
       jugador2.turno = 0;
+      comprobarTurno();
       jugador1.posicion = 12;
       console.log(jugador1.posicion);
       $('#area' + jugador1.posicion).append($(FJ1));
@@ -500,6 +587,7 @@ $(function () {
    function puentj2() {
       jugador2.turno = 1;
       jugador3.turno = 0;
+      comprobarTurno();
       jugador2.posicion = 12;
       console.log(jugador2.posicion);
       $('#area' + jugador2.posicion).append($(FJ2));
@@ -508,6 +596,7 @@ $(function () {
    function puentj3() {
       jugador3.turno = 1;
       jugador4.turno = 0;
+      comprobarTurno();
       jugador3.posicion = 12;
       console.log(jugador3.posicion);
       $('#area' + jugador3.posicion).append($(FJ3));
@@ -516,6 +605,7 @@ $(function () {
    function puentj4() {
       jugador4.turno = 1;
       jugador1.turno = 0;
+      comprobarTurno();
       jugador4.posicion = 12;
       console.log(jugador4.posicion);
       $('#area' + jugador4.posicion).append($(FJ4));
@@ -531,52 +621,53 @@ $(function () {
    function laberintoj1() {
       jugador1.posicion = 30;
       console.log(jugador1.posicion);
-      document.getElementById("area" + jugador1.posicion).append($(FJ1));
+      $('#score').text('Casilla: ' + jugador1.posicion);
+      $('#area' + jugador1.posicion).append($(FJ1));
    }
 
    function laberintoj2() {
       jugador2.posicion = 30;
       console.log(jugador2.posicion);
-      document.getElementById("area" + jugador2.posicion).append($(FJ2));
+      $('#area' + jugador1.posicion).append($(FJ2));
    }
 
    function laberintoj3() {
       jugador3.posicion = 30;
       console.log(jugador3.posicion);
-      document.getElementById("area" + jugador3.posicion).append($(FJ3));
+      $('#area' + jugador3.posicion).append($(FJ3));
    }
 
    function laberintoj4() {
       jugador4.posicion = 30;
       console.log(jugador4.posicion);
-      document.getElementById("area" + jugador4.posicion).append($(FJ4));
+      $('#area' + jugador4.posicion).append($(FJ4));
    }
 
    function muertej1() {
       jugador1.posicion = 1;
       console.log(jugador1.posicion);
-      document.getElementById("area" + jugador1.posicion).append($(FJ1));
+      $('#area' + jugador1.posicion).append($(FJ1));
 
    }
 
    function muertej2() {
       jugador2.posicion = 1;
       console.log(jugador2.posicion);
-      document.getElementById("area" + jugador2.posicion).append($(FJ2));
+      $('#area' + jugador2.posicion).append($(FJ2));
 
    }
 
    function muertej3() {
       jugador3.posicion = 1;
       console.log(jugador3.posicion);
-      document.getElementById("area" + jugador3.posicion).append($(FJ3));
+      $('#area' + jugador3.posicion).append($(FJ3));
 
    }
 
    function muertej4() {
       jugador4.posicion = 1;
       console.log(jugador4.posicion);
-      document.getElementById("area" + jugador4.posicion).append($(FJ4));
+      $('#area' + jugador4.posicion).append($(FJ4));
 
    }
 
@@ -626,22 +717,16 @@ $(function () {
    }
 
    function mostrarmensaje() {
-      if (jugador1.turno == 1) { $(mensaje).css({ 'background-color': 'blue' }); }
-      else if (jugador2.turno == 1) { $(mensaje).css({ 'background-color': 'red' }); }
-      else if (jugador3.turno == 1) { $(mensaje).css({ 'background-color': 'green' }); }
-      else if (jugador4.turno == 1) { $(mensaje).css({ 'background-color': 'yellow' }); }
-      $(mensaje).css({ 'display': 'block' }).fadeIn("slow");
-      animacion();
-   }
-
-   function animacion() {
+      if (jugador1.turno == 1) { $(mensaje).css({ 'background-color': 'blue', 'color': '#000' }); }
+      else if (jugador2.turno == 1) { $(mensaje).css({ 'background-color': 'red', 'color': '#000' }); }
+      else if (jugador3.turno == 1) { $(mensaje).css({ 'background-color': 'green', 'color': '#000' }); }
+      else if (jugador4.turno == 1) { $(mensaje).css({ 'background-color': 'yellow', 'color': '#000' }); }
       $(mensaje).fadeIn("slow");
       setTimeout(volver, 2000);
    }
 
    function volver() {
-      $("#mensajes").fadeOut();
+      $(mensaje).fadeOut();
    }
-
 
 });

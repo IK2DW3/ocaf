@@ -9,9 +9,10 @@
     color: #fff;
     font-size: 1rem;
     font-weight: 900;
-    min-height: 20vh;
+    height: 150px;
+    overflow: hidden;
     position: fixed;
-    min-width: 100px;
+    width: 150px;
     z-index: 500;
 }
 
@@ -66,15 +67,16 @@
     "c33 .   c63 c63 c63 c63 c63 .   c49 c14"
     "c34 .   c63 c63 c63 c63 c63 .   c48 c13"
     "c35 .   c63 c63 c63 c63 c63 .   c47 c12"
-    "c36 .   .   .   .   .   .   n   c46 c11"
+    "c36 .   .   .   n   n   .   .   c46 c11"
     "c37 c38 c39 c40 c41 c42 c43 c44 c45 c10"
     "c1  c1  c2  c3  c4  c5  c6  c7  c8  c9 "
     ;
-    grid-template-columns:165px;
-    grid-template-rows:150px;
-
-    padding: 1em;
+    grid-auto-flow: dense;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
     min-height: 100vh;
+    overflow: hidden;
+    padding: 1em;
     width: 100%;
 }
 
@@ -85,7 +87,7 @@
     background-size: cover;
     border:solid black 1px;
     color: #fff;
-    min-width: 6vw;
+    min-width: 7vw;
     min-height: 10vh !important;
     font-size: 1rem; 
     font-family: Impact, Charcoal, sans-serif;
@@ -136,7 +138,10 @@
 }
 
 .area{
+    align-items: center;
+    display: flex;
     height: 40px;
+    justify-content: center;
 }
 
 #casillaInicio{grid-area: c1;margin-bottom: 10px; margin-left: 10px; border-bottom-left-radius: 30%; background-image: url(../../../resources/img/tablero/tablero/casillas/inicio.png);}
@@ -212,7 +217,6 @@
 }
 #casillaNormas{
     grid-area: n;
-    transform: rotateY(0deg) rotate(45deg); /* needs Y at 0 deg to behave properly*/
     transition: transform 2s;
 }
 
@@ -252,22 +256,19 @@
 #texto{font-size: 1em; margin-left: 100px; background-color: #C4EAF2; padding: 100px;display: none;}
 
 
-#mensajes{  
-    width: 50%;
-    height: 200px;
-    border: solid 20px white;
-    background-color: gray; 
-    position: fixed;
-    left: 35%;
-    top: 80px ;
-    display: none;
-    margin-top: -100px;
-    margin-left: -200px;
+#mensajes{
+    background-color: gray;
+    border: 5px solid white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: white;
+    display: none;
     font-size: 3em;
+    height: 200px;
+    position: fixed;
+    top: 30%;
     text-align: center;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
+    width: 50%;
+    z-index: 2000;
 }
 .card-tablero {
     height: auto !important;

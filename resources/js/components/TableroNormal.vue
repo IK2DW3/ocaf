@@ -82,7 +82,7 @@
                                 <div class="col-sm-8 casillaHead"><p class="numCasilla" v-text="'63'"></p></div>
                                 <div class="col-sm-4 casillaHead"><button class="pregunta" v-text="'?'"></button></div>
                             </div>
-                            <div class="row">
+                            <div class="row align-items-center justify-center-around h-100">
                                 <div class="col-sm-12 casillaBody"><div class="area" id="area63"></div></div>
                             </div>
                         </div>
@@ -101,9 +101,9 @@
             <!-- los jugadores -->
             <div class="contjugador d-flex align-items-center justify-content-center flex-column text-center" :id="'jugador'+n" v-for="n in 4" :key="n">
                 <div class="row">
-                    <div class="col-sm-12"><p :id="'nombre'+n" v-text="'Jugador'+n"></p> </div>
-                    <div class="col-sm-12 py-1"><img class ="jugador" :src="'../../resources/img/tablero/tablero/user.png'" :alt="'Jugador'+n"></div>
-                    <div class="col-sm-12"><p id="score">0</p></div>
+                    <div class="col-sm-12 d-flex align-items-center justify-content-center"><p :id="'nombre'+n" class="m-0" v-text="'Jugador'+n" ></p> </div>
+                    <div class="col-sm-12 d-flex align-items-center justify-content-center py-1"><img class ="jugador" :src="'../../resources/img/tablero/tablero/user.png'" :alt="'Jugador'+n"></div>
+                    <div class="col-sm-12 d-flex align-items-center justify-content-center"><p :id="'posicionCasilla'+n" class="m-0">0</p></div>
                 </div>
             </div>
 
@@ -149,8 +149,8 @@
                 <div class="col-sm-12"><button id="botontirar" class="btn btn-light font-weight-bold" v-text="'Tirar'"></button></div>
             </div>
 
-            <div class="row">
-                <div class="col" id="mensajes"></div>
+            <div class="row align-items-center justify-content-center rounded">
+                <div class="col rounded" id="mensajes"></div>
             </div>
 
             <div class="row">
@@ -189,6 +189,25 @@
 
 <script>
 export default {
+    data(){
+        return{
+            // Parametros iniciales
+            nombre:"",
+            ambito:"",
+        }
+    },
+    methods: {
+        inicio() {
+            this.$swal({
+                icon: 'info',
+                title: 'Partida',
+                text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!',
+            });
+        }
+    },
+    mounted() {
+        this.inicio();
+    }
     
 }
 </script>

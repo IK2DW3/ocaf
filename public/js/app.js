@@ -3929,7 +3929,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      // Parametros iniciales
+      nombre: "",
+      ambito: ""
+    };
+  },
+  methods: {
+    inicio: function inicio() {
+      this.$swal({
+        icon: 'info',
+        title: 'Partida',
+        text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!'
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.inicio();
+  }
+});
 
 /***/ }),
 
@@ -49173,30 +49193,61 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-12" }, [
-                    _c("p", {
-                      attrs: { id: "nombre" + n },
-                      domProps: { textContent: _vm._s("Jugador" + n) }
-                    })
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-sm-12 d-flex align-items-center justify-content-center"
+                    },
+                    [
+                      _c("p", {
+                        staticClass: "m-0",
+                        attrs: { id: "nombre" + n },
+                        domProps: { textContent: _vm._s("Jugador" + n) }
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-12 py-1" }, [
-                    _c("img", {
-                      staticClass: "jugador",
-                      attrs: {
-                        src: "../../resources/img/tablero/tablero/user.png",
-                        alt: "Jugador" + n
-                      }
-                    })
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-sm-12 d-flex align-items-center justify-content-center py-1"
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "jugador",
+                        attrs: {
+                          src: "../../resources/img/tablero/tablero/user.png",
+                          alt: "Jugador" + n
+                        }
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
-                  _vm._m(5, true)
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-sm-12 d-flex align-items-center justify-content-center"
+                    },
+                    [
+                      _c(
+                        "p",
+                        {
+                          staticClass: "m-0",
+                          attrs: { id: "posicionCasilla" + n }
+                        },
+                        [_vm._v("0")]
+                      )
+                    ]
+                  )
                 ])
               ]
             )
           }),
           _vm._v(" "),
-          _vm._m(6),
+          _vm._m(5),
           _vm._v(" "),
           _c(
             "div",
@@ -49225,12 +49276,12 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(7),
+          _vm._m(6),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col", attrs: { id: "carta" } }, [
               _c("div", { staticClass: "card text-center card-tablero" }, [
-                _vm._m(8),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row" }, [
@@ -49245,15 +49296,15 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
-                    _vm._m(10)
+                    _vm._m(9)
                   ]),
                   _vm._v(" "),
-                  _vm._m(11)
+                  _vm._m(10)
                 ]),
                 _vm._v(" "),
-                _vm._m(12)
+                _vm._m(11)
               ])
             ])
           ])
@@ -49399,19 +49450,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12 casillaBody" }, [
-        _c("div", { staticClass: "area", attrs: { id: "area63" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-12" }, [
-      _c("p", { attrs: { id: "score" } }, [_vm._v("0")])
-    ])
+    return _c(
+      "div",
+      { staticClass: "row align-items-center justify-center-around h-100" },
+      [
+        _c("div", { staticClass: "col-sm-12 casillaBody" }, [
+          _c("div", { staticClass: "area", attrs: { id: "area63" } })
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -49554,9 +49601,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col", attrs: { id: "mensajes" } })
-    ])
+    return _c(
+      "div",
+      { staticClass: "row align-items-center justify-content-center rounded" },
+      [_c("div", { staticClass: "col rounded", attrs: { id: "mensajes" } })]
+    )
   },
   function() {
     var _vm = this
