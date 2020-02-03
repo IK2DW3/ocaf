@@ -3933,6 +3933,208 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VueHistorys.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VueHistorys.vue?vue&type=script&lang=js& ***!
@@ -48864,6 +49066,661 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-12 casillaBody" }, [
+                            _c("div", {
+                              staticClass: "area",
+                              attrs: { id: "area" + n }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12 casillaFooter" },
+                            [
+                              n !== 5 &&
+                              n !== 6 &&
+                              n !== 9 &&
+                              n !== 12 &&
+                              n !== 14 &&
+                              n !== 18 &&
+                              n !== 19 &&
+                              n !== 23 &&
+                              n !== 27 &&
+                              n !== 31 &&
+                              n !== 32 &&
+                              n !== 35 &&
+                              n !== 41 &&
+                              n !== 42 &&
+                              n !== 45 &&
+                              n !== 50 &&
+                              n !== 52 &&
+                              n !== 54 &&
+                              n !== 59 &&
+                              n !== 59
+                                ? _c("p", {
+                                    staticClass: "m-0",
+                                    domProps: {
+                                      textContent: _vm._s("Pepa Perez")
+                                    }
+                                  })
+                                : _vm._e()
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "casilla p-2",
+                      attrs: { id: "casillaFinal" }
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-sm-8 casillaHead" }, [
+                          _c("p", {
+                            staticClass: "numCasilla",
+                            domProps: { textContent: _vm._s("63") }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-4 casillaHead" }, [
+                          _c("button", {
+                            staticClass: "pregunta",
+                            domProps: { textContent: _vm._s("?") }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ]
+                  )
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col" },
+              _vm._l(4, function(n) {
+                return _c("div", {
+                  key: n,
+                  staticClass: "ficha",
+                  attrs: { id: "ficha" + n }
+                })
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _vm._l(4, function(n) {
+            return _c(
+              "div",
+              {
+                key: n,
+                staticClass:
+                  "contjugador d-flex align-items-center justify-content-center flex-column text-center",
+                attrs: { id: "jugador" + n }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c("p", {
+                      attrs: { id: "nombre" + n },
+                      domProps: { textContent: _vm._s("Jugador" + n) }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-12 py-1" }, [
+                    _c("img", {
+                      staticClass: "jugador",
+                      attrs: {
+                        src: "../../resources/img/tablero/tablero/user.png",
+                        alt: "Jugador" + n
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5, true)
+                ])
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "row align-items-center justify-content-center",
+              attrs: { id: "panelDado" }
+            },
+            [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("img", {
+                  attrs: {
+                    id: "dado1",
+                    src: "../../resources/img/tablero/tablero/dado/1.png",
+                    alt: "Dado"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("button", {
+                  staticClass: "btn btn-light font-weight-bold",
+                  attrs: { id: "botontirar" },
+                  domProps: { textContent: _vm._s("Tirar") }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col", attrs: { id: "carta" } }, [
+              _c("div", { staticClass: "card text-center card-tablero" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      _c("img", {
+                        attrs: {
+                          src:
+                            "../../resources/img/tablero/tablero/casillas/persona.jpg",
+                          alt: "Foto",
+                          id: "foto"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(11)
+                ]),
+                _vm._v(" "),
+                _vm._m(12)
+              ])
+            ])
+          ])
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { attrs: { id: "loader" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { attrs: { id: "debug" } }, [
+          _vm._v("\n                    jugadores\n                    "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btn2jugadores" } },
+            [_vm._v("2 jugadores")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btn4Jugadores" } },
+            [_vm._v("4 jugadores")]
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v("\n                    ModoDejuego\n                    "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btntrivia" } },
+            [_vm._v("Trivia")]
+          ),
+          _vm._v(" "),
+          _c("button", { staticClass: "btndebug" }, [_vm._v("normal")]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v("\n                    Equipos\n                    "),
+          _c("button", { staticClass: "btndebug" }, [_vm._v("2 equipos")]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v("\n                    otros\n                    "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btnImprimir" } },
+            [_vm._v("Imprimir")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btnmensajer" } },
+            [_vm._v("mostrar")]
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "NJ1", placeholder: "jugador1" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "NJ2", placeholder: "jugador2" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "NJ3", placeholder: "jugador3" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "text", id: "NJ4", placeholder: "jugador4" }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btndebug", attrs: { id: "btnNombres" } },
+            [_vm._v("nombrar")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12 casillaBody" }, [
+        _c("div", {
+          staticClass: "area d-flex align-items-center justify-content-around",
+          attrs: { id: "area1" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "casillaNormas p-2", attrs: { id: "casillaNormas" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "row align-items-center justify-content-center h-100"
+          },
+          [
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-light",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#mostrarNormas"
+                  }
+                },
+                [_c("strong", [_vm._v("Ver normas")])]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12 casillaBody" }, [
+        _c("div", { staticClass: "area", attrs: { id: "area63" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("p", { attrs: { id: "score" } }, [_vm._v("0")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "mostrarNormas",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalCenterTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      { staticClass: "modal-title", attrs: { id: "normas" } },
+                      [_vm._v("Normas")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Oca: ")]),
+                      _vm._v(
+                        " Logo de Desayunos Feministas. \n                                Si se cae en una de estas casillas, se puede\n                                avanzar hasta la siguiente casilla en la que hay un logo y volver atirar\n                                ¡De desayuno a +>desayuno, y si la conozco, gano uno"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [
+                        _vm._v("+>Puente - Manifestación. Casillas 6 y 12:")
+                      ]),
+                      _vm._v(
+                        " se salta de la 6 a la 12 y se vuelve a tirar. ¡De manifestación en manifestación hasta la liberación!"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Posada - Casilla 19:")]),
+                      _vm._v(" se pierde un turno.")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [
+                        _vm._v("+>Cárcel de sufragistas - Casilla 56:")
+                      ]),
+                      _vm._v(
+                        " Si se cae en esta casilla, hay que permanecer dos turnos sin jugar. Dados."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Casillas 26 y 53:")]),
+                      _vm._v(
+                        " Si se cae en estas casillas, se suma la marcación de la casilla de los dados (26 o 53)\n                                y se avanza tanto como resulte."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Pozo - Casilla 31:")]),
+                      _vm._v(
+                        " No se puede volver a jugar hasta que no pase otro jugador por esa casilla."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Laberinto - Casilla 42:")]),
+                      _vm._v(
+                        " Si se cae en esta casilla, se está obligado a retroceder a la casilla 30."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>Calavera - Casilla 58:")]),
+                      _vm._v(
+                        " Si se cae en esta casilla, hay que volver a la Casilla 1."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("+>¡Llegaste! Casilla 63.")]),
+                      _vm._v(
+                        " Es necesario sacar los puntos justos para quedarte en esta casilla y terminar!"
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col", attrs: { id: "mensajes" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-10" }, [
+          _c("p", { attrs: { id: "ambito" } })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-2" }, [
+          _c("button", { attrs: { id: "quitarcarta" } }, [_vm._v("X")]),
+          _c("br")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("p", { attrs: { id: "name" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("p", { attrs: { id: "apellidos" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { attrs: { id: "pregunta" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta1" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta2" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("p", { staticClass: "rounded", attrs: { id: "respuesta3" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("button", { attrs: { id: "aceptar" } }, [_vm._v("Aceptar")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "row align-items-center justify-content-center contenido p-2",
+      attrs: { id: "body" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-sm-10 d-flex align-items-center justify-content-center flex-column"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "row w-100" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c(
+                "div",
+                { attrs: { id: "tablero2" } },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "casilla p-2",
+                      attrs: { id: "casillaInicio" }
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-sm-8 casillaHead" }, [
+                          _c("p", {
+                            staticClass: "numCasilla",
+                            domProps: { textContent: _vm._s("1") }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-4 casillaHead" }, [
+                          _c("button", {
+                            staticClass: "pregunta",
+                            domProps: { textContent: _vm._s("?") }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(61, function(n) {
+                    return _c(
+                      "div",
+                      {
+                        key: n,
+                        staticClass: "casilla px-2 py-2 text-center",
+                        attrs: { id: "casilla" + (n = n + 1) }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-8 casillaHead" }, [
+                            _c("p", {
+                              staticClass: "numCasilla",
+                              domProps: { textContent: _vm._s(n) }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4 casillaHead" }, [
+                            _c("button", {
+                              staticClass: "pregunta",
+                              domProps: { textContent: _vm._s("?") }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
                           _c(
                             "div",
                             { staticClass: "col-sm-12 w-100 casillaBody" },
@@ -49019,7 +49876,6 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-12" }, [
                 _c("button", {
-                  staticClass: "btn btn-light font-weight-bold",
                   attrs: { id: "botontirar" },
                   domProps: { textContent: _vm._s("Tirar") }
                 })
@@ -61890,6 +62746,7 @@ Vue.component('crudadm-preguntas', __webpack_require__(/*! ./components/CrudadmP
 Vue.component('vue-historys', __webpack_require__(/*! ./components/VueHistorys.vue */ "./resources/js/components/VueHistorys.vue")["default"]);
 Vue.component('selector-juego', __webpack_require__(/*! ./components/SelectorJuego.vue */ "./resources/js/components/SelectorJuego.vue")["default"]);
 Vue.component('tablero-normal', __webpack_require__(/*! ./components/TableroNormal.vue */ "./resources/js/components/TableroNormal.vue")["default"]);
+Vue.component('tablero-serpiente', __webpack_require__(/*! ./components/TableroSerpiente.vue */ "./resources/js/components/TableroSerpiente.vue")["default"]);
 /**
  * Creacion de las nuevas instancias vue
  */
@@ -62965,6 +63822,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroNormal_vue_vue_type_template_id_312ff412___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroNormal_vue_vue_type_template_id_312ff412___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TableroSerpiente.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/TableroSerpiente.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableroSerpiente.vue?vue&type=template&id=3af0ced3& */ "./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3&");
+/* harmony import */ var _TableroSerpiente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableroSerpiente.vue?vue&type=script&lang=js& */ "./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TableroSerpiente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TableroSerpiente.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroSerpiente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TableroSerpiente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TableroSerpiente.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroSerpiente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TableroSerpiente.vue?vue&type=template&id=3af0ced3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TableroSerpiente.vue?vue&type=template&id=3af0ced3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableroSerpiente_vue_vue_type_template_id_3af0ced3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

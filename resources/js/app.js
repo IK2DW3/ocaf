@@ -29,6 +29,7 @@ Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 
 Vue.component('selector-juego', require('./components/SelectorJuego.vue').default);
 Vue.component('tablero-normal', require('./components/TableroNormal.vue').default);
+Vue.component('tablero-serpiente', require('./components/TableroSerpiente.vue').default);
 
 /**
  * Creacion de las nuevas instancias vue

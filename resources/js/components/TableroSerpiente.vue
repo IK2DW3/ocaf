@@ -38,7 +38,7 @@
             <div class="row w-100">
                 <div class="col-sm-12">
                     <!-- el tablero esta formado de 63 casillas que dependeiendo de su tipo tendran o no : un boton de pregunta, un numero y un area donde se guardan las fichas de juego si se cae en dicha casilla-->
-                    <div id="tablero">
+                    <div id="tablero2">
 
                         <div class="casilla p-2" id="casillaInicio">
                             <div class="row">
@@ -46,7 +46,7 @@
                                 <div class="col-sm-4 casillaHead"><button class="pregunta" v-text="'?'"></button></div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12 casillaBody"><div class="area d-flex align-items-center justify-content-around" id="area1"></div></div>
+                                <div class="col-sm-12 casillaBody"><div class="area" id="area1"></div></div>
                             </div>
                         </div>
 
@@ -56,7 +56,7 @@
                                 <div class="col-sm-4 casillaHead"><button class="pregunta" v-text="'?'"></button></div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12 casillaBody"><div class="area" :id="'area'+n"></div></div>
+                                <div class="col-sm-12 w-100 casillaBody"><div class="area" :id="'area'+n"></div></div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 casillaFooter">
@@ -146,7 +146,7 @@
             <!-- El dado -->
             <div class="row align-items-center justify-content-center" id="panelDado">
                 <div class="col-sm-12"><img id="dado1" :src="'../../resources/img/tablero/tablero/dado/1.png'" alt="Dado"></div>
-                <div class="col-sm-12"><button id="botontirar" class="btn btn-light font-weight-bold" v-text="'Tirar'"></button></div>
+                <div class="col-sm-12"><button id="botontirar" v-text="'Tirar'"></button></div>
             </div>
 
             <div class="row">

@@ -11,7 +11,8 @@ Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
 Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
-Route::get('tablero/normal', 'OcafController@getTabnormal')->name('gamemode');
+Route::get('tablero/normal', 'OcafController@getTabnormal')->name('tablero.normal');
+Route::get('tablero/serpiente', 'OcafController@getTabserpiente')->name('tablero.serpiente');
 
 
 Route::group(['middleware' => 'auth'], function () {

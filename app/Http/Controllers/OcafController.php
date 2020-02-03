@@ -47,6 +47,10 @@ class OcafController extends Controller
     public function getTabnormal() {
         return view('tableros.tabnormal');
     }
+    
+    public function getTabserpiente() {
+        return view('tableros.tabserpiente');
+    }
 
     public function getHistorys() {
         return view('historys');
