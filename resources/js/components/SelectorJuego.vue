@@ -12,7 +12,7 @@
                 <h1 v-text="'OCA-F'"></h1>
             </div>
             <div class="col-sm-12 text-center">
-                <form class="gamemode" method="POST">
+                <form class="gamemode" @submit="checkForm" action="tablero/normal" method="get">
                     <h2 v-if="gamemode === 'Individual'" v-text="gamemode"></h2>
                     <h2 v-else v-text="'Co-Operativo'"></h2>
 
@@ -21,12 +21,12 @@
                             <div class="col-md-3 mb-3">
                                 <label v-if="gamemode === 'Individual'" for="lbljugador1" v-text="'Jugador 1'"></label>
                                 <label v-else for="lbljugador1" v-text="'Equipo 1'"></label>
-                                <input type="text" class="form-control" id="lbljugador1" :value="''" autocomplete="off" disabled readonly>
+                                <input type="text" class="form-control" id="lbljugador1" :value="''" autocomplete="off" required>
                             </div>
                             <div class="col-md-3 mb-3" v-for="n in 3" :key="n">
                                 <label v-if="gamemode === 'Individual'" :for="'lbljugador'+ (n=n+1)" v-text="'Jugador '+n"></label>
                                 <label v-else :for="'lbljugador'+ (n=n+1)" v-text="'Equipo '+ n"></label>
-                                <input type="text" class="form-control" :id="'lbljugador'+n" :value="''" autocomplete="off" required>
+                                <input type="text" class="form-control" :id="'lbljugador'+n" :value="''" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -117,6 +117,13 @@ export default {
         },
         removeLocalStorage(){
             localStorage.removeItem('modoSeleccionado');
+        },
+        checkForm(e) {
+            console.log('hola');
+            return true;
+
+            e.preventDefault();
+            
         }
     },
     mounted() {

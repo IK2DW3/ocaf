@@ -3722,6 +3722,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeLocalStorage: function removeLocalStorage() {
       localStorage.removeItem('modoSeleccionado');
+    },
+    checkForm: function checkForm(e) {
+      console.log('hola');
+      return true;
+      e.preventDefault();
     }
   },
   mounted: function mounted() {
@@ -48708,145 +48713,151 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-12 text-center" }, [
-        _c("form", { staticClass: "gamemode", attrs: { method: "POST" } }, [
-          _vm.gamemode === "Individual"
-            ? _c("h2", { domProps: { textContent: _vm._s(_vm.gamemode) } })
-            : _c("h2", { domProps: { textContent: _vm._s("Co-Operativo") } }),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "div",
-              { staticClass: "form-row" },
-              [
-                _c("div", { staticClass: "col-md-3 mb-3" }, [
-                  _vm.gamemode === "Individual"
-                    ? _c("label", {
-                        attrs: { for: "lbljugador1" },
-                        domProps: { textContent: _vm._s("Jugador 1") }
-                      })
-                    : _c("label", {
-                        attrs: { for: "lbljugador1" },
-                        domProps: { textContent: _vm._s("Equipo 1") }
-                      }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "lbljugador1",
-                      autocomplete: "off",
-                      disabled: "",
-                      readonly: ""
-                    },
-                    domProps: { value: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm._l(3, function(n) {
-                  return _c("div", { key: n, staticClass: "col-md-3 mb-3" }, [
+        _c(
+          "form",
+          {
+            staticClass: "gamemode",
+            attrs: { action: "tablero/normal", method: "get" },
+            on: { submit: _vm.checkForm }
+          },
+          [
+            _vm.gamemode === "Individual"
+              ? _c("h2", { domProps: { textContent: _vm._s(_vm.gamemode) } })
+              : _c("h2", { domProps: { textContent: _vm._s("Co-Operativo") } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "div",
+                { staticClass: "form-row" },
+                [
+                  _c("div", { staticClass: "col-md-3 mb-3" }, [
                     _vm.gamemode === "Individual"
                       ? _c("label", {
-                          attrs: { for: "lbljugador" + (n = n + 1) },
-                          domProps: { textContent: _vm._s("Jugador " + n) }
+                          attrs: { for: "lbljugador1" },
+                          domProps: { textContent: _vm._s("Jugador 1") }
                         })
                       : _c("label", {
-                          attrs: { for: "lbljugador" + (n = n + 1) },
-                          domProps: { textContent: _vm._s("Equipo " + n) }
+                          attrs: { for: "lbljugador1" },
+                          domProps: { textContent: _vm._s("Equipo 1") }
                         }),
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        id: "lbljugador" + n,
+                        id: "lbljugador1",
                         autocomplete: "off",
                         required: ""
                       },
                       domProps: { value: "" }
                     })
-                  ])
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.modoJuego,
-                    expression: "modoJuego"
-                  }
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(3, function(n) {
+                    return _c("div", { key: n, staticClass: "col-md-3 mb-3" }, [
+                      _vm.gamemode === "Individual"
+                        ? _c("label", {
+                            attrs: { for: "lbljugador" + (n = n + 1) },
+                            domProps: { textContent: _vm._s("Jugador " + n) }
+                          })
+                        : _c("label", {
+                            attrs: { for: "lbljugador" + (n = n + 1) },
+                            domProps: { textContent: _vm._s("Equipo " + n) }
+                          }),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "lbljugador" + n,
+                          autocomplete: "off"
+                        },
+                        domProps: { value: "" }
+                      })
+                    ])
+                  })
                 ],
-                staticClass: "custom-select",
-                attrs: { id: "modoJuego" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.modoJuego = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c(
-                  "option",
-                  { attrs: { disabled: "", selected: "", value: "" } },
-                  [_vm._v("Abrir para seleccionar modo de juego")]
-                ),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Normal")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("Categoría específica")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _vm.modoJuego == 2
-            ? _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "select",
-                  { staticClass: "custom-select" },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { disabled: "", selected: "", value: "" } },
-                      [_vm._v("Seleccionar categoría")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.arrayAmbitos, function(ambito) {
-                      return _c("option", {
-                        key: ambito.id,
-                        domProps: { textContent: _vm._s(ambito.ambitoEsp) }
-                      })
-                    })
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.modoJuego,
+                      expression: "modoJuego"
+                    }
                   ],
-                  2
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2)
-        ])
+                  staticClass: "custom-select",
+                  attrs: { id: "modoJuego" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.modoJuego = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { disabled: "", selected: "", value: "" } },
+                    [_vm._v("Abrir para seleccionar modo de juego")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Normal")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("Categoría específica")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.modoJuego == 2
+              ? _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    { staticClass: "custom-select" },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", selected: "", value: "" } },
+                        [_vm._v("Seleccionar categoría")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.arrayAmbitos, function(ambito) {
+                        return _c("option", {
+                          key: ambito.id,
+                          domProps: { textContent: _vm._s(ambito.ambitoEsp) }
+                        })
+                      })
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-12 text-center" }, [
