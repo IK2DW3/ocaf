@@ -3686,22 +3686,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      usuarioLogin: "",
       gamemode: "",
       modoJuego: "",
-      update: 0,
+      categoria: "",
+      tablero: "",
+      valido: true,
+      lbljugador: [],
       arrayAmbitos: []
     };
   },
@@ -3724,9 +3717,87 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.removeItem('modoSeleccionado');
     },
     checkForm: function checkForm(e) {
-      console.log('hola');
-      return true;
+      var me = this;
+
+      if (me.lbljugador.length <= 0) {
+        this.$swal({
+          icon: 'error',
+          title: 'Campos vacios',
+          text: 'Deben existir al menos 2 jugadores'
+        });
+        this.valido = false;
+      } else if (me.lbljugador[1].length > 0 && me.lbljugador.length <= 2) {
+        this.$swal({
+          icon: 'error',
+          title: 'Campos vacios',
+          text: 'Deben existir al menos 2 jugadores'
+        });
+        this.valido = false;
+      } else if (me.lbljugador[1].length > 0 && me.lbljugador[2] === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Campos vacios',
+          text: 'Deben haber al menos 2 jugadores'
+        });
+        this.valido = false;
+      } else if (me.lbljugador[1] === "" && me.lbljugador[2] === "") {
+        this.$swal({
+          icon: 'error',
+          title: 'Campos vacios',
+          text: 'Deben haber al menos 2 jugadores'
+        });
+        this.valido = false;
+      } else if (me.modoJuego === "" || me.modoJuego === null) {
+        this.$swal({
+          icon: 'error',
+          title: 'Modo de juego',
+          text: 'Selecciona un modo de juego'
+        });
+        this.valido = false;
+      } else if (me.tablero === "" || me.tablero === null) {
+        this.$swal({
+          icon: 'error',
+          title: 'Tablero',
+          text: 'Selecciona un tablero'
+        });
+        this.valido = false;
+      } else {
+        me.datosSelectorModo();
+
+        if (me.tablero === "normal") {
+          window.location.href = 'tablero/normal';
+        } else if (me.tablero === "nuevo") {
+          window.location.href = 'tablero/serpiente';
+        }
+      }
+
       e.preventDefault();
+    },
+    datosSelectorModo: function datosSelectorModo() {
+      var jugador1 = this.lbljugador[1];
+      var jugador2 = this.lbljugador[2];
+      var jugador3 = this.lbljugador[3];
+      var jugador4 = this.lbljugador[4];
+      var modo = this.modoJuego;
+      var categoria = this.categoria;
+      var tablero = this.tablero;
+      var jugadores = {
+        'modo': modo,
+        'categoria': categoria,
+        'tablero': tablero,
+        'jugador1': jugador1,
+        'jugador2': jugador2,
+        'jugador3': jugador3,
+        'jugador4': jugador4
+      };
+
+      if (jugador1 !== "" && jugador2 !== "") {
+        localStorage.setItem("partida", JSON.stringify(jugadores));
+      } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "") {
+        localStorage.setItem("partida", JSON.stringify(jugadores));
+      } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "" && jugador4 !== "") {
+        localStorage.setItem("partida", JSON.stringify(jugadores));
+      }
     }
   },
   mounted: function mounted() {
@@ -3939,11 +4010,22 @@ __webpack_require__.r(__webpack_exports__);
     return {
       // Parametros iniciales
       nombre: "",
-      ambito: ""
+      ambito: "",
+      partida: [],
+      arrayCasillas: []
     };
   },
   methods: {
     inicio: function inicio() {
+      var me = this;
+      var url = '../card';
+      axios.get(url).then(function (response) {
+        me.arrayCasillas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      me.partida = localStorage.getItem("partida");
+      me.partida = JSON.parse(me.partida);
       this.$swal({
         icon: 'info',
         title: 'Partida',
@@ -48717,7 +48799,7 @@ var render = function() {
           "form",
           {
             staticClass: "gamemode",
-            attrs: { action: "tablero/normal", method: "get" },
+            attrs: { id: "formGamemode" },
             on: { submit: _vm.checkForm }
           },
           [
@@ -48729,55 +48811,47 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "form-row" },
-                [
-                  _c("div", { staticClass: "col-md-3 mb-3" }, [
+                _vm._l(4, function(n) {
+                  return _c("div", { key: n, staticClass: "col-md-3 mb-3" }, [
                     _vm.gamemode === "Individual"
                       ? _c("label", {
-                          attrs: { for: "lbljugador1" },
-                          domProps: { textContent: _vm._s("Jugador 1") }
+                          attrs: { for: "lbljugador" + n },
+                          domProps: { textContent: _vm._s("Jugador " + n) }
                         })
                       : _c("label", {
-                          attrs: { for: "lbljugador1" },
-                          domProps: { textContent: _vm._s("Equipo 1") }
+                          attrs: { for: "lbljugador" + n },
+                          domProps: { textContent: _vm._s("Equipo " + n) }
                         }),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.lbljugador[n],
+                          expression: "lbljugador[n]"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        id: "lbljugador1",
-                        autocomplete: "off",
-                        required: ""
+                        name: "lbljugador" + n,
+                        id: "lbljugador" + n,
+                        autocomplete: "off"
                       },
-                      domProps: { value: "" }
+                      domProps: { value: _vm.lbljugador[n] },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.lbljugador, n, $event.target.value)
+                        }
+                      }
                     })
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(3, function(n) {
-                    return _c("div", { key: n, staticClass: "col-md-3 mb-3" }, [
-                      _vm.gamemode === "Individual"
-                        ? _c("label", {
-                            attrs: { for: "lbljugador" + (n = n + 1) },
-                            domProps: { textContent: _vm._s("Jugador " + n) }
-                          })
-                        : _c("label", {
-                            attrs: { for: "lbljugador" + (n = n + 1) },
-                            domProps: { textContent: _vm._s("Equipo " + n) }
-                          }),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "lbljugador" + n,
-                          autocomplete: "off"
-                        },
-                        domProps: { value: "" }
-                      })
-                    ])
-                  })
-                ],
-                2
+                  ])
+                }),
+                0
               )
             ]),
             _vm._v(" "),
@@ -48818,20 +48892,47 @@ var render = function() {
                     [_vm._v("Abrir para seleccionar modo de juego")]
                   ),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Normal")]),
+                  _c("option", { attrs: { value: "normal" } }, [
+                    _vm._v("Normal")
+                  ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [
+                  _c("option", { attrs: { value: "ambitos" } }, [
                     _vm._v("Categoría específica")
                   ])
                 ]
               )
             ]),
             _vm._v(" "),
-            _vm.modoJuego == 2
+            _vm.modoJuego == "ambitos"
               ? _c("div", { staticClass: "form-group" }, [
                   _c(
                     "select",
-                    { staticClass: "custom-select" },
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.categoria,
+                          expression: "categoria"
+                        }
+                      ],
+                      staticClass: "custom-select",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.categoria = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
                     [
                       _c(
                         "option",
@@ -48851,11 +48952,140 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "form-row d-flex justify-content-center gamemode-typetablero"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "input-group col-md-3 mb-3 d-flex justify-content-center flex-wrap"
+                    },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "radio-label-gamemode flex-fill w-100",
+                          attrs: { for: "tableroDefault" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Normal\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group-prepend select-tablero" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "input-group-text input-tableroDefault justify-content-center"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.tablero,
+                                    expression: "tablero"
+                                  }
+                                ],
+                                staticClass: "radio-gamemode",
+                                attrs: {
+                                  type: "radio",
+                                  id: "tableroDefault",
+                                  name: "tab",
+                                  value: "normal"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.tablero, "normal")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.tablero = "normal"
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "input-group col-md-3 mb-3 d-flex justify-content-center flex-wrap"
+                    },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "radio-label-gamemode flex-fill w-100",
+                          attrs: { for: "tableroNuevo" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Nuevo\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group-prepend" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "input-group-text input-tableroNuevo justify-content-center"
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.tablero,
+                                  expression: "tablero"
+                                }
+                              ],
+                              staticClass: "radio-gamemode",
+                              attrs: {
+                                type: "radio",
+                                id: "tableroNuevo",
+                                name: "tab",
+                                value: "nuevo"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.tablero, "nuevo")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.tablero = "nuevo"
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]),
             _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2)
+            _vm._m(0)
           ]
         )
       ]),
@@ -48875,116 +49105,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "form-row d-flex justify-content-center gamemode-typetablero"
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass:
-                "input-group col-md-3 mb-3 d-flex justify-content-center flex-wrap"
-            },
-            [
-              _c(
-                "label",
-                {
-                  staticClass: "radio-label-gamemode flex-fill w-100",
-                  attrs: { for: "tableroDefault" }
-                },
-                [
-                  _vm._v(
-                    "\n                                Normal\n                            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-prepend select-tablero" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "input-group-text input-tableroDefault justify-content-center"
-                  },
-                  [
-                    _c("input", {
-                      staticClass: "radio-gamemode",
-                      attrs: {
-                        type: "radio",
-                        id: "tableroDefault",
-                        name: "tablero"
-                      }
-                    })
-                  ]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "input-group col-md-3 mb-3 d-flex justify-content-center flex-wrap"
-            },
-            [
-              _c(
-                "label",
-                {
-                  staticClass: "radio-label-gamemode flex-fill w-100",
-                  attrs: { for: "tableroNuevo" }
-                },
-                [
-                  _vm._v(
-                    "\n                                Nuevo\n                            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "input-group-text input-tableroNuevo justify-content-center"
-                  },
-                  [
-                    _c("input", {
-                      staticClass: "radio-gamemode",
-                      attrs: {
-                        type: "radio",
-                        id: "tableroNuevo",
-                        name: "tablero"
-                      }
-                    })
-                  ]
-                )
-              ])
-            ]
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "", placeholder: "", readonly: "" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -49128,7 +49248,7 @@ var render = function() {
                               n !== 50 &&
                               n !== 52 &&
                               n !== 54 &&
-                              n !== 59 &&
+                              n !== 58 &&
                               n !== 59
                                 ? _c("p", {
                                     staticClass: "m-0",
@@ -49817,7 +49937,7 @@ var render = function() {
                               n !== 52 &&
                               n !== 54 &&
                               n !== 59 &&
-                              n !== 59
+                              n !== 58
                                 ? _c("p", {
                                     staticClass: "m-0",
                                     domProps: {
@@ -63146,12 +63266,21 @@ $(function () {
       setTimeout(checkAmbit, 100);
     });
   }
-  /**
-   *  Validacion de la creación de cartas
-   */
+  /*
+  *politicas de cookies
+  */
 
+
+  $(document).ready(function () {
+    $("#divcookies").css({
+      "display": "block"
+    });
+    $("#divcookies").fadeIn("slow");
+  });
+  $("#btncookies").click(function () {
+    $("#divcookies").fadeOut("slow");
+  });
   /* Previsualizar la imagen de la carta */
-
 
   function filePreview(input) {
     if (input.files && input.files[0]) {
@@ -64043,8 +64172,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel\ocaf\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\ocaf\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\ocaf-master\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\ocaf-master\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

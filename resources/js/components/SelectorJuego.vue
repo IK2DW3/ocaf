@@ -12,21 +12,16 @@
                 <h1 v-text="'OCA-F'"></h1>
             </div>
             <div class="col-sm-12 text-center">
-                <form class="gamemode" @submit="checkForm" action="tablero/normal" method="get">
+                <form class="gamemode" id="formGamemode" @submit="checkForm">
                     <h2 v-if="gamemode === 'Individual'" v-text="gamemode"></h2>
                     <h2 v-else v-text="'Co-Operativo'"></h2>
 
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label v-if="gamemode === 'Individual'" for="lbljugador1" v-text="'Jugador 1'"></label>
-                                <label v-else for="lbljugador1" v-text="'Equipo 1'"></label>
-                                <input type="text" class="form-control" id="lbljugador1" :value="''" autocomplete="off" required>
-                            </div>
-                            <div class="col-md-3 mb-3" v-for="n in 3" :key="n">
-                                <label v-if="gamemode === 'Individual'" :for="'lbljugador'+ (n=n+1)" v-text="'Jugador '+n"></label>
-                                <label v-else :for="'lbljugador'+ (n=n+1)" v-text="'Equipo '+ n"></label>
-                                <input type="text" class="form-control" :id="'lbljugador'+n" :value="''" autocomplete="off">
+                            <div class="col-md-3 mb-3" v-for="n in 4" :key="n">
+                                <label v-if="gamemode === 'Individual'" :for="'lbljugador'+ n" v-text="'Jugador '+n"></label>
+                                <label v-else :for="'lbljugador'+ n" v-text="'Equipo '+ n"></label>
+                                <input v-model="lbljugador[n]" type="text" class="form-control" :name="'lbljugador'+n" :id="'lbljugador'+n" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -34,13 +29,13 @@
                     <div class="form-group">
                         <select class="custom-select" id="modoJuego" v-model="modoJuego">
                             <option disabled selected value="">Abrir para seleccionar modo de juego</option>
-                            <option value="1">Normal</option>
-                            <option value="2">Categoría específica</option>
+                            <option value="normal">Normal</option>
+                            <option value="ambitos">Categoría específica</option>
                         </select>
                     </div>
 
-                    <div v-if="modoJuego == 2" class="form-group">
-                        <select class="custom-select">
+                    <div v-if="modoJuego == 'ambitos'" class="form-group">
+                        <select class="custom-select" v-model="categoria">
                             <option disabled selected value="">Seleccionar categoría</option>
                             <option v-for="ambito in arrayAmbitos" :key="ambito.id" v-text="ambito.ambitoEsp"></option>
                         </select>
@@ -54,7 +49,7 @@
                                 </label>
                                 <div class="input-group-prepend select-tablero">
                                     <div class="input-group-text input-tableroDefault justify-content-center">
-                                        <input type="radio" id="tableroDefault" name="tablero" class="radio-gamemode">
+                                        <input v-model="tablero" type="radio" id="tableroDefault" name="tab" class="radio-gamemode" value="normal">
                                     </div>
                                 </div>
                             </div>
@@ -64,15 +59,11 @@
                                 </label>
                                 <div class="input-group-prepend">
                                     <div class="input-group-text input-tableroNuevo justify-content-center">
-                                        <input type="radio" id="tableroNuevo" name="tablero" class="radio-gamemode">
+                                        <input v-model="tablero" type="radio" id="tableroNuevo" name="tab" class="radio-gamemode" value="nuevo">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" id="" placeholder="" readonly></textarea>
                     </div>
 
                     <div class="form-group text-center">
@@ -91,11 +82,13 @@
 export default {
     data(){
         return{
-            usuarioLogin:"",
             gamemode:"",
             modoJuego:"",
-            update:0,
+            categoria:"",
+            tablero:"",
+            valido:true,
 
+            lbljugador: [],
             arrayAmbitos: []
         }
     },
@@ -119,11 +112,89 @@ export default {
             localStorage.removeItem('modoSeleccionado');
         },
         checkForm(e) {
-            console.log('hola');
-            return true;
-
+            let me = this;
+            if (me.lbljugador.length <= 0) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Campos vacios',
+                    text: 'Deben existir al menos 2 jugadores',
+                });
+                this.valido = false;
+            } else if (me.lbljugador[1].length > 0 && me.lbljugador.length <= 2) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Campos vacios',
+                    text: 'Deben existir al menos 2 jugadores',
+                });
+                this.valido = false;
+            } else if (me.lbljugador[1].length > 0 && me.lbljugador[2] === "") {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Campos vacios',
+                    text: 'Deben haber al menos 2 jugadores',
+                });
+                this.valido = false;
+            } else if (me.lbljugador[1] === "" && me.lbljugador[2] === "") {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Campos vacios',
+                    text: 'Deben haber al menos 2 jugadores',
+                });
+                this.valido = false;
+            } else if (me.modoJuego === "" || me.modoJuego === null) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Modo de juego',
+                    text: 'Selecciona un modo de juego',
+                });
+                this.valido = false;
+            } else if (me.tablero === "" || me.tablero === null) {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Tablero',
+                    text: 'Selecciona un tablero',
+                });
+                this.valido = false;
+            } else {
+                me.datosSelectorModo();
+                if (me.tablero === "normal") {
+                    window.location.href = 'tablero/normal';
+                } else if(me.tablero === "nuevo") {
+                    window.location.href = 'tablero/serpiente';
+                }
+                
+            }
+            
             e.preventDefault();
             
+        },
+        datosSelectorModo() {
+            let jugador1 = this.lbljugador[1];
+            let jugador2 = this.lbljugador[2];
+            let jugador3 = this.lbljugador[3];
+            let jugador4 = this.lbljugador[4];
+            let modo = this.modoJuego;
+            let categoria = this.categoria;
+            let tablero = this.tablero;
+            var jugadores = {
+                    'modo':modo,
+                    'categoria':categoria,
+                    'tablero':tablero,
+                    'jugador1':jugador1,
+                    'jugador2':jugador2,
+                    'jugador3':jugador3,
+                    'jugador4':jugador4
+                    };
+
+            if (jugador1 !== "" && jugador2 !== ""){
+                localStorage.setItem("partida", JSON.stringify(jugadores));
+
+            } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== ""){
+                localStorage.setItem("partida", JSON.stringify(jugadores));
+
+            } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "" && jugador4 !== ""){
+                localStorage.setItem("partida", JSON.stringify(jugadores));
+            }
         }
     },
     mounted() {

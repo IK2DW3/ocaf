@@ -17,7 +17,7 @@
 }
 
 #jugador1{ 
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.8);
     border:solid black 3px;
     border-top-right-radius: 25%;
     border-bottom-right-radius: 25%;
@@ -26,7 +26,7 @@
 }
 
 #jugador2{
-    background-color: rgba(0, 128, 0, 0.5);
+    background-color: rgba(0, 128, 0, 0.8);
     border:solid black 3px;
     border-top-right-radius: 25%;
     border-bottom-right-radius: 25%;
@@ -35,7 +35,7 @@
 }
 
 #jugador3{
-    background-color: rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.8);
     border:solid black 3px;
     border-top-right-radius: 25%;
     border-bottom-right-radius: 25%;
@@ -44,7 +44,7 @@
 }
 
 #jugador4{
-    background-color: rgba(0, 0, 255, 0.5); 
+    background-color: rgba(0, 0, 255, 0.8); 
     border:solid black 3px;
     border-bottom-right-radius: 25%;
     border-top-right-radius: 25%;
@@ -61,7 +61,7 @@
     grid-template-areas:
     "c28 c27 c26 c25 c24 c23 c22 c21 c20 c19"
     "c29 c60 c59 c58 c57 c56 c55 c54 c53 c18"
-    "c30 c61 .   .   d   d   .   .   c52 c17"
+    "c30 c61 .   .   .   .   .   .   c52 c17"
     "c31 c62 c63 c63 c63 c63 c63 .   c51 c16"
     "c32 .   c63 c63 c63 c63 c63 .   c50 c15"
     "c33 .   c63 c63 c63 c63 c63 .   c49 c14"

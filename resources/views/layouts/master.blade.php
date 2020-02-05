@@ -28,9 +28,8 @@
         @if (\Request::is('tablero/normal'))
             <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
         @endif
-
         @if (\Request::is('tablero/serpiente'))
-        <link rel="stylesheet" href="../../resources/css/tablero/css tablero 2.css">
+            <link rel="stylesheet" href="../../resources/css/tablero/css tablero 2.css">
         @endif
 
         <!-- Titulo de la web recogido del archivo .env -->

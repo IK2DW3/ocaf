@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-sm-12 casillaFooter">
                                     <p class="m-0" v-if="n!==5 && n!==6 && n!==9 && n!==12 && n!==14 && n!==18 && n!==19 && n!==23 && n!==27 && n!==31 && n!==32 
-                                        && n!==35 && n!==41 && n!==42 && n!==45 && n!==50 && n!==52 && n!==54 && n!==59 && n!==58 v-text="'Pepa Perez'"></p>
+                                        && n!==35 && n!==41 && n!==42 && n!==45 && n!==50 && n!==52 && n!==54 && n!==58 && n!==59" v-text="'Pepa Perez'"></p>
                                 </div>
                             </div>
                         </div>
@@ -194,10 +194,22 @@ export default {
             // Parametros iniciales
             nombre:"",
             ambito:"",
+
+            partida: [],
+            arrayCasillas: []
         }
     },
     methods: {
         inicio() {
+            let me = this;
+            let url = '../card';
+            axios.get(url).then(function (response) {
+                me.arrayCasillas = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            me.partida = localStorage.getItem("partida");
+            me.partida = JSON.parse(me.partida);
             this.$swal({
                 icon: 'info',
                 title: 'Partida',

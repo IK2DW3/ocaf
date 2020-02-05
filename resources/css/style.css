@@ -1,3 +1,4 @@
+
 /* LAYOUT MASTER */
 
 div.main {
@@ -5,7 +6,6 @@ div.main {
     background-size: cover;
     background-repeat: repeat-x;
 }
-
 
 /* NAVEGADOR */
 
@@ -299,3 +299,5 @@ div.footer {
     color: #f5f5f5;
     margin-bottom: 0;
 }
+
+
