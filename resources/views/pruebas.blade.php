@@ -30,6 +30,10 @@
                                     <input type="file" name="filename" id="filename" class="form-control">
                                     <span class="text-danger"> {{ $errors->first('filename') }}</span>
                             </div>
+                            <div class="form-group" {{ $errors->has('filename') ? 'has-error' : '' }}>
+                                <label for="filename"></label>
+                                    <input type="text" name="fie" id="filame" class="form-control">
+                            </div>
                     </div>
  
                     <div class="card-footer">

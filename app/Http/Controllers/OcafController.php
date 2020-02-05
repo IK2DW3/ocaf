@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
 use App\Ambito;
-Use Alert;
 
 class OcafController extends Controller
 {
@@ -42,6 +42,14 @@ class OcafController extends Controller
 
     public function getGamemode() {
         return view('gamemode');
+    }
+
+    public function getTabnormal() {
+        return view('tableros.tabnormal');
+    }
+    
+    public function getTabserpiente() {
+        return view('tableros.tabserpiente');
     }
 
     public function getHistorys() {
@@ -96,6 +104,15 @@ class OcafController extends Controller
     public function getPanelcartas() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
             return view('administracion.panelcartas');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
+    }
+
+    public function getPanelpreguntas() {
+        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+            return view('administracion.panelpreguntas');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');

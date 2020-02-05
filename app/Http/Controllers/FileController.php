@@ -38,13 +38,14 @@ class FileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        
         // file validation
         $validator = Validator::make($request->all(),
            ['filename' => 'required|mimes:jpeg,png,jpg,bmp|max:2048']);
  
         // if validation fails
         if($validator->fails()) {
-            return back()->withErrors($validator->errors());
+            return Alert::info('Imagen', 'Fallo en validacion de imagen');
         }
     
         // if validation success
@@ -55,10 +56,40 @@ class FileController extends Controller
             $target_path = public_path('../resources/img/cartas/');
             
                 if($file->move($target_path, $name)) {                
-                    return back()->with("success", "File uploaded successfully");
+                   return Alert::info('Imagen', 'Imagen subida correctamente');
                 }
         }
-   }
+        /*
+            $name = $request->file('filename')->getClientOriginalName();
+            //$extension = $request->file('filename')->extension();
+
+            //Storage::putFileAs('filename', new File('./../resources/img/cartas'), $name);
+
+            //Storage::disk('local')->put($name, 'Contents');
+
+            //$path = Storage::putFile('./resources/img/cartas', $request->file('filename'));
+            //$path = Storage::putFileAs('./resources/img/cartas', $request->file('filename'), $name);
+            //$path = $request->file('filename')->store('./resources/img/cartas');
+            $target_path = public_path('../resources/img/cartas/');
+
+            $request->file('filename')->move($target_path, $name);
+
+            echo('imagen subida corectamente');
+        */
+
+        /**
+         * $fileName = $request->file->getClientOriginalName();
+         * $request->file->move(public_path('../resources/img/cartas'), $fileName);
+        */
+
+        /**
+         * $data = request()->validate([
+         *      'name' => 'required',
+         *       'email' => 'required|email',
+         *       'message' => 'required',
+         *   ]);
+         */
+    }
 
     /**
      * Display the specified resource.

@@ -108,7 +108,7 @@ export default {
                     confirmButtonText: '¡Actualizar!',
                     cancelButtonText: '¡Cancelar!',
                     showCloseButton: true,
-                    showLoaderOnConfirm: true
+                    showLoaderOnConfirm: false
                 }).then((result) => {
                     if(result.value) {
                         this.$swal('Actualizacion', 'Ha aceptado la actualización de tu contraseña', 'success');

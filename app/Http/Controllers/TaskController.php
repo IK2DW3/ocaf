@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
-Use Alert;
 use App\Task;
 use App\Ambito;
 use App\Carta;
 use App\Continente;
 use App\User;
+use Illuminate\Support\Facades\Validator;
+use Redirect;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\FileIlluminate\Http\UploadedFile;
+use Illuminate\Filesystem\Filesystem;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class TaskController extends Controller
@@ -69,15 +76,49 @@ class TaskController extends Controller
 
     }
 
+    public function uploadImage(Request $request) {
+        
+        /* Metodo para subir archivos */
+        $fileName = $request->file->getClientOriginalName();
+        $request->file->move(public_path('../resources/img/cartas'), $fileName);
+        /* Devolver la informacion */
+        return alert('Imagen subida correctamente');
+
+    }
+
     public function storeCard(Request $request){
 
         $task = new Carta();
-        $task->name = $request->name;
-        $task->email = $request->email;
-        $task->tipo = $request->tipo;
-        $task->password = bcrypt($request->password);
+        $task->nombre = $request->nombre;
+        $task->apellido = $request->apellido;
+        $task->fechaNacimiento = $request->fechaNacimiento;
+        $task->fechaMuerte = $request->fechaMuerte;
+        $task->ambito_id = $request->ambito_id;
+        $task->loreEsp = $request->loreEsp;
+        $task->loreEng = $request->loreEng;
+        $task->loreEus = $request->loreEus;
+        $task->zonaGeografica = $request->zonaGeografica;
+        $task->continente_id = $request->continente_id;
+        
+        if (!($request->imgRuta == "") || !($request->imgRuta == null)) {
+            $task->imgRuta = $request->imgRuta;
+        } else {
+            $task->imgRuta = '';
+        }
+        
+        $task->imgDefault = $request->imgDefault;
+        $task->enlaceReferencia = $request->enlaceReferencia;
+        if ($request->habilitado == true || $request->habilitado == 1) {
+            $request->habilitado == 1;
+            $task->habilitado = $request->habilitado;
+        } else {
+            $request->habilitado == 0;
+            $task->habilitado = $request->habilitado;
+        }
         $task->save();
+
     }
+
     public function showCard(Request $request) {
 
         $task = Carta::findOrFail($request->id);
@@ -88,12 +129,27 @@ class TaskController extends Controller
     public function updateCard(Request $request) {
 
         $task = Carta::findOrFail($request->id);
-        $task->name = $request->name;
-        $task->email = $request->email;
-        $task->tipo = $request->tipo;
-        $task->password = bcrypt($request->password);
+        $task->nombre = $request->nombre;
+        $task->apellido = $request->apellido;
+        $task->fechaNacimiento = $request->fechaNacimiento;
+        $task->fechaMuerte = $request->fechaMuerte;
+        $task->ambito_id = $request->ambito_id;
+        $task->loreEsp = $request->loreEsp;
+        $task->loreEng = $request->loreEng;
+        $task->loreEus = $request->loreEus;
+        $task->zonaGeografica = $request->zonaGeografica;
+        $task->continente_id = $request->continente_id;
+        $task->imgRuta = $request->imgRuta;
+        $task->imgDefault = $request->imgDefault;
+        $task->enlaceReferencia = $request->enlaceReferencia;
+        if ($request->habilitado == true || $request->habilitado == 1) {
+            $request->habilitado == 1;
+            $task->habilitado = $request->habilitado;
+        } else {
+            $request->habilitado == 0;
+            $task->habilitado = $request->habilitado;
+        }
         $task->save();
-
         return $task;
     }
 
@@ -190,6 +246,52 @@ class TaskController extends Controller
     public function destroyContinent(Request $request) {
 
         $task = Continente::destroy($request->id);
+        return $task;
+
+    }
+
+    /* ----------------------------------------------------------------------------------------------- */
+    public function tableQuest(Request $request) {
+
+        return Pregunta::orderBy('carta_id')->get();
+
+
+    }
+
+    public function storeQuest(Request $request){
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+        $task->save();
+    }
+    public function showQuest(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updateQuest(Request $request) {
+
+        $task = Pregunta::findOrFail($request->id);
+        $task->carta_id = $request->carta_id;
+        $task->pregunta = $request->pregunta;
+        $task->respuesta_1 = $request->respuesta_1;
+        $task->respuesta_2 = $request->respuesta_2;
+        $task->respuesta_3 = $request->respuesta_3;
+
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyQuest(Request $request) {
+
+        $task = Pregunta::destroy($request->id);
         return $task;
 
     }

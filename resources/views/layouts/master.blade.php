@@ -17,12 +17,20 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos CSS3 diferente... -->
-        @if (\Request::is('history/*'))
+        @if (\Request::is('history/*') || \Request::is('tablero/*'))
             <link rel="stylesheet" href="../../resources/css/style.css">
             <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
         @else
             <link rel="stylesheet" href="../resources/css/style.css">
             <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
+        @endif
+
+        @if (\Request::is('tablero/normal'))
+            <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
+        @endif
+
+        @if (\Request::is('tablero/serpiente'))
+        <link rel="stylesheet" href="../../resources/css/tablero/css tablero 2.css">
         @endif
 
         <!-- Titulo de la web recogido del archivo .env -->
@@ -51,8 +59,12 @@
 
         <!-- + Scripts -->
         <script src="{{asset('js/app.js')}}"></script>
-        @if ( \Request::is('/login'))
+        @if ( \Request::is('/login') || \Request::is('tablero/*'))
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @endif
+        @if (\Request::is('tablero/*'))
+            <script src="../../resources/js/tablero/main.js"></script>
+            <script src="../../resources/js/tablero/generartablero.js"></script>
         @endif
 
   </body>

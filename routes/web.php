@@ -5,12 +5,14 @@ Route::get('/', 'OcafController@getIndex');
 Route::get('index', 'OcafController@getIndex');
 
 Route::GET('logout', 'Auth/LoginController@logout');
+Route::post('register', 'OcafController@postRegister');
 
 Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
 Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
-Route::post('register', 'OcafController@postRegister');
+Route::get('tablero/normal', 'OcafController@getTabnormal')->name('tablero.normal');
+Route::get('tablero/serpiente', 'OcafController@getTabserpiente')->name('tablero.serpiente');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -37,8 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('panelambitos', 'OcafController@getPanelambitos');
     Route::get('panelcontinentes', 'OcafController@getPanelcontinentes');
     Route::get('panelcartas', 'OcafController@getPanelcartas');
+    Route::get('panelpreguntas', 'OcafController@getPanelpreguntas');
+
 });
-Route::get('pruebas', 'FileController@create');
+
 /*
 CRUD Vue.js y Laravel
 */
@@ -57,6 +61,7 @@ Route::get('/user/buscar', 'TaskController@showUser');
 Route::get('/card', 'TaskController@tableCard');
 Route::put('/card/actualizar', 'TaskController@updateCard');
 Route::post('/card/guardar', 'TaskController@storeCard');
+Route::post('/card/imagen', 'TaskController@uploadImage');
 Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
 Route::get('/card/buscar', 'TaskController@showCard');
 Route::get('/card/filtrar', 'TaskController@filterCard');
@@ -75,11 +80,22 @@ Route::post('/continent/guardar', 'TaskController@storeContinent');
 Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
 Route::get('/continent/buscar', 'TaskController@showContinent');
 
+// Rutas para el panel de gestion de Preguntas
+Route::get('/quest', 'TaskController@tableQuest');
+Route::put('/quest/actualizar', 'TaskController@updateQuest');
+Route::post('/quest/guardar', 'TaskController@storeQuest');
+Route::delete('/quest/borrar/{id}', 'TaskController@destroyQuest');
+Route::get('/quest/buscar', 'TaskController@showQuest');
+
 // Ruta para el selector de juego y el tablero
 Route::post('/modo', 'TaskController@getGamemode');
 
 /**
  * Subida de archivos
  */
+Route::get('pruebas', 'FileController@create');
 Route::resource('file', 'FileController');
+Route::resource('file', 'TaskController');
+
+
 

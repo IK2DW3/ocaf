@@ -104,7 +104,7 @@ export default {
             me.validarCampos();
             if(true) {
                 let url = 'ambit/guardar';
-                axios.post(url,{ 
+                axios.post(url,{
                     'ambitoEsp':this.ambitoEsp,
                     'ambitoEng':this.ambitoEng,
                     'ambitoEus':this.ambitoEus,
@@ -161,7 +161,7 @@ export default {
                 confirmButtonText: '¡Eliminar!',
                 cancelButtonText: '¡No, mantenerlo!',
                 showCloseButton: true,
-                showLoaderOnConfirm: true
+                showLoaderOnConfirm: false
             }).then((result) => {
                 if(result.value) {
                     this.$swal('Eliminado', 'El ambito ha sido eliminado correctamente', 'success')
@@ -203,7 +203,7 @@ export default {
             } else {
                 return true;
             }
-            
+
         }
     },
     computed: {
