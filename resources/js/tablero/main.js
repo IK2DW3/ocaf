@@ -695,13 +695,12 @@ $(function () {
          document.getElementById("tablero").style.marginLeft = "0px";
          document.getElementById("tablero").style.marginTop = "0px";
          document.getElementById("normas").style.marginLeft = "0px";
-         document.getElementById("texto").style.marginLeft = "0px";
+   
          document.getElementById("ficha1").style.display = "none";
          document.getElementById("ficha2").style.display = "none";
          document.getElementById("ficha3").style.display = "none";
          document.getElementById("ficha4").style.display = "none";
-         document.getElementById("texto").style.display = "block";
-         document.getElementById("normas").style.display = "block";
+
 
          window.print()
          alert("volviendo al juego")

@@ -240,24 +240,30 @@
 #panelDado{
     background-color: grey; 
     border:solid black 3px; 
-    top:10%;
-    right: 1%;
     max-height: 15vh;
     position: fixed;
     text-align: center;
     width: auto;
     z-index: 1000;
+    right: 0;
+    top: 50%;
+    width: 200px;
+    height: 220px;
+    border-bottom-left-radius: 25%;
+    border-top-left-radius: 25%;
+    padding: 10px;
 }
 
 #botontirar{
     width: 100%; 
+    margin-top: -5px;
     height: 50px; 
-    font-size: 1em;
-}
+    font-size: 1em;}
+
 
 #dado1{
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 
 #debug{  left: 150vw;   position: fixed; background-color: yellowgreen; top:0px; width: 300px; height: 150px; font-size: 1rem; }

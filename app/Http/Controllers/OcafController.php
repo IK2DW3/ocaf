@@ -34,8 +34,8 @@ class OcafController extends Controller
     public function postRegister(Request $request) {
         $registroPersona = new User;
         $registroPersona->name = $request->input('userRegister');
-        $registroPersona->email = $request->input('emailRegister');
-        $registroPersona->password = bcrypt($request->input('confirmnpasswordRegister'));
+        $registroPersona->email = $request->input('userEmailRegister');
+        $registroPersona->password = bcrypt($request->input('userConfirmnPasswordRegister'));
         $registroPersona->save();
         return view('index', array('arrayRegistro'=> $registroPersona));
     }

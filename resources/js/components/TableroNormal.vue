@@ -23,7 +23,7 @@
                         <button class="btndebug">2 equipos</button>
                         <br>
                         otros
-                        <button class="btndebug" id=btnImprimir>Imprimir</button>
+                        <button class="btndebug" id=btnImprimir><img src="..\..\img\tablero\tablero\impresora.png" ></button>
                         <button class="btndebug" id=btnmensajer>mostrar</button> 
                         <br>
                         <input type="text" id="NJ1" placeholder="jugador1">
