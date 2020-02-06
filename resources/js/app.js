@@ -41,6 +41,16 @@ const Swal = require('sweetalert2');
 
 $(function() {
 
+    /*
+    *   Politicas de cookies
+    */
+    $("#divcookies").css({ "display": "block" })
+    $("#divcookies").fadeIn("slow");
+
+    $("#btncookies").click(function () {
+        $("#divcookies").fadeOut("slow");
+    });
+
     /**
      * Comprobacion del login
      */
@@ -409,6 +419,10 @@ $(function() {
     });
 
     $('#botonPanel').hover(function() {
+        $(this).parent().siblings('div').children().first().slideToggle('fast');
+    });
+
+    $('#botonImprimir').hover(function () {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
 

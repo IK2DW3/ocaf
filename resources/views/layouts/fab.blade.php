@@ -32,6 +32,19 @@
         </div>
     </div>
 
+    @if (\Request::is('tablero/*'))
+        <div class="row overflow-hidden py-1 w-100">
+            <div class="col-9 d-flex align-items-center justify-content-end px-1">
+                <span class="rounded-pill shadow-lg bg-white rounded mx-1 px-2 esconder">Imprimir</span>
+            </div>
+            <div class="col-3 d-flex align-items-center justify-content-center px-1">
+                <button class="btn btn-item btn-info rounded-circle shadow-lg rounded w-75 menuslide" id="botonImprimir">
+                    <i class="icon ion-md-print"></i>
+                </button>
+            </div>
+        </div>
+    @endif
+
     @auth
         <div class="row overflow-hidden py-1 w-100">
             <div class="col-9 d-flex align-items-center justify-content-end px-1">

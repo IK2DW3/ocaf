@@ -4011,8 +4011,11 @@ __webpack_require__.r(__webpack_exports__);
       // Parametros iniciales
       nombre: "",
       ambito: "",
+      elegirCarta: "",
       partida: [],
-      arrayCasillas: []
+      arrayCartas: [],
+      arrayAleatorioNormalCasillas: [],
+      arrayCategoriaCasillas: []
     };
   },
   methods: {
@@ -4020,7 +4023,8 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = '../card';
       axios.get(url).then(function (response) {
-        me.arrayCasillas = response.data;
+        me.arrayCartas = response.data;
+        me.cargarPartida();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4031,6 +4035,120 @@ __webpack_require__.r(__webpack_exports__);
         title: 'Partida',
         text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!'
       });
+    },
+    nombrarJugadores: function nombrarJugadores() {
+      var me = this;
+      $('#nombre1').text(me.partida['jugador1']);
+      $('#nombre2').text(me.partida['jugador2']);
+      $('#nombre3').text(me.partida['jugador3']);
+      $('#nombre4').text(me.partida['jugador4']);
+    },
+    aleatorizarCasillas: function aleatorizarCasillas() {
+      var me = this;
+
+      for (var i = 63; i > 0; i--) {
+        var chosenNumber = Math.floor(Math.random() * me.arrayCartas.length);
+        me.arrayAleatorioNormalCasillas.push(me.arrayCartas[chosenNumber]);
+      }
+    },
+    categoriaCasillas: function categoriaCasillas(categoria) {
+      var me = this;
+      me.arrayCategoriaCasillas[0] = '';
+      me.arrayCategoriaCasillas[1] = '';
+
+      for (var _i = 0; _i < me.arrayCartas.length; _i++) {
+        if (me.arrayCartas[_i].ambito.ambitoEsp == categoria) {
+          me.arrayCategoriaCasillas.push(me.arrayCartas[_i]);
+        }
+      }
+
+      for (var i = 2; i < $('.casilla').length + 2; i++) {
+        $('#nombreMujer' + i).text(me.arrayCategoriaCasillas[i].nombre.substring(0, 20));
+
+        if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
+          try {
+            $('#casilla' + i).css({
+              'background-image': 'url(' + me.arrayCategoriaCasillas[i].imgDefault + ')'
+            });
+          } catch (error) {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+            });
+            console.log(error);
+          }
+        } else {
+          try {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/cartas/' + me.arrayCategoriaCasillas[i].imgRuta + ')'
+            });
+          } catch (error) {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+            });
+            console.log(error);
+          }
+        }
+      }
+    },
+    asignarCasillas: function asignarCasillas() {
+      var me = this;
+      me.arrayAleatorioNormalCasillas[0] = '';
+      me.arrayAleatorioNormalCasillas[1] = '';
+
+      if (me.partida.modo == 'normal') {
+        for (var i = 2; i < $('.casilla').length + 2; i++) {
+          $('#nombreMujer' + i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 20));
+
+          if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
+            try {
+              $('#casilla' + i).css({
+                'background-image': 'url(' + me.arrayAleatorioNormalCasillas[i].imgDefault + ')'
+              });
+            } catch (error) {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+              });
+              console.log(error);
+            }
+          } else {
+            try {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/cartas/' + me.arrayAleatorioNormalCasillas[i].imgRuta + ')'
+              });
+            } catch (error) {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+              });
+              console.log(error);
+            }
+          }
+        }
+      } else if (me.partida.modo == 'ambitos') {
+        if (me.partida.categoria == 'Antropología') {
+          me.categoriaCasillas('Antropología');
+        } else if (me.partida.categoria == 'Historia') {
+          me.categoriaCasillas('Historia');
+        } else if (me.partida.categoria == 'Derecho') {
+          me.categoriaCasillas('Derecho');
+        } else if (me.partida.categoria == 'Geografía') {
+          me.categoriaCasillas('Geografía');
+        } else if (me.partida.categoria == 'Filosofía') {
+          me.categoriaCasillas('Filosofía');
+        } else if (me.partida.categoria == 'Psicología') {
+          me.categoriaCasillas('Psicología');
+        } else if (me.partida.categoria == 'Economía') {
+          me.categoriaCasillas('Economía');
+        } else if (me.partida.categoria == 'Sociología') {
+          me.categoriaCasillas('Sociología');
+        } else if (me.partida.categoria == 'Pedagogía') {
+          me.categoriaCasillas('Pedagogía');
+        }
+      }
+    },
+    cargarPartida: function cargarPartida() {
+      this.nombrarJugadores();
+      this.aleatorizarCasillas();
+      this.asignarCasillas();
     }
   },
   mounted: function mounted() {
@@ -4238,7 +4356,156 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      // Parametros iniciales
+      nombre: "",
+      ambito: "",
+      elegirCarta: "",
+      partida: [],
+      arrayCartas: [],
+      arrayAleatorioNormalCasillas: [],
+      arrayCategoriaCasillas: []
+    };
+  },
+  methods: {
+    inicio: function inicio() {
+      var me = this;
+      var url = '../card';
+      axios.get(url).then(function (response) {
+        me.arrayCartas = response.data;
+        me.cargarPartida();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      me.partida = localStorage.getItem("partida");
+      me.partida = JSON.parse(me.partida);
+      this.$swal({
+        icon: 'info',
+        title: 'Partida',
+        text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!'
+      });
+    },
+    nombrarJugadores: function nombrarJugadores() {
+      var me = this;
+      $('#nombre1').text(me.partida['jugador1']);
+      $('#nombre2').text(me.partida['jugador2']);
+      $('#nombre3').text(me.partida['jugador3']);
+      $('#nombre4').text(me.partida['jugador4']);
+    },
+    aleatorizarCasillas: function aleatorizarCasillas() {
+      var me = this;
+
+      for (var i = 63; i > 0; i--) {
+        var chosenNumber = Math.floor(Math.random() * me.arrayCartas.length);
+        me.arrayAleatorioNormalCasillas.push(me.arrayCartas[chosenNumber]);
+      }
+    },
+    categoriaCasillas: function categoriaCasillas(categoria) {
+      var me = this;
+      me.arrayCategoriaCasillas[0] = '';
+      me.arrayCategoriaCasillas[1] = '';
+
+      for (var _i = 0; _i < me.arrayCartas.length; _i++) {
+        if (me.arrayCartas[_i].ambito.ambitoEsp == categoria) {
+          me.arrayCategoriaCasillas.push(me.arrayCartas[_i]);
+        }
+      }
+
+      for (var i = 2; i < $('.casilla').length + 2; i++) {
+        $('#nombreMujer' + i).text(me.arrayCategoriaCasillas[i].nombre.substring(0, 20));
+
+        if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
+          try {
+            $('#casilla' + i).css({
+              'background-image': 'url(' + me.arrayCategoriaCasillas[i].imgDefault + ')'
+            });
+          } catch (error) {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+            });
+            console.log(error);
+          }
+        } else {
+          try {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/cartas/' + me.arrayCategoriaCasillas[i].imgRuta + ')'
+            });
+          } catch (error) {
+            $('#casilla' + i).css({
+              'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+            });
+            console.log(error);
+          }
+        }
+      }
+    },
+    asignarCasillas: function asignarCasillas() {
+      var me = this;
+      me.arrayAleatorioNormalCasillas[0] = '';
+      me.arrayAleatorioNormalCasillas[1] = '';
+
+      if (me.partida.modo == 'normal') {
+        for (var i = 2; i < $('.casilla').length + 2; i++) {
+          $('#nombreMujer' + i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 20));
+
+          if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
+            try {
+              $('#casilla' + i).css({
+                'background-image': 'url(' + me.arrayAleatorioNormalCasillas[i].imgDefault + ')'
+              });
+            } catch (error) {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+              });
+              console.log(error);
+            }
+          } else {
+            try {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/cartas/' + me.arrayAleatorioNormalCasillas[i].imgRuta + ')'
+              });
+            } catch (error) {
+              $('#casilla' + i).css({
+                'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
+              });
+              console.log(error);
+            }
+          }
+        }
+      } else if (me.partida.modo == 'ambitos') {
+        if (me.partida.categoria == 'Antropología') {
+          me.categoriaCasillas('Antropología');
+        } else if (me.partida.categoria == 'Historia') {
+          me.categoriaCasillas('Historia');
+        } else if (me.partida.categoria == 'Derecho') {
+          me.categoriaCasillas('Derecho');
+        } else if (me.partida.categoria == 'Geografía') {
+          me.categoriaCasillas('Geografía');
+        } else if (me.partida.categoria == 'Filosofía') {
+          me.categoriaCasillas('Filosofía');
+        } else if (me.partida.categoria == 'Psicología') {
+          me.categoriaCasillas('Psicología');
+        } else if (me.partida.categoria == 'Economía') {
+          me.categoriaCasillas('Economía');
+        } else if (me.partida.categoria == 'Sociología') {
+          me.categoriaCasillas('Sociología');
+        } else if (me.partida.categoria == 'Pedagogía') {
+          me.categoriaCasillas('Pedagogía');
+        }
+      }
+    },
+    cargarPartida: function cargarPartida() {
+      this.nombrarJugadores();
+      this.aleatorizarCasillas();
+      this.asignarCasillas();
+    }
+  },
+  mounted: function mounted() {
+    this.inicio();
+  }
+});
 
 /***/ }),
 
@@ -49196,7 +49463,8 @@ var render = function() {
                       "div",
                       {
                         key: n,
-                        staticClass: "casilla px-2 py-2 text-center",
+                        staticClass:
+                          "casilla casillaJuego px-2 py-2 text-center",
                         attrs: { id: "casilla" + (n = n + 1) }
                       },
                       [
@@ -49252,9 +49520,8 @@ var render = function() {
                               n !== 59
                                 ? _c("p", {
                                     staticClass: "m-0",
-                                    domProps: {
-                                      textContent: _vm._s("Pepa Perez")
-                                    }
+                                    attrs: { id: "nombreMujer" + n },
+                                    domProps: { textContent: _vm._s("") }
                                   })
                                 : _vm._e()
                             ]
@@ -49383,7 +49650,8 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "row align-items-center justify-content-center",
+              staticClass:
+                "row align-items-center justify-content-center rounded",
               attrs: { id: "panelDado" }
             },
             [
@@ -49940,9 +50208,8 @@ var render = function() {
                               n !== 59
                                 ? _c("p", {
                                     staticClass: "m-0",
-                                    domProps: {
-                                      textContent: _vm._s("Pepa Perez")
-                                    }
+                                    attrs: { id: "nombreMujer" + n },
+                                    domProps: { textContent: _vm._s("") }
                                   })
                                 : _vm._e()
                             ]
@@ -50040,7 +50307,8 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "row align-items-center justify-content-center",
+              staticClass:
+                "row align-items-center justify-content-center rounded",
               attrs: { id: "panelDado" }
             },
             [
@@ -62938,9 +63206,20 @@ var app = new Vue({
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 $(function () {
+  /*
+  *   Politicas de cookies
+  */
+  $("#divcookies").css({
+    "display": "block"
+  });
+  $("#divcookies").fadeIn("slow");
+  $("#btncookies").click(function () {
+    $("#divcookies").fadeOut("slow");
+  });
   /**
    * Comprobacion del login
    */
+
   function validarLogin(event) {
     // Inicializacion de variables
     var email = $("input[name=email]").val();
@@ -63335,6 +63614,9 @@ $(function () {
     $(this).parent().siblings('div').children().first().slideToggle('fast');
   });
   $('#botonPanel').hover(function () {
+    $(this).parent().siblings('div').children().first().slideToggle('fast');
+  });
+  $('#botonImprimir').hover(function () {
     $(this).parent().siblings('div').children().first().slideToggle('fast');
   });
 });

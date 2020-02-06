@@ -81,7 +81,8 @@
 }
 
 .casilla {
-    background-image: url(../../../resources/img/tablero/tablero/casillas/persona.jpg);
+    background-color: #fff;
+    background-image: url(../../../resources/img/tablero/tablero/casillas/imglogo.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -148,61 +149,61 @@
 #casilla2{grid-area: c2;margin-bottom: 10px;}
 #casilla3{grid-area: c3;margin-bottom: 10px;}
 #casilla4{grid-area: c4;margin-bottom: 10px;}
-#casilla5{grid-area: c5;margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
-#casilla6{grid-area: c6;margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/manifestacion1.jpg);}
+#casilla5{grid-area: c5;margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
+#casilla6{grid-area: c6;margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/manifestacion1.jpg) !important;}
 #casilla7{grid-area: c7;margin-bottom: 10px;}
 #casilla8{grid-area: c8;margin-bottom: 10px;}
-#casilla9{grid-area: c9;margin-bottom: 10px;border-bottom-right-radius: 50%;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla9{grid-area: c9;margin-bottom: 10px;border-bottom-right-radius: 50%;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla10{grid-area:c10;margin-right: 10px;}
 #casilla11{grid-area: c11;margin-right: 10px;}
-#casilla12{grid-area: c12;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/manifestacion2.jpg);}
+#casilla12{grid-area: c12;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/manifestacion2.jpg) !important;}
 #casilla13{grid-area: c13;margin-right: 10px;}
-#casilla14{grid-area: c14;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla14{grid-area: c14;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla15{grid-area: c15;margin-right: 10px;}
 #casilla16{grid-area: c16;margin-right: 10px;}
 #casilla17{grid-area: c17;margin-right: 10px;}
-#casilla18{grid-area: c18;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
-#casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;border-top-right-radius: 50%; background-image: url(../../../resources/img/tablero/tablero/casillas/posada.png);}
+#casilla18{grid-area: c18;margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
+#casilla19{grid-area: c19;margin-top: 10px; margin-right: 10px;border-top-right-radius: 50%; background-image: url(../../../resources/img/tablero/tablero/casillas/posada.png) !important;}
 #casilla20{grid-area: c20;margin-top: 10px;}
 #casilla21{grid-area: c21;margin-top: 10px;}
 #casilla22{grid-area: c22;margin-top: 10px;}
-#casilla23{grid-area: c23;margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla23{grid-area: c23;margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla24{grid-area: c24;margin-top: 10px;}
 #casilla25{grid-area: c25;margin-top: 10px;}
 #casilla26{grid-area: c26;margin-top: 10px;}
-#casilla27{grid-area: c27; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla27{grid-area: c27; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla28{grid-area: c28; margin-left: 10px;border-top-left-radius: 50%;margin-top: 10px;}
 #casilla29{grid-area: c29; margin-left: 10px;}
 #casilla30{grid-area: c30; margin-left: 10px;}
-#casilla31{grid-area: c31; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/pozo.png);}
-#casilla32{grid-area: c32; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla31{grid-area: c31; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/pozo.png) !important;}
+#casilla32{grid-area: c32; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla33{grid-area: c33; margin-left: 10px;}
 #casilla34{grid-area: c34; margin-left: 10px;}
 #casilla35{grid-area: c35;margin-left: 10px; }
-#casilla36{grid-area: c36; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla36{grid-area: c36; margin-left: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla37{grid-area: c37;margin-bottom: 10px; border-bottom-left-radius: 50%;margin-left: 10px;}
 #casilla38{grid-area: c38;margin-bottom: 10px;}
 #casilla39{grid-area: c39;margin-bottom: 10px;}
 #casilla40{grid-area: c40;margin-bottom: 10px;}
-#casilla41{grid-area: c41; margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
-#casilla42{grid-area: c42; margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/laberinto.png)}
+#casilla41{grid-area: c41; margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
+#casilla42{grid-area: c42; margin-bottom: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/laberinto.png) !important;}
 #casilla43{grid-area: c43; margin-bottom: 10px;}
 #casilla44{grid-area: c44; margin-bottom: 10px;}
-#casilla45{grid-area: c45; margin-right: 10px; margin-bottom: 10px; border-bottom-right-radius: 50%; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla45{grid-area: c45; margin-right: 10px; margin-bottom: 10px; border-bottom-right-radius: 50%; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla46{grid-area: c46; margin-right: 10px;}
 #casilla47{grid-area: c47; margin-right: 10px;}
 #casilla48{grid-area: c48; margin-right: 10px;}
 #casilla49{grid-area: c49; margin-right: 10px; }
-#casilla50{grid-area: c50; margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla50{grid-area: c50; margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla51{grid-area: c51; margin-right: 10px;}
-#casilla52{grid-area: c52; margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/carcel.png);}
+#casilla52{grid-area: c52; margin-right: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/carcel.png) !important;}
 #casilla53{grid-area: c53; margin-right: 10px; border-top-right-radius: 50%;margin-top: 10px;}
-#casilla54{grid-area: c54; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla54{grid-area: c54; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla55{grid-area: c55; margin-top: 10px; }
 #casilla56{grid-area: c56; margin-top: 10px;}
 #casilla57{grid-area: c57; margin-top: 10px;}
-#casilla58{grid-area: c58; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/muerte.png);}
-#casilla59{grid-area: c59; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg);}
+#casilla58{grid-area: c58; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/muerte.png) !important;}
+#casilla59{grid-area: c59; margin-top: 10px; background-image: url(../../../resources/img/tablero/tablero/casillas/logo.jpg) !important;}
 #casilla60{grid-area: c60; margin-top: 10px;  border-top-left-radius: 50%; margin-left: 10px;}
 #casilla61{grid-area: c61; margin-left: 10px;}
 #casilla62{grid-area: c62;margin-left: 10px; border-bottom-left-radius: 50%; }
@@ -223,16 +224,18 @@
 .ficha{
  background-color: white;
  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.4), 0 6px 20px 0 rgba(255, 255, 255, 0.3); 
- height: 30px;
- width: 30px;
+ height: 35px;
+ width: 35px;
  border-radius: 50%;
 }
 
+
 #panelDado{
-    background-color: grey; 
+    background-color: #f0d0b2; 
     border:solid black 3px; 
     top:10%;
     right: 1%;
+    height: 12.5vh;
     max-height: 15vh;
     position: fixed;
     text-align: center;

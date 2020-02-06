@@ -25,8 +25,13 @@
             <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
         @endif
 
-        @if (\Request::is('tablero/*'))
+        @if (\Request::is('tablero/normal'))
             <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
+            <style type="text/css" media="print">
+                @page { size: landscape; }
+            </style>
+        @elseif (\Request::is('tablero/serpiente'))
+            <link rel="stylesheet" href="../../resources/css/tablero/tablero2.css">
         @endif
 
         <!-- Titulo de la web recogido del archivo .env -->
@@ -45,7 +50,7 @@
         <div id="app" class="main">
             @yield('content')
 
-            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
+            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('tablero/*') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
                 @include('layouts.fab')
             @endif
         </div>
@@ -60,7 +65,6 @@
         @endif
         @if (\Request::is('tablero/*'))
             <script src="../../resources/js/tablero/main.js"></script>
-            <script src="../../resources/js/tablero/generartablero.js"></script>
         @endif
 
   </body>

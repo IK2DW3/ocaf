@@ -60,8 +60,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 casillaFooter">
-                                    <p class="m-0" v-if="n!==5 && n!==6 && n!==9 && n!==12 && n!==14 && n!==18 && n!==19 && n!==23 && n!==27 && n!==31 && n!==32 
-                                        && n!==35 && n!==41 && n!==42 && n!==45 && n!==50 && n!==52 && n!==54 && n!==59 && n!==59" v-text="'Pepa Perez'"></p>
+                                    <p class="m-0" :id="'nombreMujer'+n" v-if="n!==5 && n!==6 && n!==9 && n!==12 && n!==14 && n!==18 && n!==19 && n!==23 && n!==27 && n!==31 && n!==32 
+                                        && n!==35 && n!==41 && n!==42 && n!==45 && n!==50 && n!==52 && n!==54 && n!==59 && n!==59" v-text="''"></p>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
             </div>
             
             <!-- El dado -->
-            <div class="row align-items-center justify-content-center" id="panelDado">
+            <div class="row align-items-center justify-content-center rounded" id="panelDado">
                 <div class="col-sm-12"><img id="dado1" :src="'../../resources/img/tablero/tablero/dado/1.png'" alt="Dado"></div>
                 <div class="col-sm-12"><button id="botontirar" v-text="'Tirar'"></button></div>
             </div>
@@ -189,6 +189,135 @@
 
 <script>
 export default {
+    data(){
+        return{
+            // Parametros iniciales
+            nombre:"",
+            ambito:"",
+            elegirCarta:"",
+
+            partida: [],
+            arrayCartas: [],
+            arrayAleatorioNormalCasillas: [],
+            arrayCategoriaCasillas: [],
+        }
+    },
+    methods: {
+        inicio() {
+            let me = this;
+            let url = '../card';
+            axios.get(url).then(function (response) {
+                me.arrayCartas = response.data;
+                me.cargarPartida();
+            }).catch(function (error) {
+                console.log(error);
+            });
+            me.partida = localStorage.getItem("partida");
+            me.partida = JSON.parse(me.partida);
+            this.$swal({
+                icon: 'info',
+                title: 'Partida',
+                text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!',
+            });
+        },
+        nombrarJugadores() {
+            let me = this;
+            $('#nombre1').text(me.partida['jugador1']);
+            $('#nombre2').text(me.partida['jugador2']);
+            $('#nombre3').text(me.partida['jugador3']);
+            $('#nombre4').text(me.partida['jugador4']);
+        },
+        aleatorizarCasillas() {
+            let me = this;
+            for (let i = 63; i > 0; i--) {
+                var chosenNumber = Math.floor(Math.random() * me.arrayCartas.length);
+                me.arrayAleatorioNormalCasillas.push(me.arrayCartas[chosenNumber]);
+            }
+        },
+        categoriaCasillas(categoria) {
+            let me = this;
+            me.arrayCategoriaCasillas[0] = '';
+            me.arrayCategoriaCasillas[1] = '';
+            for (let i = 0; i < me.arrayCartas.length; i++) {
+                if (me.arrayCartas[i].ambito.ambitoEsp == categoria) {
+                    me.arrayCategoriaCasillas.push(me.arrayCartas[i]);
+                }
+            }
+            for (var i = 2; i < $('.casilla').length + 2; i++) {
+                
+                $('#nombreMujer'+i).text(me.arrayCategoriaCasillas[i].nombre.substring(0,20));
+                if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
+                    try {
+                        $('#casilla'+i).css({'background-image': 'url('+ me.arrayCategoriaCasillas[i].imgDefault +')'});
+                    } catch (error) {
+                        $('#casilla'+i).css({'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'});
+                        console.log(error);
+                    }
+                } else {
+                    try {
+                        $('#casilla'+i).css({'background-image': 'url(../../resources/img/cartas/'+ me.arrayCategoriaCasillas[i].imgRuta +')'});
+                    } catch (error) {
+                        $('#casilla'+i).css({'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'});
+                        console.log(error);
+                    }
+                }
+            }
+        },
+        asignarCasillas() {
+            let me = this;
+            me.arrayAleatorioNormalCasillas[0] = '';
+            me.arrayAleatorioNormalCasillas[1] = '';
+            if (me.partida.modo == 'normal') {
+                for (let i = 2; i < $('.casilla').length + 2; i++) {
+                    $('#nombreMujer'+i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0,20));
+                    if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
+                        try {
+                            $('#casilla'+i).css({'background-image': 'url('+ me.arrayAleatorioNormalCasillas[i].imgDefault +')'});
+                        } catch (error) {
+                            $('#casilla'+i).css({'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'});
+                            console.log(error);
+                        }
+                    } else {
+                        try {
+                            $('#casilla'+i).css({'background-image': 'url(../../resources/img/cartas/'+ me.arrayAleatorioNormalCasillas[i].imgRuta +')'});
+                        } catch (error) {
+                            $('#casilla'+i).css({'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'});
+                            console.log(error);
+                        }
+                    }
+                }
+            } else if (me.partida.modo == 'ambitos') {
+                if (me.partida.categoria == 'Antropología') {
+                    me.categoriaCasillas('Antropología');
+                } else if (me.partida.categoria == 'Historia') {
+                    me.categoriaCasillas('Historia');
+                } else if (me.partida.categoria == 'Derecho') {
+                    me.categoriaCasillas('Derecho');
+                } else if (me.partida.categoria == 'Geografía') {
+                    me.categoriaCasillas('Geografía');
+                } else if (me.partida.categoria == 'Filosofía') {
+                    me.categoriaCasillas('Filosofía');
+                } else if (me.partida.categoria == 'Psicología') {
+                    me.categoriaCasillas('Psicología');
+                } else if (me.partida.categoria == 'Economía') {
+                    me.categoriaCasillas('Economía');
+                } else if (me.partida.categoria == 'Sociología') {
+                    me.categoriaCasillas('Sociología');
+                } else if (me.partida.categoria == 'Pedagogía') {
+                    me.categoriaCasillas('Pedagogía');
+                } 
+            }
+            
+        },
+        cargarPartida() {
+            this.nombrarJugadores();
+            this.aleatorizarCasillas();
+            this.asignarCasillas();
+        },
+    },
+    mounted() {
+        this.inicio();
+    }
     
 }
 </script>

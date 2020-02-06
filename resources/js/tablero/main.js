@@ -10,6 +10,16 @@ $(function () {
    var FJ2 = $('#ficha2');
    var FJ3 = $('#ficha3');
    var FJ4 = $('#ficha4');
+   var trivia = 0;
+   var respuestaE = "";
+   var numeros = $('.numCasilla'); // Array de los numero en las casillas
+   var preguntas = $('.pregunta'); // Array de las preguntas en las casillas
+   var casillas = $('.casilla'); // Array de las casillas
+
+   /* Asigno al arrayPreguntas las casillas que no tendran el icono de interrogacion */
+   var arrayPreguntas = [preguntas[0], preguntas[4], preguntas[5], preguntas[8], preguntas[11], preguntas[13], preguntas[17], preguntas[18], preguntas[22],
+   preguntas[26], preguntas[30], preguntas[31], preguntas[35], preguntas[40], preguntas[41], preguntas[44], preguntas[49], preguntas[51], preguntas[53],
+   preguntas[57], preguntas[58], preguntas[62]];
 
    /**
     * Creacion del objeto jugador
@@ -26,12 +36,26 @@ $(function () {
    }
 
    /**
+     * Creacion de un object que guarda los datos de las casillas que tiene preguntas 
+     * */
+   var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respuesta3, estado) {
+      this.pregunta = pregunta
+      this.respuestaCorrecta = respuestaCorrecta
+      this.respuesta2 = respuesta2
+      this.respuesta3 = respuesta3
+      this.estado = estado
+   }
+
+   /**
     * Declarando jugadores por defecto
     */
    var jugador1 = new jugador("Player 1", 0, 1, "red", 0, "ficha1", 0);
    var jugador2 = new jugador("Player 2", 0, 1, "green", 0, "ficha2", 0);
    var jugador3 = new jugador("Player 3", 0, 1, "yellow", 0, "ficha3", 0);
    var jugador4 = new jugador("Player 4", 0, 1, "blue", 0, "ficha4", 0);
+
+   /*creamos una pregunta para la casilla 10 */
+   var casilla10 = new casillaPregunta("¿Ésto es una pregunta?", "Sí", "Tal vez", "No", 0);
 
    /**
     * Declarando funciones y asignar elementos por defecto
@@ -45,13 +69,15 @@ $(function () {
    $('#btnmensajer').on('click', mostrarmensaje);
    $('#btn2jugadores').on('click', modo2jugadores);
    $('#btn4Jugadores').on('click', modo4jugadores);
-   $('#btnImprimir').on('click', Imprimir);
+   $('#botonImprimir').on('click', Imprimir);
    $('#btnNombres').on('click', nombrarjugadores);
+   $('#btntrivia').on('click', cambiarmodo);
 
-   $('#nombre1').text(String(jugador1.nombre));
-   $('#nombre2').text(String(jugador2.nombre));
-   $('#nombre3').text(String(jugador3.nombre));
-   $('#nombre4').text(String(jugador4.nombre));
+   $('#respuesta1').on('click', responder);
+   $('#respuesta2').on('click', responder);
+   $('#respuesta3').on('click', responder);
+   $('#quitarcarta').on('click', quitarcarta);
+   $('#aceptar').on('click', aceptarcarta);
 
    $('#ficha1').css({ 'backgroundColor': String(jugador1.color)});
    $('#ficha2').css({ 'backgroundColor': String(jugador2.color)});
@@ -167,6 +193,7 @@ $(function () {
       var sonidito = new Audio('../../resources/img/tablero/tablero/sonido/dado.mp3');
       sonidito.play();
       $('#dado1').attr('src','../../resources/img/tablero/tablero/dado/animacion.gif');
+      $(mensaje).text("Has sacado un " + num1); mostrarmensaje();
       setTimeout(dados, 900);
    }
 
@@ -684,36 +711,42 @@ $(function () {
 
    function Imprimir() {
       /*pedimos que el usuario confirme que quiere imprimir ya que reinicia el progrso del jugo */
-      if (confirm('si desea imprimir el progreso de la partida se reiniciara')) {
+      if (confirm('Si desea imprimir, el progreso de la partida se reiniciara.')) {
          alert('Recomendamos una escala de 90 y activar los graficos fondos a la hora de imprimir');
-         document.getElementById("debug").style.display = "none";
+
+         //document.getElementById("debug").style.display = "none";
          document.getElementById("jugador1").style.display = "none";
          document.getElementById("jugador2").style.display = "none";
          document.getElementById("jugador3").style.display = "none";
          document.getElementById("jugador4").style.display = "none";
          document.getElementById("panelDado").style.display = "none";
-         document.getElementById("tablero").style.marginLeft = "0px";
-         document.getElementById("tablero").style.marginTop = "0px";
-         document.getElementById("normas").style.marginLeft = "0px";
-         document.getElementById("texto").style.marginLeft = "0px";
+         //document.getElementById("tablero").style.marginLeft = "0px";
+         //document.getElementById("tablero").style.marginTop = "0px";
+         //document.getElementById("normas").style.marginLeft = "0px";
+         //document.getElementById("texto").style.marginLeft = "0px";
          document.getElementById("ficha1").style.display = "none";
          document.getElementById("ficha2").style.display = "none";
          document.getElementById("ficha3").style.display = "none";
          document.getElementById("ficha4").style.display = "none";
-         document.getElementById("texto").style.display = "block";
-         document.getElementById("normas").style.display = "block";
+         //document.getElementById("texto").style.display = "block";
+         //document.getElementById("normas").style.display = "block";
 
-         window.print()
-         alert("volviendo al juego")
-         setTimeout(reload, 1000)
+         myFunction();
+         alert("Volviendo al juego");
+         setTimeout(reload, 1000);
 
          function reload() {
             location.reload();
          }
+
       } else {
          alert('Volviendo al juego');
       }
 
+   }
+
+   function myFunction() {
+      window.print();
    }
 
    function mostrarmensaje() {
@@ -727,6 +760,89 @@ $(function () {
 
    function volver() {
       $(mensaje).fadeOut();
+   }
+
+   /*configuramos el zoom de la pagina para que se vea bien */
+   //document.body.style.zoom = "80%";
+   /*hacemos que las casillas especiales no muestren el simbolo de pregunta */
+   for (let i = 0; i < arrayPreguntas.length; i++) {
+      arrayPreguntas[i].style.display = 'none';
+   }
+
+   /*otros ajustes de diseño */
+   numeros[27].style.marginLeft = "20px";
+   numeros[59].style.marginLeft = "20px";
+   preguntas[52].style.marginRight = "20px";
+   /*cuando hacemos click en cualquier pregunta */
+   for (i = 0; i < preguntas.length; i++) {
+      preguntas[i].onclick = sacarcarta;
+   }
+   /*muestra un alert con la pregunta si el modo trivia esta activado */
+   function preguntar() {
+
+      preguntas[i];
+      var identificador = this.parentNode.id;
+      console.log(identificador);
+
+      if (trivia == 1) {
+         alert("pregunta" + i); if (identificador == "casilla10") { confirm(casilla10.pregunta + "?\n" + casilla10.respuestaCorrecta + "\n") }
+      }
+
+      else if (trivia == 0) { alert("activa el modo pregunta") }
+
+   }
+
+   /*si el boton trivia es pulsado cambia el modo de jeugo  */
+   function cambiarmodo() {
+      if (trivia == 1) { trivia = 0 }
+      else if (trivia == 0) { trivia = 1 }
+   }
+
+   function responder() {
+      respuestaE = this.id;
+      document.getElementById("respuesta1").style.backgroundColor = "thistle";
+      document.getElementById("respuesta2").style.backgroundColor = "thistle";
+      document.getElementById("respuesta3").style.backgroundColor = "thistle";
+      document.getElementById(respuestaE).style.backgroundColor = "lightblue";
+      console.log(respuestaE);
+   }
+
+   function sacarcarta() {
+      var deg = 360;
+      $("#carta").css({ 'display': 'flex', 'align-items': 'center', 'justify-content': 'center' });
+      $(".card-tablero").animate({ left: '-=1px' }, 1000);
+
+      $('.card-tablero').animate(
+         { deg: deg },
+         {
+            duration: 1200,
+            step: function (now) {
+               $(this).css({ transform: 'rotate(' + now + 'deg)' });
+            }
+         }
+      );
+
+      document.getElementById("name").innerText = "Nombre";
+      document.getElementById("apellidos").innerText = "Apellido(s)";
+      document.getElementById("foto").src = "../../resources/img/tablero/tablero/casillas/persona.jpg";
+      document.getElementById("pregunta").innerText = "¿Ésto es una pregunta?";
+      document.getElementById("respuesta1").innerText = "Sí";
+      document.getElementById("respuesta2").innerText = "Tal vez";
+      document.getElementById("respuesta3").innerText = "No";
+      document.getElementById("respuesta1").onmouseover = document.getElementById("respuesta1").style.cursor = "pointer";
+      document.getElementById("respuesta2").onmouseover = document.getElementById("respuesta2").style.cursor = "pointer";
+      document.getElementById("respuesta3").onmouseover = document.getElementById("respuesta3").style.cursor = "pointer";
+
+   }
+
+   function quitarcarta() {
+      document.getElementById("carta").style.display = "none";
+      document.getElementById("carta").style.left = "0";
+   }
+
+   function aceptarcarta() {
+      document.getElementById("carta").style.display = "none";
+      document.getElementById("carta").style.left = "0";
    }
 
 });
