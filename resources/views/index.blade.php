@@ -31,6 +31,9 @@
                             </div>
                         </div>
                         @endif
+                        <div class="row align-items-center justify-content-center my-2">
+                            <a class="btn btn-primary btn-lg" href="{{url('historys')}}" role="button">Historias</a>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12 text-center my-1">
                                 <a class="btn btn-primary btn-lg" href="{{url('mode')}}">Jugar</a>

@@ -18,9 +18,6 @@
                     </div>
                     <div class="col-sm-12 text-center">
                         <div class="row align-items-center justify-content-center my-2">
-                            <a class="btn btn-primary btn-lg" href="{{url('historys')}}" role="button">Historia</a>
-                        </div>
-                        <div class="row align-items-center justify-content-center my-2">
                             <a id="modoIndividual" class="btn btn-primary btn-lg" href="{{url('gamemode')}}" role="button">Individual</a>
                         </div>
                         <div class="row align-items-center justify-content-center my-2">

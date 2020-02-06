@@ -40,9 +40,7 @@
         <!-- Incluir metodo de notificaciones -->
         @include('sweetalert::alert')
 
-        @if (\Request::is('historys') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelcartas') || \Request::is('history/*'))
-            @include('layouts.nav')
-        @endif
+        @include('layouts.nav')
 
         <div id="app" class="main">
             @yield('content')

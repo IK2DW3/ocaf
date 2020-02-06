@@ -17,7 +17,7 @@
             </li>
             @if (\Request::is('historys'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('mode') }}">Volver a Modo</a>
+                    <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
             @elseif (\Request::is('history/*'))
                 <li class="nav-item">
