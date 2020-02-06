@@ -303,4 +303,4 @@
 #respuesta3{margin: 1%; padding: 1%;background-color: #f3e1f3;}
 #aceptar{width: auto; height: auto; font-size: 1em;}
 
-#btnImprimir{ position: fixed; bottom: 10px; right: 10px;}
+#btnImprimir{ position: fixed; bottom: 10px; right: 10px; background-image: url(../../../resources/img/tablero/tablero/impresora.png); width: 100px; height: 100px; background-size: contain; font-weight: bold;}
