@@ -220,6 +220,33 @@
     grid-area: n;
     transition: transform 2s;
 }
+.casilla.antropologia::after { 
+    background-color:#fec57c !important;
+}
+.casilla.historia::after { 
+    background-color:#a76f62 !important;
+}
+.casilla.derecho::after { 
+    background-color: #9fffff !important;
+}
+.casilla.geografia::after { 
+    background-color:#fe9494 !important;
+}
+.casilla.filosofia::after { 
+    background-color:#fd7cfd !important;
+}
+.casilla.psicologia::after { 
+    background-color:#a8a8ff !important;
+}
+.casilla.economia::after { 
+    background-color:#ffd6dd !important;
+}
+.casilla.sociologia::after { 
+    background-color:#fefe85 !important;
+}
+.casilla.pedagogia::after { 
+    background-color:#aaf59e !important;
+}
 
 .ficha{
  background-color: white;
@@ -235,8 +262,6 @@
     border:solid black 3px; 
     top:10%;
     right: 1%;
-    height: 12.5vh;
-    max-height: 15vh;
     position: fixed;
     text-align: center;
     width: auto;

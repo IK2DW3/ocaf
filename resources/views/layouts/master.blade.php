@@ -27,9 +27,6 @@
 
         @if (\Request::is('tablero/normal'))
             <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
-            <style type="text/css" media="print">
-                @page { size: landscape; }
-            </style>
         @elseif (\Request::is('tablero/serpiente'))
             <link rel="stylesheet" href="../../resources/css/tablero/tablero2.css">
         @endif

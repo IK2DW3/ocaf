@@ -244,7 +244,25 @@ export default {
                 }
             }
             for (var i = 2; i < $('.casilla').length + 2; i++) {
-                
+                if (me.arrayCategoriaCasillas[i].ambito_id === 3 ) {
+                        $('#casilla'+i).toggleClass('antropologia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 1 ) {
+                        $('#casilla'+i).toggleClass('historia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 2 ) {
+                        $('#casilla'+i).toggleClass('derecho');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 4 ) {
+                        $('#casilla'+i).toggleClass('geografia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 5 ) {
+                        $('#casilla'+i).toggleClass('filosofia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 6 ) {
+                        $('#casilla'+i).toggleClass('psicologia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 7 ) {
+                        $('#casilla'+i).toggleClass('economia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 8 ) {
+                        $('#casilla'+i).toggleClass('sociologia');
+                    } else if (me.arrayCategoriaCasillas[i].ambito_id === 9 ) {
+                        $('#casilla'+i).toggleClass('pedagogia');
+                    }
                 $('#nombreMujer'+i).text(me.arrayCategoriaCasillas[i].nombre.substring(0,20));
                 if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
                     try {
@@ -269,6 +287,25 @@ export default {
             me.arrayAleatorioNormalCasillas[1] = '';
             if (me.partida.modo == 'normal') {
                 for (let i = 2; i < $('.casilla').length + 2; i++) {
+                    if (me.arrayAleatorioNormalCasillas[i].ambito_id === 3 ) {
+                        $('#casilla'+i).toggleClass('antropologia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 1 ) {
+                        $('#casilla'+i).toggleClass('historia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 2 ) {
+                        $('#casilla'+i).toggleClass('derecho');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 4 ) {
+                        $('#casilla'+i).toggleClass('geografia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 5 ) {
+                        $('#casilla'+i).toggleClass('filosofia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 6 ) {
+                        $('#casilla'+i).toggleClass('psicologia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 7 ) {
+                        $('#casilla'+i).toggleClass('economia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 8 ) {
+                        $('#casilla'+i).toggleClass('sociologia');
+                    } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 9 ) {
+                        $('#casilla'+i).toggleClass('pedagogia');
+                    }
                     $('#nombreMujer'+i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0,20));
                     if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
                         try {

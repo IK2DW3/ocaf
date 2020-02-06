@@ -91,7 +91,7 @@
 
 .casilla {
     background-color: #fff;
-    background-image: url(../../../resources/img/tablero/tablero/casillas/persona.jpg);
+    background-image: url(../../../resources/img/tablero/tablero/casillas/imglogo.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -228,6 +228,33 @@
     grid-area: n;
     transition: transform 2s;
 }
+.casilla.antropologia::after { 
+    background-color:#fec57c !important;
+}
+.casilla.historia::after { 
+    background-color:#a76f62 !important;
+}
+.casilla.derecho::after { 
+    background-color: #9fffff !important;
+}
+.casilla.geografia::after { 
+    background-color:#fe9494 !important;
+}
+.casilla.filosofia::after { 
+    background-color:#fd7cfd !important;
+}
+.casilla.psicologia::after { 
+    background-color:#a8a8ff !important;
+}
+.casilla.economia::after { 
+    background-color:#ffd6dd !important;
+}
+.casilla.sociologia::after { 
+    background-color:#fefe85 !important;
+}
+.casilla.pedagogia::after { 
+    background-color:#aaf59e !important;
+}
 
 .ficha{
  background-color: white;
@@ -238,20 +265,14 @@
 }
 
 #panelDado{
-    background-color: grey; 
+    background-color: #f0d0b2; 
     border:solid black 3px; 
-    max-height: 15vh;
+    top:10%;
+    right: 1%;
     position: fixed;
     text-align: center;
     width: auto;
     z-index: 1000;
-    right: 0;
-    top: 50%;
-    width: 200px;
-    height: 220px;
-    border-bottom-left-radius: 25%;
-    border-top-left-radius: 25%;
-    padding: 10px;
 }
 
 #botontirar{

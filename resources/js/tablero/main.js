@@ -711,34 +711,59 @@ $(function () {
 
    function Imprimir() {
       /*pedimos que el usuario confirme que quiere imprimir ya que reinicia el progrso del jugo */
-      if (confirm('Si desea imprimir, el progreso de la partida se reiniciara.')) {
+      if (confirm('si desea imprimir el progreso de la partida se reiniciara')) {
          alert('Recomendamos una escala de 90 y activar los graficos fondos a la hora de imprimir');
+         
+         
 
-         //document.getElementById("debug").style.display = "none";
-         document.getElementById("jugador1").style.display = "none";
-         document.getElementById("jugador2").style.display = "none";
-         document.getElementById("jugador3").style.display = "none";
-         document.getElementById("jugador4").style.display = "none";
+         if (document.getElementById("tablero2")==null)
+         {
+         document.getElementById("tablero").style.position="absolute";
+         document.getElementById("tablero").style.margin="0px";
+         document.getElementById("tablero").style.top="-750px";
+         document.getElementById("tablero").style.left="-100px";
+         document.getElementById("tablero").style.height="30vh";
+         document.getElementById("tablero").style.width="100vw";
+         }
+
+         else
+         {
+         document.getElementById("tablero2").style.position="absolute";
+         document.getElementById("tablero2").style.margin="0px";
+         document.getElementById("tablero2").style.top="-750px";
+         document.getElementById("tablero2").style.left="-100px";
+         document.getElementById("tablero2").style.height="30vh";
+         document.getElementById("tablero2").style.width="100vw";
+         }
+         
+
+         document.getElementById("jugador1").style.visibility = "hidden";
+         document.getElementById("jugador2").style.visibility = "hidden";
+         document.getElementById("jugador3").style.visibility = "hidden";
+         document.getElementById("jugador4").style.visibility = "hidden";
+         document.getElementById("btnImprimir").style.visibility="hidden"
+
          document.getElementById("panelDado").style.display = "none";
-         //document.getElementById("tablero").style.marginLeft = "0px";
-         //document.getElementById("tablero").style.marginTop = "0px";
-         //document.getElementById("normas").style.marginLeft = "0px";
-         //document.getElementById("texto").style.marginLeft = "0px";
+         
+   
          document.getElementById("ficha1").style.display = "none";
          document.getElementById("ficha2").style.display = "none";
          document.getElementById("ficha3").style.display = "none";
          document.getElementById("ficha4").style.display = "none";
-         //document.getElementById("texto").style.display = "block";
-         //document.getElementById("normas").style.display = "block";
 
-         myFunction();
+         var footer = document.getElementsByClassName("footer jumbotron text-center");
+         var fab = document.getElementsByClassName("fab");
+
+         footer[0].style.display="none";
+         fab[0].style.display="none";
+
+         window.print();
          alert("Volviendo al juego");
          setTimeout(reload, 1000);
 
          function reload() {
             location.reload();
          }
-
       } else {
          alert('Volviendo al juego');
       }
