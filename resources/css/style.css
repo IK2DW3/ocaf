@@ -150,8 +150,7 @@ div.card h2 {
     font-size: 1em;
 }
 
-div.card img {
-    height: 180px;
+div.card .card-body-img img{
     object-fit: cover;
 }
 

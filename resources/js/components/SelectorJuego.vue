@@ -40,7 +40,7 @@
                                     Normal
                                 </label>
                                 <div class="input-group-prepend select-tablero">
-                                    <div class="input-group-text input-tableroDefault justify-content-center">
+                                    <div class="input-group-text input-tableroDefault justify-content-center" @click="elegirTablero('.input-tableroDefault')">
                                         <input v-model="tablero" type="radio" id="tableroDefault" name="tab" class="radio-gamemode" value="normal">
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                     Nuevo
                                 </label>
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text input-tableroNuevo justify-content-center">
+                                    <div class="input-group-text input-tableroNuevo justify-content-center" @click="elegirTablero('.input-tableroNuevo')">
                                         <input v-model="tablero" type="radio" id="tableroNuevo" name="tab" class="radio-gamemode" value="nuevo">
                                     </div>
                                 </div>
@@ -102,6 +102,12 @@ export default {
         },
         removeLocalStorage(){
             localStorage.removeItem('modoSeleccionado');
+        },
+        elegirTablero(div) {
+            $(div).css({'border':'1.25px solid #e64900'});
+            $(div).children().prop("checked", true);
+            $(div).parent().parent().siblings('div').children().eq(1).children().css({'border':'1px solid #ced4da'});
+            this.tablero = $(div).children().val();
         },
         checkForm(e) {
             let me = this;

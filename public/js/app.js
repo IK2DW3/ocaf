@@ -3708,6 +3708,17 @@ __webpack_require__.r(__webpack_exports__);
     removeLocalStorage: function removeLocalStorage() {
       localStorage.removeItem('modoSeleccionado');
     },
+    elegirTablero: function elegirTablero(div) {
+      $(div).css({
+        'border': '1.25px solid #e64900'
+      });
+      $(div).children().prop("checked", true);
+      $(div).parent().parent().siblings('div').children().eq(1).children().css({
+        'border': '1px solid #ced4da'
+      }); //console.log($(div).parent().parent().siblings('div').children().eq(1));
+
+      this.tablero = $(div).children().val();
+    },
     checkForm: function checkForm(e) {
       var me = this;
 
@@ -49378,7 +49389,14 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "input-group-text input-tableroDefault justify-content-center"
+                                "input-group-text input-tableroDefault justify-content-center",
+                              on: {
+                                click: function($event) {
+                                  return _vm.elegirTablero(
+                                    ".input-tableroDefault"
+                                  )
+                                }
+                              }
                             },
                             [
                               _c("input", {
@@ -49438,7 +49456,12 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "input-group-text input-tableroNuevo justify-content-center"
+                              "input-group-text input-tableroNuevo justify-content-center",
+                            on: {
+                              click: function($event) {
+                                return _vm.elegirTablero(".input-tableroNuevo")
+                              }
+                            }
                           },
                           [
                             _c("input", {
@@ -50995,10 +51018,11 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "row align-items-center justify-content-center"
+                    staticClass:
+                      "row align-items-center justify-content-center h-100"
                   },
                   [
-                    _c("div", { staticClass: "col-sm-12" }, [
+                    _c("div", { staticClass: "col-sm-12 card-body-img" }, [
                       carta.imgRuta != ""
                         ? _c("img", {
                             staticClass: "card-img-top",
@@ -51030,16 +51054,23 @@ var render = function() {
                           })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-12" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { href: "history/" + carta.id }
-                        },
-                        [_vm._v("Ver")]
-                      )
-                    ])
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-sm-12 d-flex align-items-center justify-content-center"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { href: "history/" + carta.id }
+                          },
+                          [_vm._v("Ver")]
+                        )
+                      ]
+                    )
                   ]
                 )
               ]),
@@ -63745,24 +63776,6 @@ $(function () {
   });
   $('#botonImprimir').hover(function () {
     $(this).parent().siblings('div').children().first().slideToggle('fast');
-  });
-  $('.input-tableroDefault').click(function () {
-    $('.input-tableroNuevo').css({
-      'border': '1px solid #ced4da'
-    });
-    $(this).css({
-      'border': '1.25px solid #e64900'
-    });
-    $("#tableroDefault").prop("checked", true);
-  });
-  $('.input-tableroNuevo').click(function () {
-    $('.input-tableroDefault').css({
-      'border': '1px solid #ced4da'
-    });
-    $(this).css({
-      'border': '1.25px solid #e64900'
-    });
-    $("#tableroNuevo").prop("checked", true);
   });
 });
 
