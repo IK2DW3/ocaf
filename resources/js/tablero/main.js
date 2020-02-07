@@ -14,7 +14,6 @@ $(function () {
    var respuestaE = "";
    var numeros = $('.numCasilla'); // Array de los numero en las casillas
    var preguntas = $('.pregunta'); // Array de las preguntas en las casillas
-   var casillas = $('.casilla'); // Array de las casillas
 
    /* Asigno al arrayPreguntas las casillas que no tendran el icono de interrogacion */
    var arrayPreguntas = [preguntas[0], preguntas[4], preguntas[5], preguntas[8], preguntas[11], preguntas[13], preguntas[17], preguntas[18], preguntas[22],

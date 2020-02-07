@@ -23,11 +23,17 @@
                 <div class="card-header d-flex align-items-center justify-content-center">
                     <h2 v-text="carta.nombre +' '+ carta.apellido" class="font-weight-bolder m-0"></h2>
                 </div>
-                    <img v-if="carta.imgRuta != ''" :src="'../resources/img/cartas/'+ carta.imgRuta" class="card-img-top" v-bind:alt='carta.nombre' v-bind:title='carta.nombre' style="height:200px">
-                    <img v-else-if="carta.imgDefault != ''" :src="carta.imgDefault" class="card-img-top" v-bind:alt="carta.nombre" v-bind:title="carta.nombre" style="height:200px">
-                    <img v-else :src="'../resources/img/imglogo.svg'" class="card-img-top" v-bind:alt="'No encontrado'" v-bind:title="'No encontrado'" style="height:200px">
-                <div class="card-body d-flex align-items-center justify-content-center">
-                    <a class="btn btn-primary" :href="'history/'+ carta.id">Ver</a>
+                <div class="card-body">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-sm-12">
+                            <img v-if="carta.imgRuta != ''" :src="'../resources/img/cartas/'+ carta.imgRuta" class="card-img-top" v-bind:alt='carta.nombre' v-bind:title='carta.nombre' style="height:200px">
+                            <img v-else-if="carta.imgDefault != ''" :src="carta.imgDefault" class="card-img-top" v-bind:alt="carta.nombre" v-bind:title="carta.nombre" style="height:200px">
+                            <img v-else :src="'../resources/img/imglogo.svg'" class="card-img-top" v-bind:alt="'No encontrado'" v-bind:title="'No encontrado'" style="height:200px">
+                        </div>
+                        <div class="col-sm-12">
+                            <a class="btn btn-primary" :href="'history/'+ carta.id">Ver</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer" v-text="carta.ambito.ambitoEsp"></div>
             </div>

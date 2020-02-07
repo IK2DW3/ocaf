@@ -3678,14 +3678,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4046,63 +4038,84 @@ __webpack_require__.r(__webpack_exports__);
     aleatorizarCasillas: function aleatorizarCasillas() {
       var me = this;
 
-      for (var i = 63; i > 0; i--) {
-        var chosenNumber = Math.floor(Math.random() * me.arrayCartas.length);
-        me.arrayAleatorioNormalCasillas.push(me.arrayCartas[chosenNumber]);
+      for (var i = 0; i < 41; i++) {
+        var aleatorio1 = Math.floor(Math.random() * me.arrayCartas.length);
+        var aleatorio2 = Math.floor(Math.random() * me.arrayCartas.length);
+
+        if (aleatorio1 != aleatorio2) {
+          me.arrayAleatorioNormalCasillas.push(me.arrayCartas[aleatorio2]);
+
+          for (var j = 0; j < i; j++) {
+            if (me.arrayAleatorioNormalCasillas[j].id == me.arrayAleatorioNormalCasillas[i].id) {
+              me.arrayAleatorioNormalCasillas.splice(i, 1);
+              i--;
+            }
+          }
+        }
       }
     },
     categoriaCasillas: function categoriaCasillas(categoria) {
       var me = this;
-      me.arrayCategoriaCasillas[0] = '';
-      me.arrayCategoriaCasillas[1] = '';
+      var casillas = $('.casilla');
+      var arrayCasillas = [casillas[1], casillas[2], casillas[3], casillas[6], casillas[7], casillas[9], casillas[10], casillas[12], casillas[14], casillas[15], casillas[16], casillas[19], casillas[20], casillas[21], casillas[23], casillas[24], casillas[25], casillas[27], casillas[28], casillas[29], casillas[32], casillas[33], casillas[34], casillas[36], casillas[37], casillas[38], casillas[39], casillas[42], casillas[43], casillas[45], casillas[46], casillas[47], casillas[48], casillas[50], casillas[52], casillas[54], casillas[55], casillas[56], casillas[59], casillas[60], casillas[61]];
 
-      for (var _i = 0; _i < me.arrayCartas.length; _i++) {
-        if (me.arrayCartas[_i].ambito.ambitoEsp == categoria) {
-          me.arrayCategoriaCasillas.push(me.arrayCartas[_i]);
+      for (var i = 0; i < me.arrayCartas.length; i++) {
+        if (me.arrayCartas[i].ambito.ambitoEsp == categoria) {
+          me.arrayCategoriaCasillas.push(me.arrayCartas[i]);
         }
       }
 
-      for (var i = 2; i < $('.casilla').length + 2; i++) {
-        if (me.arrayCategoriaCasillas[i].ambito_id === 3) {
-          $('#casilla' + i).toggleClass('antropologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 1) {
-          $('#casilla' + i).toggleClass('historia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 2) {
-          $('#casilla' + i).toggleClass('derecho');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 4) {
-          $('#casilla' + i).toggleClass('geografia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 5) {
-          $('#casilla' + i).toggleClass('filosofia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 6) {
-          $('#casilla' + i).toggleClass('psicologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 7) {
-          $('#casilla' + i).toggleClass('economia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 8) {
-          $('#casilla' + i).toggleClass('sociologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 9) {
-          $('#casilla' + i).toggleClass('pedagogia');
+      if (me.arrayCategoriaCasillas.length < 41) {
+        for (var i = 0; i < me.arrayCartas.length; i++) {
+          me.arrayCategoriaCasillas.push(me.arrayAleatorioNormalCasillas[i]);
+
+          if (me.arrayCategoriaCasillas.length == 41) {
+            break;
+          }
+        }
+      }
+
+      for (var i = 0; i < arrayCasillas.length; i++) {
+        if (me.arrayCategoriaCasillas[i].ambito_id == 1) {
+          $(arrayCasillas[i]).toggleClass('historia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 2) {
+          $(arrayCasillas[i]).toggleClass('derecho');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 3) {
+          $(arrayCasillas[i]).toggleClass('antropologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 4) {
+          $(arrayCasillas[i]).toggleClass('geografia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 5) {
+          $(arrayCasillas[i]).toggleClass('filosofia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 6) {
+          $(arrayCasillas[i]).toggleClass('psicologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 7) {
+          $(arrayCasillas[i]).toggleClass('economia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 8) {
+          $(arrayCasillas[i]).toggleClass('sociologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 9) {
+          $(arrayCasillas[i]).toggleClass('pedagogia');
         }
 
-        $('#nombreMujer' + i).text(me.arrayCategoriaCasillas[i].nombre.substring(0, 20));
+        $(arrayCasillas[i]).find('#nombreMujer').text(me.arrayCategoriaCasillas[i].nombre.substring(0, 1) + '. ' + me.arrayCategoriaCasillas[i].apellido.substring(0, 20));
 
         if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
           try {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(' + me.arrayCategoriaCasillas[i].imgDefault + ')'
             });
           } catch (error) {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
             });
             console.log(error);
           }
         } else {
           try {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/cartas/' + me.arrayCategoriaCasillas[i].imgRuta + ')'
             });
           } catch (error) {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
             });
             console.log(error);
@@ -4112,51 +4125,52 @@ __webpack_require__.r(__webpack_exports__);
     },
     asignarCasillas: function asignarCasillas() {
       var me = this;
-      me.arrayAleatorioNormalCasillas[0] = '';
-      me.arrayAleatorioNormalCasillas[1] = '';
 
       if (me.partida.modo == 'normal') {
-        for (var i = 2; i < $('.casilla').length + 2; i++) {
+        var casillas = $('.casilla');
+        var arrayCasillas = [casillas[1], casillas[2], casillas[3], casillas[6], casillas[7], casillas[9], casillas[10], casillas[12], casillas[14], casillas[15], casillas[16], casillas[19], casillas[20], casillas[21], casillas[23], casillas[24], casillas[25], casillas[27], casillas[28], casillas[29], casillas[32], casillas[33], casillas[34], casillas[37], casillas[38], casillas[39], casillas[42], casillas[43], casillas[45], casillas[46], casillas[47], casillas[48], casillas[50], casillas[52], casillas[54], casillas[55], casillas[56], casillas[59], casillas[60], casillas[61]];
+
+        for (var i = 0; i < arrayCasillas.length; i++) {
           if (me.arrayAleatorioNormalCasillas[i].ambito_id === 3) {
-            $('#casilla' + i).toggleClass('antropologia');
+            $(arrayCasillas[i]).toggleClass('antropologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 1) {
-            $('#casilla' + i).toggleClass('historia');
+            $(arrayCasillas[i]).toggleClass('historia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 2) {
-            $('#casilla' + i).toggleClass('derecho');
+            $(arrayCasillas[i]).toggleClass('derecho');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 4) {
-            $('#casilla' + i).toggleClass('geografia');
+            $(arrayCasillas[i]).toggleClass('geografia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 5) {
-            $('#casilla' + i).toggleClass('filosofia');
+            $(arrayCasillas[i]).toggleClass('filosofia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 6) {
-            $('#casilla' + i).toggleClass('psicologia');
+            $(arrayCasillas[i]).toggleClass('psicologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 7) {
-            $('#casilla' + i).toggleClass('economia');
+            $(arrayCasillas[i]).toggleClass('economia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 8) {
-            $('#casilla' + i).toggleClass('sociologia');
+            $(arrayCasillas[i]).toggleClass('sociologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 9) {
-            $('#casilla' + i).toggleClass('pedagogia');
+            $(arrayCasillas[i]).toggleClass('pedagogia');
           }
 
-          $('#nombreMujer' + i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 20));
+          $(arrayCasillas[i]).find('#nombreMujer').text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 1) + '. ' + me.arrayAleatorioNormalCasillas[i].apellido.substring(0, 20));
 
           if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
             try {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(' + me.arrayAleatorioNormalCasillas[i].imgDefault + ')'
               });
             } catch (error) {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
               });
               console.log(error);
             }
           } else {
             try {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/cartas/' + me.arrayAleatorioNormalCasillas[i].imgRuta + ')'
               });
             } catch (error) {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
               });
               console.log(error);
@@ -4164,33 +4178,33 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       } else if (me.partida.modo == 'ambitos') {
-        if (me.partida.categoria == 'Antropología') {
+        if (me.partida.categoria == "Antropología") {
           me.categoriaCasillas('Antropología');
-          $('.casilla').toggleClass('antropologia');
-        } else if (me.partida.categoria == 'Historia') {
+          $(arrayCasillas).toggleClass('antropologia');
+        } else if (me.partida.categoria == "Historia") {
           me.categoriaCasillas('Historia');
-          $('.casilla').toggleClass('historia');
-        } else if (me.partida.categoria == 'Derecho') {
+          $(arrayCasillas).toggleClass('historia');
+        } else if (me.partida.categoria == "Derecho") {
           me.categoriaCasillas('Derecho');
-          $('.casilla').toggleClass('derecho');
-        } else if (me.partida.categoria == 'Geografía') {
+          $(arrayCasillas).toggleClass('derecho');
+        } else if (me.partida.categoria == "Geografía") {
           me.categoriaCasillas('Geografía');
-          $('.casilla').toggleClass('geografia');
-        } else if (me.partida.categoria == 'Filosofía') {
+          $(arrayCasillas).toggleClass('geografia');
+        } else if (me.partida.categoria == "Filosofía") {
           me.categoriaCasillas('Filosofía');
-          $('.casilla').toggleClass('filosofia');
-        } else if (me.partida.categoria == 'Psicología') {
+          $(arrayCasillas).toggleClass('filosofia');
+        } else if (me.partida.categoria == "Psicología") {
           me.categoriaCasillas('Psicología');
-          $('.casilla').toggleClass('pshicologia');
-        } else if (me.partida.categoria == 'Economía') {
+          $(arrayCasillas).toggleClass('pshicologia');
+        } else if (me.partida.categoria == "Economía") {
           me.categoriaCasillas('Economía');
-          $('.casilla').toggleClass('economia');
-        } else if (me.partida.categoria == 'Sociología') {
+          $(arrayCasillas).toggleClass('economia');
+        } else if (me.partida.categoria == "Sociología") {
           me.categoriaCasillas('Sociología');
-          $('.casilla').toggleClass('sociologia');
-        } else if (me.partida.categoria == 'Pedagogía') {
+          $(arrayCasillas).toggleClass('sociologia');
+        } else if (me.partida.categoria == "Pedagogía") {
           me.categoriaCasillas('Pedagogía');
-          $('.casilla').toggleClass('pedagogia');
+          $(arrayCasillas).toggleClass('pedagogia');
         }
       }
     },
@@ -4446,63 +4460,84 @@ __webpack_require__.r(__webpack_exports__);
     aleatorizarCasillas: function aleatorizarCasillas() {
       var me = this;
 
-      for (var i = 63; i > 0; i--) {
-        var chosenNumber = Math.floor(Math.random() * me.arrayCartas.length);
-        me.arrayAleatorioNormalCasillas.push(me.arrayCartas[chosenNumber]);
+      for (var i = 0; i < 41; i++) {
+        var aleatorio1 = Math.floor(Math.random() * me.arrayCartas.length);
+        var aleatorio2 = Math.floor(Math.random() * me.arrayCartas.length);
+
+        if (aleatorio1 != aleatorio2) {
+          me.arrayAleatorioNormalCasillas.push(me.arrayCartas[aleatorio2]);
+
+          for (var j = 0; j < i; j++) {
+            if (me.arrayAleatorioNormalCasillas[j].id == me.arrayAleatorioNormalCasillas[i].id) {
+              me.arrayAleatorioNormalCasillas.splice(i, 1);
+              i--;
+            }
+          }
+        }
       }
     },
     categoriaCasillas: function categoriaCasillas(categoria) {
       var me = this;
-      me.arrayCategoriaCasillas[0] = '';
-      me.arrayCategoriaCasillas[1] = '';
+      var casillas = $('.casilla');
+      var arrayCasillas = [casillas[1], casillas[2], casillas[3], casillas[6], casillas[7], casillas[9], casillas[10], casillas[12], casillas[14], casillas[15], casillas[16], casillas[19], casillas[20], casillas[21], casillas[23], casillas[24], casillas[25], casillas[27], casillas[28], casillas[29], casillas[32], casillas[33], casillas[34], casillas[36], casillas[37], casillas[38], casillas[39], casillas[42], casillas[43], casillas[45], casillas[46], casillas[47], casillas[48], casillas[50], casillas[52], casillas[54], casillas[55], casillas[56], casillas[59], casillas[60], casillas[61]];
 
-      for (var _i = 0; _i < me.arrayCartas.length; _i++) {
-        if (me.arrayCartas[_i].ambito.ambitoEsp == categoria) {
-          me.arrayCategoriaCasillas.push(me.arrayCartas[_i]);
+      for (var i = 0; i < me.arrayCartas.length; i++) {
+        if (me.arrayCartas[i].ambito.ambitoEsp == categoria) {
+          me.arrayCategoriaCasillas.push(me.arrayCartas[i]);
         }
       }
 
-      for (var i = 2; i < $('.casilla').length + 2; i++) {
-        if (me.arrayCategoriaCasillas[i].ambito_id === 3) {
-          $('#casilla' + i).toggleClass('antropologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 1) {
-          $('#casilla' + i).toggleClass('historia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 2) {
-          $('#casilla' + i).toggleClass('derecho');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 4) {
-          $('#casilla' + i).toggleClass('geografia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 5) {
-          $('#casilla' + i).toggleClass('filosofia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 6) {
-          $('#casilla' + i).toggleClass('psicologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 7) {
-          $('#casilla' + i).toggleClass('economia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 8) {
-          $('#casilla' + i).toggleClass('sociologia');
-        } else if (me.arrayCategoriaCasillas[i].ambito_id === 9) {
-          $('#casilla' + i).toggleClass('pedagogia');
+      if (me.arrayCategoriaCasillas.length < 41) {
+        for (var i = 0; i < me.arrayCartas.length; i++) {
+          me.arrayCategoriaCasillas.push(me.arrayAleatorioNormalCasillas[i]);
+
+          if (me.arrayCategoriaCasillas.length == 41) {
+            break;
+          }
+        }
+      }
+
+      for (var i = 0; i < arrayCasillas.length; i++) {
+        if (me.arrayCategoriaCasillas[i].ambito_id == 1) {
+          $(arrayCasillas[i]).toggleClass('historia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 2) {
+          $(arrayCasillas[i]).toggleClass('derecho');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 3) {
+          $(arrayCasillas[i]).toggleClass('antropologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 4) {
+          $(arrayCasillas[i]).toggleClass('geografia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 5) {
+          $(arrayCasillas[i]).toggleClass('filosofia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 6) {
+          $(arrayCasillas[i]).toggleClass('psicologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 7) {
+          $(arrayCasillas[i]).toggleClass('economia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 8) {
+          $(arrayCasillas[i]).toggleClass('sociologia');
+        } else if (me.arrayCategoriaCasillas[i].ambito_id == 9) {
+          $(arrayCasillas[i]).toggleClass('pedagogia');
         }
 
-        $('#nombreMujer' + i).text(me.arrayCategoriaCasillas[i].nombre.substring(0, 20));
+        $(arrayCasillas[i]).find('#nombreMujer').text(me.arrayCategoriaCasillas[i].nombre.substring(0, 1) + '. ' + me.arrayCategoriaCasillas[i].apellido.substring(0, 20));
 
         if (me.arrayCategoriaCasillas[i].imgRuta == "" || me.arrayCategoriaCasillas[i].imgRuta == null) {
           try {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(' + me.arrayCategoriaCasillas[i].imgDefault + ')'
             });
           } catch (error) {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
             });
             console.log(error);
           }
         } else {
           try {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/cartas/' + me.arrayCategoriaCasillas[i].imgRuta + ')'
             });
           } catch (error) {
-            $('#casilla' + i).css({
+            $(arrayCasillas[i]).css({
               'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
             });
             console.log(error);
@@ -4512,51 +4547,52 @@ __webpack_require__.r(__webpack_exports__);
     },
     asignarCasillas: function asignarCasillas() {
       var me = this;
-      me.arrayAleatorioNormalCasillas[0] = '';
-      me.arrayAleatorioNormalCasillas[1] = '';
 
       if (me.partida.modo == 'normal') {
-        for (var i = 2; i < $('.casilla').length + 2; i++) {
+        var casillas = $('.casilla');
+        var arrayCasillas = [casillas[1], casillas[2], casillas[3], casillas[6], casillas[7], casillas[9], casillas[10], casillas[12], casillas[14], casillas[15], casillas[16], casillas[19], casillas[20], casillas[21], casillas[23], casillas[24], casillas[25], casillas[27], casillas[28], casillas[29], casillas[32], casillas[33], casillas[34], casillas[37], casillas[38], casillas[39], casillas[42], casillas[43], casillas[45], casillas[46], casillas[47], casillas[48], casillas[50], casillas[52], casillas[54], casillas[55], casillas[56], casillas[59], casillas[60], casillas[61]];
+
+        for (var i = 0; i < arrayCasillas.length; i++) {
           if (me.arrayAleatorioNormalCasillas[i].ambito_id === 3) {
-            $('#casilla' + i).toggleClass('antropologia');
+            $(arrayCasillas[i]).toggleClass('antropologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 1) {
-            $('#casilla' + i).toggleClass('historia');
+            $(arrayCasillas[i]).toggleClass('historia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 2) {
-            $('#casilla' + i).toggleClass('derecho');
+            $(arrayCasillas[i]).toggleClass('derecho');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 4) {
-            $('#casilla' + i).toggleClass('geografia');
+            $(arrayCasillas[i]).toggleClass('geografia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 5) {
-            $('#casilla' + i).toggleClass('filosofia');
+            $(arrayCasillas[i]).toggleClass('filosofia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 6) {
-            $('#casilla' + i).toggleClass('psicologia');
+            $(arrayCasillas[i]).toggleClass('psicologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 7) {
-            $('#casilla' + i).toggleClass('economia');
+            $(arrayCasillas[i]).toggleClass('economia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 8) {
-            $('#casilla' + i).toggleClass('sociologia');
+            $(arrayCasillas[i]).toggleClass('sociologia');
           } else if (me.arrayAleatorioNormalCasillas[i].ambito_id === 9) {
-            $('#casilla' + i).toggleClass('pedagogia');
+            $(arrayCasillas[i]).toggleClass('pedagogia');
           }
 
-          $('#nombreMujer' + i).text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 20));
+          $(arrayCasillas[i]).find('#nombreMujer').text(me.arrayAleatorioNormalCasillas[i].nombre.substring(0, 1) + '. ' + me.arrayAleatorioNormalCasillas[i].apellido.substring(0, 20));
 
           if (me.arrayAleatorioNormalCasillas[i].imgRuta == "" || me.arrayAleatorioNormalCasillas[i].imgRuta == null) {
             try {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(' + me.arrayAleatorioNormalCasillas[i].imgDefault + ')'
               });
             } catch (error) {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
               });
               console.log(error);
             }
           } else {
             try {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/cartas/' + me.arrayAleatorioNormalCasillas[i].imgRuta + ')'
               });
             } catch (error) {
-              $('#casilla' + i).css({
+              $(arrayCasillas[i]).css({
                 'background-image': 'url(../../resources/img/tablero/tablero/casillas/imglogo.png)'
               });
               console.log(error);
@@ -4564,24 +4600,33 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       } else if (me.partida.modo == 'ambitos') {
-        if (me.partida.categoria == 'Antropología') {
+        if (me.partida.categoria == "Antropología") {
           me.categoriaCasillas('Antropología');
-        } else if (me.partida.categoria == 'Historia') {
+          $(arrayCasillas).toggleClass('antropologia');
+        } else if (me.partida.categoria == "Historia") {
           me.categoriaCasillas('Historia');
-        } else if (me.partida.categoria == 'Derecho') {
+          $(arrayCasillas).toggleClass('historia');
+        } else if (me.partida.categoria == "Derecho") {
           me.categoriaCasillas('Derecho');
-        } else if (me.partida.categoria == 'Geografía') {
+          $(arrayCasillas).toggleClass('derecho');
+        } else if (me.partida.categoria == "Geografía") {
           me.categoriaCasillas('Geografía');
-        } else if (me.partida.categoria == 'Filosofía') {
+          $(arrayCasillas).toggleClass('geografia');
+        } else if (me.partida.categoria == "Filosofía") {
           me.categoriaCasillas('Filosofía');
-        } else if (me.partida.categoria == 'Psicología') {
+          $(arrayCasillas).toggleClass('filosofia');
+        } else if (me.partida.categoria == "Psicología") {
           me.categoriaCasillas('Psicología');
-        } else if (me.partida.categoria == 'Economía') {
+          $(arrayCasillas).toggleClass('pshicologia');
+        } else if (me.partida.categoria == "Economía") {
           me.categoriaCasillas('Economía');
-        } else if (me.partida.categoria == 'Sociología') {
+          $(arrayCasillas).toggleClass('economia');
+        } else if (me.partida.categoria == "Sociología") {
           me.categoriaCasillas('Sociología');
-        } else if (me.partida.categoria == 'Pedagogía') {
+          $(arrayCasillas).toggleClass('sociologia');
+        } else if (me.partida.categoria == "Pedagogía") {
           me.categoriaCasillas('Pedagogía');
+          $(arrayCasillas).toggleClass('pedagogia');
         }
       }
     },
@@ -4607,6 +4652,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49128,29 +49179,6 @@ var render = function() {
   return _c("div", { staticClass: "col-sm-8 col-md-8 col-lg-6 box-gamemode" }, [
     _c("div", { staticClass: "row box-gamemode-contenido" }, [
       _c("div", { staticClass: "col-sm-12 text-center" }, [
-        _c("picture", [
-          _c("source", {
-            attrs: {
-              srcset: "../resources/img/imglogo.svg",
-              type: "image/svg+xml"
-            }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src: "../resources/img/imglogo.png",
-              alt: "SVG con fallback de png",
-              title: "OCA-F"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12 text-center" }, [
-        _c("h1", { domProps: { textContent: _vm._s("OCA-F") } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12 text-center" }, [
         _c(
           "form",
           {
@@ -49160,8 +49188,14 @@ var render = function() {
           },
           [
             _vm.gamemode === "Individual"
-              ? _c("h2", { domProps: { textContent: _vm._s(_vm.gamemode) } })
-              : _c("h2", { domProps: { textContent: _vm._s("Co-Operativo") } }),
+              ? _c("h2", {
+                  staticClass: "my-4",
+                  domProps: { textContent: _vm._s("Juego " + _vm.gamemode) }
+                })
+              : _c("h2", {
+                  staticClass: "my-4",
+                  domProps: { textContent: _vm._s("Juego Co-Operativo") }
+                }),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c(
@@ -49598,7 +49632,6 @@ var render = function() {
                               n !== 27 &&
                               n !== 31 &&
                               n !== 32 &&
-                              n !== 35 &&
                               n !== 41 &&
                               n !== 42 &&
                               n !== 45 &&
@@ -49609,7 +49642,7 @@ var render = function() {
                               n !== 59
                                 ? _c("p", {
                                     staticClass: "m-0",
-                                    attrs: { id: "nombreMujer" + n },
+                                    attrs: { id: "nombreMujer" },
                                     domProps: { textContent: _vm._s("") }
                                   })
                                 : _vm._e()
@@ -50958,53 +50991,58 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              carta.imgRuta != ""
-                ? _c("img", {
-                    staticClass: "card-img-top",
-                    staticStyle: { height: "200px" },
-                    attrs: {
-                      src: "../resources/img/cartas/" + carta.imgRuta,
-                      alt: carta.nombre,
-                      title: carta.nombre
-                    }
-                  })
-                : carta.imgDefault != ""
-                ? _c("img", {
-                    staticClass: "card-img-top",
-                    staticStyle: { height: "200px" },
-                    attrs: {
-                      src: carta.imgDefault,
-                      alt: carta.nombre,
-                      title: carta.nombre
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "card-img-top",
-                    staticStyle: { height: "200px" },
-                    attrs: {
-                      src: "../resources/img/imglogo.svg",
-                      alt: "No encontrado",
-                      title: "No encontrado"
-                    }
-                  }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-body d-flex align-items-center justify-content-center"
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { href: "history/" + carta.id }
-                    },
-                    [_vm._v("Ver")]
-                  )
-                ]
-              ),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "row align-items-center justify-content-center"
+                  },
+                  [
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      carta.imgRuta != ""
+                        ? _c("img", {
+                            staticClass: "card-img-top",
+                            staticStyle: { height: "200px" },
+                            attrs: {
+                              src: "../resources/img/cartas/" + carta.imgRuta,
+                              alt: carta.nombre,
+                              title: carta.nombre
+                            }
+                          })
+                        : carta.imgDefault != ""
+                        ? _c("img", {
+                            staticClass: "card-img-top",
+                            staticStyle: { height: "200px" },
+                            attrs: {
+                              src: carta.imgDefault,
+                              alt: carta.nombre,
+                              title: carta.nombre
+                            }
+                          })
+                        : _c("img", {
+                            staticClass: "card-img-top",
+                            staticStyle: { height: "200px" },
+                            attrs: {
+                              src: "../resources/img/imglogo.svg",
+                              alt: "No encontrado",
+                              title: "No encontrado"
+                            }
+                          })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "history/" + carta.id }
+                        },
+                        [_vm._v("Ver")]
+                      )
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", {
                 staticClass: "card-footer",
@@ -63707,6 +63745,24 @@ $(function () {
   });
   $('#botonImprimir').hover(function () {
     $(this).parent().siblings('div').children().first().slideToggle('fast');
+  });
+  $('.input-tableroDefault').click(function () {
+    $('.input-tableroNuevo').css({
+      'border': '1px solid #ced4da'
+    });
+    $(this).css({
+      'border': '1.25px solid #e64900'
+    });
+    $("#tableroDefault").prop("checked", true);
+  });
+  $('.input-tableroNuevo').click(function () {
+    $('.input-tableroDefault').css({
+      'border': '1px solid #ced4da'
+    });
+    $(this).css({
+      'border': '1.25px solid #e64900'
+    });
+    $("#tableroNuevo").prop("checked", true);
   });
 });
 

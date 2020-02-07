@@ -6,14 +6,6 @@
     <div class="contenedor">
         <div class="row align-items-center justify-content-center contenido py-4">
 
-            <div class="col-sm-12 col-logo my-3">
-                <picture>
-                    <source srcset="../resources/img/imglogo.svg" type="image/svg+xml">
-                    <img src="../resources/img/imglogo.png" alt="SVG con fallback de png" title="OCA-F">
-                </picture>
-                <h1>OCA-F</h1>
-            </div>
-
             <div class="col-sm-8 col-md-8 col-lg-4 cont-login mx-2 my-2 h-100">
                 <div class="row">
                     <div class="col-sm-12 login">

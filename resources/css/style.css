@@ -2,6 +2,7 @@
 
 div.main {
     background-image: url(../img/backgrounds/imgfondo.png);
+    background-attachment: fixed;
     background-size: cover;
     background-repeat: repeat-x;
 }
@@ -151,6 +152,7 @@ div.card h2 {
 
 div.card img {
     height: 180px;
+    object-fit: cover;
 }
 
 .antropologia {
@@ -217,8 +219,8 @@ form.gamemode div.input-tableroNuevo,
 form.gamemode div.input-tableroDefault {
     background-size: cover;
     background-repeat: repeat-x;
-    border-color: none;
     border-radius: 2px !important;
+    cursor: pointer;
     height: 75px;
     width: 75px;
 }

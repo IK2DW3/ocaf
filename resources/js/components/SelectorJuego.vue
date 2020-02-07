@@ -2,19 +2,11 @@
 
     <div class="col-sm-8 col-md-8 col-lg-6 box-gamemode">
         <div class="row box-gamemode-contenido">
-            <div class="col-sm-12 text-center">
-                <picture>
-                    <source :srcset="'../resources/img/imglogo.svg'" type="image/svg+xml">
-                    <img :src="'../resources/img/imglogo.png'" alt="SVG con fallback de png" title="OCA-F">
-                </picture>
-            </div>
-            <div class="col-sm-12 text-center">
-                <h1 v-text="'OCA-F'"></h1>
-            </div>
+        
             <div class="col-sm-12 text-center">
                 <form class="gamemode" id="formGamemode" @submit="checkForm">
-                    <h2 v-if="gamemode === 'Individual'" v-text="gamemode"></h2>
-                    <h2 v-else v-text="'Co-Operativo'"></h2>
+                    <h2 class="my-4" v-if="gamemode === 'Individual'" v-text="'Juego ' + gamemode"></h2>
+                    <h2 class="my-4" v-else v-text="'Juego Co-Operativo'"></h2>
 
                     <div class="form-group">
                         <div class="form-row">

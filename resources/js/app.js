@@ -426,4 +426,16 @@ $(function() {
         $(this).parent().siblings('div').children().first().slideToggle('fast');
     });
 
+    $('.input-tableroDefault').click(function() {
+        $('.input-tableroNuevo').css({'border':'1px solid #ced4da'});
+        $(this).css({'border':'1.25px solid #e64900'});
+        $("#tableroDefault").prop("checked", true);
+    });
+
+    $('.input-tableroNuevo').click(function() {
+        $('.input-tableroDefault').css({'border':'1px solid #ced4da'});
+        $(this).css({'border':'1.25px solid #e64900'});
+        $("#tableroNuevo").prop("checked", true);
+    });
+
 });
