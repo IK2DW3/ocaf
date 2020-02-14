@@ -63,7 +63,7 @@
                     <span class="rounded-pill shadow-lg bg-white rounded mx-1 px-2 esconder">Gestionar</span>
                 </div>
                 <div class="col-3 d-flex align-items-center justify-content-center px-1">
-                    <a href="{{url('panel')}}" class="btn btn-item btn-warning rounded-circle shadow-lg rounded w-75 menuslide" id="botonPanel">
+                    <a href="{{url('panelusuarios')}}" class="btn btn-item btn-warning rounded-circle shadow-lg rounded w-75 menuslide" id="botonPanel">
                         <i class="icon ion-md-settings"></i>
                     </a>
                 </div>

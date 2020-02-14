@@ -17,29 +17,29 @@ Route::get('tablero/serpiente', 'OcafController@getTabserpiente')->name('tablero
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('panel', function(){
+    Route::GET('/panel/gestion', function(){
         if (Auth::check()) {
-            return Redirect::action('OcafController@getPanel');
+            return Redirect::action('OcafController@getPanelgestion');
         } else {
             return Redirect::action('OcafController@getIndex');
         }
     });
 
-    Route::get('/panel', function(){
+    Route::get('/panel/gestion', function(){
         if (Auth::check()) {
-            return Redirect::action('OcafController@getPanel');
+            return Redirect::action('OcafController@getPanelgestion');
         } else {
             return Redirect::action('OcafController@getIndex');
         }
     });
 
-    Route::get('panel', 'OcafController@getPanel');
-    Route::get('perfil', 'OcafController@getPerfil');
-    Route::get('panelusuarios', 'OcafController@getPanelusuarios');
-    Route::get('panelambitos', 'OcafController@getPanelambitos');
-    Route::get('panelcontinentes', 'OcafController@getPanelcontinentes');
-    Route::get('panelcartas', 'OcafController@getPanelcartas');
-    Route::get('panelpreguntas', 'OcafController@getPanelpreguntas');
+    Route::get('/perfil', 'OcafController@getPerfil')->name('perfil');
+    Route::get('/panel/gestion', 'OcafController@getPanelgestion')->name('panel.gestion');
+    Route::get('/panel/usuarios', 'OcafController@getPanelusuarios')->name('panel.usuarios');
+    Route::get('/panel/ambitos', 'OcafController@getPanelambitos')->name('panel.ambitos');
+    Route::get('/panel/continentes', 'OcafController@getPanelcontinentes')->name('panel.continentes');
+    Route::get('/panel/cartas', 'OcafController@getPanelcartas')->name('panel.cartas');
+    Route::get('/panel/preguntas', 'OcafController@getPanelpreguntas')->name('panel.preguntas');
 
 });
 
@@ -47,45 +47,45 @@ Route::group(['middleware' => 'auth'], function () {
 CRUD Vue.js y Laravel
 */
 // Rutas para el perfil del usuario
-Route::get('/profile', 'TaskController@getPerfiluser');
-Route::put('/profile/actualizar', 'TaskController@updatePerfiluser');
+Route::get('/perfil/usuario', 'TaskController@getPerfiluser');
+Route::put('/perfil/actualizar', 'TaskController@updatePerfiluser');
 
 // Rutas para el panel de gestion de usuarios
-Route::get('/user', 'TaskController@tableUser');
-Route::put('/user/actualizar', 'TaskController@updateUser');
-Route::post('/user/guardar', 'TaskController@storeUser');
-Route::delete('/user/borrar/{id}', 'TaskController@destroyUser');
-Route::get('/user/buscar', 'TaskController@showUser');
+Route::get('/panel/usuarios/datos', 'TaskController@tableUser');
+Route::put('/panel/usuarios/actualizar', 'TaskController@updateUser');
+Route::post('/panel/usuarios/guardar', 'TaskController@storeUser');
+Route::delete('/panel/usuarios/borrar/{id}', 'TaskController@destroyUser');
+Route::get('/panel/usuarios/buscar', 'TaskController@showUser');
 
 // Rutas para el panel de gestion de cartas
-Route::get('/card', 'TaskController@tableCard');
-Route::put('/card/actualizar', 'TaskController@updateCard');
-Route::post('/card/guardar', 'TaskController@storeCard');
-Route::post('/card/imagen', 'TaskController@uploadImage');
-Route::delete('/card/borrar/{id}', 'TaskController@destroyCard');
-Route::get('/card/buscar', 'TaskController@showCard');
-Route::get('/card/filtrar', 'TaskController@filterCard');
+Route::get('/panel/cartas/datos', 'TaskController@tableCard');
+Route::put('/panel/cartas/actualizar', 'TaskController@updateCard');
+Route::post('/panel/cartas/guardar', 'TaskController@storeCard');
+Route::post('/panel/cartas/imagen', 'TaskController@uploadImage');
+Route::delete('/panel/cartas/borrar/{id}', 'TaskController@destroyCard');
+Route::get('/panel/cartas/buscar', 'TaskController@showCard');
+Route::get('/panel/cartas/filtrar', 'TaskController@filterCard');
 
 // Rutas para el panel de gestion de cartas
-Route::get('/ambit', 'TaskController@tableAmbit');
-Route::put('/ambit/actualizar', 'TaskController@updateAmbit');
-Route::post('/ambit/guardar', 'TaskController@storeAmbit');
-Route::delete('/ambit/borrar/{id}', 'TaskController@destroyAmbit');
-Route::get('/ambit/buscar', 'TaskController@showAmbit');
+Route::get('/panel/ambitos/datos', 'TaskController@tableAmbit');
+Route::put('/panel/ambitos/actualizar', 'TaskController@updateAmbit');
+Route::post('/panel/ambitos/guardar', 'TaskController@storeAmbit');
+Route::delete('/panel/ambitos/borrar/{id}', 'TaskController@destroyAmbit');
+Route::get('/panel/ambitos/buscar', 'TaskController@showAmbit');
 
 // Rutas para el panel de gestion de cartas
-Route::get('/continent', 'TaskController@tableContinent');
-Route::put('/continent/actualizar', 'TaskController@updateContinent');
-Route::post('/continent/guardar', 'TaskController@storeContinent');
-Route::delete('/continent/borrar/{id}', 'TaskController@destroyContinent');
-Route::get('/continent/buscar', 'TaskController@showContinent');
+Route::get('/panel/continentes/datos', 'TaskController@tableContinent');
+Route::put('/panel/continentes/actualizar', 'TaskController@updateContinent');
+Route::post('/panel/continentes/guardar', 'TaskController@storeContinent');
+Route::delete('/panel/continentes/borrar/{id}', 'TaskController@destroyContinent');
+Route::get('/panel/continentes/buscar', 'TaskController@showContinent');
 
 // Rutas para el panel de gestion de Preguntas
-Route::get('/quest', 'TaskController@tableQuest');
-Route::put('/quest/actualizar', 'TaskController@updateQuest');
-Route::post('/quest/guardar', 'TaskController@storeQuest');
-Route::delete('/quest/borrar/{id}', 'TaskController@destroyQuest');
-Route::get('/quest/buscar', 'TaskController@showQuest');
+Route::get('/panel/preguntas/datos', 'TaskController@tableQuest');
+Route::put('/panel/preguntas/actualizar', 'TaskController@updateQuest');
+Route::post('/panel/preguntas/guardar', 'TaskController@storeQuest');
+Route::delete('/panel/preguntas/borrar/{id}', 'TaskController@destroyQuest');
+Route::get('/panel/preguntas/buscar', 'TaskController@showQuest');
 
 // Ruta para el selector de juego y el tablero
 Route::post('/modo', 'TaskController@getGamemode');

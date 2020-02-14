@@ -11,11 +11,11 @@
                 <div class="col-md-2 panel-aside border-right px-2 py-2">
                     <h2>Gestionar</h2>
                     <div class="btn-group-vertical panel-aside-navegador w-100">
-                        <a href="{{url('panelusuarios')}}" type="button" class="btn btn-secondary">&#x1F465; Usuarios</a>
-                        <a href="{{url('panelambitos')}}" type="button" class="btn btn-secondary">&#x1F393; Ambitos</a>
-                        <a href="{{url('panelcontinentes')}}" type="button" class="btn btn-secondary">&#x1F310; Continentes</a>
-                        <a href="{{url('panelcartas')}}" type="button" class="btn btn-secondary">&#x1F4D6; Historias</a>
-                        <a href="{{url('panelpreguntas')}}" type="button" class="btn btn-secondary">&#x2047; Preguntas</a>
+                        <a href="{{route('panel.usuarios')}}" type="button" class="btn btn-secondary">&#x1F465; Usuarios</a>
+                        <a href="{{route('panel.ambitos')}}" type="button" class="btn btn-secondary">&#x1F393; Ambitos</a>
+                        <a href="{{route('panel.continentes')}}" type="button" class="btn btn-secondary">&#x1F310; Continentes</a>
+                        <a href="{{route('panel.cartas')}}" type="button" class="btn btn-secondary">&#x1F4D6; Historias</a>
+                        <a href="{{route('panel.preguntas')}}" type="button" class="btn btn-secondary">&#x2047; Preguntas</a>
                     </div>
                 </div>
                 <div class="col-md-10 panel-contenido px-2 py-2">

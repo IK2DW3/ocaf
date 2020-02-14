@@ -178,18 +178,18 @@
             // Metodo para recoger los datos
             getTasks(){
                 let me =this;
-                let url = 'card';
+                let url = './cartas/datos';
                 axios.get(url).then(function (response) {
                     me.arrayCartas = response.data;
                 }).catch(function (error) {
                     console.log(error);
                 });
-                axios.get('ambit').then(function (response) {
+                axios.get('./ambitos/datos').then(function (response) {
                     me.arrayAmbitos = response.data;
                 }).catch(function (error) {
                     console.log(error);
                 });
-                axios.get('continent').then(function (response) {
+                axios.get('./continentes/datos').then(function (response) {
                     me.arrayContinentes = response.data;
                 }).catch(function (error) {
                     console.log(error);

@@ -65,9 +65,9 @@ class OcafController extends Controller
         return view('administracion.perfil');
     }
 
-    public function getPanel() {
+    public function getPanelgestion() {
         if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panel');
+            return view('administracion.panelgestion');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');

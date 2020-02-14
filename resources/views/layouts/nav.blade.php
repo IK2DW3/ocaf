@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark ">
     <a class="navbar-brand" href="{{ url('/') }}">
-        @if (\Request::is('history/*') || \Request::is('tablero/*'))
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
             <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
         @else
             <img src="../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Finalizar partida</a>
                 </li>
-            @elseif (\Request::is('panel'))
+            @elseif (\Request::is('panelusuarios'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
@@ -39,7 +39,7 @@
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('panel') }}">Volver al panel</a>
+                    <a class="nav-link" href="{{ url('panelusuarios') }}">Volver al panel</a>
                 </li>
             @endif
         </ul>
