@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Task;
-use App\Ambito;
-use App\Carta;
-use App\Continente;
 use App\User;
+use App\Ambito;
+use App\Continente;
+use App\Carta;
+use App\Pregunta;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Illuminate\Http\File;
@@ -21,10 +22,13 @@ use Illuminate\Filesystem\Filesystem;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
-class TaskController extends Controller
-{
-    public function tableUser(Request $request) {
+class TaskController extends Controller {
 
+    /**
+     * Metodo para la tabla de usuarios
+     */
+    public function tableUser(Request $request) {
+        // Devovler la tabla con un orden
         $results = User::orderBy('name')->get();
         return $results;
 
@@ -68,8 +72,96 @@ class TaskController extends Controller
 
     }
 
-    // ****************************************************************************************** //
+    /**
+     * Metodo para la tabla de ambitos
+     */
+    public function tableAmbit(Request $request) {
+        // Devovler la tabla con un orden
+        return Ambito::orderBy('ambitoEsp')->get();
 
+    }
+
+    public function storeAmbit(Request $request){
+
+        $task = new Ambito();
+        $task->ambitoEsp = $request->ambitoEsp;
+        $task->ambitoEng = $request->ambitoEng;
+        $task->ambitoEus = $request->ambitoEus;
+        $task->save();
+
+
+    }
+
+    public function showAmbit(Request $request) {
+
+        $task = Ambito::findOrFail($request->id);
+        return $task;
+
+    }
+
+    public function updateAmbit(Request $request) {
+
+        $task = Ambito::findOrFail($request->id);
+        $task->ambitoEsp = $request->ambitoEsp;
+        $task->ambitoEng = $request->ambitoEng;
+        $task->ambitoEus = $request->ambitoEus;
+        $task->save();
+        Alert::success('Success', 'Datos actualizados correctamente');
+        return $task;
+    }
+
+    public function destroyAmbit(Request $request) {
+
+        $task = Ambito::destroy($request->id);
+        return $task;
+
+    }
+
+    /**
+     * Metodo para la tabla de continentes
+     */
+    public function tableContinent(Request $request) {
+        // Devovler la tabla
+        return Continente::all();
+    }
+
+    public function storeContinent(Request $request){
+
+        $task = new Continente();
+        $task->continenteEsp = $request->continenteEsp;
+        $task->continenteEng = $request->continenteEng;
+        $task->continenteEus = $request->continenteEus;
+        $task->save();
+    }
+
+    public function showContinent(Request $request) {
+
+        $task = Continente::findOrFail($request->id);
+
+        return $task;
+    }
+
+    public function updateContinent(Request $request) {
+
+        $task = Continente::findOrFail($request->id);
+        $task->continenteEsp = $request->continenteEsp;
+        $task->continenteEng = $request->continenteEng;
+        $task->continenteEus = $request->continenteEus;
+        $task->save();
+
+        return $task;
+    }
+
+    public function destroyContinent(Request $request) {
+
+        $task = Continente::destroy($request->id);
+        return $task;
+
+    }
+    
+    /**
+     * Metodo para la tabla de cartas
+     */
     public function tableCard(Request $request){
 
         return Carta::with('ambito', 'continente')->get();
@@ -167,94 +259,12 @@ class TaskController extends Controller
 
     }
 
-    /* - -------------------------------------------------------------------------------------------- */
-    public function tableAmbit(Request $request) {
-
-        return Ambito::orderBy('ambitoEsp')->get();
-
-    }
-
-    public function storeAmbit(Request $request){
-
-        $task = new Ambito();
-        $task->ambitoEsp = $request->ambitoEsp;
-        $task->ambitoEng = $request->ambitoEng;
-        $task->ambitoEus = $request->ambitoEus;
-        $task->save();
-
-
-    }
-
-    public function showAmbit(Request $request) {
-
-        $task = Ambito::findOrFail($request->id);
-        return $task;
-
-    }
-
-    public function updateAmbit(Request $request) {
-
-        $task = Ambito::findOrFail($request->id);
-        $task->ambitoEsp = $request->ambitoEsp;
-        $task->ambitoEng = $request->ambitoEng;
-        $task->ambitoEus = $request->ambitoEus;
-        $task->save();
-        Alert::success('Success', 'Datos actualizados correctamente');
-        return $task;
-    }
-
-    public function destroyAmbit(Request $request) {
-
-        $task = Ambito::destroy($request->id);
-        return $task;
-
-    }
-
-    /* ----------------------------------------------------------------------------------------------- */
-    public function tableContinent(Request $request) {
-
-        return Continente::all();
-
-    }
-
-    public function storeContinent(Request $request){
-
-        $task = new Continente();
-        $task->continenteEsp = $request->continenteEsp;
-        $task->continenteEng = $request->continenteEng;
-        $task->continenteEus = $request->continenteEus;
-        $task->save();
-    }
-    public function showContinent(Request $request) {
-
-        $task = Continente::findOrFail($request->id);
-
-        return $task;
-    }
-
-    public function updateContinent(Request $request) {
-
-        $task = Continente::findOrFail($request->id);
-        $task->continenteEsp = $request->continenteEsp;
-        $task->continenteEng = $request->continenteEng;
-        $task->continenteEus = $request->continenteEus;
-        $task->save();
-
-        return $task;
-    }
-
-    public function destroyContinent(Request $request) {
-
-        $task = Continente::destroy($request->id);
-        return $task;
-
-    }
-
-    /* ----------------------------------------------------------------------------------------------- */
+    /**
+     * Metodo para la tabla de preguntas
+     */
     public function tableQuest(Request $request) {
 
-        return Pregunta::orderBy('carta_id')->get();
-
+        return Pregunta::with('carta')->get();
 
     }
 
@@ -268,6 +278,7 @@ class TaskController extends Controller
         $task->respuesta_3 = $request->respuesta_3;
         $task->save();
     }
+
     public function showQuest(Request $request) {
 
         $task = Pregunta::findOrFail($request->id);
@@ -296,15 +307,14 @@ class TaskController extends Controller
 
     }
 
-    /* ----------------------------------------------------------------------------------------------- */
-
+    /**
+     * Metodo para el perfil del usuario
+     */
     public function getPerfiluser(Request $request) {
 
         if (Auth::check()) {
-
             $user = Auth::user();
             return $user;
-
         }
 
     }
@@ -312,17 +322,12 @@ class TaskController extends Controller
     public function updatePerfiluser(Request $request) {
 
         if (Auth::check()) {
-
-                $userUp = User::findOrFail($request->id);
-                $userUp->password = bcrypt($request->password);
-                $userUp->save();
-
-                return $userUp;
-
+            $userUp = User::findOrFail($request->id);
+            $userUp->password = bcrypt($request->password);
+            $userUp->save();
+            return $userUp;
         } else {
-
             return view('index');
-
         }
 
     }

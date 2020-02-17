@@ -25,7 +25,7 @@
                         </div>
                         @if (Auth::check() && Auth::user()->tipo == "superadmin")
                         <div class="row align-items-center justify-content-center my-2">
-                            <a class="btn btn-primary btn-lg" href="{{url('panel')}}" role="button">&#x269E; &#x1F5F3; &#x269F;</a>
+                            <a class="btn btn-primary btn-lg" href="{{route('panel.gestion')}}" role="button">&#x269E; &#x1F5F3; &#x269F;</a>
                         </div>
                         @endif
                         <div class="row align-items-center justify-content-center my-2">

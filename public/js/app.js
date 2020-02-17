@@ -2090,19 +2090,307 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       opcion: '',
       busqueda: '',
       update: 0,
-      name: "",
-      email: "",
-      tipo: "",
-      password: "",
-      ambitoEsp: "",
-      ambitoEng: "",
-      ambitoEus: "",
+      name: '',
+      email: '',
+      tipo: '',
+      password: '',
+      ambito_id: 0,
+      ambitoEsp: '',
+      ambitoEng: '',
+      ambitoEus: '',
+      continente_id: 0,
+      continenteEsp: '',
+      continenteEng: '',
+      continenteEus: '',
+      nombre: '',
+      apellido: '',
+      fechaNacimiento: '',
+      fechaMuerte: '',
+      loreEsp: '',
+      loreEng: '',
+      loreEus: '',
+      zonaGeografica: '',
+      imgRuta: '',
+      imgDefault: '',
+      imagenPrevia: '../../resources/img/imglogo.svg',
+      fileCarta: $('input[name=fileCarta]'),
+      file: '',
+      enlaceReferencia: '',
+      habilitado: false,
+      valido: true,
+      pregunta: "",
+      respuesta_1: "",
+      respuesta_2: "",
+      respuesta_3: "",
+      carta_id: "",
       arrayUsuarios: [],
       tipos: [{
         text: 'Usuario',
@@ -2110,11 +2398,11 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Administrador',
         value: 'administrator'
-      }, {
-        text: 'Super Administrador',
-        value: 'superadmin'
       }],
-      arrayAmbitos: []
+      arrayAmbitos: [],
+      arrayContinentes: [],
+      arrayCartas: [],
+      arrayPreguntas: []
     };
   },
   methods: {
@@ -2122,104 +2410,713 @@ __webpack_require__.r(__webpack_exports__);
       this.opcion = $(element).text();
       return this.opcion;
     },
-    saveTasks: function saveTasks(event) {
+    getData: function getData() {
       var me = this;
-      var url = 'user/guardar';
-      var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // Condiciones
+      axios.get('./users/data').then(function (response) {
+        // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+        me.arrayUsuarios = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get('./ambits/data').then(function (response) {
+        // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+        me.arrayAmbitos = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get('./continents/data').then(function (response) {
+        // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+        me.arrayContinentes = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get('./cards/data').then(function (response) {
+        // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+        me.arrayCartas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get('./quests/data').then(function (response) {
+        // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+        me.arrayPreguntas = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    saveData: function saveData(element) {
+      var me = this;
+      element = $(element);
 
-      if (me.name === "") {
-        this.$swal({
-          icon: 'error',
-          title: 'Nombre',
-          text: 'Campo nombre vacio'
-        });
-        me.campoInvalido('#userNombre');
-        me.valido = false;
-      } else if (me.name < 6 || me.name > 12) {
-        this.$swal({
-          icon: 'error',
-          title: 'Nombre',
-          text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres'
-        });
-        me.campoInvalido('#userNombre');
-        me.valido = false;
-      } else if (me.email === "" || /^\s+$/.test(me.email)) {
-        this.$swal({
-          icon: 'error',
-          title: 'Email',
-          text: 'Campo email vacio'
-        });
-        me.campoInvalido('#userEmail');
-        me.valido = false;
-      } else if (!testEmail.test(me.email)) {
-        this.$swal({
-          icon: 'error',
-          title: 'Email',
-          text: 'No has introducido un email válido'
-        });
-        me.campoInvalido('#userEmail');
-        me.valido = false;
-      } else if (me.tipo === "") {
-        this.$swal({
-          icon: 'error',
-          title: 'Tipo',
-          text: 'Debes seleccionar un tipo de usuario'
-        });
-        me.campoInvalido('#userTipo');
-        me.valido = false;
-      } else if (me.password === "") {
-        this.$swal({
-          icon: 'error',
-          title: 'Contraseña',
-          text: 'El campo contraseña está vacio'
-        });
-        me.campoInvalido('#userPassword');
-        me.valido = false;
-      } else if (me.password.length < 6 || me.password.length > 16) {
-        this.$swal({
-          icon: 'error',
-          title: 'Contraseña',
-          text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres'
-        });
-        me.campoInvalido('#userPassword');
-        me.valido = false;
+      if (element.attr('id') == 'saveUser') {
+        var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // Condiciones
+
+        if (me.name === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Nombre',
+            text: 'Campo nombre vacio'
+          });
+          me.campoInvalido('#userNombre');
+          me.valido = false;
+        } else if (me.name < 6 || me.name > 12) {
+          this.$swal({
+            icon: 'error',
+            title: 'Nombre',
+            text: 'El nombre debe estar entre un mínimo de 6 a 12 carácteres'
+          });
+          me.campoInvalido('#userNombre');
+          me.valido = false;
+        } else if (me.email === "" || /^\s+$/.test(me.email)) {
+          this.$swal({
+            icon: 'error',
+            title: 'Email',
+            text: 'Campo email vacio'
+          });
+          me.campoInvalido('#userEmail');
+          me.valido = false;
+        } else if (!testEmail.test(me.email)) {
+          this.$swal({
+            icon: 'error',
+            title: 'Email',
+            text: 'No has introducido un email válido'
+          });
+          me.campoInvalido('#userEmail');
+          me.valido = false;
+        } else if (me.tipo === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Tipo',
+            text: 'Debes seleccionar un tipo de usuario'
+          });
+          me.campoInvalido('#userTipo');
+          me.valido = false;
+        } else if (me.password === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Contraseña',
+            text: 'El campo contraseña está vacio'
+          });
+          me.campoInvalido('#userPassword');
+          me.valido = false;
+        } else if (me.password.length < 6 || me.password.length > 16) {
+          this.$swal({
+            icon: 'error',
+            title: 'Contraseña',
+            text: 'La contraseña debe estar entre un mínimo de 6 a 16 carácteres'
+          });
+          me.campoInvalido('#userPassword');
+          me.valido = false;
+        } else {
+          me.valido = true;
+        }
+
+        if (me.valido) {
+          axios.post('./users/save', {
+            'name': this.name,
+            'email': this.email,
+            'tipo': this.tipo,
+            'password': this.password
+          }).then(function (response) {
+            me.getData();
+            me.clearFields();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      } else if (element.attr('id') == 'saveAmbit') {
+        if (me.ambitoEsp === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campo requerido vacío'
+          });
+          me.campoInvalido('#ambitoEsp');
+          me.valido = false;
+        } else {
+          me.valido = true;
+        }
+
+        if (me.valido) {
+          axios.post('./ambits/save', {
+            'ambitoEsp': this.ambitoEsp,
+            'ambitoEng': this.ambitoEng,
+            'ambitoEus': this.ambitoEus
+          }).then(function (response) {
+            me.getTasks();
+            me.clearFields();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      } else if (element.attr('id') == 'saveContinent') {
+        if (me.continenteEsp === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campo requerido vacío'
+          });
+          me.campoInvalido('#continenteEsp');
+          me.valido = false;
+        } else {
+          me.valido = true;
+        }
+
+        if (me.valido) {
+          axios.post('./continents/save', {
+            //estas variables son las que enviaremos para que crear la tarea
+            'continenteEsp': this.continenteEsp,
+            'continenteEng': this.continenteEng,
+            'continenteEus': this.continenteEus
+          }).then(function (response) {
+            me.getTasks();
+            me.clearFields();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      } else if (element.attr('id') == 'saveCard') {
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        };
+
+        if (me.nombre === "" && me.apellido === "" && me.fechaNacimiento === "" && me.ambito_id === "" && me.continente_id === "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campos vacios'
+          });
+          me.campoInvalido('#cartaNombre');
+          me.campoInvalido('#cartaApellido');
+          me.campoInvalido('#cartaFnacimiento');
+          me.campoInvalido('#cartaAmbito');
+          me.campoInvalido('#cartaContinente');
+          me.valido = false;
+        } else if (me.nombre == "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campo nombre vacio'
+          });
+          me.campoInvalido('#cartaNombre');
+          me.valido = false;
+        } else if (me.apellido == "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campo apellido vacio'
+          });
+          me.campoInvalido('#cartaApellido');
+          me.valido = false;
+        } else if (me.fechaNacimiento == "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campos fecha nacimiento vacio'
+          });
+          me.campoInvalido('#cartaFnacimiento');
+          me.valido = false;
+        } else if (me.ambito_id == "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Debes seleccionar un ambito'
+          });
+          me.campoInvalido('#cartaAmbito');
+          me.valido = false;
+        } else if (me.continente_id == "") {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Debes seleccionar un continente'
+          });
+          me.campoInvalido('#cartaContinente');
+          me.valido = false;
+        } else {
+          me.valido = true;
+        }
+
+        if (me.valido) {
+          axios.post('./cards/save', {
+            'nombre': this.nombre,
+            'apellido': this.apellido,
+            'fechaNacimiento': this.fechaNacimiento,
+            'fechaMuerte': this.fechaMuerte,
+            'ambito_id': this.ambito_id,
+            'loreEsp': this.loreEsp,
+            'loreEng': this.loreEng,
+            'loreEus': this.loreEus,
+            'zonaGeografica': this.zonaGeografica,
+            'continente_id': this.continente_id,
+            'imgRuta': this.imgRuta,
+            'imgDefault': this.imgDefault,
+            'enlaceReferencia': this.enlaceReferencia,
+            'habilitado': this.habilitado
+          }).then(function (response) {
+            me.getTasks();
+            me.clearFields();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+
+          if (!(me.imgRuta == null) || !(me.imgRuta == '')) {
+            this.imgUpload();
+          }
+        }
+      } else if (element.attr('id') == 'saveQuest') {
+        if (me.pregunta === "" && me.respuesta_1 === "" && me.respuesta_2 === "" && me.respuesta_3 == "" && me.carta_id === null) {
+          this.$swal({
+            icon: 'error',
+            title: 'Validación',
+            text: 'Campos requeridos vacíos'
+          });
+          me.valido = false;
+        } else {
+          me.valido = true;
+        }
+
+        if (me.valido) {
+          axios.post('./quests/save', {
+            'pregunta': this.pregunta,
+            'respuesta_1': this.respuesta_1,
+            'respuesta_2': this.respuesta_2,
+            'respuesta_3': this.respuesta_3,
+            'carta_id': this.carta_id
+          }).then(function (response) {
+            me.getTasks();
+            me.clearFields();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
       } else {
-        me.valido = true;
-      }
+        this.$swal('Guardado', 'Los datos no se han guardado correctamente', 'info');
+      } // Previene el funcionamiento por defecto
 
-      if (me.valido) {
-        axios.post(url, {
+
+      event.preventDefault();
+    },
+    updateData: function updateData(element) {
+      var me = this;
+      element = $(element);
+
+      if (element.attr('id') == 'updateUser') {
+        axios.put('./users/update', {
+          'id': this.update,
           'name': this.name,
           'email': this.email,
           'tipo': this.tipo,
           'password': this.password
         }).then(function (response) {
-          me.getTasks();
+          me.getData();
           me.clearFields();
         })["catch"](function (error) {
           console.log(error);
         });
-      } // Previene el funcionamiento por defecto
+      } else if (element.attr('id') == 'updateAmbit') {
+        axios.put('./ambits/update', {
+          'id': this.update,
+          'ambitoEsp': this.ambitoEsp,
+          'ambitoEng': this.ambitoEng,
+          'ambitoEus': this.ambitoEus
+        }).then(function (response) {
+          me.getData();
+          me.clearFields();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'updateContinent') {
+        axios.put('./continents/update', {
+          'id': this.update,
+          'continenteEsp': this.continenteEsp,
+          'continenteEng': this.continenteEng,
+          'continenteEus': this.continenteEus
+        }).then(function (response) {
+          me.getData();
+          me.clearFields();
+        })["catch"](function (error) {
+          this.$swal('Error', 'Se ha producido un error', 'warning');
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'updateCard') {
+        axios.put('./cards/update', {
+          'id': this.update,
+          'nombre': this.nombre,
+          'apellido': this.apellido,
+          'fechaNacimiento': this.fechaNacimiento,
+          'fechaMuerte': this.fechaMuerte,
+          'ambito_id': this.ambito_id,
+          'loreEsp': this.loreEsp,
+          'loreEng': this.loreEng,
+          'loreEus': this.loreEus,
+          'zonaGeografica': this.zonaGeografica,
+          'continente_id': this.continente_id,
+          'imgRuta': this.imgRuta,
+          'imgDefault': this.imgDefault,
+          'enlaceReferencia': this.enlaceReferencia,
+          'habilitado': this.habilitado
+        }).then(function (response) {
+          me.getData();
+          me.clearFields();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'updateQuest') {
+        axios.put('./quests/update', {
+          'id': this.update,
+          'pregunta': this.pregunta,
+          'respuesta_1': this.respuesta_1,
+          'respuesta_2': this.respuesta_2,
+          'respuesta_3': this.respuesta_3,
+          'carta_id': this.carta_id
+        }).then(function (response) {
+          me.getData();
+          me.clearFields();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        this.$swal('Actualización', 'Los datos no se han actualizado correctamente', 'info');
+      }
+    },
+    deleteData: function deleteData(data, element) {
+      var _this = this;
 
+      var me = this;
+      var task_id = data.id;
+      element = $(element);
 
-      event.preventDefault();
+      if (element.attr('id') == 'deleteUser') {
+        this.$swal({
+          icon: 'warning',
+          title: '¿Seguro que deseas borrar éste usuario?',
+          text: 'No podras revertir ésta acción',
+          showCancelButton: true,
+          confirmButtonText: '¡Eliminar!',
+          cancelButtonText: '¡No, mantenerlo!',
+          showCloseButton: true,
+          showLoaderOnConfirm: false
+        }).then(function (result) {
+          if (result.value) {
+            _this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success');
+
+            axios["delete"]('./users/delete/' + task_id).then(function (response) {
+              me.getData();
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else {
+            _this.$swal('Cancelado', 'El usuario correspondiente sigue intacto', 'info');
+          }
+        });
+      } else if (element.attr('id') == 'deleteAmbit') {
+        this.$swal({
+          icon: 'warning',
+          title: '¿Seguro que deseas borrar éste ambito?',
+          text: 'No podras revertir ésta acción',
+          showCancelButton: true,
+          confirmButtonText: '¡Eliminar!',
+          cancelButtonText: '¡No, mantenerlo!',
+          showCloseButton: true,
+          showLoaderOnConfirm: false
+        }).then(function (result) {
+          if (result.value) {
+            _this.$swal('Eliminado', 'El ambito ha sido eliminado correctamente', 'success');
+
+            axios["delete"]('ambit/borrar/' + task_id).then(function (response) {
+              me.getData();
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else {
+            _this.$swal('Cancelado', 'El ambito correspondiente sigue intacto', 'info');
+          }
+        });
+      } else if (element.attr('id') == 'deleteContinent') {
+        this.$swal({
+          icon: 'warning',
+          title: '¿Seguro que deseas borrar éste usuario?',
+          text: 'No podras revertir ésta acción',
+          showCancelButton: true,
+          confirmButtonText: '¡Eliminar!',
+          cancelButtonText: '¡No, mantenerlo!',
+          showCloseButton: true,
+          showLoaderOnConfirm: false
+        }).then(function (result) {
+          if (result.value) {
+            _this.$swal('Eliminado', 'El usuario ha sido eliminado correctamente', 'success');
+
+            axios["delete"]('continent/borrar/' + task_id).then(function (response) {
+              me.getData();
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else {
+            _this.$swal('Cancelado', 'El usuario correspondiente sigue intacto', 'info');
+          }
+        });
+      } else if (element.attr('id') == 'deleteCard') {
+        this.$swal({
+          icon: 'warning',
+          title: '¿Seguro que deseas borrar esta carta?',
+          text: 'No podras revertir ésta acción',
+          showCancelButton: true,
+          confirmButtonText: '¡Eliminar!',
+          cancelButtonText: '¡No, mantenerlo!',
+          showCloseButton: true,
+          showLoaderOnConfirm: false
+        }).then(function (result) {
+          if (result.value) {
+            _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
+
+            axios["delete"]('card/borrar/' + task_id).then(function (response) {
+              me.getData();
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else {
+            _this.$swal('Cancelado', 'La carta correspondiente sigue intacta', 'info');
+          }
+        });
+      } else if (element.attr('id') == 'deleteQuest') {
+        this.$swal({
+          icon: 'warning',
+          title: '¿Seguro que deseas borrar esta carta?',
+          text: 'No podras revertir ésta acción',
+          showCancelButton: true,
+          confirmButtonText: '¡Eliminar!',
+          cancelButtonText: '¡No, mantenerlo!',
+          showCloseButton: true,
+          showLoaderOnConfirm: false
+        }).then(function (result) {
+          if (result.value) {
+            _this.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
+
+            axios["delete"]('quest/borrar/' + task_id).then(function (response) {
+              me.getData();
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else {
+            _this.$swal('Cancelado', 'La carta correspondiente sigue intacta', 'info');
+          }
+        });
+      } else {
+        this.$swal('Cancelado', 'La informacion que deseaste borrar sigue intacta', 'info');
+      }
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data, element) {
+      var me = this;
+      this.update = data.id;
+      element = $(element);
+
+      if (element.attr('id') == 'loadUser') {
+        axios.get('./users/search?id=' + this.update).then(function (response) {
+          me.name = response.data.name;
+          me.email = response.data.email;
+          me.tipo = response.data.tipo;
+          me.vm.tipo = response.data.tipo;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'loadAmbit') {
+        axios.get('./ambits/search?id=' + this.update).then(function (response) {
+          me.ambitoEsp = response.data.ambitoEsp;
+          me.ambitoEng = response.data.ambitoEng;
+          me.ambitoEus = response.data.ambitoEus;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'loadContinent') {
+        axios.get('./continents/search?id=' + this.update).then(function (response) {
+          me.continenteEsp = response.data.continenteEsp;
+          me.continenteEng = response.data.continenteEng;
+          me.continenteEus = response.data.continenteEus;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'loadCard') {
+        axios.get('./cards/search?id=' + this.update).then(function (response) {
+          me.nombre = response.data.nombre;
+          me.apellido = response.data.apellido;
+          me.fechaNacimiento = response.data.fechaNacimiento;
+          me.fechaMuerte = response.data.fechaMuerte;
+          me.ambito_id = response.data.ambito_id;
+          me.loreEsp = response.data.loreEsp;
+          me.loreEng = response.data.loreEng;
+          me.loreEus = response.data.loreEus;
+          me.zonaGeografica = response.data.zonaGeografica;
+          me.continente_id = response.data.continente_id;
+          me.imgRuta = response.data.imgRuta;
+          me.imgDefault = response.data.imgDefault;
+          $('#fileCartas').val('');
+
+          if (me.imgRuta == null || me.imgRuta == 'null' || me.imgRuta == '') {
+            $('#fileTxt').text('No tiene imagen');
+            $('#imgPrevia').attr('src', me.imagenPrevia).css({
+              'width': '50%'
+            });
+          } else if (me.imgRuta != null || me.imgRuta != 'null' || me.imgRuta != '') {
+            $('#fileTxt').text(response.data.imgRuta);
+            $('#imgPrevia').attr('src', '../resources/img/cartas/' + response.data.imgRuta).css({
+              'width': '50%'
+            });
+          } else if (me.imgDefault != null || me.imgDefault != '') {
+            $('#imgPrevia').attr('src', response.data.imgDefault).css({
+              'width': '50%'
+            });
+          } else {
+            $('#fileTxt').text('No tiene imagen');
+            $('#imgPrevia').attr('src', me.imagenPrevia).css({
+              'width': '50%'
+            });
+          }
+
+          me.enlaceReferencia = response.data.enlaceReferencia;
+          me.usuario_id = response.data.usuario_id;
+          me.habilitado = response.data.habilitado;
+
+          if (me.habilitado == 1 || me.habilitado) {
+            $('#habi_desText').val('Habilitado');
+          } else {
+            $('#habi_desText').val('Deshabilitado');
+          }
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (element.attr('id') == 'loadQuest') {
+        axios.get('./quests/search?id=' + this.update).then(function (response) {
+          me.pregunta = response.data.pregunta;
+          me.respuesta_1 = response.data.respuesta_1;
+          me.respuesta_2 = response.data.respuesta_2;
+          me.respuesta_3 = response.data.respuesta_3;
+          me.carta_id = response.data.carta_id;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        this.$swal('Datos', 'Fallo al cargar los datos', 'info');
+      }
+    },
+    campoInvalido: function campoInvalido(campo) {
+      $(campo).css('border', '1px solid red');
+    },
+    checked: function checked() {
+      if (this.habilitado) {
+        $('#habi_desText').val('Habilitado');
+        this.update = 0;
+      } else {
+        $('#habi_desText').val('Deshabilitado');
+        this.update = 0;
+      }
+    },
+    volverCss: function volverCss() {
+      $('input').css('border', '1px solid #ced4da');
+      $('input').attr('placeholder', '');
+      $('select').css('border', '1px solid #ced4da');
+    },
+    imagPrev: function imagPrev(e) {
+      if (!$("#filename").val() == "") {
+        this.imgRuta = $("#filename").val().replace(/C:\\fakepath\\/i, '');
+        this.file = e.target.files[0];
+      } else {
+        this.update = 0;
+      }
+    },
+    imgUpload: function imgUpload() {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('file', this.file);
+      axios.post('card/imagen', formData, config).then(function (response) {
+        console.log(response);
+        this.$swal({
+          icon: 'success',
+          title: 'Imagen',
+          text: 'Imagen subida correctamente'
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    clearFields: function clearFields() {
+      this.ambito_id = 0;
+      this.ambitoEsp = '';
+      this.ambitoEng = '';
+      this.ambitoEus = '';
+      this.continente_id = 0;
+      this.continenteEsp = '';
+      this.continenteEng = '';
+      this.continenteEus = '';
+      this.nombre = '';
+      this.apellido = '';
+      this.fechaNacimiento = '';
+      this.fechaMuerte = '';
+      this.loreEsp = '';
+      this.loreEng = '';
+      this.loreEus = '';
+      this.zonaGeografica = '';
+      $('#fileTxt').text('Seleccionar archivo');
+      this.imgRuta = '';
+      this.imgDefault = '';
+      $('#imgPrevia').attr('src', this.imagenPrevia);
+      $('#fileCartas').val('');
+      this.enlaceReferencia = '';
+      this.habilitado = 0;
+      $('#habi_desText').val('Deshabilitado');
+      this.volverCss();
+      this.pregunta = '';
+      this.respuesta_1 = '';
+      this.respuesta_2 = '';
+      this.respuesta_3 = '';
+      this.carta_id = 0;
+      this.update = 0;
+      this.busqueda = '';
     }
   },
   computed: {
     buscarUsuarios: function buscarUsuarios() {
-      var _this = this;
+      var _this2 = this;
 
       return this.arrayUsuarios.filter(function (user) {
-        return user.name.toLowerCase().includes(_this.busqueda.toLowerCase()) || user.email.toLowerCase().includes(_this.busqueda.toLowerCase()) || user.tipo.toLowerCase().includes(_this.busqueda.toLowerCase());
+        return user.name.toLowerCase().includes(_this2.busqueda.toLowerCase()) || user.email.toLowerCase().includes(_this2.busqueda.toLowerCase()) || user.tipo.toLowerCase().includes(_this2.busqueda.toLowerCase());
       });
     },
     buscarAmbito: function buscarAmbito() {
-      var _this2 = this;
+      var _this3 = this;
 
       return this.arrayAmbitos.filter(function (ambito) {
-        return ambito.ambitoEsp.toLowerCase().includes(_this2.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(_this2.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(_this2.busqueda.toLowerCase());
+        return ambito.ambitoEsp.toLowerCase().includes(_this3.busqueda.toLowerCase()) || ambito.ambitoEng.toLowerCase().includes(_this3.busqueda.toLowerCase()) || ambito.ambitoEus.toLowerCase().includes(_this3.busqueda.toLowerCase());
+      });
+    },
+    buscarContinente: function buscarContinente() {
+      var _this4 = this;
+
+      return this.arrayContinentes.filter(function (continente) {
+        return continente.continenteEsp.toLowerCase().includes(_this4.busqueda.toLowerCase()) || continente.continenteEng.toLowerCase().includes(_this4.busqueda.toLowerCase()) || continente.continenteEus.toLowerCase().includes(_this4.busqueda.toLowerCase());
+      });
+    },
+    buscarCartas: function buscarCartas() {
+      var _this5 = this;
+
+      return this.arrayCartas.filter(function (carta) {
+        return carta.nombre.toLowerCase().includes(_this5.busqueda.toLowerCase()) || carta.apellido.toLowerCase().includes(_this5.busqueda.toLowerCase()) || carta.ambito.ambitoEsp.toLowerCase().includes(_this5.busqueda.toLowerCase());
+      });
+    },
+    buscarPregunta: function buscarPregunta() {
+      var _this6 = this;
+
+      return this.arrayPreguntas.filter(function (pregunta) {
+        return pregunta.pregunta.toLowerCase().includes(_this6.busqueda.toLowerCase());
       });
     }
+  },
+  mounted: function mounted() {
+    this.getData();
   }
 });
 
@@ -3048,7 +3945,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getTasks: function getTasks() {
       var me = this;
-      var url = 'continent'; //Ruta que hemos creado para que nos devuelva todas las tareas
+      var url = '../continentes/'; //Ruta que hemos creado para que nos devuelva todas las tareas
 
       axios.get(url).then(function (response) {
         //creamos un array y guardamos el contenido que nos devuelve el response
@@ -47287,29 +48184,20 @@ var render = function() {
                                   },
                                   [
                                     _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn btn-secondary",
-                                        attrs: {
-                                          href: "",
-                                          role: "button",
-                                          title: "Ver"
-                                        }
-                                      },
-                                      [_vm._v("👀")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
                                       "button",
                                       {
                                         staticClass: "btn btn-secondary",
                                         attrs: {
                                           type: "button",
+                                          id: "loadUser",
                                           title: "Editar"
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.loadFieldsUpdate(user)
+                                            return _vm.loadFieldsUpdate(
+                                              user,
+                                              "#loadUser"
+                                            )
                                           }
                                         }
                                       },
@@ -47322,11 +48210,15 @@ var render = function() {
                                         staticClass: "btn btn-secondary",
                                         attrs: {
                                           type: "button",
+                                          id: "deleteUser",
                                           title: "Eliminar"
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.deleteTask(user)
+                                            return _vm.deleteData(
+                                              user,
+                                              "#deleteUser"
+                                            )
                                           }
                                         }
                                       },
@@ -47519,7 +48411,12 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success",
-                                    on: { click: _vm.saveTasks }
+                                    attrs: { id: "saveUser" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.saveData("#saveUser")
+                                      }
+                                    }
                                   },
                                   [_vm._v("Añadir")]
                                 )
@@ -47530,9 +48427,10 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-warning",
+                                    attrs: { id: "updateUser" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.updateTasks()
+                                        return _vm.updateData("#updateUser")
                                       }
                                     }
                                   },
@@ -47545,13 +48443,10 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-info",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.clearFields()
-                                      }
-                                    }
+                                    attrs: { id: "clearUser" },
+                                    on: { click: _vm.clearFields }
                                   },
-                                  [_vm._v("Atrás")]
+                                  [_vm._v("Limpiar")]
                                 )
                               : _vm._e()
                           ]
@@ -47597,26 +48492,20 @@ var render = function() {
                               },
                               [
                                 _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-secondary",
-                                    attrs: {
-                                      href: "",
-                                      role: "button",
-                                      title: "Ver"
-                                    }
-                                  },
-                                  [_vm._v("👀")]
-                                ),
-                                _vm._v(" "),
-                                _c(
                                   "button",
                                   {
                                     staticClass: "btn btn-secondary",
-                                    attrs: { type: "button", title: "Editar" },
+                                    attrs: {
+                                      type: "button",
+                                      id: "loadAmbit",
+                                      title: "Editar"
+                                    },
                                     on: {
                                       click: function($event) {
-                                        return _vm.loadFieldsUpdate(ambito)
+                                        return _vm.loadFieldsUpdate(
+                                          ambito,
+                                          "#loadAmbit"
+                                        )
                                       }
                                     }
                                   },
@@ -47629,11 +48518,15 @@ var render = function() {
                                     staticClass: "btn btn-secondary",
                                     attrs: {
                                       type: "button",
+                                      id: "deleteAmbit",
                                       title: "Eliminar"
                                     },
                                     on: {
                                       click: function($event) {
-                                        return _vm.deleteTask(ambito)
+                                        return _vm.deleteData(
+                                          ambito,
+                                          "#deleteAmbit"
+                                        )
                                       }
                                     }
                                   },
@@ -47762,7 +48655,12 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success",
-                                    on: { click: _vm.saveTasks }
+                                    attrs: { id: "saveAmbit" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.saveData("#saveAmbit")
+                                      }
+                                    }
                                   },
                                   [_vm._v("Añadir")]
                                 )
@@ -47773,9 +48671,1351 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-warning",
+                                    attrs: { id: "updateAmbit" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.updateTasks()
+                                        return _vm.updateData("#updateAmbit")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Actualizar")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.update != 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.clearFields()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Atrás")]
+                                )
+                              : _vm._e()
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opcion == "Continentes"
+            ? _c("div", { staticClass: "col-sm-12" }, [
+                _c(
+                  "div",
+                  { staticClass: "table-responsive table-continentes" },
+                  [
+                    _c(
+                      "table",
+                      { staticClass: "table table-striped rounded" },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.buscarContinente, function(continente) {
+                            return _c("tr", { key: continente.id }, [
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(continente.continenteEsp)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(continente.continenteEng)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(continente.continenteEus)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "btn-group",
+                                    attrs: {
+                                      role: "group",
+                                      "aria-label": "Basic example"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-secondary",
+                                        attrs: {
+                                          type: "button",
+                                          id: "loadContinent",
+                                          title: "Editar"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.loadFieldsUpdate(
+                                              continente,
+                                              "#loadContinent"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("✎")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-secondary",
+                                        attrs: {
+                                          type: "button",
+                                          id: "deleteContinent",
+                                          title: "Eliminar"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.deleteData(
+                                              continente,
+                                              "#deleteContinent"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("✖")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "row my-4" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "form-group col-md-3" }, [
+                          _c("label", { attrs: { for: "continenteEsp" } }, [
+                            _vm._v("Continente en Español")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.continenteEsp,
+                                expression: "continenteEsp"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "continenteEsp",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.continenteEsp },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.continenteEsp = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group col-md-3" }, [
+                          _c("label", { attrs: { for: "ambitoEng" } }, [
+                            _vm._v("Continent in English")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.continenteEng,
+                                expression: "continenteEng"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "continenteEng",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.continenteEng },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.continenteEng = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group col-md-3" }, [
+                          _c("label", { attrs: { for: "continenteEus" } }, [
+                            _vm._v("Kontinente Euskeraz")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.continenteEus,
+                                expression: "continenteEus"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "continenteEus",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.continenteEus },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.continenteEus = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md-12 text-center" },
+                          [
+                            _vm.update == 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    attrs: { id: "saveContinent" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.saveData("#saveContinent")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Añadir")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.update != 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: { id: "updateContinent" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.updateData(
+                                          "#updateContinent"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Actualizar")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.update != 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.clearFields()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Atrás")]
+                                )
+                              : _vm._e()
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opcion == "Cartas"
+            ? _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "table-responsive table-mujeres" }, [
+                  _c("table", { staticClass: "table table-striped rounded" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.buscarCartas, function(carta) {
+                        return _c("tr", { key: carta.id }, [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(carta.nombre) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(carta.apellido) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(carta.fechaNacimiento)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(carta.fechaMuerte) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(carta.ambito.ambitoEsp)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn-group",
+                                attrs: {
+                                  role: "group",
+                                  "aria-label": "Basic example"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: {
+                                      href: "history/" + carta.id,
+                                      role: "button",
+                                      title: "Ver"
+                                    }
+                                  },
+                                  [_vm._v("👀")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: {
+                                      type: "button",
+                                      id: "loadCard",
+                                      title: "Editar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.loadFieldsUpdate(
+                                          carta,
+                                          "#loadCard"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("✎")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: {
+                                      type: "button",
+                                      id: "deleteCard",
+                                      title: "Eliminar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteData(
+                                          carta,
+                                          "#deleteCard"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("✖")]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row my-4" }, [
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          id: "formCartas",
+                          enctype: "multipart/form-data"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-3" }, [
+                            _c("label", { attrs: { for: "cartaNombres" } }, [
+                              _vm._v("Nombre/s")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.nombre,
+                                  expression: "nombre"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", id: "cartaNombre" },
+                              domProps: { value: _vm.nombre },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.nombre = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-3" }, [
+                            _c("label", { attrs: { for: "cartaApellidos" } }, [
+                              _vm._v("Apellido/s")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.apellido,
+                                  expression: "apellido"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", id: "cartaApellido" },
+                              domProps: { value: _vm.apellido },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.apellido = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-3" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "cartaFnacimiento" } },
+                              [_vm._v("Fecha Nacimiento")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.fechaNacimiento,
+                                  expression: "fechaNacimiento"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", id: "cartaFnacimiento" },
+                              domProps: { value: _vm.fechaNacimiento },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.fechaNacimiento = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-3" }, [
+                            _c("label", { attrs: { for: "cartaFmuerte" } }, [
+                              _vm._v("Fecha Muerte")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.fechaMuerte,
+                                  expression: "fechaMuerte"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", id: "cartaFmuerte" },
+                              domProps: { value: _vm.fechaMuerte },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.fechaMuerte = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.enlaceReferencia,
+                                  expression: "enlaceReferencia"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "cartaEnlacereferencia",
+                                placeholder: "Enlace referencia..."
+                              },
+                              domProps: { value: _vm.enlaceReferencia },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.enlaceReferencia = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-4" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "img-muestra d-flex align-items-center justify-content-center"
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "rounded",
+                                  attrs: {
+                                    src: _vm.imagenPrevia,
+                                    id: "imgPrevia",
+                                    alt: "Imagen previa",
+                                    title: "Imagen previa"
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-8" }, [
+                            _c("div", { staticClass: "form-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-12" },
+                                [
+                                  _c("div", { staticClass: "custom-file" }, [
+                                    _c("input", {
+                                      staticClass: "custom-file-input",
+                                      attrs: {
+                                        type: "file",
+                                        name: "filename",
+                                        id: "filename"
+                                      },
+                                      on: { change: _vm.imagPrev }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("label", {
+                                      staticClass: "custom-file-label",
+                                      attrs: {
+                                        id: "fileTxt",
+                                        for: "customFileLang"
+                                      },
+                                      domProps: {
+                                        textContent: _vm._s(
+                                          "Seleccionar Archivo"
+                                        )
+                                      }
+                                    })
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-6" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.imgDefault,
+                                        expression: "imgDefault"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      id: "cartaImagenalternativa",
+                                      placeholder:
+                                        "Enlace imagen alternativa..."
+                                    },
+                                    domProps: { value: _vm.imgDefault },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.imgDefault = $event.target.value
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-6" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.zonaGeografica,
+                                        expression: "zonaGeografica"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      id: "cartaZonageografica",
+                                      placeholder: "Zona geográfica"
+                                    },
+                                    domProps: { value: _vm.zonaGeografica },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.zonaGeografica = $event.target.value
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-6" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.ambito_id,
+                                          expression: "ambito_id"
+                                        }
+                                      ],
+                                      staticClass: "custom-select",
+                                      attrs: { id: "cartaAmbito" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.ambito_id = $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Seleccionar ambito")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.arrayAmbitos, function(
+                                        ambito
+                                      ) {
+                                        return _c("option", {
+                                          key: ambito.id,
+                                          domProps: {
+                                            value: ambito.id,
+                                            textContent: _vm._s(
+                                              ambito.ambitoEsp
+                                            )
+                                          }
+                                        })
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-6" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.continente_id,
+                                          expression: "continente_id"
+                                        }
+                                      ],
+                                      staticClass: "custom-select",
+                                      attrs: { id: "cartaContinente" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.continente_id = $event.target
+                                            .multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Seleccionar continente")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.arrayContinentes, function(
+                                        continente
+                                      ) {
+                                        return _c("option", {
+                                          key: continente.id,
+                                          domProps: {
+                                            value: continente.id,
+                                            textContent: _vm._s(
+                                              continente.continenteEsp
+                                            )
+                                          }
+                                        })
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("label", { attrs: { for: "cartaLoreesp" } }, [
+                              _vm._v("Historia en Español")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.loreEsp,
+                                  expression: "loreEsp"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "cartaLoreesp",
+                                placeholder: "Añade aquí la historia..."
+                              },
+                              domProps: { value: _vm.loreEsp },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.loreEsp = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("label", { attrs: { for: "cartaLoreeng" } }, [
+                              _vm._v("History in English")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.loreEng,
+                                  expression: "loreEng"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "cartaLoreeng",
+                                placeholder: "Add history here..."
+                              },
+                              domProps: { value: _vm.loreEng },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.loreEng = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("label", { attrs: { for: "cartaLoreeus" } }, [
+                              _vm._v("Historia Euskeraz")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.loreEus,
+                                  expression: "loreEus"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "cartaLoreeus",
+                                placeholder: "Geitu hemen historia..."
+                              },
+                              domProps: { value: _vm.loreEus },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.loreEus = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-12" }, [
+                            _c("div", { staticClass: "input-group mb-3" }, [
+                              _c(
+                                "div",
+                                { staticClass: "input-group-prepend" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-text" },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.habilitado,
+                                            expression: "habilitado"
+                                          }
+                                        ],
+                                        attrs: {
+                                          type: "checkbox",
+                                          id: "habi_des",
+                                          "aria-label":
+                                            "Checkbox for following text input"
+                                        },
+                                        domProps: {
+                                          checked: Array.isArray(_vm.habilitado)
+                                            ? _vm._i(_vm.habilitado, null) > -1
+                                            : _vm.habilitado
+                                        },
+                                        on: {
+                                          change: [
+                                            function($event) {
+                                              var $$a = _vm.habilitado,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = null,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.habilitado = $$a.concat(
+                                                      [$$v]
+                                                    ))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.habilitado = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.habilitado = $$c
+                                              }
+                                            },
+                                            _vm.checked
+                                          ]
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "habi_desText",
+                                  "aria-label": "Text input with checkbox",
+                                  value: "Deshabilitado",
+                                  disabled: "",
+                                  readonly: ""
+                                }
+                              })
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group col-md-12 text-center" },
+                            [
+                              _vm.update == 0
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { id: "saveCard" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.saveData("#saveCard")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Añadir")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.update != 0
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-warning",
+                                      attrs: { id: "updateCard" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.updateData("#updateCard")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Actualizar")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.update != 0
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-info",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.clearFields()
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Atrás")]
+                                  )
+                                : _vm._e()
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.opcion == "Preguntas"
+            ? _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "table-responsive table-ambitos" }, [
+                  _c("table", { staticClass: "table table-striped rounded" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.buscarPregunta, function(pregunta) {
+                        return _c("tr", { key: pregunta.id }, [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(pregunta.carta_id) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(pregunta.carta.nombre)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: { textContent: _vm._s(pregunta.pregunta) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn-group",
+                                attrs: {
+                                  role: "group",
+                                  "aria-label": "Basic example"
+                                }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: {
+                                      type: "button",
+                                      id: "loadQuest",
+                                      title: "Editar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.loadFieldsUpdate(
+                                          pregunta,
+                                          "#loadQuest"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("✎")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: {
+                                      type: "button",
+                                      id: "deleteQuest",
+                                      title: "Eliminar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteData(
+                                          pregunta,
+                                          "#deleteQuest"
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("✖")]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row my-4" }, [
+                  _vm._m(10),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "form-group col-md-3" }, [
+                          _c("label", { attrs: { for: "mujer" } }, [
+                            _vm._v("Mujer")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.carta_id,
+                                  expression: "carta_id"
+                                }
+                              ],
+                              staticClass: "custom-select",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.carta_id = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { disabled: "", value: "" } },
+                                [_vm._v("Seleccionar mujer")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.arrayCartas, function(carta) {
+                                return _c("option", {
+                                  key: carta.id,
+                                  domProps: {
+                                    textContent: _vm._s(carta.nombre)
+                                  }
+                                })
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("label", { attrs: { for: "pregunta" } }, [
+                          _vm._v("Preguntas")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.pregunta,
+                              expression: "pregunta"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { autocomplete: "off", id: "pregunta" },
+                          domProps: { value: _vm.pregunta },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.pregunta = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("label", { attrs: { for: "respuesta_1" } }, [
+                          _vm._v("Respuesta Correcta")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.respuesta_1,
+                              expression: "respuesta_1"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { autocomplete: "off", id: "respuesta_1" },
+                          domProps: { value: _vm.respuesta_1 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.respuesta_1 = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("label", { attrs: { for: "respuesta_2" } }, [
+                          _vm._v("Respuesta Erronea 1")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.respuesta_2,
+                              expression: "respuesta_2"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { autocomplete: "off", id: "respuesta_2" },
+                          domProps: { value: _vm.respuesta_2 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.respuesta_2 = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("label", { attrs: { for: "respuesta_3" } }, [
+                          _vm._v("Respuesta Erronea 2")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.respuesta_3,
+                              expression: "respuesta_3"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { autocomplete: "off", id: "respuesta_3" },
+                          domProps: { value: _vm.respuesta_3 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.respuesta_3 = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-md-12 text-center" },
+                          [
+                            _vm.update == 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    attrs: { id: "saveQuest" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.saveData("#saveQuest")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Añadir")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.update != 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: { id: "updateQuest" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.updateData("#updateQuest")
                                       }
                                     }
                                   },
@@ -47854,6 +50094,84 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Ambit in English")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Eremu Euskeraz")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("h3", [_vm._v("Datos")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Continente en Español")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Continent in English")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Kontinente Euskeraz")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("h3", [_vm._v("Datos")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark position-sticky" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("F. Nacimiento")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("F. Muerte")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ambito")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("h3", [_vm._v("Datos")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("CartaID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Carta")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pregunta")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])

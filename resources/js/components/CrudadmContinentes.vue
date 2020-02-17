@@ -88,7 +88,7 @@ export default {
     methods:{
         getTasks(){
             let me =this;
-            let url = 'continent' //Ruta que hemos creado para que nos devuelva todas las tareas
+            let url = '../continentes/' //Ruta que hemos creado para que nos devuelva todas las tareas
             axios.get(url).then(function (response) {
                 //creamos un array y guardamos el contenido que nos devuelve el response
                 me.arrayContinentes = response.data;
