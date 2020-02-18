@@ -33,22 +33,23 @@ Route::group(['middleware' => 'auth'], function () {
         }
     });
 
-    Route::get('/perfil', 'OcafController@getPerfil')->name('perfil');
+    Route::get('/profile', 'OcafController@getPerfil')->name('profile');
     Route::get('/panel/gestion', 'OcafController@getPanelgestion')->name('panel.gestion');
-    Route::get('/panel/usuarios', 'OcafController@getPanelusuarios')->name('panel.usuarios');
-    Route::get('/panel/ambitos', 'OcafController@getPanelambitos')->name('panel.ambitos');
-    Route::get('/panel/continentes', 'OcafController@getPanelcontinentes')->name('panel.continentes');
-    Route::get('/panel/cartas', 'OcafController@getPanelcartas')->name('panel.cartas');
-    Route::get('/panel/preguntas', 'OcafController@getPanelpreguntas')->name('panel.preguntas');
-
 });
 
 /*
 CRUD Vue.js y Laravel
 */
 // Rutas para el perfil del usuario
-Route::get('/profile/user', 'TaskController@getPerfiluser');
-Route::put('/profile/update', 'TaskController@updatePerfiluser');
+Route::get('/profile/user', 'TaskController@getProfile');
+Route::put('/profile/update', 'TaskController@updateProfile');
+
+// Rutas para el panel de gestion de usuarios
+Route::get('/panel/ranks/data', 'TaskController@tableRank');
+Route::put('/panel/ranks/update', 'TaskController@updateRank');
+Route::post('/panel/ranks/save', 'TaskController@storeRank');
+Route::delete('/panel/ranks/delete/{id}', 'TaskController@destroyRank');
+Route::get('/panel/ranks/search', 'TaskController@showRank');
 
 // Rutas para el panel de gestion de usuarios
 Route::get('/panel/users/data', 'TaskController@tableUser');

@@ -57,7 +57,7 @@ export default {
     methods: {
         getTasks(){
             let me =this;
-            let url = 'profile';
+            let url = './profile/user';
             axios.get(url).then(function (response) {
                 //creamos un array y guardamos el contenido que nos devuelve el response
                 me.arrayUsuario = response.data;
@@ -112,7 +112,7 @@ export default {
                 }).then((result) => {
                     if(result.value) {
                         this.$swal('Actualizacion', 'Ha aceptado la actualización de tu contraseña', 'success');
-                        axios.put('profile/actualizar',{
+                        axios.put('./profile/update',{
                             'id':this.update,
                             'password':this.perfilConfirmarcontraseña,
                         }).then(function (response) {

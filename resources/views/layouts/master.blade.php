@@ -45,7 +45,7 @@
         <div id="app" class="main">
             @yield('content')
 
-            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('tablero/*') || \Request::is('perfil') || \Request::is('panel') || \Request::is('panelusuarios') || \Request::is('panelcartas'))
+            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('tablero/*') || \Request::is('profile') || \Request::is('panel/*') )
                 @include('layouts.fab')
             @endif
         </div>

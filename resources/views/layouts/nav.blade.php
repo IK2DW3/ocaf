@@ -15,7 +15,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/') }}">Inicio <span class="sr-only">(current)</span></a>
             </li>
-            @if (\Request::is('historys'))
+            @if (\Request::is('profile') || \Request::is('historys') || \Request::is('panel/*'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
@@ -30,17 +30,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Finalizar partida</a>
                 </li>
-            @elseif (\Request::is('panelusuarios'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
-                </li>
-            @elseif (\Request::is('perfil') || \Request::is('panelusuarios') || \Request::is('panelambitos') || \Request::is('panelcontinentes') || \Request::is('panelcartas'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('panelusuarios') }}">Volver al panel</a>
-                </li>
             @endif
         </ul>
         @if( Auth::check() )
@@ -51,9 +40,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <p class="dropdown-item disabled">{{Auth::user()->name}}</p>
-                        <a class="dropdown-item" href="{{ url('perfil') }}">Ver perfil</a>
-                        @if (Auth::user()->tipo == "superadmin")
-                            <a class="dropdown-item" href="{{ url('panel') }}">Gestionar</a>
+                        <a class="dropdown-item" href="{{ url('profile') }}">Ver perfil</a>
+                        @if (Auth::user()->rango_id == 1)
+                            <a class="dropdown-item" href="{{ route('panel.gestion') }}">Gestionar</a>
                             <div class="dropdown-divider"></div>
                         @endif
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">

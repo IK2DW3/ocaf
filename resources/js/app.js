@@ -20,11 +20,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
 
 Vue.component('crud-gestion', require('./components/CrudGestion.vue').default);
-Vue.component('crudadm-users', require('./components/CrudadmUsers.vue').default);
-Vue.component('crudadm-ambits', require('./components/CrudadmAmbitos.vue').default);
-Vue.component('crudadm-continents', require('./components/CrudadmContinentes.vue').default);
-Vue.component('crudadm-cartas', require('./components/CrudadmCartas.vue').default);
-Vue.component('crudadm-preguntas', require('./components/CrudadmPreguntas.vue').default);
 
 Vue.component('vue-historys', require('./components/VueHistorys.vue').default);
 

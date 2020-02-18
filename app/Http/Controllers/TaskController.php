@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Rango;
 use App\User;
 use App\Ambito;
 use App\Continente;
@@ -25,25 +26,77 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TaskController extends Controller {
 
     /**
-     * Metodo para la tabla de usuarios
+     * Metodo para la tabla de rangos
      */
-    public function tableUser(Request $request) {
+    public function tableRank(Request $request) {
         // Devovler la tabla con un orden
-        $results = User::orderBy('name')->get();
+        $results = Rango::all();
         return $results;
 
     }
 
-    public function storeUser(Request $request) {
+    public function storeRank(Request $request) {
 
-        $task = new User();
+        $task = new Rango();
+        $task->rango = $request->rango;
+        $task->descripcion = $request->descripcion;
+        $task->save();
+
+
+    }
+
+    public function showRank(Request $request) {
+
+        $task = Rango::findOrFail($request->id);
+        return $task;
+
+    }
+
+    public function updateRank(Request $request) {
+
+        $task = Rango::findOrFail($request->id);
         $task->name = $request->name;
         $task->email = $request->email;
         $task->tipo = $request->tipo;
         $task->password = bcrypt($request->password);
         $task->save();
+        return $task;
 
+    }
 
+    public function destroyRank(Request $request) {
+
+        if ($request->id == 1 || $request->id == 2 || $request->id == 3 || $request->id == 4){
+            return false;
+        } else {
+            $task = Rango::destroy($request->id);
+            return $task;
+        }
+
+    }
+
+    /**
+     * Metodo para la tabla de usuarios
+     */
+    public function tableUser(Request $request) {
+        // Devovler la tabla con un orden
+        return User::with('rango')->get();
+
+    }
+
+    public function storeUser(Request $request) {
+
+        if (Auth::user()->rango_id === 3 && $request->tipo === 3 || Auth::user()->rango_id === 3 && $request->tipo === 4) {
+            return false;
+        } else {
+            $task = new User();
+            $task->name = $request->name;
+            $task->email = $request->email;
+            $task->rango_id = $request->tipo;
+            $task->password = bcrypt($request->password);
+            $task->save();
+        }
+        
     }
 
     public function showUser(Request $request) {
@@ -58,8 +111,12 @@ class TaskController extends Controller {
         $task = User::findOrFail($request->id);
         $task->name = $request->name;
         $task->email = $request->email;
-        $task->tipo = $request->tipo;
-        $task->password = bcrypt($request->password);
+        $task->rango_id = $request->rango_id;
+        if ($request->password == '') {
+            $task->password = bcrypt('1234567890');
+        } else {
+            $task->password = bcrypt($request->password);
+        }
         $task->save();
         return $task;
 
@@ -67,9 +124,13 @@ class TaskController extends Controller {
 
     public function destroyUser(Request $request) {
 
-        $task = User::destroy($request->id);
-        return $task;
-
+        if (Auth::user()->rango_id === 3 && $request->tipo === 3 || Auth::user()->rango_id === 3 && $request->tipo === 4) {
+            return false;
+        } else {
+            $task = User::destroy($request->id);
+            return $task;
+        }
+        
     }
 
     /**
@@ -310,7 +371,7 @@ class TaskController extends Controller {
     /**
      * Metodo para el perfil del usuario
      */
-    public function getPerfiluser(Request $request) {
+    public function getProfile(Request $request) {
 
         if (Auth::check()) {
             $user = Auth::user();
@@ -319,7 +380,7 @@ class TaskController extends Controller {
 
     }
 
-    public function updatePerfiluser(Request $request) {
+    public function updateProfile(Request $request) {
 
         if (Auth::check()) {
             $userUp = User::findOrFail($request->id);

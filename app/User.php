@@ -20,6 +20,11 @@ class User extends Authenticatable
         'name', 'email', 'tipo', 'password',
     ];
 
+    // Funciones
+    public function rango() {
+        return $this->belongsTo('App\Rango');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

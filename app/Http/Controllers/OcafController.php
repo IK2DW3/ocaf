@@ -66,53 +66,8 @@ class OcafController extends Controller
     }
 
     public function getPanelgestion() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
+        if (Auth::user()->rango_id === 1 || Auth::user()->rango_id === 2) {
             return view('administracion.panelgestion');
-        } else {
-            Alert::warning('Error', 'Permisos insuficientes!');
-            return redirect()->action('OcafController@getIndex');
-        }
-    }
-
-    public function getPanelusuarios() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelusuarios');
-        } else {
-            Alert::warning('Error', 'Permisos insuficientes!');
-            return redirect()->action('OcafController@getIndex');
-        }
-    }
-
-    public function getPanelambitos() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelambitos');
-        } else {
-            Alert::warning('Error', 'Permisos insuficientes!');
-            return redirect()->action('OcafController@getIndex');
-        }
-    }
-
-    public function getPanelcontinentes() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelcontinentes');
-        } else {
-            Alert::warning('Error', 'Permisos insuficientes!');
-            return redirect()->action('OcafController@getIndex');
-        }
-    }
-
-    public function getPanelcartas() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelcartas');
-        } else {
-            Alert::warning('Error', 'Permisos insuficientes!');
-            return redirect()->action('OcafController@getIndex');
-        }
-    }
-
-    public function getPanelpreguntas() {
-        if (Auth::user()->tipo == 'superadmin' || Auth::user()->tipo == 'admin') {
-            return view('administracion.panelpreguntas');
         } else {
             Alert::warning('Error', 'Permisos insuficientes!');
             return redirect()->action('OcafController@getIndex');

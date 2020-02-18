@@ -51,19 +51,19 @@
                 <span class="rounded-pill shadow-lg bg-white rounded mx-1 px-2 esconder">Ver perfil</span>
             </div>
             <div class="col-3 d-flex align-items-center justify-content-center px-1">
-                <a href="{{url('perfil')}}" class="btn btn-item btn-success rounded-circle shadow-lg rounded w-75 menuslide" id="botonPerfil">
+                <a href="{{url('profile')}}" class="btn btn-item btn-success rounded-circle shadow-lg rounded w-75 menuslide" id="botonPerfil">
                     <i class="icon ion-md-contact"></i>
                 </a>
             </div>
         </div>
 
-        @if (Auth::check() && Auth::user()->tipo == "superadmin")
+        @if (Auth::check() && Auth::user()->rango_id === 1)
             <div class="row overflow-hidden py-1 w-100">
                 <div class="col-9 d-flex align-items-center justify-content-end px-1">
                     <span class="rounded-pill shadow-lg bg-white rounded mx-1 px-2 esconder">Gestionar</span>
                 </div>
                 <div class="col-3 d-flex align-items-center justify-content-center px-1">
-                    <a href="{{url('panelusuarios')}}" class="btn btn-item btn-warning rounded-circle shadow-lg rounded w-75 menuslide" id="botonPanel">
+                    <a href="{{route('panel.gestion')}}" class="btn btn-item btn-warning rounded-circle shadow-lg rounded w-75 menuslide" id="botonPanel">
                         <i class="icon ion-md-settings"></i>
                     </a>
                 </div>

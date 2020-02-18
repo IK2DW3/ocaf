@@ -4,19 +4,23 @@
         <div class="col-md-2 panel-aside border-right px-2 py-2">
             <h2>Gestionar</h2>
             <div class="btn-group-vertical panel-aside-navegador w-100">
-                <a type="button" id="btnUsuarios" class="btn btn-secondary" v-text="'Usuarios'" @click="getOption('#btnUsuarios')">&#x1F465;</a>
-                <a type="button" id="btnAmbitos" class="btn btn-secondary" v-text="'Ambitos'" @click="getOption('#btnAmbitos')">&#x1F393;</a>
-                <a type="button" id="btnContinentes" class="btn btn-secondary" v-text="'Continentes'" @click="getOption('#btnContinentes')">&#x1F310;</a>
-                <a type="button" id="btnCartas" class="btn btn-secondary" v-text="'Cartas'" @click="getOption('#btnCartas')">&#x1F4D6;</a>
-                <a type="button" id="btnPreguntas" class="btn btn-secondary" v-text="'Preguntas'" @click="getOption('#btnPreguntas')">&#x2047;</a>
+                <a type="button" id="btnUsuarios" class="btn btn-secondary text-light" v-if="usuarioActivo.rango_id == 1 || usuarioActivo.rango_id == 2" v-text="'Usuarios'" @click="getOption('#btnUsuarios')">&#x1F465;</a>
+                <a type="button" id="btnAmbitos" class="btn btn-secondary text-light" v-if="usuarioActivo.rango_id == 1" v-text="'Ambitos'" @click="getOption('#btnAmbitos')">&#x1F393;</a>
+                <a type="button" id="btnContinentes" class="btn btn-secondary text-light" v-if="usuarioActivo.rango_id == 1" v-text="'Continentes'" @click="getOption('#btnContinentes')">&#x1F310;</a>
+                <a type="button" id="btnCartas" class="btn btn-secondary text-light" v-text="'Cartas'" @click="getOption('#btnCartas')">&#x1F4D6;</a>
+                <a type="button" id="btnPreguntas" class="btn btn-secondary text-light" v-text="'Preguntas'" @click="getOption('#btnPreguntas')">&#x2047;</a>
             </div>
         </div>
         <div class="col-md-10 panel-contenido px-2 py-2">
             <div class="row" id="master">
-                <div class="col-sm-12 my-2">
+                <div class="col-sm-12 text-center my-2">
                     <h2>Tabla del NET</h2>
                 </div>
-                <div class="col-sm-12 my-2">
+                <div class="col-sm-12 text-center my-2 py-5" v-if="opcion == ''">
+                    <h3>¡Hola, {{ usuarioActivo.name }}!</h3>
+                    <p>Bienvenid@ a la tabla del conocimiento</p>
+                </div>
+                <div class="col-sm-12 my-2"  v-if="opcion != ''">
                     <input class="form-control" type="search" v-model="busqueda" name="buscador" placeholder="Buscar en la tabla" autocomplete="off">
                 </div>
                 <div class="col-sm-12" v-if="opcion == 'Usuarios'">
@@ -34,11 +38,11 @@
                                 <tr v-for="user in buscarUsuarios" :key="user.id">
                                     <td v-text="user.name"></td>
                                     <td v-text="user.email"></td>
-                                    <td v-text="user.tipo"></td>
+                                    <td v-text="user.rango.nombre"></td>
                                     <td>
-                                        <div v-if="user.tipo != 'superadmin'" class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary" id="loadUser" title="Editar" @click="loadFieldsUpdate(user, '#loadUser')">&#x270E;</button>
-                                            <button type="button" class="btn btn-secondary" id="deleteUser" title="Eliminar" @click="deleteData(user,'#deleteUser')">&#x2716;</button>
+                                        <div v-if="user.rango.id != 1" class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" id="loadUser" class="btn btn-secondary"  title="Editar" @click="loadFieldsUpdate(user, '#loadUser')">&#x270E;</button>
+                                            <button type="button" id="deleteUser" class="btn btn-secondary"  title="Eliminar" @click="deleteData(user,'#deleteUser')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -62,11 +66,9 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="cartaApellidos">Seleccionar tipo</label>
-                                        <select v-model="tipo" class="custom-select" id="userTipo">
+                                        <select v-model="rango_id" class="custom-select" id="userTipo">
                                             <option disabled value="">Seleccionar rango</option>
-                                            <option v-for="tipo in tipos" v-bind:key="tipo.id" :value="tipo.value">
-                                                {{ tipo.text }}
-                                            </option>
+                                            <option v-for="rango in arrayRangos" :key="rango.id" :value="rango.id">{{ rango.nombre }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3">
@@ -77,11 +79,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12 text-center">
                                         <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                        <button v-if="update == 0" @click="saveData('#saveUser')" class="btn btn-success" id="saveUser">Añadir</button>
+                                        <button id="saveUser" class="btn btn-success" v-if="update == 0" @click="saveData('#saveUser')">Añadir</button>
                                         <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="updateData('#updateUser')" class="btn btn-warning" id="updateUser">Actualizar</button>
+                                        <button id="updateUser" class="btn btn-warning" v-if="update != 0" @click="updateData('#updateUser')">Actualizar</button>
                                         <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="clearFields" class="btn btn-info" id="clearUser">Limpiar</button>
+                                        <input type="reset" id="clearUser" class="btn btn-info" v-if="update != 0" @click="updateStatus('#clearUser')">
                                     </div>
                                 </div>
                             </form>
@@ -106,8 +108,8 @@
                                     <td v-text="ambito.ambitoEus"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary" id="loadAmbit" title="Editar" @click="loadFieldsUpdate(ambito, '#loadAmbit')">&#x270E;</button>
-                                            <button type="button" class="btn btn-secondary" id="deleteAmbit" title="Eliminar" @click="deleteData(ambito,'#deleteAmbit')">&#x2716;</button>
+                                            <button type="button" id="loadAmbit" class="btn btn-secondary"  title="Editar" @click="loadFieldsUpdate(ambito, '#loadAmbit')">&#x270E;</button>
+                                            <button type="button" id="deleteAmbit" class="btn btn-secondary" title="Eliminar" @click="deleteData(ambito,'#deleteAmbit')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -137,11 +139,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12 text-center">
                                         <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                        <button v-if="update == 0" @click="saveData('#saveAmbit')" class="btn btn-success" id="saveAmbit">Añadir</button>
+                                        <button id="saveAmbit" class="btn btn-success" v-if="update == 0" @click="saveData('#saveAmbit')">Añadir</button>
                                         <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="updateData('#updateAmbit')" class="btn btn-warning" id="updateAmbit">Actualizar</button>
+                                        <button id="updateAmbit" class="btn btn-warning" v-if="update != 0" @click="updateData('#updateAmbit')">Actualizar</button>
                                         <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
+                                        <input type="reset" id="clearAmbit" class="btn btn-info" v-if="update != 0" @click="updateStatus('#clearAmbit')">
                                     </div>
                                 </div>
                             </form>
@@ -166,8 +168,8 @@
                                     <td v-text="continente.continenteEus"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary" id="loadContinent" title="Editar" @click="loadFieldsUpdate(continente, '#loadContinent')">&#x270E;</button>
-                                            <button type="button" class="btn btn-secondary" id="deleteContinent" title="Eliminar" @click="deleteData(continente, '#deleteContinent')">&#x2716;</button>
+                                            <button type="button" id="loadContinent" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(continente, '#loadContinent')">&#x270E;</button>
+                                            <button type="button" id="deleteContinent" class="btn btn-secondary" title="Eliminar" @click="deleteData(continente, '#deleteContinent')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -197,11 +199,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12 text-center">
                                         <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                        <button v-if="update == 0" @click="saveData('#saveContinent')" class="btn btn-success" id="saveContinent">Añadir</button>
+                                        <button id="saveContinent" class="btn btn-success" v-if="update == 0" @click="saveData('#saveContinent')">Añadir</button>
                                         <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="updateData('#updateContinent')" class="btn btn-warning" id="updateContinent">Actualizar</button>
+                                        <button id="updateContinent" class="btn btn-warning" v-if="update != 0" @click="updateData('#updateContinent')">Actualizar</button>
                                         <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
+                                        <input type="reset" id="clearContinent" class="btn btn-info" v-if="update != 0" @click="updateStatus('#clearContinent')">
                                     </div>
                                 </div>
                             </form>
@@ -231,8 +233,8 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a :href="'history/'+ carta.id" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
-                                            <button type="button" class="btn btn-secondary" id="loadCard" title="Editar" @click="loadFieldsUpdate(carta, '#loadCard')">&#x270E;</button>
-                                            <button type="button" class="btn btn-secondary" id="deleteCard" title="Eliminar" @click="deleteData(carta, '#deleteCard')">&#x2716;</button>
+                                            <button type="button" id="loadCard" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta, '#loadCard')">&#x270E;</button>
+                                            <button type="button" id="deleteCard" class="btn btn-secondary" title="Eliminar" @click="deleteData(carta, '#deleteCard')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -330,11 +332,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12 text-center">
                                         <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                        <button v-if="update == 0" @click="saveData('#saveCard')" class="btn btn-success" id="saveCard">Añadir</button>
+                                        <button id="saveCard" class="btn btn-success" v-if="update == 0" @click="saveData('#saveCard')">Añadir</button>
                                         <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="updateData('#updateCard')" class="btn btn-warning" id="updateCard">Actualizar</button>
+                                        <button id="updateCard" class="btn btn-warning" v-if="update != 0" @click="updateData('#updateCard')">Actualizar</button>
                                         <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
+                                        <input type="reset" id="clearCard" class="btn btn-info" v-if="update != 0" @click="updateStatus('#clearCard')">
                                     </div>
                                 </div>
                             </form>
@@ -359,8 +361,8 @@
                                     <td v-text="pregunta.pregunta"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary" id="loadQuest" title="Editar" @click="loadFieldsUpdate(pregunta, '#loadQuest')">&#x270E;</button>
-                                            <button type="button" class="btn btn-secondary" id="deleteQuest" title="Eliminar" @click="deleteData(pregunta, '#deleteQuest')">&#x2716;</button>
+                                            <button type="button" id="loadQuest" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(pregunta, '#loadQuest')">&#x270E;</button>
+                                            <button type="button" id="deleteQuest" class="btn btn-secondary" title="Eliminar" @click="deleteData(pregunta, '#deleteQuest')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -383,29 +385,37 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="pregunta">Preguntas</label>
-                                    <textarea v-model="pregunta" class="form-control" autocomplete="off" id="pregunta"></textarea>
+                                    <div class="form-group col-md-12">
+                                        <label for="pregunta">Preguntas</label>
+                                        <textarea v-model="pregunta" class="form-control" id="pregunta" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="respuesta_1">Respuesta Correcta</label>
-                                    <textarea v-model="respuesta_1" class="form-control" autocomplete="off" id="respuesta_1"></textarea>
+                                    <div class="form-group col-md-12">
+                                        <label for="respuesta_1">Respuesta Correcta</label>
+                                        <textarea v-model="respuesta_1" class="form-control" id="respuesta_1" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="respuesta_2">Respuesta Erronea 1</label>
-                                    <textarea v-model="respuesta_2" class="form-control" autocomplete="off" id="respuesta_2"></textarea>
+                                    <div class="form-group col-md-12">
+                                        <label for="respuesta_2">Respuesta Erronea 1</label>
+                                        <textarea v-model="respuesta_2" class="form-control" id="respuesta_2" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="respuesta_3">Respuesta Erronea 2</label>
-                                    <textarea v-model="respuesta_3" class="form-control" autocomplete="off" id="respuesta_3"></textarea>
+                                    <div class="form-group col-md-12">
+                                        <label for="respuesta_3">Respuesta Erronea 2</label>
+                                        <textarea v-model="respuesta_3" class="form-control" id="respuesta_3" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12 text-center">
                                         <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                                        <button v-if="update == 0" @click="saveData('#saveQuest')" class="btn btn-success" id="saveQuest">Añadir</button>
+                                        <button id="saveQuest" class="btn btn-success" v-if="update == 0" @click="saveData('#saveQuest')">Añadir</button>
                                         <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="updateData('#updateQuest')" class="btn btn-warning" id="updateQuest">Actualizar</button>
+                                        <button id="updateQuest" class="btn btn-warning" v-if="update != 0" @click="updateData('#updateQuest')">Actualizar</button>
                                         <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                                        <button v-if="update != 0" @click="clearFields()" class="btn btn-info">Atrás</button>
+                                        <input type="reset" id="clearQuest" class="btn btn-info" v-if="update != 0" @click="updateStatus('#clearQuest')">
                                     </div>
                                 </div>
                             </form>
@@ -428,7 +438,7 @@ export default {
 
             name:'',
             email:'',
-            tipo:'',
+            rango_id:0,
             password:'',
 
             ambito_id:0,
@@ -464,11 +474,9 @@ export default {
             respuesta_3: "",
             carta_id: "",
             
+            usuarioActivo:[],
+            arrayRangos:[],
             arrayUsuarios:[],
-            tipos: [
-                { text: 'Usuario', value: 'user' },
-                { text: 'Administrador', value: 'administrator' }
-            ],
             arrayAmbitos:[],
             arrayContinentes:[],
             arrayCartas:[],
@@ -476,12 +484,19 @@ export default {
         }
     },
     methods: {
-        getOption(element){
-            this.opcion = $(element).text();
-            return this.opcion
-        },
         getData(){
             let me =this;
+            axios.get('./ranks/data').then(function (response) {
+                // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+                me.arrayRangos = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            axios.get('../profile/user').then(function (response) {
+                // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
+                me.usuarioActivo = response.data;
+            })
             axios.get('./users/data').then(function (response) {
                 // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
                 me.arrayUsuarios = response.data;
@@ -516,6 +531,10 @@ export default {
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        getOption(element){
+            this.opcion = $(element).text();
+            return this.opcion
         },
         saveData(element){
             let me = this;
@@ -591,7 +610,6 @@ export default {
                         'password':this.password,
                     }).then(function (response) {
                         me.getData();
-                        me.clearFields();
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -616,8 +634,8 @@ export default {
                         'ambitoEng':this.ambitoEng,
                         'ambitoEus':this.ambitoEus,
                     }).then(function (response) {
-                        me.getTasks();
-                        me.clearFields();
+                        me.getData();
+                        
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -643,8 +661,8 @@ export default {
                         'continenteEng':this.continenteEng,
                         'continenteEus':this.continenteEus,
                     }).then(function (response) {
-                        me.getTasks();
-                        me.clearFields();
+                        me.getData();
+                        
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -729,8 +747,7 @@ export default {
                         'enlaceReferencia':this.enlaceReferencia,
                         'habilitado':this.habilitado,
                     }).then(function (response) {
-                        me.getTasks();
-                        me.clearFields();
+                        me.getData();
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -760,8 +777,7 @@ export default {
                         'respuesta_3':this.respuesta_3,
                         'carta_id':this.carta_id,
                     }).then(function (response) {
-                        me.getTasks();
-                        me.clearFields();
+                        me.getData();
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -782,11 +798,10 @@ export default {
                     'id':this.update,
                     'name':this.name,
                     'email':this.email,
-                    'tipo':this.tipo,
+                    'rango_id':this.rango_id,
                     'password':this.password,
                 }).then(function (response) {
                     me.getData();
-                    me.clearFields();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -799,7 +814,6 @@ export default {
                     'ambitoEus':this.ambitoEus,
                 }).then(function (response) {
                     me.getData();
-                    me.clearFields();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -812,7 +826,7 @@ export default {
                     'continenteEus':this.continenteEus,
                 }).then(function (response) {
                     me.getData();
-                    me.clearFields();
+                    
                 })
                 .catch(function (error) {
                     this.$swal('Error', 'Se ha producido un error', 'warning');
@@ -837,7 +851,7 @@ export default {
                     'habilitado':this.habilitado,
                 }).then(function (response) {
                    me.getData();
-                   me.clearFields();
+                   
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -852,7 +866,7 @@ export default {
                     'carta_id':this.carta_id,
                 }).then(function (response) {
                    me.getData();
-                   me.clearFields();
+                   
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -860,6 +874,51 @@ export default {
             } else {
                 this.$swal('Actualización', 'Los datos no se han actualizado correctamente', 'info');
             }
+        },
+        updateStatus(element){
+            element = $(element);
+            if (element.attr('id') == 'clearUser') {
+                this.name = '';
+                this.email = '';
+                this.tipo = '';
+                this.password = '';
+            } else if (element.attr('id') == 'loadUser') {
+                this.ambito_id = 0;
+                this.ambitoEsp = '';
+                this.ambitoEng = '';
+                this.ambitoEus = '';
+            } else if (element.attr('id') == 'loadUser') {
+                this.continente_id = 0;
+                this.continenteEsp = '';
+                this.continenteEng = '';
+                this.continenteEus = '';
+            } else if (element.attr('id') == 'loadUser') {
+                this.nombre = '';
+                this.apellido = '';
+                this.fechaNacimiento = '';
+                this.fechaMuerte = '';
+                this.loreEsp = '';
+                this.loreEng = '';
+                this.loreEus = '';
+                this.zonaGeografica = '';
+                $('#fileTxt').text('Seleccionar archivo');
+                this.imgRuta = '';
+                this.imgDefault = '';
+                $('#imgPrevia').attr('src',this.imagenPrevia);
+                $('#fileCartas').val('');
+                this.enlaceReferencia = '';
+                this.habilitado = 0;
+                $('#habi_desText').val('Deshabilitado');
+                this.volverCss();
+            } else if (element.attr('id') == 'loadUser') {
+                this.pregunta = '';
+                this.respuesta_1 = '';
+                this.respuesta_2 = '';
+                this.respuesta_3 = '';
+                this.carta_id  = 0;
+            }
+            this.update = 0;
+            this.busqueda = '';
         },
         deleteData(data,element){
             let me = this;
@@ -997,8 +1056,7 @@ export default {
                 axios.get('./users/search?id='+this.update).then(function (response) {
                     me.name = response.data.name;
                     me.email = response.data.email;
-                    me.tipo = response.data.tipo;
-                    me.vm.tipo = response.data.tipo;
+                    me.rango_id = response.data.rango_id;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1075,8 +1133,8 @@ export default {
                 this.$swal('Datos', 'Fallo al cargar los datos', 'info')
             }
         },
-        campoInvalido(campo){
-            $(campo).css('border','1px solid red');
+        campoInvalido(input){
+            $(input).css('border','1px solid red');
         },
         checked() {
             if(this.habilitado) {
@@ -1122,44 +1180,6 @@ export default {
                 console.log(error);
             });
         },
-        clearFields(){
-            this.ambito_id = 0;
-            this.ambitoEsp = '';
-            this.ambitoEng = '';
-            this.ambitoEus = '';
-
-            this.continente_id = 0;
-            this.continenteEsp = '';
-            this.continenteEng = '';
-            this.continenteEus = '';
-
-            this.nombre = '';
-            this.apellido = '';
-            this.fechaNacimiento = '';
-            this.fechaMuerte = '';
-            this.loreEsp = '';
-            this.loreEng = '';
-            this.loreEus = '';
-            this.zonaGeografica = '';
-            $('#fileTxt').text('Seleccionar archivo');
-            this.imgRuta = '';
-            this.imgDefault = '';
-            $('#imgPrevia').attr('src',this.imagenPrevia);
-            $('#fileCartas').val('');
-            this.enlaceReferencia = '';
-            this.habilitado = 0;
-            $('#habi_desText').val('Deshabilitado');
-            this.volverCss();
-
-            this.pregunta = '';
-            this.respuesta_1 = '';
-            this.respuesta_2 = '';
-            this.respuesta_3 = '';
-            this.carta_id  = 0;
-
-            this.update = 0;
-            this.busqueda = '';
-        }
     },
     computed: {
         buscarUsuarios() {
