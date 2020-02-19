@@ -24,6 +24,12 @@ class User extends Authenticatable
     public function rango() {
         return $this->belongsTo('App\Rango');
     }
+    public function post() {
+        return $this->hasMany('App\Post');
+    }
+    public function comentario() {
+        return $this->hasMany('App\Comentario');
+    }
 
     /**
      * The attributes that should be hidden for arrays.

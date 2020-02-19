@@ -10,11 +10,14 @@ class Post extends Model
     protected $table = 'posts';
     public $timestamps = true;
 
-    protected $fillable = ['titulo', 'descripcion', 'imagen', 'numero_comentarios', 'user_id'];
+    protected $fillable = ['titulo', 'descripcion', 'imagen', 'numero_comentarios', 'categoria_id', 'user_id'];
 
     // Funciones
     public function categoria() {
         return $this->belongsTo('App\Categoria');
+    }
+    public function user() {
+        return $this->belongsTo('App\User');
     }
     public function comentario() {
         return $this->hasMany('App\Comentario');

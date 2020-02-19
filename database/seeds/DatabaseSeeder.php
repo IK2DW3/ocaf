@@ -137,6 +137,10 @@ class DatabaseSeeder extends Seeder
             'nombre' => 'Off-Topic',
             'descripcion' => 'Categoria con posts de tema general'
         ),
+        array(
+            'nombre' => 'Prueba',
+            'descripcion' => 'Categoria con posts de tema general'
+        )
     );
 
     private $arrayPosts = array(
@@ -148,6 +152,78 @@ class DatabaseSeeder extends Seeder
             'categoria_id' => 1,
             'user_id' => 1
         ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+        array(
+            'titulo' => 'Una entrada normal',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        )
     );
 
     // Funcion de inicio del seeder

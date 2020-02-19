@@ -16,7 +16,7 @@
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-        <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos CSS3 diferente... -->
+        <!-- Dependiendo de la ruta recogida, ponemos una direccion de recursos CSS3 diferente... -->
         @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('blog/*') || \Request::is('panel/*'))
             <link rel="stylesheet" href="../../resources/css/style.css">
             <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
@@ -37,21 +37,22 @@
   </head>
   <body>
 
-        <!-- Incluir metodo de notificaciones -->
-        @include('sweetalert::alert')
-
-        @include('layouts.nav')
-
         <div id="app" class="main">
+            <!-- Barra de navegacion -->
+            @include('layouts.nav')
+
             @yield('content')
 
             @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('tablero/*') || \Request::is('profile') || \Request::is('panel/*') )
                 @include('layouts.fab')
             @endif
-        </div>
 
-        <!-- Footer -->
-        @include('layouts.footer')
+            <!-- Incluir metodo de notificaciones -->
+            @include('sweetalert::alert')
+
+            <!-- Footer -->
+            @include('layouts.footer')
+        </div>
 
         <!-- + Scripts -->
         <script src="{{asset('js/app.js')}}"></script>
