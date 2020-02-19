@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark ">
     <a class="navbar-brand" href="{{ url('/') }}">
-        @if (\Request::is('history/*'))
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
             <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
         @else
             <img src="../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
@@ -15,33 +15,42 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/') }}">Inicio <span class="sr-only">(current)</span></a>
             </li>
-            @if (\Request::is('historys'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('mode') }}">Volver</a>
-                </li>
-            @elseif (\Request::is('paneladmin'))
+            @if (\Request::is('profile') || \Request::is('historys') || \Request::is('panel/*'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
-            @elseif ('history/*')
+            @elseif (\Request::is('history/*'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('historys') }}">Volver</a>
+                    <a class="nav-link" href="{{ url('historys') }}">Historias</a>
+                </li>
+            @elseif (\Request::is('tablero/*'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('mode') }}">Finalizar partida</a>
                 </li>
             @endif
         </ul>
         @if( Auth::check() )
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opciones
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon ion-md-add"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('paneladmin') }}">Gestión</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url('/logout') }}">Cerrar sesión</a>
+                        <p class="dropdown-item disabled">{{Auth::user()->name}}</p>
+                        <a class="dropdown-item" href="{{ url('profile') }}">Ver perfil</a>
+                        @if (Auth::user()->rango_id == 1)
+                            <a class="dropdown-item" href="{{ route('panel.gestion') }}">Gestionar</a>
+                            <div class="dropdown-divider"></div>
+                        @endif
+                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
+                            {{ csrf_field() }}
+                            <button type="submit" class="dropdown-item" style="display:inline;cursor:pointer">
+                                Cerrar sesión
+                            </button>
+                        </form>
                     </div>
                 </li>
             </ul>

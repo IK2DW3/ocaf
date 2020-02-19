@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\Controller;
 use App\Carta;
-Use Alert;
+use App\User;
+use App\Ambito;
 
 class OcafController extends Controller
 {
-    //
+    // Inicio de las funciones
+    public function getHome() {
+        return  redirect()->action('LoginController@login');
+    }
+
     public function getIndex() {
         return view('index');
     }
@@ -21,27 +31,47 @@ class OcafController extends Controller
         return view('mode');
     }
 
-    public function getGamemode(Request $request) {
-        $mode = $request->input('mode');
-        return view('gamemode', array('gamemode' => $mode));
+    public function postRegister(Request $request) {
+        $registroPersona = new User;
+        $registroPersona->name = $request->input('userRegister');
+        $registroPersona->email = $request->input('userEmailRegister');
+        $registroPersona->password = bcrypt($request->input('userConfirmnPasswordRegister'));
+        $registroPersona->save();
+        return view('index', array('arrayRegistro'=> $registroPersona));
+    }
+
+    public function getGamemode() {
+        return view('gamemode');
+    }
+
+    public function getTabnormal() {
+        return view('tableros.tabnormal');
+    }
+    
+    public function getTabserpiente() {
+        return view('tableros.tabserpiente');
     }
 
     public function getHistorys() {
-        $Cartas = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp')
-                    ->get();
-        return view('historys', array('arrayCartas'=> $Cartas));
+        return view('historys');
     }
 
     public function getHistory($id) {
-        $Carta = DB::table('cartas')
-                    ->join('ambitos', 'cartas.codAmbito', '=', 'ambitos.id')
-                    ->join('continentes', 'cartas.codContinente', '=', 'continentes.id')
-                    ->select('cartas.*', 'ambitos.ambitoEsp', 'continentes.continenteEng')
-                    ->where('cartas.id', '=', $id)
-                    ->get();
+        $Carta = Carta::findOrFail($id);
         return view('history', array('arrayCarta' => $Carta));
+    }
+
+    public function getPerfil() {
+        return view('administracion.perfil');
+    }
+
+    public function getPanelgestion() {
+        if (Auth::user()->rango_id === 1 || Auth::user()->rango_id === 2) {
+            return view('administracion.panelgestion');
+        } else {
+            Alert::warning('Error', 'Permisos insuficientes!');
+            return redirect()->action('OcafController@getIndex');
+        }
     }
 
 }

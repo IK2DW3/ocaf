@@ -1,46 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- + Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
-    <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos diferente... -->
-    @if (\Request::is('history/*'))
-        <link rel="stylesheet" href="../../resources/css/style.css">
-        <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
-    @else
-        <link rel="stylesheet" href="../resources/css/style.css">
-        <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
-    @endif
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+        <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos CSS3 diferente... -->
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
+            <link rel="stylesheet" href="../../resources/css/style.css">
+            <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
+        @else
+            <link rel="stylesheet" href="../resources/css/style.css">
+            <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
+        @endif
 
-    <title>OCA-F</title>
+        @if (\Request::is('tablero/normal'))
+            <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
+        @elseif (\Request::is('tablero/serpiente'))
+            <link rel="stylesheet" href="../../resources/css/tablero/tablero2.css">
+        @endif
+
+        <!-- Titulo de la web recogido del archivo .env -->
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
   </head>
   <body>
-    @include('sweetalert::alert')
 
-    @if (\Request::is('historys') || \Request::is('paneladmin') || \Request::is('history/*'))
+        <!-- Incluir metodo de notificaciones -->
+        @include('sweetalert::alert')
+
         @include('layouts.nav')
-    @endif
 
-    <div class="main">
-      @yield('content')
-    </div>
-    <!-- Footer -->
-    @include('layouts.footer')
+        <div id="app" class="main">
+            @yield('content')
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            @if ( \Request::is('/') || \Request::is('index') || \Request::is('historys') || \Request::is('history/*') || \Request::is('mode') || \Request::is('gamemode') || \Request::is('tablero/*') || \Request::is('profile') || \Request::is('panel/*') )
+                @include('layouts.fab')
+            @endif
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <!-- Footer -->
+        @include('layouts.footer')
+
+        <!-- + Scripts -->
+        <script src="{{asset('js/app.js')}}"></script>
+        @if ( \Request::is('/login') || \Request::is('tablero/*'))
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @endif
+        @if (\Request::is('tablero/*'))
+            <script src="../../resources/js/tablero/main.js"></script>
+        @endif
 
   </body>
 </html>

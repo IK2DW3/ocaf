@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Rango;
 use App\User;
 use App\Ambito;
 use App\Continente;
@@ -110,16 +111,50 @@ class DatabaseSeeder extends Seeder
         )
     );
 
+    private $arrayRangos = array(
+		array(
+            'nombre' => 'Superadmin',
+            'descripcion' => 'Usuario con permisos totales sobre toda la aplicacion'
+        ),
+        array(
+            'nombre' => 'Administrador',
+            'descripcion' => 'Usuario con permisos avanzados  en la aplicacion'
+        ),
+        array(
+            'nombre' => 'Moderador',
+            'descripcion' => 'Usuario con permisos basicos en la aplicacion'
+        ),
+        array(
+            'nombre' => 'Usuario',
+            'descripcion' => 'Usuario con permisos minimos de uso en la aplicacion'
+        ),
+    );
+
     // Funcion de inicio del seeder
     public function run()
     {
         // Añadimos los seeders
+        self::seedRangos();
         self::seedUsers();
         self::seedAmbitos();
         self::seedContinentes();
-        self::seedCartas();
 
         $this->command->info('Datos insertados correctamente!');
+
+    }
+
+    public function seedRangos()
+    {
+        // En primer lugar borramos el contenido de la tabla
+        DB::table('rangos')->delete();
+
+        // Rellenamos la tabla con el nuevo contenido
+        foreach( $this->arrayRangos as $rango ) {
+            $range = new Rango;
+            $range->nombre = $rango['nombre'];
+            $range->descripcion = $rango['descripcion'];
+            $range->save();
+        }
 
     }
 
@@ -131,8 +166,8 @@ class DatabaseSeeder extends Seeder
         // Rellenamos la tabla con el nuevo contenido
 		$user = new User;
 		$user->name = 'Administrador';
-        $user->email = 'adminsupport@rdjsl.com';
-        $user->tipo = 'superadmin';
+        $user->email = 'ocafsupport@gmail.com';
+        $user->rango_id = 1;
 		$user->password = bcrypt('adminrootg1');
 		$user->save();
 
@@ -167,13 +202,6 @@ class DatabaseSeeder extends Seeder
             $p->continenteEus = $continente['eus'];
             $p->save();
         }
-
-    }
-
-    public function seedCartas()
-    {
-        // En primer lugar borramos el contenido de la tabla
-        DB::table('cartas')->delete();
 
     }
 

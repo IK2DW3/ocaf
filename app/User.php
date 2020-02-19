@@ -15,9 +15,15 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'tipo', 'password',
     ];
+
+    // Funciones
+    public function rango() {
+        return $this->belongsTo('App\Rango');
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -25,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     /**
