@@ -300,3 +300,9 @@ div.footer {
     color: #f5f5f5;
     margin-bottom: 0;
 }
+
+
+/* OCULTAR OBJ o ELEMENTS */
+.nodisplay {
+    display: none !important;
+}

@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Carta;
 use App\User;
 use App\Ambito;
+use App\Post;
 
 class OcafController extends Controller
 {
@@ -81,7 +82,8 @@ class OcafController extends Controller
      * Funciones para el blog
      */
     public function getBlog() {
-        return view('blog.home');
+        $Post = Post::orderBy('created_at', 'DESC')->first();
+        return view('blog.home',['arrayPost' => $Post]);
     }
     public function getPosts() {
         return view('blog.posts');

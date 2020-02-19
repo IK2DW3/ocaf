@@ -102,5 +102,7 @@ Route::get('pruebas', 'FileController@create');
 Route::resource('file', 'FileController');
 Route::resource('file', 'TaskController');
 
-
-
+/**
+ * Rutas para el blog
+ */
+Route::get('/blog/posts/data', 'TaskController@getBloghome');

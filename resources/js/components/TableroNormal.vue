@@ -206,27 +206,39 @@ export default {
     methods: {
         inicio() {
             let me = this;
-            let url = './cards/data';
-            axios.get(url).then(function (response) {
+            axios.get('../panel/cards/data').then(function (response) {
+                me.partida = localStorage.getItem("partida");
+                me.partida = JSON.parse(me.partida);
                 me.arrayCartas = response.data;
                 me.cargarPartida();
             }).catch(function (error) {
                 console.log(error);
             });
-            me.partida = localStorage.getItem("partida");
-            me.partida = JSON.parse(me.partida);
             this.$swal({
                 icon: 'info',
                 title: 'Partida',
                 text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!',
             });
+
         },
         nombrarJugadores() {
             let me = this;
             $('#nombre1').text(me.partida['jugador1']);
             $('#nombre2').text(me.partida['jugador2']);
-            $('#nombre3').text(me.partida['jugador3']);
-            $('#nombre4').text(me.partida['jugador4']);
+
+            if (me.partida['jugador3'] == null || me.partida['jugador3'] == ''){
+                $('#jugador3').addClass('nodisplay');
+                $('#ficha3').css({'display': 'none'});
+            } else {
+                $('#nombre3').text(me.partida['jugador3']);
+            }
+
+            if (me.partida['jugador4'] == null || me.partida['jugador4'] == ''){
+                $('#jugador4').addClass('nodisplay');
+                $('#ficha4').css({'display': 'none'});
+            } else {
+                $('#nombre4').text(me.partida['jugador4']);
+            }
         },
         aleatorizarCasillas() {
             let me = this;

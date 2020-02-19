@@ -88,15 +88,9 @@ export default {
         getTasks(){
             let me = this;
             me.gamemode = localStorage.getItem('modoSeleccionado');
-            axios.get('ambit').then(function (response) {
+            axios.get('./panel/ambits/data').then(function (response) {
                 me.arrayAmbitos = response.data;
             }).catch(function (error) {
-                console.log(error);
-            });
-            axios.get('profile').then(function (response) {
-                me.usuarioLogin = response.data;
-            })
-            .catch(function (error) {
                 console.log(error);
             });
         },

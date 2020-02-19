@@ -395,4 +395,12 @@ class TaskController extends Controller {
 
     }
 
+    /**
+     * Metodo para el blog
+     */
+    public function getBloghome() {
+        $post = Post::orderBy('created_at', 'DESC')->take(5)->get();
+        return $post;
+    }
+
 }

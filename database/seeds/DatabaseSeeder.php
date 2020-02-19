@@ -7,6 +7,7 @@ use App\Ambito;
 use App\Continente;
 use App\Pregunta;
 use App\Categoria;
+use App\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -138,6 +139,17 @@ class DatabaseSeeder extends Seeder
         ),
     );
 
+    private $arrayPosts = array(
+		array(
+            'titulo' => 'Bienvenida',
+            'descripcion' => 'Éste es nuestro blog con el cual queremos compartir nuestras experiencias y conocimientos',
+            'imagen' => '',
+            'numero_comentarios' => 0,
+            'categoria_id' => 1,
+            'user_id' => 1
+        ),
+    );
+
     // Funcion de inicio del seeder
     public function run()
     {
@@ -147,6 +159,7 @@ class DatabaseSeeder extends Seeder
         self::seedAmbitos();
         self::seedContinentes();
         self::seedCategorias();
+        self::seedPosts();
 
         $this->command->info('Datos insertados correctamente!');
 
@@ -224,6 +237,25 @@ class DatabaseSeeder extends Seeder
             $p = new Categoria;
             $p->nombre = $categoria['nombre'];
             $p->descripcion = $categoria['descripcion'];
+            $p->save();
+        }
+
+    }
+
+    public function seedPosts()
+    {
+        // En primer lugar borramos el contenido de la tabla
+        DB::table('posts')->delete();
+
+        // Rellenamos la tabla con el nuevo contenido
+        foreach( $this->arrayPosts as $post ) {
+            $p = new Post;
+            $p->titulo = $post['titulo'];
+            $p->descripcion = $post['descripcion'];
+            $p->imagen = $post['imagen'];
+            $p->numero_comentarios = $post['numero_comentarios'];
+            $p->categoria_id = $post['categoria_id'];
+            $p->user_id = $post['user_id'];
             $p->save();
         }
 

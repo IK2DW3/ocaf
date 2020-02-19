@@ -3427,13 +3427,8 @@ __webpack_require__.r(__webpack_exports__);
     getTasks: function getTasks() {
       var me = this;
       me.gamemode = localStorage.getItem('modoSeleccionado');
-      axios.get('ambit').then(function (response) {
+      axios.get('./panel/ambits/data').then(function (response) {
         me.arrayAmbitos = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      axios.get('profile').then(function (response) {
-        me.usuarioLogin = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3756,15 +3751,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     inicio: function inicio() {
       var me = this;
-      var url = '../card';
-      axios.get(url).then(function (response) {
+      axios.get('../panel/cards/data').then(function (response) {
+        me.partida = localStorage.getItem("partida");
+        me.partida = JSON.parse(me.partida);
         me.arrayCartas = response.data;
         me.cargarPartida();
       })["catch"](function (error) {
         console.log(error);
       });
-      me.partida = localStorage.getItem("partida");
-      me.partida = JSON.parse(me.partida);
       this.$swal({
         icon: 'info',
         title: 'Partida',
@@ -3775,8 +3769,24 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       $('#nombre1').text(me.partida['jugador1']);
       $('#nombre2').text(me.partida['jugador2']);
-      $('#nombre3').text(me.partida['jugador3']);
-      $('#nombre4').text(me.partida['jugador4']);
+
+      if (me.partida['jugador3'] == null || me.partida['jugador3'] == '') {
+        $('#jugador3').addClass('nodisplay');
+        $('#ficha3').css({
+          'display': 'none'
+        });
+      } else {
+        $('#nombre3').text(me.partida['jugador3']);
+      }
+
+      if (me.partida['jugador4'] == null || me.partida['jugador4'] == '') {
+        $('#jugador4').addClass('nodisplay');
+        $('#ficha4').css({
+          'display': 'none'
+        });
+      } else {
+        $('#nombre4').text(me.partida['jugador4']);
+      }
     },
     aleatorizarCasillas: function aleatorizarCasillas() {
       var me = this;
@@ -4178,7 +4188,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     inicio: function inicio() {
       var me = this;
-      var url = '../card';
+      var url = './cards/data';
       axios.get(url).then(function (response) {
         me.arrayCartas = response.data;
         me.cargarPartida();
@@ -63178,6 +63188,18 @@ $(function () {
   $("#divcookies").fadeIn("slow");
   $("#btncookies").click(function () {
     $("#divcookies").fadeOut("slow");
+  });
+  var validarCookie = localStorage.getItem("validarCookie");
+  ;
+
+  if (validarCookie == 'habilitada') {
+    $("#divcookies").css({
+      'visibility': 'hidden'
+    });
+  }
+
+  $("#btncookies").click(function () {
+    localStorage.setItem("validarCookie", "habilitada");
   });
   /**
    * Comprobacion del login
