@@ -1,19 +1,23 @@
 <?php
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'OcafController@getIndex');
 Route::get('index', 'OcafController@getIndex');
 
 Route::GET('logout', 'Auth/LoginController@logout');
 Route::post('register', 'OcafController@postRegister');
 
-Route::get('mode', 'OcafController@getMode');
 Route::get('historys', 'OcafController@getHistorys');
 Route::get('history/{id}', 'OcafController@getHistory');
+
+Route::get('mode', 'OcafController@getMode');
 Route::get('gamemode', 'OcafController@getGamemode')->name('gamemode');
+
 Route::get('tablero/normal', 'OcafController@getTabnormal')->name('tablero.normal');
 Route::get('tablero/serpiente', 'OcafController@getTabserpiente')->name('tablero.serpiente');
 
+Route::get('blog/home', 'OcafController@getBlog')->name('blog.home');
+Route::get('blog/posts', 'OcafController@getPosts')->name('blog.posts');
+Route::get('blog/post/{id}', 'OcafController@getPost')->name('blog.post');
 
 Route::group(['middleware' => 'auth'], function () {
 

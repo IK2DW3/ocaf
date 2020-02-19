@@ -17,9 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->unsignedInteger('rango_id')->default('4');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedInteger('rango_id')->default('4');
+            $table->string('avatar')->default('default.png');
+            $table->integer('entradas_publicadas')->default('0');
+            $table->integer('comentarios_publicados')->default('0');
             $table->timestamps();
 
             $table->foreign('rango_id')->references('id')->on('rangos');

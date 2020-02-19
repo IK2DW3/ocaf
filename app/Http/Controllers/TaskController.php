@@ -9,6 +9,8 @@ use App\Ambito;
 use App\Continente;
 use App\Carta;
 use App\Pregunta;
+use App\Post;
+use App\Comentario;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Illuminate\Http\File;

@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark ">
     <a class="navbar-brand" href="{{ url('/') }}">
-        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('blog/*') || \Request::is('panel/*'))
             <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
         @else
             <img src="../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
@@ -15,6 +15,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/') }}">Inicio <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('blog.home') }}">Blog</a>
+            </li>
             @if (\Request::is('profile') || \Request::is('historys') || \Request::is('panel/*'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
@@ -23,12 +26,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('mode') }}">Jugar</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ url('historys') }}">Historias</a>
                 </li>
             @elseif (\Request::is('tablero/*'))
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ url('mode') }}">Finalizar partida</a>
+                </li>
+            @elseif (\Request::is('blog/*'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('blog.posts') }}">Entradas</a>
                 </li>
             @endif
         </ul>

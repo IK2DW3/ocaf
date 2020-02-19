@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Dependiando de la ruta damos recogida, ponemos una direccion de recursos CSS3 diferente... -->
-        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('blog/*') || \Request::is('panel/*'))
             <link rel="stylesheet" href="../../resources/css/style.css">
             <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
         @else

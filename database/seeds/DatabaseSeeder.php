@@ -6,6 +6,7 @@ use App\User;
 use App\Ambito;
 use App\Continente;
 use App\Pregunta;
+use App\Categoria;
 
 class DatabaseSeeder extends Seeder
 {
@@ -130,6 +131,13 @@ class DatabaseSeeder extends Seeder
         ),
     );
 
+    private $arrayCategorias = array(
+		array(
+            'nombre' => 'Off-Topic',
+            'descripcion' => 'Categoria con posts de tema general'
+        ),
+    );
+
     // Funcion de inicio del seeder
     public function run()
     {
@@ -138,6 +146,7 @@ class DatabaseSeeder extends Seeder
         self::seedUsers();
         self::seedAmbitos();
         self::seedContinentes();
+        self::seedCategorias();
 
         $this->command->info('Datos insertados correctamente!');
 
@@ -200,6 +209,21 @@ class DatabaseSeeder extends Seeder
             $p->continenteEsp = $continente['esp'];
             $p->continenteEng = $continente['eng'];
             $p->continenteEus = $continente['eus'];
+            $p->save();
+        }
+
+    }
+
+    public function seedCategorias()
+    {
+        // En primer lugar borramos el contenido de la tabla
+        DB::table('categorias')->delete();
+
+        // Rellenamos la tabla con el nuevo contenido
+        foreach( $this->arrayCategorias as $categoria ) {
+            $p = new Categoria;
+            $p->nombre = $categoria['nombre'];
+            $p->descripcion = $categoria['descripcion'];
             $p->save();
         }
 

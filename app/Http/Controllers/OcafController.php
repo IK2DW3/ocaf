@@ -23,14 +23,9 @@ class OcafController extends Controller
         return  redirect()->action('LoginController@login');
     }
 
-    public function getIndex() {
-        return view('index');
-    }
-
-    public function getMode() {
-        return view('mode');
-    }
-
+    /**
+     * Registro de usuarios en la aplicacion
+     */
     public function postRegister(Request $request) {
         $registroPersona = new User;
         $registroPersona->name = $request->input('userRegister');
@@ -38,6 +33,36 @@ class OcafController extends Controller
         $registroPersona->password = bcrypt($request->input('userConfirmnPasswordRegister'));
         $registroPersona->save();
         return view('index', array('arrayRegistro'=> $registroPersona));
+    }
+    
+    public function getPerfil() {
+        return view('administracion.perfil');
+    }
+
+    /**
+     * Inicio de la aplicaion
+     */
+    public function getIndex() {
+        return view('index');
+    }
+
+    /**
+     * Funciones para las historias
+     */
+    public function getHistorys() {
+        return view('historys');
+    }
+
+    public function getHistory($id) {
+        $Carta = Carta::findOrFail($id);
+        return view('history', array('arrayCarta' => $Carta));
+    }
+    
+    /**
+     * Funciones para el juego
+     */
+    public function getMode() {
+        return view('mode');
     }
 
     public function getGamemode() {
@@ -52,19 +77,22 @@ class OcafController extends Controller
         return view('tableros.tabserpiente');
     }
 
-    public function getHistorys() {
-        return view('historys');
+    /**
+     * Funciones para el blog
+     */
+    public function getBlog() {
+        return view('blog.home');
+    }
+    public function getPosts() {
+        return view('blog.posts');
+    }
+    public function getPost($id) {
+        return view('blog.post');
     }
 
-    public function getHistory($id) {
-        $Carta = Carta::findOrFail($id);
-        return view('history', array('arrayCarta' => $Carta));
-    }
-
-    public function getPerfil() {
-        return view('administracion.perfil');
-    }
-
+    /**
+     * Gestion de la base de datos desde la aplicacion
+     */
     public function getPanelgestion() {
         if (Auth::user()->rango_id === 1 || Auth::user()->rango_id === 2) {
             return view('administracion.panelgestion');

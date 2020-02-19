@@ -205,7 +205,7 @@ export default {
     methods: {
         inicio() {
             let me = this;
-            let url = '../card';
+            let url = './cards/data';
             axios.get(url).then(function (response) {
                 me.arrayCartas = response.data;
                 me.cargarPartida();
