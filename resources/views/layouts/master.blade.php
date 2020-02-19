@@ -61,6 +61,7 @@
         @if (\Request::is('tablero/*'))
             <script src="../../resources/js/tablero/main.js"></script>
         @endif
+        <script src="../resources/js/cookie.js"></script>
 
   </body>
 </html>

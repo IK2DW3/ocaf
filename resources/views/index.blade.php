@@ -5,13 +5,15 @@
 
     <div class="contenedor">
         <div class="row align-items-center justify-content-center contenido mx-2 my-2">
+            
             <div id ="divcookies" class="alert text-center cookiealert mx-2 my-2 bg-info fixed-top" role="alert">
-                <b>¿Conoces nuesta politica de cookies?</b> &#x1F36A; usamos la cokies para poder mejorar el funcionamiento de nuestra pagina. Haz click <a href="https://www.cookiesandyou.com/about-cookies/" class="text-warning">aqui</a> para mas informacion <br>
+                <b>¿Conoces nuestra politica de cookies?</b> &#x1F36A; usamos las cokies para poder mejorar el funcionamiento de nuestra pagina. Haz click <a href="https://www.cookiesandyou.com/about-cookies/" class="text-warning">aqui</a> para mas informacion <br>
             <br>
                 <button type="button" class="btn btn-primary btn-lg" aria-label="Close" id="btncookies">
                     Acepto las cookies 
                 </button>
             </div>
+
             <div class="col-sm-8 col-md-8 col-lg-4 box-index">
                 <div class="row box-index-contenido">
                     <div class="col-sm-12 text-center">
@@ -44,6 +46,7 @@
             </div>
         </div>
     </div>
-
-
 @stop
+
+
+
