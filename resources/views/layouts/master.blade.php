@@ -17,18 +17,24 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Dependiendo de la ruta recogida, ponemos una direccion de recursos CSS3 diferente... -->
-        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('blog/*') || \Request::is('panel/*'))
-            <link rel="stylesheet" href="../../resources/css/style.css">
-            <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
+        @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
+        <link rel="stylesheet" href="../../resources/css/style.css">
+        <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
+        @elseif (\Request::is('blog/home') || \Request::is('blog/posts'))
+        <link rel="stylesheet" href="../../resources/css/style.css">
+        <link rel="shortcut icon" href="../../resources/img/fav/favicon.ico" type="image/x-icon">
+        @elseif (\Request::is('blog/post/*'))
+        <link rel="stylesheet" href="../../../resources/css/style.css">
+        <link rel="shortcut icon" href="../../../resources/img/fav/favicon.ico" type="image/x-icon">
         @else
-            <link rel="stylesheet" href="../resources/css/style.css">
-            <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../resources/css/style.css">
+        <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">
         @endif
 
         @if (\Request::is('tablero/normal'))
-            <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
+        <link rel="stylesheet" href="../../resources/css/tablero/tablero.css">
         @elseif (\Request::is('tablero/serpiente'))
-            <link rel="stylesheet" href="../../resources/css/tablero/tablero2.css">
+        <link rel="stylesheet" href="../../resources/css/tablero/tablero2.css">
         @endif
 
         <!-- Titulo de la web recogido del archivo .env -->

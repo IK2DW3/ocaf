@@ -322,7 +322,7 @@ div.blog-body div.blog-section div.blog-article-principal p.text-info {
     margin: 0;
 }
 
-div.blog-body div.blog-section h3 {
+div.blog-body div.blog-section h3.blog-text-secundary {
     font-size: 3em !important;
     font-weight: bold;
     text-decoration: underline;
@@ -336,9 +336,52 @@ div.blog-body div.blog-section div.blog-article {
     text-align: left;
 }
 
-div.blog-body div.blog-section div.blog-article h5.titulo-principal {
+div.blog-body div.blog-section div.blog-article h5.titulo-principal,
+div.blog-body div.blog-section div.blog-post h5.titulo-principal {
     font-size: 1.5em !important;
     font-weight: bold;
+}
+
+div.blog-body div.blog-section div.blog-article p.text-info,
+div.blog-body div.blog-section div.blog-post p.text-info,
+div.blog-body div.blog-section div.blog-comentary p.text-info {
+    color: #000 !important;
+    font-size: .8em !important;
+}
+
+div.blog-body div.blog-section div.blog-article div.blog-article-footer {
+    background-color: #c7c7c7;
+    border-top: 1px solid #7ffbff;
+}
+
+div.blog-body div.blog-section div.blog-post {
+    background-color: #fdfdfd;
+    border: 1px solid #e254a0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: auto;
+    max-height: 1500px;
+    min-height: 150px; 
+    overflow: hidden;
+    text-align: left; 
+}
+
+div.blog-body div.blog-section div.blog-post div.blog-post-img {
+    max-height: 768px;
+}
+div.blog-body div.blog-section div.blog-post div.blog-post-img img {
+    object-fit: cover;
+}
+
+div.blog-body div.blog-section div.blog-comentary {
+    border: none;
+    border-bottom: 1px solid #757575;
+    height: auto;
+    max-height: 150px;
+    min-height: 90px;    
+}
+
+div.blog-body div.blog-section div.blog-comentary button.btn-comentario-eliminar {
+    font-size: .5em !important; 
 }
 
 div.blog-body div.blog-aside {
@@ -349,13 +392,18 @@ div.blog-body div.blog-aside {
     min-height: 500px;
 }
 
-div.blog-body div.blog-aside h4{
+div.blog-body div.blog-aside h4.blog-title-navigation {
     font-size: 2em !important;
     font-weight: bold;
 }
 
-div.blog-body div.blog-aside input.blog-busqueda {
+div.blog-body div.blog-aside input.blog-aside-busqueda {
     border: 1px solid #e8ff7f;
+}
+
+div.blog-body div.blog-aside a.blog-aside-lista-item {
+    border: 1px solid #d169e6;
+    border-left: 5px solid #e081f3;
 }
 
 /* Footer */

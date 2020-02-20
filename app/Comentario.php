@@ -13,7 +13,7 @@ class Comentario extends Model
     protected $fillable = ['descripcion', 'post_id', 'user_id'];
 
     // Funciones
-    public function usuario() {
+    public function user() {
         return $this->belongsTo('App\User');
     }
 

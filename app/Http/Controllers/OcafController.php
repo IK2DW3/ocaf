@@ -17,6 +17,7 @@ use App\User;
 use App\Ambito;
 use App\Categoria;
 use App\Post;
+use App\Comentario;
 
 class OcafController extends Controller
 {
@@ -83,16 +84,67 @@ class OcafController extends Controller
      * Funciones para el blog
      */
     public function getBlog() {
+
+        $data['categorys'] = Categoria::all();
         $data['post'] = Post::with('user', 'categoria')->orderBy('created_at', 'DESC')->first();
         $data['posts'] = Post::with('user', 'categoria')->orderBy('created_at', 'DESC')->take(8)->get();
-        $data['categorys'] = Categoria::all();
         return view('blog.home', ['data' => $data]);
+
     }
     public function getPosts() {
-        return view('blog.posts');
+
+        $data['categorys'] = Categoria::all();
+        $data['posts'] = Post::with('user', 'categoria', 'comentario')->orderBy('created_at', 'DESC')->get();
+        return view('blog.posts', ['data' => $data]);
+
     }
     public function getPost($id) {
-        return view('blog.post');
+
+        $data['categorys'] = Categoria::all();
+        $data['post'] = Post::findOrFail($id);
+        $data['comentarys'] = Comentario::with('user')->where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('blog.post', ['data' => $data]);
+
+    }
+
+    public function postComment(Request $request) {
+
+        $idPost = $request->input('post-postid-comment');
+
+        $Comentario = new Comentario;
+        $Comentario->descripcion = $request->input('post-comment');
+        $Comentario->post_id = $request->input('post-postid-comment');
+        $Comentario->user_id = $request->input('post-userid-comment');
+        $Comentario->save();
+
+        $Post = Post::findOrFail($idPost);
+        $Post->numero_comentarios = $Post->numero_comentarios + 1;
+        $Post->save();
+        
+        $data['categorys'] = Categoria::all();
+        $data['post'] = Post::findOrFail($idPost);
+        $data['comentarys'] = Comentario::with('user')->where('post_id', $idPost)->orderBy('created_at', 'desc')->get();
+        return redirect()->route('blog.post', [$idPost]);
+
+    }
+
+    public function deleteComment(Request $request) {
+
+        $idPost = $request->input('post-postid-comment');
+        $idComentario = $request->input('post-comment-id');
+
+        $Comentario = Comentario::findOrFail($idComentario);
+        $Comentario->delete();
+
+        $Post = Post::findOrFail($idPost);
+        $Post->numero_comentarios = $Post->numero_comentarios - 1;
+        $Post->save();
+        
+        $data['categorys'] = Categoria::all();
+        $data['post'] = Post::findOrFail($idPost);
+        $data['comentarys'] = Comentario::with('user')->where('post_id', $idPost)->orderBy('created_at', 'desc')->get();
+        return redirect()->route('blog.post', [$idPost]);
+
     }
 
     /**

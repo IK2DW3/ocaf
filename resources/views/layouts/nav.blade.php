@@ -2,8 +2,12 @@
     <div class="col-sm-10">
         <nav class="navbar  navbar-expand-md navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ url('/') }}">
-                @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('blog/*') || \Request::is('panel/*'))
+                @if (\Request::is('history/*') || \Request::is('tablero/*') || \Request::is('panel/*'))
                     <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
+                @elseif (\Request::is('blog/home') || \Request::is('blog/posts'))
+                    <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
+                @elseif (\Request::is('blog/post/*'))
+                    <img src="../../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
                 @else
                     <img src="../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
                 @endif
