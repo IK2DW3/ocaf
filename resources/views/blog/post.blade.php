@@ -34,11 +34,11 @@
                         </div>
                     </div>
                 </div>
+                @auth
                 <div class="row my-3">
                     <div class="col-sm-12">
                         <h3>Dejar comentario</h3>
                     </div>
-                    @auth
                     <div class="col-sm-12">
                         <form action="{{ url('/blog/post/comentar') }}" method="post">
                             {{ csrf_field() }}
@@ -50,17 +50,23 @@
                             </div>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"><img src="../../../resources/img/avatars/{{Auth::user()->avatar}}" alt="avatar" title="{{Auth::user()->name}}" width="30" height="30"></span>
+                                    <span class="input-group-text"><img src="../../../resources/img/avatars/{{Auth::user()->avatar}}" alt="avatar" title="{{Auth::user()->name}}" width="30" height="30"></span>
                                 </div>
                                 <textarea class="form-control" aria-label="With textarea" name="post-comment"></textarea>
-                            </div>
-                            <div class="input-group my-1">
-                                <input class="btn btn-success" type="submit" value="Comentar">
+                                <div class="input-group-append">
+                                    <input class="btn btn-success" type="submit" value="Comentar">
+                                </div>
                             </div>
                         </form>
                     </div>
-                    @endauth
                 </div>
+                @else
+                <div class="row my-3">
+                    <div class="col-sm-12">
+                        <p>¿Tienes ya una cuenta? Inicia sesion <a href="{{route('login')}}">aquí</a> o <a href="{{route('login')}}">registrate</a>.</p>
+                    </div>
+                </div>
+                @endauth
                 <div class="row my-3">
                     @foreach( $data['comentarys'] as $key => $comentario )
                     <div class="col-sm-12 my-1">
@@ -68,12 +74,12 @@
                             <div class="card-body blog-comentary-body">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-1 d-flex align-items-center justify-content-center h-100">
-                                        <img src="../../../resources/img/avatars/{{$comentario->user->avatar}}" alt="avatar" title="{{$comentario->user->name}}" width="30" height="30">
+                                        <img src="../../../resources/img/avatars/{{$comentario->user->avatar}}" alt="avatar" title="{{$comentario->user->name}}" width="50" height="50">
                                     </div>
                                     <div class="col-sm-12 col-md-11">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-8">
-                                                <p class="card-text text-info">{{$comentario->user->name}}</p>
+                                                <p class="card-text text-info"><strong>{{$comentario->user->name}}</strong></p>
                                             </div>
                                             <div class="col-sm-12 col-md-3">
                                                 <p class="card-text text-info"><strong>&#x1F4C5;</strong> {{$comentario->created_at}}</p>
@@ -107,29 +113,8 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-2 blog-aside mx-1">
-                <div class="row">
-                    <div class="col-sm-12 px-3 pt-2 pb-1"><h4 class="text-center blog-title-navigation">Navegador</h4></div>
-                    <div class="col-sm-12 px-3 pt-2 pb-1">
-                        <form action="" method="post">
-                            {{ csrf_field() }}
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control blog-aside-busqueda" placeholder="Búsqueda" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-warning" type="button">&#128269;</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="list-group">
-                            @foreach( $data['categorys'] as $key => $categoria )
-                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center blog-aside-lista-item">{{$categoria->nombre}}
-                                <span class="badge badge-warning badge-pill">{{$categoria->numero_posts}}</span>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                <!-- Barra de navegacion lateral -->
+                @include('layouts.blogaside')
             </div>
         </div>
     </div>

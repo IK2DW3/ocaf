@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-8 blog-section mx-1">
                 <div class="row my-3">
                     <div class="col-sm-12 mt-2 mb-3">
-                        <h3 class="blog-text-secundary">Últimas publicaciones</h3>
+                        <h3 class="blog-text-secundary">Resultados de búsqueda "{{$data['filter']}}"</h3>
                     </div>
                     @foreach( $data['posts'] as $key => $posts )
                     <div class="col-sm-12 col-md-6 px-3 pt-2 pb-1">

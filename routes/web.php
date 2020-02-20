@@ -18,7 +18,12 @@ Route::get('tablero/serpiente', 'OcafController@getTabserpiente')->name('tablero
 Route::get('blog/home', 'OcafController@getBlog')->name('blog.home');
 Route::get('blog/posts', 'OcafController@getPosts')->name('blog.posts');
 Route::get('blog/post/{id}', 'OcafController@getPost')->name('blog.post');
+Route::get('blog/posts/category/{id}', 'OcafController@getPostsByCategory')->name('blog.postsByCategory');
+Route::get('blog/posts/filter', 'OcafController@getPostsByFilter')->name('blog.postsByFilter');
+
 Route::post('/blog/post/comentar', 'OcafController@postComment');
+Route::post('/blog/post/filtrar', 'OcafController@getPostsByFilter');
+Route::post('/blog/post/eliminar/{id}', 'OcafController@deletePost');
 Route::post('/blog/comentario/eliminar', 'OcafController@deleteComment');
 
 Route::group(['middleware' => 'auth'], function () {

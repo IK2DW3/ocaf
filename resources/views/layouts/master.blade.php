@@ -26,6 +26,9 @@
         @elseif (\Request::is('blog/post/*'))
         <link rel="stylesheet" href="../../../resources/css/style.css">
         <link rel="shortcut icon" href="../../../resources/img/fav/favicon.ico" type="image/x-icon">
+        @elseif (\Request::is('blog/posts/category/*'))
+        <link rel="stylesheet" href="../../../../resources/css/style.css">
+        <link rel="shortcut icon" href="../../../../resources/img/fav/favicon.ico" type="image/x-icon">
         @else
         <link rel="stylesheet" href="../resources/css/style.css">
         <link rel="shortcut icon" href="../resources/img/fav/favicon.ico" type="image/x-icon">

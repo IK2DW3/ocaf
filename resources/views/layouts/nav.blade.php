@@ -8,6 +8,8 @@
                     <img src="../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
                 @elseif (\Request::is('blog/post/*'))
                     <img src="../../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
+                @elseif (\Request::is('blog/posts/category/*'))
+                    <img src="../../../../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
                 @else
                     <img src="../resources/img/imglogo.svg" width="30" height="30" class="d-inline-block align-top" alt="OCA-F">
                 @endif

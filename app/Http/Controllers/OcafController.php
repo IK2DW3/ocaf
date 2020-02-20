@@ -91,19 +91,39 @@ class OcafController extends Controller
         return view('blog.home', ['data' => $data]);
 
     }
+
     public function getPosts() {
 
         $data['categorys'] = Categoria::all();
-        $data['posts'] = Post::with('user', 'categoria', 'comentario')->orderBy('created_at', 'DESC')->get();
+        $data['posts'] = Post::with('user', 'categoria')->orderBy('created_at', 'DESC')->get();
         return view('blog.posts', ['data' => $data]);
 
     }
+
     public function getPost($id) {
 
         $data['categorys'] = Categoria::all();
         $data['post'] = Post::findOrFail($id);
         $data['comentarys'] = Comentario::with('user')->where('post_id', $id)->orderBy('created_at', 'desc')->get();
         return view('blog.post', ['data' => $data]);
+
+    }
+
+    public function getPostsByCategory($id) {
+
+        $data['categorys'] = Categoria::all();
+        $data['category'] = Categoria::findOrFail($id);
+        $data['posts'] = Post::with('user', 'categoria')->where('categoria_id', $id)->orderBy('created_at', 'desc')->get();
+        return view('blog.postsbycategory', ['data' => $data]);
+
+    }
+
+    public function getPostsByFilter(Request $request) {
+
+        $data['filter'] = $request->input('post-filter');
+        $data['categorys'] = Categoria::all();
+        $data['posts'] = Post::with('user', 'categoria')->where('titulo', 'like', '%' . $request->input('post-filter') . '%')->orderBy('created_at', 'DESC')->get();
+        return view('blog.postsbyfilter', ['data' => $data]);
 
     }
 
@@ -125,6 +145,15 @@ class OcafController extends Controller
         $data['post'] = Post::findOrFail($idPost);
         $data['comentarys'] = Comentario::with('user')->where('post_id', $idPost)->orderBy('created_at', 'desc')->get();
         return redirect()->route('blog.post', [$idPost]);
+
+    }
+
+    public function deletePost($id) {
+
+        Comentario::where('post_id', '=', $id)->delete();
+        $Post = Post::findOrFail($id);
+        $Post->delete();
+        return redirect()->action('OcafController@getBlog');
 
     }
 
