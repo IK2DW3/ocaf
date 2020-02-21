@@ -84,7 +84,7 @@
                                             <div class="col-sm-12 col-md-3">
                                                 <p class="card-text text-info"><strong>&#x1F4C5;</strong> {{$comentario->created_at}}</p>
                                             </div>
-                                            @if (Auth::user()->rango_id === 1 || Auth::user()->rango_id === 2)
+                                            @if (Auth::check() && Auth::user()->rango_id === 1 || Auth::check() && Auth::user()->rango_id === 2)
                                             <div class="col-sm-12 col-md-1 d-flex align-items-start justify-content-center">
                                                 <form action="{{ url('/blog/comentario/eliminar') }}" method="post">
                                                     {{ csrf_field() }}

@@ -2421,7 +2421,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       axios.get('../profile/user').then(function (response) {
         // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
-        me.usuarioActivo = response.data;
+        me.usuarioActivo = response.data.data.user;
       });
       axios.get('./users/data').then(function (response) {
         // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
@@ -3223,30 +3223,124 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      perfilNombre: null,
-      pefilEmail: null,
-      perfilNuevacontraseña: null,
-      perfilConfirmarcontraseña: null,
+      perfilNombre: '',
+      pefilEmail: '',
+      perfilNuevacontraseña: '',
+      perfilConfirmarcontraseña: '',
+      titulo: '',
+      descripcion: '',
+      categoria: '',
+      categoria_id: 0,
+      imagen: '',
+      file: '',
+      busqueda: '',
       valido: true,
       update: 0,
-      arrayUsuario: []
+      arrayUsuario: [],
+      arrayCategorias: [],
+      arrayPost: []
     };
   },
   methods: {
-    getTasks: function getTasks() {
+    getData: function getData() {
       var me = this;
       var url = './profile/user';
       axios.get(url).then(function (response) {
         //creamos un array y guardamos el contenido que nos devuelve el response
-        me.arrayUsuario = response.data;
-        me.update = me.arrayUsuario.id;
+        me.arrayUsuario = response.data.data.user;
+        me.arrayCategorias = response.data.data.categorys;
+        me.arrayPost = response.data.data.post;
         me.perfilNombre = me.arrayUsuario.name;
         me.pefilEmail = me.arrayUsuario.email;
       })["catch"](function (error) {
-        // handle error
         console.log(error);
       });
     },
@@ -3299,7 +3393,7 @@ __webpack_require__.r(__webpack_exports__);
               'id': _this.update,
               'password': _this.perfilConfirmarcontraseña
             }).then(function (response) {
-              me.getTasks();
+              me.getData();
               me.perfilNuevacontraseña = "", me.perfilConfirmarcontraseña = "";
             })["catch"](function (error) {
               this.$swal({
@@ -3320,11 +3414,99 @@ __webpack_require__.r(__webpack_exports__);
 
 
       event.preventDefault();
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      this.update = data.id;
+      var me = this;
+      axios.get('./profile/post/search?id=' + this.update).then(function (response) {
+        me.titulo = response.data.titulo;
+        me.descripcion = response.data.descripcion;
+        me.categoria_id = response.data.categoria_id;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    saveData: function saveData() {
+      var me = this;
+      axios.post('./profile/post/save', {
+        'titulo': this.titulo,
+        'descripcion': this.descripcion,
+        'categoria_id': this.categoria_id
+      }).then(function (response) {
+        me.getData();
+        this.$swal('Guardado', 'Los datos se han guardado correctamente', 'Aceptar');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateData: function updateData() {
+      var me = this;
+      axios.put('./profile/post/update', {
+        'id': this.update,
+        'titulo': this.nombre,
+        'descripcion': this.descripcion,
+        'imagen': this.imagen,
+        'categoria_id': this.categoria_id,
+        'user_id': this.arrayUsuario.id
+      }).then(function (response) {
+        me.getData();
+        this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deleteData: function deleteData(data) {
+      var _this2 = this;
+
+      var me = this;
+      var task_id = data.id;
+      this.$swal({
+        title: '¿Seguro que deseas borrar esta carta?',
+        text: 'No podras revertir ésta acción',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '¡Eliminar!',
+        cancelButtonText: '¡No, mantenerlo!',
+        showCloseButton: true,
+        showLoaderOnConfirm: true
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$swal('Eliminado', 'La carta ha sido eliminada correctamente', 'success');
+
+          axios["delete"]('./profile/post/delete/' + task_id).then(function (response) {
+            me.getData();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else {
+          _this2.$swal('Cancelado', 'El post correspondiente sigue intacta', 'info');
+        }
+      });
+    },
+    imagPrev: function imagPrev(e) {
+      if (!$("#filename").val() == "") {
+        this.imagen = $("#filename").val().replace(/C:\\fakepath\\/i, '');
+        this.file = e.target.files[0];
+      } else {
+        this.update = 0;
+      }
+    },
+    updateStatus: function updateStatus() {
+      this.titulo = '', this.descripcion = '', this.categoria = '', this.categoria_id = 0, this.update = 0;
+    }
+  },
+  computed: {
+    buscarPost: function buscarPost() {
+      var _this3 = this;
+
+      return this.arrayPost.filter(function (post) {
+        return post.titulo.toLowerCase().includes(_this3.busqueda.toLowerCase()) || post.categoria.nombre.toLowerCase().includes(_this3.busqueda.toLowerCase()) || post.created_at.toLowerCase().includes(_this3.busqueda.toLowerCase());
+      });
     }
   },
   // Metodo de inicialización del archivo vue
   mounted: function mounted() {
-    this.getTasks();
+    this.getData();
   }
 });
 
@@ -4188,7 +4370,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     inicio: function inicio() {
       var me = this;
-      var url = './cards/data';
+      var url = '../panel/cards/data';
       axios.get(url).then(function (response) {
         me.arrayCartas = response.data;
         me.cargarPartida();
@@ -46748,7 +46930,7 @@ var render = function() {
                                     _c(
                                       "button",
                                       {
-                                        staticClass: "btn btn-secondary",
+                                        staticClass: "btn btn-warning",
                                         attrs: {
                                           type: "button",
                                           id: "loadUser",
@@ -46769,7 +46951,7 @@ var render = function() {
                                     _c(
                                       "button",
                                       {
-                                        staticClass: "btn btn-secondary",
+                                        staticClass: "btn btn-danger",
                                         attrs: {
                                           type: "button",
                                           id: "deleteUser",
@@ -47050,7 +47232,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-warning",
                                     attrs: {
                                       type: "button",
                                       id: "loadAmbit",
@@ -47071,7 +47253,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-danger",
                                     attrs: {
                                       type: "button",
                                       id: "deleteAmbit",
@@ -47306,7 +47488,7 @@ var render = function() {
                                     _c(
                                       "button",
                                       {
-                                        staticClass: "btn btn-secondary",
+                                        staticClass: "btn btn-warning",
                                         attrs: {
                                           type: "button",
                                           id: "loadContinent",
@@ -47327,7 +47509,7 @@ var render = function() {
                                     _c(
                                       "button",
                                       {
-                                        staticClass: "btn btn-secondary",
+                                        staticClass: "btn btn-danger",
                                         attrs: {
                                           type: "button",
                                           id: "deleteContinent",
@@ -47569,7 +47751,7 @@ var render = function() {
                                 _c(
                                   "a",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-info",
                                     attrs: {
                                       href: "history/" + carta.id,
                                       role: "button",
@@ -47582,7 +47764,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-warning",
                                     attrs: {
                                       type: "button",
                                       id: "loadCard",
@@ -47603,7 +47785,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-danger",
                                     attrs: {
                                       type: "button",
                                       id: "deleteCard",
@@ -48315,7 +48497,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-warning",
                                     attrs: {
                                       type: "button",
                                       id: "loadQuest",
@@ -48336,7 +48518,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "btn btn-secondary",
+                                    staticClass: "btn btn-danger",
                                     attrs: {
                                       type: "button",
                                       id: "deleteQuest",
@@ -48813,133 +48995,449 @@ var render = function() {
     "div",
     { staticClass: "row align-items-center justify-content-center py-4" },
     [
-      _c("form", [
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.perfilNombre,
-                  expression: "perfilNombre"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", disabled: "", readonly: "" },
-              domProps: { value: _vm.perfilNombre },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-sm-12 d-flex align-items-center justify-content-center border-bottom pb-3"
+        },
+        [
+          _c("form", { staticClass: "w-50" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.perfilNombre,
+                      expression: "perfilNombre"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", disabled: "", readonly: "" },
+                  domProps: { value: _vm.perfilNombre },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.perfilNombre = $event.target.value
+                    }
                   }
-                  _vm.perfilNombre = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(1),
+                })
+              ])
+            ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pefilEmail,
-                  expression: "pefilEmail"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "email", disabled: "", readonly: "" },
-              domProps: { value: _vm.pefilEmail },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pefilEmail,
+                      expression: "pefilEmail"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "email", disabled: "", readonly: "" },
+                  domProps: { value: _vm.pefilEmail },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pefilEmail = $event.target.value
+                    }
                   }
-                  _vm.pefilEmail = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(2),
+                })
+              ])
+            ]),
             _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.perfilNuevacontraseña,
+                      expression: "perfilNuevacontraseña"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    placeholder: "Nueva contraseña",
+                    autocomplete: "off"
+                  },
+                  domProps: { value: _vm.perfilNuevacontraseña },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.perfilNuevacontraseña = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.perfilConfirmarcontraseña,
+                      expression: "perfilConfirmarcontraseña"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    placeholder: "Confirmar contraseña",
+                    autocomplete: "off"
+                  },
+                  domProps: { value: _vm.perfilConfirmarcontraseña },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.perfilConfirmarcontraseña = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group text-center" }, [
+              _c("input", {
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit", value: "Actualizar" },
+                on: { click: _vm.validarLogin }
+              })
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12 border-bottom my-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12 my-2" }, [
             _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.perfilNuevacontraseña,
-                  expression: "perfilNuevacontraseña"
+                  value: _vm.busqueda,
+                  expression: "busqueda"
                 }
               ],
               staticClass: "form-control",
               attrs: {
-                type: "password",
-                placeholder: "Nueva contraseña",
+                type: "search",
+                name: "buscador",
+                placeholder: "Buscar en la tabla",
                 autocomplete: "off"
               },
-              domProps: { value: _vm.perfilNuevacontraseña },
+              domProps: { value: _vm.busqueda },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.perfilNuevacontraseña = $event.target.value
+                  _vm.busqueda = $event.target.value
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12 pb-3" }, [
+            _c("div", { staticClass: "table-responsive table-perfil-posts" }, [
+              _c("table", { staticClass: "table table-striped rounded" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.buscarPost, function(post) {
+                    return _c("tr", { key: post.id }, [
+                      _c("td", {
+                        domProps: { textContent: _vm._s(post.titulo) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(post.categoria.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(post.created_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              role: "group",
+                              "aria-label": "Basic example"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-info",
+                                attrs: {
+                                  href: "blog/post/" + post.id,
+                                  role: "button",
+                                  title: "Ver"
+                                }
+                              },
+                              [_vm._v("👀")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: {
+                                  type: "button",
+                                  id: "loadUser",
+                                  title: "Editar"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.loadFieldsUpdate(post)
+                                  }
+                                }
+                              },
+                              [_vm._v("✎")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: {
+                                  type: "button",
+                                  id: "deleteUser",
+                                  title: "Eliminar"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteData(post)
+                                  }
+                                }
+                              },
+                              [_vm._v("✖")]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "input-group mb-2 mr-sm-2" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.perfilConfirmarcontraseña,
-                  expression: "perfilConfirmarcontraseña"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "password",
-                placeholder: "Confirmar contraseña",
-                autocomplete: "off"
-              },
-              domProps: { value: _vm.perfilConfirmarcontraseña },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.perfilConfirmarcontraseña = $event.target.value
-                }
-              }
-            })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12 my-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12 py-2" }, [
+            _c("form", [
+              _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "" } }, [_vm._v("Titulo")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.titulo,
+                        expression: "titulo"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", autocomplete: "off" },
+                    domProps: { value: _vm.titulo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.titulo = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "" } }, [_vm._v("Descripción")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.descripcion,
+                        expression: "descripcion"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { autocomplete: "off" },
+                    domProps: { value: _vm.descripcion },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.descripcion = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "" } }, [
+                    _vm._v("Seleccionar categoria")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.categoria_id,
+                          expression: "categoria_id"
+                        }
+                      ],
+                      staticClass: "custom-select",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.categoria_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "" }, domProps: { value: 0 } },
+                        [_vm._v("Seleccionar categoria")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.arrayCategorias, function(categoria) {
+                        return _c(
+                          "option",
+                          {
+                            key: categoria.id,
+                            domProps: { value: categoria.id }
+                          },
+                          [_vm._v(_vm._s(categoria.nombre))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "" } }, [
+                    _vm._v("¿Deseas subir una imagen?")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "custom-file" }, [
+                    _c("input", {
+                      staticClass: "custom-file-input",
+                      attrs: { type: "file", name: "filename", id: "filename" },
+                      on: { change: _vm.imagen }
+                    }),
+                    _vm._v(" "),
+                    _c("label", {
+                      staticClass: "custom-file-label",
+                      attrs: { id: "fileTxt", for: "customFileLang" },
+                      domProps: { textContent: _vm._s("Seleccionar Archivo") }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "form-group col-md-12 text-center" }, [
+                  _vm.update == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: {
+                            click: function($event) {
+                              return _vm.saveData()
+                            }
+                          }
+                        },
+                        [_vm._v("Añadir")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.update != 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateData()
+                            }
+                          }
+                        },
+                        [_vm._v("Actualizar")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.update != 0
+                    ? _c("input", {
+                        staticClass: "btn btn-info",
+                        attrs: { type: "reset" },
+                        on: { click: _vm.updateStatus }
+                      })
+                    : _vm._e()
+                ])
+              ])
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group text-center" }, [
-          _c("input", {
-            staticClass: "btn btn-primary",
-            attrs: { type: "submit", value: "Actualizar" },
-            on: { click: _vm.validarLogin }
-          })
         ])
       ])
     ]
@@ -48982,6 +49480,38 @@ var staticRenderFns = [
       _c("div", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "icon ion-md-lock" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 text-center mt-3 mb-2" }, [
+      _c("h2", [_vm._v("Mis publicaciones")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Titulo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoria")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Publicado el")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 text-center mt-3 mb-2" }, [
+      _c("h3", [_vm._v("Crea o edita tus posts")])
     ])
   }
 ]

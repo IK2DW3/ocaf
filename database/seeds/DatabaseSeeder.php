@@ -136,10 +136,6 @@ class DatabaseSeeder extends Seeder
 		array(
             'nombre' => 'Off-Topic',
             'descripcion' => 'Categoria con posts de tema general'
-        ),
-        array(
-            'nombre' => 'Prueba',
-            'descripcion' => 'Categoria con posts de tema general'
         )
     );
 

@@ -41,8 +41,8 @@
                                     <td v-text="user.rango.nombre"></td>
                                     <td>
                                         <div v-if="user.rango.id != 1" class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" id="loadUser" class="btn btn-secondary"  title="Editar" @click="loadFieldsUpdate(user, '#loadUser')">&#x270E;</button>
-                                            <button type="button" id="deleteUser" class="btn btn-secondary"  title="Eliminar" @click="deleteData(user,'#deleteUser')">&#x2716;</button>
+                                            <button type="button" id="loadUser" class="btn btn-warning"  title="Editar" @click="loadFieldsUpdate(user, '#loadUser')">&#x270E;</button>
+                                            <button type="button" id="deleteUser" class="btn btn-danger"  title="Eliminar" @click="deleteData(user,'#deleteUser')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -108,8 +108,8 @@
                                     <td v-text="ambito.ambitoEus"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" id="loadAmbit" class="btn btn-secondary"  title="Editar" @click="loadFieldsUpdate(ambito, '#loadAmbit')">&#x270E;</button>
-                                            <button type="button" id="deleteAmbit" class="btn btn-secondary" title="Eliminar" @click="deleteData(ambito,'#deleteAmbit')">&#x2716;</button>
+                                            <button type="button" id="loadAmbit" class="btn btn-warning"  title="Editar" @click="loadFieldsUpdate(ambito, '#loadAmbit')">&#x270E;</button>
+                                            <button type="button" id="deleteAmbit" class="btn btn-danger" title="Eliminar" @click="deleteData(ambito,'#deleteAmbit')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -168,8 +168,8 @@
                                     <td v-text="continente.continenteEus"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" id="loadContinent" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(continente, '#loadContinent')">&#x270E;</button>
-                                            <button type="button" id="deleteContinent" class="btn btn-secondary" title="Eliminar" @click="deleteData(continente, '#deleteContinent')">&#x2716;</button>
+                                            <button type="button" id="loadContinent" class="btn btn-warning" title="Editar" @click="loadFieldsUpdate(continente, '#loadContinent')">&#x270E;</button>
+                                            <button type="button" id="deleteContinent" class="btn btn-danger" title="Eliminar" @click="deleteData(continente, '#deleteContinent')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -232,9 +232,9 @@
                                     <td v-text="carta.ambito.ambitoEsp"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a :href="'history/'+ carta.id" role="button" class="btn btn-secondary" title="Ver">&#x1F440;</a>
-                                            <button type="button" id="loadCard" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(carta, '#loadCard')">&#x270E;</button>
-                                            <button type="button" id="deleteCard" class="btn btn-secondary" title="Eliminar" @click="deleteData(carta, '#deleteCard')">&#x2716;</button>
+                                            <a :href="'history/'+ carta.id" role="button" class="btn btn-info" title="Ver">&#x1F440;</a>
+                                            <button type="button" id="loadCard" class="btn btn-warning" title="Editar" @click="loadFieldsUpdate(carta, '#loadCard')">&#x270E;</button>
+                                            <button type="button" id="deleteCard" class="btn btn-danger" title="Eliminar" @click="deleteData(carta, '#deleteCard')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -361,8 +361,8 @@
                                     <td v-text="pregunta.pregunta"></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" id="loadQuest" class="btn btn-secondary" title="Editar" @click="loadFieldsUpdate(pregunta, '#loadQuest')">&#x270E;</button>
-                                            <button type="button" id="deleteQuest" class="btn btn-secondary" title="Eliminar" @click="deleteData(pregunta, '#deleteQuest')">&#x2716;</button>
+                                            <button type="button" id="loadQuest" class="btn btn-warning" title="Editar" @click="loadFieldsUpdate(pregunta, '#loadQuest')">&#x270E;</button>
+                                            <button type="button" id="deleteQuest" class="btn btn-danger" title="Eliminar" @click="deleteData(pregunta, '#deleteQuest')">&#x2716;</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -495,7 +495,7 @@ export default {
             });
             axios.get('../profile/user').then(function (response) {
                 // seleccionamos array especifico y guardamos el contenido que nos devuelve el response
-                me.usuarioActivo = response.data;
+                me.usuarioActivo = response.data.data.user;
             })
             axios.get('./users/data').then(function (response) {
                 // seleccionamos array especifico y guardamos el contenido que nos devuelve el response

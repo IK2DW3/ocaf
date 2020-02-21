@@ -240,6 +240,14 @@ div.contenedor-panel div.box-panel a.panel-boton img {
     width: 100px;
 }
 
+div.table-perfil-posts {
+    border-collapse: collapse;
+    max-height: 400px !important;
+    overflow-y: scroll;
+    table-layout: fixed;
+    width: 100%;
+}
+
 
 /* Panel de conocimiento */
 
@@ -377,7 +385,7 @@ div.blog-body div.blog-section div.blog-comentary {
     border-bottom: 1px solid #757575;
     height: auto;
     max-height: 150px;
-    min-height: 90px;    
+    min-height: 90px;
 }
 
 div.blog-body div.blog-section div.blog-comentary button.btn-comentario-eliminar {

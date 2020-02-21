@@ -54,6 +54,11 @@ CRUD Vue.js y Laravel
 // Rutas para el perfil del usuario
 Route::get('/profile/user', 'TaskController@getProfile');
 Route::put('/profile/update', 'TaskController@updateProfile');
+Route::put('/profile/post/update', 'TaskController@updateProfilePost');
+Route::post('/profile/post/save', 'TaskController@storeProfilePost');
+Route::get('/profile/post/data', 'TaskController@getProfilePosts');
+Route::delete('/profile/post/delete/{id}', 'TaskController@destroyProfilePost');
+Route::get('/profile/post/search', 'TaskController@showProfilePost');
 
 // Rutas para el panel de gestion de usuarios
 Route::get('/panel/ranks/data', 'TaskController@tableRank');

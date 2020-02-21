@@ -5,7 +5,7 @@
 
     <div class="contenedor-panel">
         <div class="row align-items-center justify-content-center contenido mx-2 my-2">
-            <div class="col-sm-8 col-md-8 col-lg-4 box-perfil">
+            <div class="col-sm-10 col-md-7 box-perfil">
                 <div class="row box-perfil-contenido">
                     <div class="col-sm-12 text-center my-2">
                         <h1>{{Auth::user()->name}}</h1>

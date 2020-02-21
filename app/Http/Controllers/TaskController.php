@@ -9,6 +9,7 @@ use App\Ambito;
 use App\Continente;
 use App\Carta;
 use App\Pregunta;
+use App\Categoria;
 use App\Post;
 use App\Comentario;
 use Illuminate\Support\Facades\Validator;
@@ -376,8 +377,10 @@ class TaskController extends Controller {
     public function getProfile(Request $request) {
 
         if (Auth::check()) {
-            $user = Auth::user();
-            return $user;
+            $data['user'] = Auth::user();
+            $data['categorys'] = Categoria::all();
+            $data['post'] = Post::with('categoria')->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            return ['data' => $data];
         }
 
     }
@@ -392,6 +395,43 @@ class TaskController extends Controller {
         } else {
             return view('index');
         }
+
+    }
+
+    public function showProfilePost(Request $request) {
+
+        $task = Post::findOrFail($request->id);
+        return $task;
+
+    }
+
+    public function storeProfilePost(Request $request){
+
+        $task = Post::findOrFail($request->id);
+        $task->titulo = $request->titulo;
+        $task->descripcion = $request->descripcion;
+        $task->categoria_id = $request->categoria_id;
+        $task->save();
+
+    }
+
+    public function updateProfilePost(Request $request) {
+
+        $task = Post::findOrFail($request->id);
+        $task->titulo = $request->titulo;
+        $task->descripcion = $request->descripcion;
+        $task->imagen = $request->imagen;
+        $task->categoria_id = $request->categoria_id;
+        $task->user_id = $request->user_id;
+        $task->save();
+        return $task;
+
+    }
+
+    public function destroyProfilePost(Request $request) {
+
+        $task = Post::destroy($request->id);
+        return $task;
 
     }
 
