@@ -3317,9 +3317,9 @@ __webpack_require__.r(__webpack_exports__);
       perfilConfirmarcontraseña: '',
       titulo: '',
       descripcion: '',
+      imagen: '',
       categoria: '',
       categoria_id: 0,
-      imagen: '',
       file: '',
       busqueda: '',
       valido: true,
@@ -3421,6 +3421,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('./profile/post/search?id=' + this.update).then(function (response) {
         me.titulo = response.data.titulo;
         me.descripcion = response.data.descripcion;
+        me.imagen = response.data.imagen;
+
+        if (me.imagen == null || me.imagen == 'null' || me.imagen == '') {
+          $('#fileTxt').text('No tiene imagen');
+        } else if (me.imagen != null || me.imagen != 'null' || me.imagen != '') {
+          $('#fileTxt').text(response.data.imagen);
+        } else {
+          $('#fileTxt').text('No tiene imagen');
+        }
+
         me.categoria_id = response.data.categoria_id;
       })["catch"](function (error) {
         console.log(error);
@@ -3443,11 +3453,10 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios.put('./profile/post/update', {
         'id': this.update,
-        'titulo': this.nombre,
+        'titulo': this.titulo,
         'descripcion': this.descripcion,
         'imagen': this.imagen,
-        'categoria_id': this.categoria_id,
-        'user_id': this.arrayUsuario.id
+        'categoria_id': this.categoria_id
       }).then(function (response) {
         me.getData();
         this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
@@ -3482,14 +3491,6 @@ __webpack_require__.r(__webpack_exports__);
           _this2.$swal('Cancelado', 'El post correspondiente sigue intacta', 'info');
         }
       });
-    },
-    imagPrev: function imagPrev(e) {
-      if (!$("#filename").val() == "") {
-        this.imagen = $("#filename").val().replace(/C:\\fakepath\\/i, '');
-        this.file = e.target.files[0];
-      } else {
-        this.update = 0;
-      }
     },
     updateStatus: function updateStatus() {
       this.titulo = '', this.descripcion = '', this.categoria = '', this.categoria_id = 0, this.update = 0;
@@ -49382,8 +49383,7 @@ var render = function() {
                   _c("div", { staticClass: "custom-file" }, [
                     _c("input", {
                       staticClass: "custom-file-input",
-                      attrs: { type: "file", name: "filename", id: "filename" },
-                      on: { change: _vm.imagen }
+                      attrs: { type: "file", name: "filename", id: "filename" }
                     }),
                     _vm._v(" "),
                     _c("label", {

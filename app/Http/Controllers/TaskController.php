@@ -422,7 +422,6 @@ class TaskController extends Controller {
         $task->descripcion = $request->descripcion;
         $task->imagen = $request->imagen;
         $task->categoria_id = $request->categoria_id;
-        $task->user_id = $request->user_id;
         $task->save();
         return $task;
 

@@ -103,7 +103,7 @@
                             <div class="form-group col-md-12">
                                 <label for="">¿Deseas subir una imagen?</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="filename" id="filename" @change="imagen">
+                                    <input type="file" class="custom-file-input" name="filename" id="filename">
                                     <label class="custom-file-label" id="fileTxt" for="customFileLang" v-text="'Seleccionar Archivo'"></label>
                                 </div>
                             </div>
@@ -137,9 +137,9 @@ export default {
 
             titulo:'',
             descripcion:'',
+            imagen:'',
             categoria:'',
             categoria_id:0,
-            imagen:'',
 
             file: '',
             busqueda:'',
@@ -243,6 +243,14 @@ export default {
             axios.get('./profile/post/search?id='+this.update).then(function (response) {
                 me.titulo = response.data.titulo;
                 me.descripcion = response.data.descripcion;
+                me.imagen = response.data.imagen;
+                if(me.imagen == null || me.imagen == 'null' || me.imagen == '') {
+                    $('#fileTxt').text('No tiene imagen');
+                } else if (me.imagen != null || me.imagen != 'null' || me.imagen != ''){
+                    $('#fileTxt').text(response.data.imagen);
+                } else {
+                    $('#fileTxt').text('No tiene imagen');
+                }
                 me.categoria_id = response.data.categoria_id;
             })
             .catch(function (error) {
@@ -267,11 +275,10 @@ export default {
             let me = this;
             axios.put('./profile/post/update',{
                 'id':this.update,
-                'titulo':this.nombre,
+                'titulo':this.titulo,
                 'descripcion':this.descripcion,
                 'imagen': this.imagen,
                 'categoria_id':this.categoria_id,
-                'user_id': this.arrayUsuario.id,
             }).then(function (response) {
                 me.getData();
                 this.$swal('Actualización', 'Los datos se han actualizado correctamente', 'Aceptar');
@@ -307,14 +314,6 @@ export default {
                     this.$swal('Cancelado', 'El post correspondiente sigue intacta', 'info')
                 }
             })
-        },
-        imagPrev(e){
-            if (!$("#filename").val() == "") {
-                this.imagen = $("#filename").val().replace(/C:\\fakepath\\/i, '');
-                this.file = e.target.files[0];
-            } else {
-                this.update = 0;
-            }
         },
         updateStatus() {
             this.titulo = '',
