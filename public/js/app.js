@@ -4647,13 +4647,13 @@ __webpack_require__.r(__webpack_exports__);
     // Metodo para recoger los datos
     getTasks: function getTasks() {
       var me = this;
-      var url = 'card';
+      var url = './panel/cards/data';
       axios.get(url).then(function (response) {
         me.arrayCartas = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
-      axios.get('ambit').then(function (response) {
+      axios.get('./panel/ambits/data').then(function (response) {
         me.arrayAmbitos = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4668,7 +4668,7 @@ __webpack_require__.r(__webpack_exports__);
         this.clearFields();
       } else {
         me.update = me.ambito_id;
-        var url = 'card/filtrar?ambito_id=' + me.update;
+        var url = 'panel/cards/filter?ambito_id=' + me.update;
         axios.get(url).then(function (response) {
           me.arrayCartas = response.data;
         })["catch"](function (error) {
