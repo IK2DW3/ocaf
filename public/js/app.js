@@ -2497,7 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
           });
           me.campoInvalido('#userEmail');
           me.valido = false;
-        } else if (me.tipo === "") {
+        } else if (me.rango_id === "") {
           this.$swal({
             icon: 'error',
             title: 'Tipo',
@@ -2529,7 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
           axios.post('./users/save', {
             'name': this.name,
             'email': this.email,
-            'tipo': this.tipo,
+            'rango_id': this.rango_id,
             'password': this.password
           }).then(function (response) {
             me.getData();
@@ -3320,6 +3320,7 @@ __webpack_require__.r(__webpack_exports__);
       imagen: '',
       categoria: '',
       categoria_id: 0,
+      user_id: 0,
       file: '',
       busqueda: '',
       valido: true,
@@ -3340,6 +3341,7 @@ __webpack_require__.r(__webpack_exports__);
         me.arrayPost = response.data.data.post;
         me.perfilNombre = me.arrayUsuario.name;
         me.pefilEmail = me.arrayUsuario.email;
+        me.user_id = me.arrayUsuario.id;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3705,8 +3707,11 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (jugador1 !== "" && jugador2 !== "") {
+        jugadores['jugador3'] = null;
+        jugadores['jugador4'] = null;
         localStorage.setItem("partida", JSON.stringify(jugadores));
       } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "") {
+        jugadores['jugador4'] = null;
         localStorage.setItem("partida", JSON.stringify(jugadores));
       } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "" && jugador4 !== "") {
         localStorage.setItem("partida", JSON.stringify(jugadores));
@@ -4668,7 +4673,7 @@ __webpack_require__.r(__webpack_exports__);
         this.clearFields();
       } else {
         me.update = me.ambito_id;
-        var url = 'panel/cards/filter?ambito_id=' + me.update;
+        var url = './panel/cards/filter?ambito_id=' + me.update;
         axios.get(url).then(function (response) {
           me.arrayCartas = response.data;
         })["catch"](function (error) {

@@ -574,7 +574,7 @@ export default {
                     });
                     me.campoInvalido('#userEmail');
                     me.valido = false;
-                } else if (me.tipo === "") {
+                } else if (me.rango_id === "") {
                     this.$swal({
                         icon: 'error',
                         title: 'Tipo',
@@ -606,7 +606,7 @@ export default {
                     axios.post('./users/save',{
                         'name':this.name,
                         'email':this.email,
-                        'tipo':this.tipo,
+                        'rango_id':this.rango_id,
                         'password':this.password,
                     }).then(function (response) {
                         me.getData();

@@ -78,7 +78,7 @@ export default {
                 this.clearFields();
             } else {
                 me.update = me.ambito_id
-                let url = 'panel/cards/filter?ambito_id='+ me.update;
+                let url = './panel/cards/filter?ambito_id='+ me.update;
                 axios.get(url).then(function (response) {
                     me.arrayCartas = response.data;
                 }).catch(function (error) {

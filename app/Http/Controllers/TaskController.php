@@ -95,7 +95,7 @@ class TaskController extends Controller {
             $task = new User();
             $task->name = $request->name;
             $task->email = $request->email;
-            $task->rango_id = $request->tipo;
+            $task->rango_id = $request->rango_id;
             $task->password = bcrypt($request->password);
             $task->save();
         }
@@ -407,10 +407,12 @@ class TaskController extends Controller {
 
     public function storeProfilePost(Request $request){
 
-        $task = Post::findOrFail($request->id);
+        $task = New Post();
         $task->titulo = $request->titulo;
         $task->descripcion = $request->descripcion;
+        $task->numero_comentarios = 0;
         $task->categoria_id = $request->categoria_id;
+        $task->user_id = Auth::user()->id;
         $task->save();
 
     }
@@ -420,7 +422,6 @@ class TaskController extends Controller {
         $task = Post::findOrFail($request->id);
         $task->titulo = $request->titulo;
         $task->descripcion = $request->descripcion;
-        $task->imagen = $request->imagen;
         $task->categoria_id = $request->categoria_id;
         $task->save();
         return $task;

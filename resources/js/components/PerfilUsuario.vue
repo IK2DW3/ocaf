@@ -140,6 +140,7 @@ export default {
             imagen:'',
             categoria:'',
             categoria_id:0,
+            user_id:0,
 
             file: '',
             busqueda:'',
@@ -162,6 +163,7 @@ export default {
                 me.arrayPost = response.data.data.post;
                 me.perfilNombre = me.arrayUsuario.name;
                 me.pefilEmail = me.arrayUsuario.email;
+                me.user_id = me.arrayUsuario.id;
             })
             .catch(function (error) {
                 console.log(error);

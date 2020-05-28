@@ -15,7 +15,9 @@ $(function () {
    var numeros = $('.numCasilla'); // Array de los numero en las casillas
    var preguntas = $('.pregunta'); // Array de las preguntas en las casillas
 
-   /* Asigno al arrayPreguntas las casillas que no tendran el icono de interrogacion */
+   /**
+    * Asigno al arrayPreguntas las casillas que no tendran el icono de interrogacion
+    */
    var arrayPreguntas = [preguntas[0], preguntas[4], preguntas[5], preguntas[8], preguntas[11], preguntas[13], preguntas[17], preguntas[18], preguntas[22],
    preguntas[26], preguntas[30], preguntas[31], preguntas[35], preguntas[40], preguntas[41], preguntas[44], preguntas[49], preguntas[51], preguntas[53],
    preguntas[57], preguntas[58], preguntas[62]];
@@ -34,9 +36,9 @@ $(function () {
       this.parar = parar;
    }
 
-   /**
-     * Creacion de un object que guarda los datos de las casillas que tiene preguntas 
-     * */
+   /** 
+    * Creacion de un object que guarda los datos de las casillas que tiene preguntas
+    */
    var casillaPregunta = function (pregunta, respuestaCorrecta, respuesta2, respuesta3, estado) {
       this.pregunta = pregunta
       this.respuestaCorrecta = respuestaCorrecta
@@ -53,7 +55,9 @@ $(function () {
    var jugador3 = new jugador("Player 3", 0, 1, "yellow", 0, "ficha3", 0);
    var jugador4 = new jugador("Player 4", 0, 1, "blue", 0, "ficha4", 0);
 
-   /*creamos una pregunta para la casilla 10 */
+   /** 
+    * Creamos una pregunta para la casilla 10
+    */
    var casilla10 = new casillaPregunta("¿Ésto es una pregunta?", "Sí", "Tal vez", "No", 0);
 
    /**
@@ -110,6 +114,9 @@ $(function () {
       jugadores = 4
    }
 
+   /** 
+    * Funcion para fijar el turno del jugador
+    */
    function fijarTurno() {
       if (elegirTurno == 1) { 
          jugador1.turno = 1;
@@ -128,8 +135,12 @@ $(function () {
          comprobarTurno();
       }
    }
+   // Inicializo la funcion para fijar el turno de inicio
    fijarTurno();
 
+   /**
+    * Funcion para comprobar el turno del jugador
+    */
    function comprobarTurno() {
       if (jugador1.turno == 1) {
          $(FJ1).css({ 'border': '4px solid white' });
@@ -160,6 +171,10 @@ $(function () {
          focoTurno();
       }
    }
+
+   /**
+    * Funcion para dar foco a la ficha de turno
+    */
    function focoTurno() {
       if (jugador1.turno == 1) {
          $('#jugador1').css({ 'opacity': '1' });
@@ -187,38 +202,40 @@ $(function () {
       }
    }
 
+   /**
+    * Funcion para hacer la accion de tirar
+    */
    function tirar() {
       num1 = Math.floor(Math.random() * 6) + 1;
       var sonidito = new Audio('../../resources/img/tablero/tablero/sonido/dado.mp3');
       sonidito.play();
       $('#dado1').attr('src','../../resources/img/tablero/tablero/dado/animacion.gif');
-      $(mensaje).text("Has sacado un " + num1); mostrarmensaje();
+      $(mensaje).text("Has sacado un " + num1);
+      mostrarmensaje();
       setTimeout(dados, 900);
    }
 
+   /**
+    * Funcion para la animacion de los dados
+    */
    function dados() {
-      /*vemos que numero sale y le asignamos una cara del dado */
+      // vemos que numero sale y le asignamos una cara del dado
       switch (num1) {
          case 1:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/1.png');
             break;
-
          case 2:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/2.png');
             break;
-
          case 3:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/3.png');
             break;
-
          case 4:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/4.png');
             break;
-
          case 5:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/5.png');
             break;
-
          case 6:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/6.png');
             break;
@@ -226,9 +243,78 @@ $(function () {
       setTimeout(mover, 900);
    }
 
+   /**
+    * Funcion para seleccionar el turno una vez jugado
+    * Muestra el mensaje correspondiente segun el caso.
+    */
+   function posicionMensajeTurno(jugador) {
+
+      jugador = jugador
+      // si es la primera vez que se tira
+      if (jugador.posicion == 1) { jugador.posicion = 1 + num1 }
+      else { jugador.posicion = jugador.posicion + num1 }
+
+      if (jugador.parar > 0) { pararj1 }
+      // comprobamos en que casilla ha caido
+      switch (jugador.posicion) {
+         // si se llega hasta el final
+         case (jugador.posicion > 63): $(mensaje).text(jugador.nombre + " ha llegado al FINAL"); mostrarmensaje();
+         case 63: $(mensaje).text(jugador.nombre + " ha llegado al FINAL"); mostrarmensaje();
+            break
+         // caso de laberinto
+         case 42: $(mensaje).text(jugador.nombre + " ha muerto"); mostrarmensaje(); setTimeout(muertej1, 2000);
+            break;
+         // caso de laberinto
+         case 42: $(mensaje).text(jugador.nombre + " ha caido en el laberinto"); mostrarmensaje(); setTimeout(laberintoj1, 2000);
+            break;
+         // caso de carcel
+         case 52: $(mensaje).text(jugador.nombre + " ha sido detenid@"); mostrarmensaje(); setTimeout(pararj1(2), 2000);
+            break;
+         // caso de posada
+         case 19: $(mensaje).text(jugador.nombre + " se ha tomado un descanso"); mostrarmensaje(); setTimeout(pararj1(1), 2000);
+            break;
+         // caso de puente
+         case 6: $(mensaje).text(jugador.nombre + ": De manifestación en manifestación hasta la liberación! "); mostrarmensaje(); setTimeout(puentj1, 2000);
+            break;
+         // casos de oca a oca
+         case 5: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 9: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 14: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 18: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 23: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 27: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 32: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 36: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 41: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 45: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 50: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+         case 54: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
+            break;
+         case 59: $(mensaje).text(jugador.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
+            break;
+      }
+
+      if (jugador.posicion < 63) { $('#area' + jugador.posicion).append($(FJ1)), 10000 }
+      else { $('#area63').append($(FJ1)); }
+   }
+
+   /**
+    * Funcion para mover la ficha segun el jugador
+    */
    function mover() {
 
-      /*si el turno es del jugador 1*/
+      //  si el turno es del jugador 1
       if (jugador1.turno == 1) {
          comprobarTurno();
          if (jugador1.parar > 0) {
@@ -238,38 +324,38 @@ $(function () {
             comprobarTurno();
 
          } else {
-            /*asignamos los turnos */
+            // asignamos los turnos
             jugador1.turno = 0;
             jugador2.turno = 1;
             comprobarTurno();
 
-            /*si es la primera vez que se tira */
+            // si es la primera vez que se tira
             if (jugador1.posicion == 1) { jugador1.posicion = 1 + num1 }
             else { jugador1.posicion = jugador1.posicion + num1 }
 
             if (jugador1.parar > 0) { pararj1 }
-            /*comprobamos en que casilla ha caido */
+            // comprobamos en que casilla ha caido
             switch (jugador1.posicion) {
-               /*si se llega hasta el final */
+               // si se llega hasta el final
                case (jugador1.posicion > 63): $(mensaje).text(jugador1.nombre + " ha llegado al FINAL"); mostrarmensaje();
                case 63: $(mensaje).text(jugador1.nombre + " ha llegado al FINAL"); mostrarmensaje();
                   break
-               /*casos de laberinto */
+               // caso de laberinto
                case 42: $(mensaje).text(jugador1.nombre + " ha muerto"); mostrarmensaje(); setTimeout(muertej1, 2000);
                   break;
-               /*casos de laberinto */
+               // caso de laberinto
                case 42: $(mensaje).text(jugador1.nombre + " ha caido en el laberinto"); mostrarmensaje(); setTimeout(laberintoj1, 2000);
                   break;
-               /*casos de carcel*/
+               // caso de carcel
                case 52: $(mensaje).text(jugador1.nombre + " ha sido detenid@"); mostrarmensaje(); setTimeout(pararj1(2), 2000);
                   break;
-               /*casos de posada*/
+               // caso de posada
                case 19: $(mensaje).text(jugador1.nombre + " se ha tomado un descanso"); mostrarmensaje(); setTimeout(pararj1(1), 2000);
                   break;
-               /*casos de puente */
+               // caso de puente
                case 6: $(mensaje).text(jugador1.nombre + ": De manifestación en manifestación hasta la liberación! "); mostrarmensaje(); setTimeout(puentj1, 2000);
                   break;
-               /*casos de oca a oca */
+               // casos de oca a oca
                case 5: $(mensaje).text(jugador1.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc1j1, 2000);
                   break;
                case 9: $(mensaje).text(jugador1.nombre + ": ¡De desayuno a desayuno, y si la conozco, gano uno! "); mostrarmensaje(); setTimeout(oc2j1, 2000);
@@ -298,7 +384,6 @@ $(function () {
                   break;
             }
 
-            console.log(jugador1.posicion);
             if (jugador1.posicion < 63) { $('#area' + jugador1.posicion).append($(FJ1)), 10000 }
             else { $('#area63').append($(FJ1)); }
 
@@ -769,10 +854,6 @@ $(function () {
 
    }
 
-   function myFunction() {
-      window.print();
-   }
-
    function mostrarmensaje() {
       if (jugador1.turno == 1) { $(mensaje).css({ 'background-color': 'blue', 'color': '#000' }); }
       else if (jugador2.turno == 1) { $(mensaje).css({ 'background-color': 'red', 'color': '#000' }); }
@@ -794,9 +875,12 @@ $(function () {
    }
 
    /*otros ajustes de diseño */
-   numeros[27].style.marginLeft = "20px";
-   numeros[59].style.marginLeft = "20px";
-   preguntas[52].style.marginRight = "20px";
+   numeros[16].style.marginRight = "20px";
+   numeros[24].style.marginLeft = "20px";
+   numeros[52].style.marginLeft = "20px";
+   preguntas[16].style.marginRight = "20px";
+   preguntas[46].style.marginRight = "20px";
+   
    /*cuando hacemos click en cualquier pregunta */
    for (i = 0; i < preguntas.length; i++) {
       preguntas[i].onclick = sacarcarta;
@@ -812,7 +896,7 @@ $(function () {
          alert("pregunta" + i); if (identificador == "casilla10") { confirm(casilla10.pregunta + "?\n" + casilla10.respuestaCorrecta + "\n") }
       }
 
-      else if (trivia == 0) { alert("activa el modo pregunta") }
+      else if (trivia == 0) { alert("Activa el modo pregunta") }
 
    }
 

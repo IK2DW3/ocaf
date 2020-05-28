@@ -179,9 +179,12 @@ export default {
                     };
 
             if (jugador1 !== "" && jugador2 !== ""){
+                jugadores['jugador3'] = null;
+                jugadores['jugador4'] = null;
                 localStorage.setItem("partida", JSON.stringify(jugadores));
 
             } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== ""){
+                jugadores['jugador4'] = null;
                 localStorage.setItem("partida", JSON.stringify(jugadores));
 
             } else if (jugador1 !== "" && jugador2 !== "" && jugador3 !== "" && jugador4 !== ""){
