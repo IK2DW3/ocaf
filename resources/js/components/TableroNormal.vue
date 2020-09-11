@@ -195,6 +195,7 @@ export default {
             nombre:"",
             ambito:"",
             elegirCarta:"",
+            numJugadores: 2,
 
             partida: [],
             arrayCartas: [],
@@ -231,6 +232,7 @@ export default {
                 $('#ficha3').css({'display': 'none'});
             } else {
                 $('#nombre3').text(me.partida['jugador3']);
+                me.numJugadores = 3;
             }
 
             if (me.partida['jugador4'] == null || me.partida['jugador4'] == ''){
@@ -238,6 +240,7 @@ export default {
                 $('#ficha4').css({'display': 'none'});
             } else {
                 $('#nombre4').text(me.partida['jugador4']);
+                me.numJugadores = 4;
             }
         },
         aleatorizarCasillas() {

@@ -2,7 +2,7 @@ $(function () {
    /**
    * Inicializacion de variables
    */
-   var num1 = 0;
+   var resultadoDado = 0;
    var elegirTurno = Math.floor(Math.random() * 4) + 1;
    var jugadores = 4;
    var mensaje = $('#mensajes');
@@ -206,11 +206,11 @@ $(function () {
     * Funcion para hacer la accion de tirar
     */
    function tirar() {
-      num1 = Math.floor(Math.random() * 6) + 1;
+      resultadoDado = Math.floor(Math.random() * 6) + 1;
       var sonidito = new Audio('../../resources/img/tablero/tablero/sonido/dado.mp3');
       sonidito.play();
       $('#dado1').attr('src','../../resources/img/tablero/tablero/dado/animacion.gif');
-      $(mensaje).text("Has sacado un " + num1);
+      $(mensaje).text("Has sacado un " + resultadoDado);
       mostrarmensaje();
       setTimeout(dados, 900);
    }
@@ -220,7 +220,7 @@ $(function () {
     */
    function dados() {
       // vemos que numero sale y le asignamos una cara del dado
-      switch (num1) {
+      switch (resultadoDado) {
          case 1:
             $('#dado1').attr('src', '../../resources/img/tablero/tablero/dado/1.png');
             break;
@@ -251,8 +251,8 @@ $(function () {
 
       jugador = jugador
       // si es la primera vez que se tira
-      if (jugador.posicion == 1) { jugador.posicion = 1 + num1 }
-      else { jugador.posicion = jugador.posicion + num1 }
+      if (jugador.posicion == 1) { jugador.posicion = 1 + resultadoDado }
+      else { jugador.posicion = jugador.posicion + resultadoDado }
 
       if (jugador.parar > 0) { pararj1 }
       // comprobamos en que casilla ha caido
@@ -330,8 +330,8 @@ $(function () {
             comprobarTurno();
 
             // si es la primera vez que se tira
-            if (jugador1.posicion == 1) { jugador1.posicion = 1 + num1 }
-            else { jugador1.posicion = jugador1.posicion + num1 }
+            if (jugador1.posicion == 1) { jugador1.posicion = 1 + resultadoDado }
+            else { jugador1.posicion = jugador1.posicion + resultadoDado }
 
             if (jugador1.parar > 0) { pararj1 }
             // comprobamos en que casilla ha caido
@@ -410,8 +410,8 @@ $(function () {
                comprobarTurno();
             }
 
-            if (jugador2.posicion == 1) { jugador2.posicion = 1 + num1 }
-            else { jugador2.posicion = jugador2.posicion + num1 }
+            if (jugador2.posicion == 1) { jugador2.posicion = 1 + resultadoDado }
+            else { jugador2.posicion = jugador2.posicion + resultadoDado }
 
             switch (jugador2.posicion) {
                /*si se llega hasta el final */
@@ -479,8 +479,8 @@ $(function () {
             jugador3.turno = 0;
             jugador4.turno = 1;
             comprobarTurno();
-            if (jugador3.posicion == 1) { jugador3.posicion = 1 + num1 }
-            else { jugador3.posicion = jugador3.posicion + num1 }
+            if (jugador3.posicion == 1) { jugador3.posicion = 1 + resultadoDado }
+            else { jugador3.posicion = jugador3.posicion + resultadoDado }
 
             switch (jugador3.posicion) {
                /*si se llega hasta el final */
@@ -548,8 +548,8 @@ $(function () {
             jugador4.turno = 0;
             jugador1.turno = 1;
             comprobarTurno();
-            if (jugador4.posicion == 1) { jugador4.posicion = 1 + num1 }
-            else { jugador4.posicion = jugador4.posicion + num1 }
+            if (jugador4.posicion == 1) { jugador4.posicion = 1 + resultadoDado }
+            else { jugador4.posicion = jugador4.posicion + resultadoDado }
 
             switch (jugador4.posicion) {
                /*si se llega hasta el final */

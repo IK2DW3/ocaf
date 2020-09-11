@@ -3930,6 +3930,7 @@ __webpack_require__.r(__webpack_exports__);
       nombre: "",
       ambito: "",
       elegirCarta: "",
+      numJugadores: 2,
       partida: [],
       arrayCartas: [],
       arrayAleatorioNormalCasillas: [],
@@ -3965,6 +3966,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         $('#nombre3').text(me.partida['jugador3']);
+        me.numJugadores = 3;
       }
 
       if (me.partida['jugador4'] == null || me.partida['jugador4'] == '') {
@@ -3974,6 +3976,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         $('#nombre4').text(me.partida['jugador4']);
+        me.numJugadores = 4;
       }
     },
     aleatorizarCasillas: function aleatorizarCasillas() {
