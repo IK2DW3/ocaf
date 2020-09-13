@@ -101,9 +101,21 @@
             <!-- los jugadores -->
             <div class="contjugador d-flex align-items-center justify-content-center flex-column text-center" :id="'jugador'+n" v-for="n in 4" :key="n">
                 <div class="row">
-                    <div class="col-sm-12 d-flex align-items-center justify-content-center"><p :id="'nombre'+n" class="m-0" v-text="'Jugador'+n" ></p> </div>
+                    <div class="col-sm-12 d-flex align-items-center justify-content-center"><p :id="'nombre'+n" class="m-0" v-text="'Jugador'+n" ></p></div>
                     <div class="col-sm-12 d-flex align-items-center justify-content-center py-1"><img class ="jugador" :src="'../../resources/img/tablero/tablero/user.png'" :alt="'Jugador'+n"></div>
                     <div class="col-sm-12 d-flex align-items-center justify-content-center"><p :id="'posicionCasilla'+n" class="m-0">0</p></div>
+                </div>
+            </div>
+
+            <!-- El dado -->
+            <div class="casillaDado d-flex align-items-center justify-content-center flex-column text-center" id="casillaDado">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-sm-8 d-flex align-items-center justify-content-center">
+                        <img id="dado1" :src="'../../resources/img/tablero/tablero/dado/1.png'" alt="Dado">
+                    </div>
+                    <div class="col-sm-8 d-flex align-items-center justify-content-center">
+                        <button id="botontirar" class="btn btn-light btn-lg btn-block font-weight-bold" v-text="'TIRAR'"></button>
+                    </div>
                 </div>
             </div>
 
@@ -143,12 +155,6 @@
                 </div>
             </div>
             
-            <!-- El dado -->
-            <div class="row align-items-center justify-content-center rounded" id="panelDado">
-                <div class="col-sm-12"><img id="dado1" :src="'../../resources/img/tablero/tablero/dado/1.png'" alt="Dado"></div>
-                <div class="col-sm-12"><button id="botontirar" class="btn btn-light font-weight-bold" v-text="'Tirar'"></button></div>
-            </div>
-
             <div class="row align-items-center justify-content-center rounded">
                 <div class="col rounded" id="mensajes"></div>
             </div>
@@ -218,7 +224,7 @@ export default {
             this.$swal({
                 icon: 'info',
                 title: 'Partida',
-                text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!',
+                text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al botón [Ver normas]. Gracias!',
             });
 
         },

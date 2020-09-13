@@ -3923,6 +3923,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3951,7 +3957,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$swal({
         icon: 'info',
         title: 'Partida',
-        text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al (Ver normas). Gracias!'
+        text: 'Bienvenid@! Por favor, tomate un momento para leer las normas y más informacián sobre el juego dándole click al botón [Ver normas]. Gracias!'
       });
     },
     nombrarJugadores: function nombrarJugadores() {
@@ -50147,35 +50153,58 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
           _c(
             "div",
             {
               staticClass:
-                "row align-items-center justify-content-center rounded",
-              attrs: { id: "panelDado" }
+                "casillaDado d-flex align-items-center justify-content-center flex-column text-center",
+              attrs: { id: "casillaDado" }
             },
             [
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c("img", {
-                  attrs: {
-                    id: "dado1",
-                    src: "../../resources/img/tablero/tablero/dado/1.png",
-                    alt: "Dado"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c("button", {
-                  staticClass: "btn btn-light font-weight-bold",
-                  attrs: { id: "botontirar" },
-                  domProps: { textContent: _vm._s("Tirar") }
-                })
-              ])
+              _c(
+                "div",
+                {
+                  staticClass: "row align-items-center justify-content-center"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-sm-8 d-flex align-items-center justify-content-center"
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          id: "dado1",
+                          src: "../../resources/img/tablero/tablero/dado/1.png",
+                          alt: "Dado"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-sm-8 d-flex align-items-center justify-content-center"
+                    },
+                    [
+                      _c("button", {
+                        staticClass:
+                          "btn btn-light btn-lg btn-block font-weight-bold",
+                        attrs: { id: "botontirar" },
+                        domProps: { textContent: _vm._s("TIRAR") }
+                      })
+                    ]
+                  )
+                ]
+              )
             ]
           ),
+          _vm._v(" "),
+          _vm._m(5),
           _vm._v(" "),
           _vm._m(6),
           _vm._v(" "),

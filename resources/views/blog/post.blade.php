@@ -63,7 +63,7 @@
                 @else
                 <div class="row my-3">
                     <div class="col-sm-12">
-                        <p>¿Tienes ya una cuenta? Inicia sesion <a href="{{route('login')}}">aquí</a> o <a href="{{route('login')}}">registrate</a>.</p>
+                        <p class="text-light">¿Tienes ya una cuenta? Inicia sesion <a href="{{route('login')}}">aquí</a> o <a href="{{route('login')}}">registrate</a>.</p>
                     </div>
                 </div>
                 @endauth

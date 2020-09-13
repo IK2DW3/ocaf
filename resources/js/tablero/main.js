@@ -247,9 +247,9 @@ $(function () {
     * Funcion para seleccionar el turno una vez jugado
     * Muestra el mensaje correspondiente segun el caso.
     */
-   function posicionMensajeTurno(jugador) {
-
-      jugador = jugador
+   function posicionMensajeTurno(jugadorActivo, fichaActiva) {
+      // Cambio valores
+      jugador = jugadorActivo
       // si es la primera vez que se tira
       if (jugador.posicion == 1) { jugador.posicion = 1 + resultadoDado }
       else { jugador.posicion = jugador.posicion + resultadoDado }
@@ -305,8 +305,8 @@ $(function () {
             break;
       }
 
-      if (jugador.posicion < 63) { $('#area' + jugador.posicion).append($(FJ1)), 10000 }
-      else { $('#area63').append($(FJ1)); }
+      if (jugador.posicion < 63) { $('#area' + jugador.posicion).append($(fichaActiva)), 10000 }
+      else { $('#area63').append($(fichaActiva)); }
    }
 
    /**
@@ -827,9 +827,6 @@ $(function () {
          document.getElementById("jugador4").style.visibility = "hidden";
          document.getElementById("btnImprimir").style.visibility="hidden"
 
-         document.getElementById("panelDado").style.display = "none";
-         
-   
          document.getElementById("ficha1").style.display = "none";
          document.getElementById("ficha2").style.display = "none";
          document.getElementById("ficha3").style.display = "none";
